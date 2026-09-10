@@ -1,0 +1,40 @@
+export type ProductSource = "amazon" | "oliveyoung" | "both";
+
+export interface Product {
+  id: string;
+  slug: string;
+  title: string;
+  brand: string;
+  description: string;
+  price: number;
+  compare_at_price?: number | null;
+  currency?: string;
+  category: string;
+  concern: string[]; // e.g. ["Acne", "Hydration"]
+  skin_type: string[]; // e.g. ["Oily", "Dry", "Sensitive", "All"]
+  key_ingredients: string[];
+  image_urls: string[];
+  amazon_url?: string | null;
+  oliveyoung_url?: string | null;
+  rating?: number | null;
+  review_count?: number | null;
+  is_featured?: boolean;
+  is_active?: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  reading_time: string;
+  date: string;
+  image: string;
+  content: string[];
+}
+
+export const CONCERNS = ["Acne", "Anti-aging", "Hydration", "Brightening", "Sensitive", "Pores"] as const;
+export const CATEGORIES = ["Cleanser", "Toner", "Serum", "Moisturizer", "Sunscreen", "Mask", "Exfoliant", "Eye Care"] as const;
+export const BRANDS = ["Beauty of Joseon", "COSRX", "Laneige", "Anua", "SKIN1004", "Round Lab", "Isntree", "Missha"] as const;
