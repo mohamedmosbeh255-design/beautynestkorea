@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Acne-Safe K-Beauty cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f7f2"/>
+      <stop offset="0.55" stop-color="#e3ece0"/>
+      <stop offset="1" stop-color="#c6d9bf"/>
+    </linearGradient>
+    <linearGradient id="maskFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.35"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1020" cy="90" r="180" fill="#ffffff" opacity="0.25"/>
+  <circle cx="140" cy="560" r="150" fill="#ffffff" opacity="0.22"/>
+
+  <!-- Sheet mask line-art -->
+  <g transform="translate(800,315)" fill="url(#maskFill)" stroke="#3b5736" stroke-width="6" stroke-linejoin="round">
+    <path d="M-140,-110 C-90,-135 -40,-140 0,-140 C40,-140 90,-135 140,-110 C155,-60 155,60 140,110 C90,135 40,140 0,140 C-40,140 -90,135 -140,110 C-155,60 -155,-60 -140,-110 Z"/>
+    <!-- eye cutouts -->
+    <ellipse cx="-62" cy="-30" rx="34" ry="22" fill="#e3ece0" stroke="#3b5736" stroke-width="5"/>
+    <ellipse cx="62" cy="-30" rx="34" ry="22" fill="#e3ece0" stroke="#3b5736" stroke-width="5"/>
+    <!-- nose + lips -->
+    <path d="M0,-8 L-12,38 L12,38 Z" fill="none" stroke="#3b5736" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M-32,72 Q0,58 32,72 Q0,92 -32,72 Z" fill="none" stroke="#3b5736" stroke-width="5"/>
+    <!-- essence drops -->
+    <path d="M-100,120 c-8,-12 -8,-22 0,-30 c8,8 8,18 0,30" fill="none" stroke="#5f8a54" stroke-width="4" stroke-linecap="round"/>
+    <path d="M100,120 c-8,-12 -8,-22 0,-30 c8,8 8,18 0,30" fill="none" stroke="#5f8a54" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Centella leaves -->
+  <g stroke="#496e42" stroke-width="5" fill="#dce8d6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120,470 C150,400 220,370 290,380 C280,450 210,490 120,470 Z"/>
+    <path d="M205,435 L255,405" fill="none"/>
+    <path d="M180,200 C210,150 270,135 320,150 C310,200 255,225 180,200 Z"/>
+    <path d="M250,178 L285,162" fill="none"/>
+    <circle cx="330" cy="480" r="10" fill="#7fa672" stroke="none"/>
+    <circle cx="360" cy="500" r="6" fill="#7fa672" stroke="none"/>
+    <circle cx="90" cy="180" r="8" fill="#7fa672" stroke="none"/>
+  </g>
+
+  <!-- Text -->
+  <g font-family="Georgia, 'Playfair Display', serif">
+    <text x="100" y="240" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="8" fill="#5f8a54">K-BEAUTY GUIDE</text>
+    <text x="96" y="330" font-size="84" font-weight="bold" fill="#2b3b28">Acne-Safe</text>
+    <text x="96" y="420" font-size="84" font-weight="bold" fill="#2b3b28">K-Beauty</text>
+    <rect x="100" y="460" width="120" height="6" rx="3" fill="#5f8a54"/>
+    <text x="100" y="510" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#496e42">Gentle picks that won’t clog pores</text>
+  </g>
+</svg>

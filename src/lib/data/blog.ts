@@ -50,7 +50,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Acne",
     reading_time: "6 min read",
     date: "2026-07-30",
-    image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?q=80&w=1200&auto=format&fit=crop",
+    image: "/blog/acne-safe-kbeauty.svg",
     content: [
       "Acne-prone skin needs calm, not combat. Harsh scrubs and high-alcohol toners damage the barrier and trigger more oil production.",
       "Heartleaf and centella asiatica are the hero calming ingredients in Anua and SKIN1004 bestsellers — anti-inflammatory and barrier-friendly.",
@@ -71,7 +71,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Ingredients",
     reading_time: "6 min read",
     date: "2026-09-05",
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1200&auto=format&fit=crop",
+    image: "/blog/pdrn-salmon-dna.svg",
     content: [
       "PDRN (polydeoxyribonucleotide) is a DNA-derived ingredient, most famously sourced from salmon, long used in Korean dermatology clinics for skin repair and regeneration. In K-beauty it has jumped from in-office treatments into serums and sheet masks promising faster recovery and bounce.",
       "Why the hype? PDRN is prized for supporting the skin barrier, improving the look of elasticity and firmness, calming stressed skin, and boosting hydration — the exact combo behind the glass-skin finish. It pairs well with hydrators like hyaluronic acid, collagen and niacinamide.",
