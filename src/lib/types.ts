@@ -24,6 +24,13 @@ export interface Product {
   updated_at?: string;
 }
 
+export interface BlogSection {
+  heading: string;
+  paragraphs: string[];
+  list?: string[];
+  closing?: string[];
+}
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -33,6 +40,8 @@ export interface BlogPost {
   date: string;
   image: string;
   content: string[];
+  sections?: BlogSection[];
+  disclaimer?: string;
   shopPicks?: { label: string; href: string }[];
 }
 

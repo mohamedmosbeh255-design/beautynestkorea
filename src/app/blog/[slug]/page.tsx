@@ -39,13 +39,40 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {post.content.map((para, i) => (
           <p key={i} className="text-ink-soft">{para}</p>
         ))}
+        {post.sections?.map((section) => (
+          <section key={section.heading}>
+            <h2 className="font-serif-display pt-4 text-2xl font-bold tracking-tight text-ink">{section.heading}</h2>
+            {section.paragraphs.map((para, i) => (
+              <p key={i} className="mt-4 text-ink-soft">{para}</p>
+            ))}
+            {section.list && section.list.length > 0 && (
+              <ul className="mt-4 space-y-3">
+                {section.list.map((item, i) => (
+                  <li key={i} className="flex gap-3 text-ink-soft">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sage-500" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {section.closing?.map((para, i) => (
+              <p key={i} className="mt-4 text-ink-soft">{para}</p>
+            ))}
+          </section>
+        ))}
       </div>
+      {post.disclaimer && (
+        <div className="glass mt-10 rounded-3xl p-6 sm:p-8">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">Please note</p>
+          <p className="mt-2 text-sm leading-relaxed text-ink-soft">{post.disclaimer}</p>
+        </div>
+      )}
       {post.shopPicks && post.shopPicks.length > 0 && (
         <div className="glass mt-10 rounded-3xl p-6 sm:p-8">
           <p className="flex items-center justify-center gap-2 font-serif-display text-lg font-bold">
             <ShoppingBag className="h-5 w-5 text-sage-600" /> Shop Our K-Beauty Picks
           </p>
-          <p className="mt-1 text-center text-sm text-ink-soft">Hand-picked masks we love — tap to compare live prices.</p>
+          <p className="mt-1 text-center text-sm text-ink-soft">Hand-picked favorites — tap to compare live prices.</p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {post.shopPicks.map((pick) => (
               <Link
