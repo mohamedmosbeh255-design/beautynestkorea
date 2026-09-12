@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import type { Product } from "@/lib/types";
+import { CATEGORIES } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
 import { cn } from "@/lib/utils";
 import { getAllConcernNames } from "@/lib/concerns";
@@ -10,6 +11,7 @@ import { getAllConcernNames } from "@/lib/concerns";
 export default function ShopClient({ products, initialConcern = "All" }: { products: Product[]; initialConcern?: string }) {
   const [query, setQuery] = useState("");
   const [brand, setBrand] = useState("All");
+  const [category, setCategory] = useState("All");
   const [concern, setConcern] = useState(initialConcern);
   const [source, setSource] = useState<"All" | "Amazon" | "Olive Young">("All");
   const [maxPrice, setMaxPrice] = useState(30);
@@ -26,11 +28,15 @@ export default function ShopClient({ products, initialConcern = "All" }: { produ
   // added via Admin) gets a filter chip automatically.
   const concerns = useMemo(() => ["All", ...getAllConcernNames(products)], [products]);
   const effectiveConcern = concerns.includes(concern) ? concern : "All";
+  // Fixed catalog list so new categories (e.g. "Cream") appear even
+  // before any product uses them.
+  const categories = useMemo(() => ["All", ...CATEGORIES], []);
 
   const filtered = useMemo(() => {
     let list = products.filter((p) => {
       if (query && !`${p.title} ${p.brand} ${p.category}`.toLowerCase().includes(query.toLowerCase())) return false;
       if (brand !== "All" && p.brand !== brand) return false;
+      if (category !== "All" && p.category !== category) return false;
       if (effectiveConcern !== "All" && !p.concern.includes(effectiveConcern)) return false;
       if (p.price > maxPrice) return false;
       if (source === "Amazon" && !p.amazon_url) return false;
@@ -41,7 +47,7 @@ export default function ShopClient({ products, initialConcern = "All" }: { produ
     if (sort === "price-desc") list = [...list].sort((a, b) => b.price - a.price);
     if (sort === "rating") list = [...list].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
     return list;
-  }, [products, query, brand, effectiveConcern, source, maxPrice, sort]);
+  }, [products, query, brand, category, effectiveConcern, source, maxPrice, sort]);
 
   return (
     <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
@@ -71,6 +77,18 @@ export default function ShopClient({ products, initialConcern = "All" }: { produ
               <button key={b} onClick={() => setBrand(b)}
                 className={cn("rounded-full px-3 py-1.5 text-xs font-medium transition", brand === b ? "bg-ink text-white" : "bg-white/70 text-ink-soft hover:bg-sage-50")}>
                 {b}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <label className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Category</label>
+          <div className="mt-1.5 flex flex-wrap gap-1.5">
+            {categories.map((c) => (
+              <button key={c} onClick={() => setCategory(c)}
+                className={cn("rounded-full px-3 py-1.5 text-xs font-medium transition", category === c ? "bg-sage-600 text-white" : "bg-white/70 text-ink-soft hover:bg-sage-50")}>
+                {c}
               </button>
             ))}
           </div>
@@ -119,8 +137,8 @@ export default function ShopClient({ products, initialConcern = "All" }: { produ
           </select>
         </div>
 
-        {(query || brand !== "All" || effectiveConcern !== "All" || source !== "All") && (
-          <button onClick={() => { setQuery(""); setBrand("All"); setConcern("All"); setSource("All"); setMaxPrice(30); }}
+        {(query || brand !== "All" || category !== "All" || effectiveConcern !== "All" || source !== "All") && (
+          <button onClick={() => { setQuery(""); setBrand("All"); setCategory("All"); setConcern("All"); setSource("All"); setMaxPrice(30); }}
             className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-blush-600 hover:underline">
             <X className="h-3.5 w-3.5" /> Clear all filters
           </button>

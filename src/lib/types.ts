@@ -37,5 +37,5 @@ export interface BlogPost {
 }
 
 export const CONCERNS = ["Acne", "Anti-aging", "Hydration", "Brightening", "Sensitive", "Pores"] as const;
-export const CATEGORIES = ["Cleanser", "Toner", "Serum", "Moisturizer", "Sunscreen", "Mask", "Exfoliant", "Eye Care"] as const;
+export const CATEGORIES = ["Cleanser", "Toner", "Serum", "Moisturizer", "Cream", "Sunscreen", "Mask", "Exfoliant", "Eye Care"] as const;
 export const BRANDS = ["Beauty of Joseon", "COSRX", "Laneige", "Anua", "SKIN1004", "Round Lab", "Isntree", "Missha"] as const;
