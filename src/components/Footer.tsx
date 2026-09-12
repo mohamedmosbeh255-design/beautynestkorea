@@ -38,7 +38,7 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="mt-20 border-t border-sage-100 bg-white/70 backdrop-blur">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-5">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5">
             <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-sage-400 to-sage-600 text-white">
@@ -83,6 +83,15 @@ export default function Footer() {
             <li><Link href="/blog" className="hover:text-ink">Skincare advice</Link></li>
             <li><Link href="/blog/10-step-korean-routine-beginners" className="hover:text-ink">Beginner routine</Link></li>
             <li><Link href="/admin/login" className="hover:text-ink">Admin login</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-sm font-semibold uppercase tracking-wider text-ink">Company</h4>
+          <ul className="mt-3 space-y-2 text-sm text-ink-soft">
+            <li><Link href="/about" className="hover:text-ink">About us</Link></li>
+            <li><Link href="/contact" className="hover:text-ink">Contact us</Link></li>
+            <li><Link href="/disclosure" className="hover:text-ink">Affiliate disclosure</Link></li>
+            <li><Link href="/privacy" className="hover:text-ink">Privacy policy</Link></li>
           </ul>
         </div>
       </div>
