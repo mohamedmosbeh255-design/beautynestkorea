@@ -29,7 +29,7 @@
       <circle cx="690" cy="490" r="9"/><circle cx="740" cy="490" r="9"/><circle cx="790" cy="490" r="9"/><circle cx="840" cy="490" r="9"/>
     </g>
   </g>
-  <text x="765" y="560" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" letter-spacing="6" fill="#8a5a34">SMOOTH TONE</text>
+  <text x="765" y="560" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="3" fill="#8a5a34">SMOOTH TONE</text>
 
   <!-- RIGHT: textured, irregular scar lines -->
   <g fill="none" stroke="#7c4a2d" stroke-width="5" stroke-linecap="round" opacity="0.7">
@@ -43,7 +43,7 @@
   <g fill="#7c4a2d" opacity="0.5">
     <circle cx="950" cy="330" r="7"/><circle cx="1040" cy="260" r="6"/><circle cx="995" cy="500" r="7"/><circle cx="1060" cy="505" r="5"/>
   </g>
-  <text x="1000" y="560" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" letter-spacing="6" fill="#7c4a2d">TEXTURED SCARS</text>
+  <text x="1010" y="560" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="3" fill="#7c4a2d">TEXTURED SCARS</text>
 
   <!-- Soft divider between halves -->
   <rect x="883" y="60" width="4" height="440" fill="url(#divider)"/>

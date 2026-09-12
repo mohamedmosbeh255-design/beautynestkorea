@@ -42,6 +42,7 @@ export interface BlogPost {
   content: string[];
   sections?: BlogSection[];
   disclaimer?: string;
+  medicalNote?: string;
   shopPicks?: { label: string; href: string }[];
 }
 

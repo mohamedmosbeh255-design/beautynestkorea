@@ -61,8 +61,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </section>
         ))}
       </div>
+      {post.medicalNote && (
+        <p className="mt-10 text-sm leading-relaxed text-ink-soft">{post.medicalNote}</p>
+      )}
       {post.disclaimer && (
-        <div className="glass mt-10 rounded-3xl p-6 sm:p-8">
+        <div className={`glass rounded-3xl p-6 sm:p-8 ${post.medicalNote ? "mt-4" : "mt-10"}`}>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">Please note</p>
           <p className="mt-2 text-sm leading-relaxed text-ink-soft">{post.disclaimer}</p>
         </div>

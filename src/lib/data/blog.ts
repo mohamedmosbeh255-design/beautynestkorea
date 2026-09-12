@@ -143,6 +143,8 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     disclaimer:
       "This article is for educational purposes only and is not medical advice, diagnosis or treatment. Skincare results vary from person to person. Products mentioned are cosmetics intended to improve the appearance of skin; they are not intended to diagnose, treat, cure or prevent any disease. Product links may earn us a commission at no extra cost to you.",
+    medicalNote:
+      "Medical sources note: The scar-vs-PIH distinctions in this article (the side-lighting texture test, silicone for raised scars, in-clinic procedures for depressed scars, and the roles of sun protection, niacinamide and gentle exfoliants in the appearance of dark spots) reflect guidance shared by board-certified dermatologists in public patient-education content. This article is educational only and is not medical advice.",
     shopPicks: [
       { label: "Anua Heartleaf 77 Soothing Toner", href: "/product/anua-heartleaf-77-soothing-toner" },
       { label: "SOME BY MI AHA BHA PHA 30 Days Miracle Toner", href: "/product/some-by-mi-aha-bha-pha-30-days-miracle-toner" },
