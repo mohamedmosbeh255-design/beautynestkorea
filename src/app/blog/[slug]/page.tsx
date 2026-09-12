@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getPostBySlug, BLOG_POSTS } from "@/lib/data/blog";
-import { ArrowLeft, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, ShoppingBag } from "lucide-react";
 
 export async function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
@@ -40,6 +40,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <p key={i} className="text-ink-soft">{para}</p>
         ))}
       </div>
+      {post.shopPicks && post.shopPicks.length > 0 && (
+        <div className="glass mt-10 rounded-3xl p-6 sm:p-8">
+          <p className="flex items-center justify-center gap-2 font-serif-display text-lg font-bold">
+            <ShoppingBag className="h-5 w-5 text-sage-600" /> Shop Our K-Beauty Picks
+          </p>
+          <p className="mt-1 text-center text-sm text-ink-soft">Hand-picked masks we love — tap to compare live prices.</p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {post.shopPicks.map((pick) => (
+              <Link
+                key={pick.href}
+                href={pick.href}
+                className="group flex items-center justify-between gap-3 rounded-2xl bg-white/70 px-4 py-3.5 text-sm font-semibold transition hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                <span className="leading-snug">{pick.label}</span>
+                <ArrowRight className="h-4 w-4 shrink-0 text-sage-600 transition group-hover:translate-x-1" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="glass mt-10 rounded-3xl p-6 text-center">
         <p className="font-serif-display text-lg font-bold">Ready to build your routine?</p>
         <p className="mt-1 text-sm text-ink-soft">Shop the products mentioned with live Amazon & Olive Young prices.</p>

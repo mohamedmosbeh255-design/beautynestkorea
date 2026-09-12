@@ -33,6 +33,7 @@ export interface BlogPost {
   date: string;
   image: string;
   content: string[];
+  shopPicks?: { label: string; href: string }[];
 }
 
 export const CONCERNS = ["Acne", "Anti-aging", "Hydration", "Brightening", "Sensitive", "Pores"] as const;
