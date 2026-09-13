@@ -16,6 +16,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return { title: post.title, description: post.excerpt };
 }
 
+const SUNSCREEN_LINK_PHRASE = "sunscreen every morning, SPF 30 or higher";
+const SUNSCREEN_LINK_HREF = "/shop?category=Sunscreen";
+
+function renderWithSunscreenLink(text: string) {
+  if (!text.includes(SUNSCREEN_LINK_PHRASE)) return text;
+  const [before, after] = text.split(SUNSCREEN_LINK_PHRASE);
+  return (
+    <>
+      {before}
+      <Link
+        href={SUNSCREEN_LINK_HREF}
+        className="font-medium text-sage-700 underline decoration-sage-300 underline-offset-2 transition hover:text-sage-600 hover:decoration-sage-500"
+      >
+        {SUNSCREEN_LINK_PHRASE}
+      </Link>
+      {after}
+    </>
+  );
+}
+
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
@@ -50,7 +70,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 {section.list.map((item, i) => (
                   <li key={i} className="flex gap-3 text-ink-soft">
                     <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sage-500" />
-                    <span>{item}</span>
+                    <span>{renderWithSunscreenLink(item)}</span>
                   </li>
                 ))}
               </ul>

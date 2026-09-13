@@ -12,12 +12,13 @@ export const revalidate = 60;
 export default async function ShopPage({
   searchParams,
 }: {
-  searchParams: Promise<{ concern?: string }>;
+  searchParams: Promise<{ concern?: string; category?: string }>;
 }) {
   const products = await getProducts();
-  const { concern } = await searchParams;
+  const { concern, category } = await searchParams;
   // Deep-link support: /shop?concern=Hydration (from homepage cards & footer)
-  // pre-selects the filter. Unknown values fall back to "All" in ShopClient.
+  // and /shop?category=Sunscreen (e.g. from blog articles) pre-select
+  // the matching filter. Unknown values fall back to "All" in ShopClient.
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">The shelf</p>
@@ -26,7 +27,7 @@ export default async function ShopPage({
         Filter by brand, concern, price and source. Every card links to both Amazon and Olive Young on the product page.
       </p>
       <div className="mt-8">
-        <ShopClient products={products} initialConcern={concern ?? "All"} />
+        <ShopClient products={products} initialConcern={concern ?? "All"} initialCategory={category ?? "All"} />
       </div>
     </div>
   );
