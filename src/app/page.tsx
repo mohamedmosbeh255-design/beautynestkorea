@@ -39,7 +39,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute -left-24 top-10 h-96 w-96 rounded-full bg-sage-100 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 top-40 h-96 w-96 rounded-full bg-blush-100 blur-3xl" />
-        <div className="mx-auto w-full max-w-[2000px] px-1 pb-2 pt-1">
+        <div className="mx-auto w-full max-w-[2000px] px-1 pb-1 pt-1">
           <div className="relative animate-fade-up-1">
             <div className="glass-strong relative overflow-hidden rounded-xl p-0">
               <div className="relative aspect-[2000/768] overflow-hidden rounded-xl">
