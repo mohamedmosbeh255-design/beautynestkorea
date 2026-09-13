@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, Truck, Sparkles, Droplets, Sun, Leaf, Star, CircleDot } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, Droplets, Sun, Leaf, Star, CircleDot } from "lucide-react";
 import { getProducts } from "@/lib/products";
 import { getConcernStats } from "@/lib/concerns";
 import ProductCard from "@/components/ProductCard";
@@ -40,40 +40,7 @@ export default async function HomePage() {
         <div className="pointer-events-none absolute -left-24 top-10 h-96 w-96 rounded-full bg-sage-100 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 top-40 h-96 w-96 rounded-full bg-blush-100 blur-3xl" />
         <div className="mx-auto max-w-7xl px-4 pb-14 pt-12 sm:px-6 lg:pt-20">
-          <div className="animate-fade-up max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-sage-700 shadow-sm backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> Trusted K-Beauty curation • Updated 2026
-            </span>
-            <h1 className="font-serif-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-              Discover K-Beauty &<br />
-              <span className="bg-gradient-to-r from-sage-600 via-sage-500 to-blush-500 bg-clip-text text-transparent">
-                Global Skincare
-              </span>
-            </h1>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-ink-soft sm:text-lg">
-              Honest reviews, simple routines and the best prices — we compare Amazon vs Olive Young so you never overpay for glow.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/shop" className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-bold text-white shadow-xl transition hover:bg-sage-700">
-                Shop bestsellers <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link href="/blog" className="glass inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold transition hover:bg-white/80">
-                Skincare advice
-              </Link>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-6 text-sm">
-              {[
-                { icon: ShieldCheck, label: "Dermat-reviewed picks" },
-                { icon: Truck, label: "Amazon & Olive Young" },
-              ].map(({ icon: Icon, label }) => (
-                <span key={label} className="inline-flex items-center gap-2 font-medium text-ink-soft">
-                  <Icon className="h-4 w-4 text-sage-600" /> {label}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="relative mt-10 animate-fade-up-1">
+          <div className="relative animate-fade-up-1">
             <div className="glass-strong relative overflow-hidden rounded-[2rem] p-3">
               <div className="relative aspect-[2000/768] overflow-hidden rounded-[1.6rem]">
                 <Image
@@ -84,19 +51,7 @@ export default async function HomePage() {
                   priority
                   sizes="(max-width: 1280px) 100vw, 1280px"
                 />
-                <div className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-2xl bg-white/85 px-4 py-3 backdrop-blur">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-sage-600">Bestseller of the week</p>
-                    <p className="font-serif-display text-sm font-bold">Beauty of Joseon Relief Sun</p>
-                  </div>
-                  <Link href="/product/beauty-of-joseon-relief-sun" className="rounded-full bg-ink px-4 py-2 text-xs font-bold text-white">
-                    $18.00
-                  </Link>
-                </div>
               </div>
-            </div>
-            <div className="glass absolute -right-3 bottom-16 hidden animate-float-slow rounded-2xl px-4 py-3 text-xs font-semibold shadow-lg sm:block">
-              ★ 4.8 · 12k reviews
             </div>
           </div>
         </div>
