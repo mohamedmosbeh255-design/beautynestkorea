@@ -77,8 +77,8 @@ export default async function HomePage() {
             <div className="glass-strong relative overflow-hidden rounded-[2rem] p-3">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[1.6rem] sm:aspect-[5/4] lg:aspect-[4/5]">
                 <Image
-                  src="https://images.unsplash.com/photo-1596704017254-9b121068fb31?w=1000&q=80"
-                  alt="K-beauty skincare flatlay"
+                  src="https://wlbsswmkoahjzentukns.supabase.co/storage/v1/object/public/site-assets/ChatGPT%20Image%20Sep%2013,%202026,%2008_31_36%20PM.png"
+                  alt="BeautyNestKorea curated K-beauty skincare banner"
                   fill
                   className="object-cover"
                   priority
@@ -94,9 +94,6 @@ export default async function HomePage() {
                   </Link>
                 </div>
               </div>
-            </div>
-            <div className="glass absolute -left-4 top-8 hidden animate-float-slow rounded-2xl px-4 py-3 text-xs font-semibold shadow-lg sm:block">
-              ✓ Zero white cast
             </div>
             <div className="glass absolute -right-3 bottom-16 hidden animate-float-slow rounded-2xl px-4 py-3 text-xs font-semibold shadow-lg sm:block">
               ★ 4.8 · 12k reviews
