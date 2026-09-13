@@ -39,10 +39,10 @@ export default async function HomePage() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute -left-24 top-10 h-96 w-96 rounded-full bg-sage-100 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 top-40 h-96 w-96 rounded-full bg-blush-100 blur-3xl" />
-        <div className="mx-auto w-full max-w-[2000px] px-2 py-2 sm:px-3 sm:py-3">
+        <div className="mx-auto w-full max-w-[2000px] px-1 pb-2 pt-1">
           <div className="relative animate-fade-up-1">
-            <div className="glass-strong relative overflow-hidden rounded-[2rem] p-1">
-              <div className="relative aspect-[2000/768] overflow-hidden rounded-[1.6rem]">
+            <div className="glass-strong relative overflow-hidden rounded-xl p-0">
+              <div className="relative aspect-[2000/768] overflow-hidden rounded-xl">
                 <Image
                   src="https://wlbsswmkoahjzentukns.supabase.co/storage/v1/object/public/site-assets/ChatGPT%20Image%20Sep%2013,%202026,%2008_31_36%20PM.png"
                   alt="BeautyNestKorea curated K-beauty skincare banner"
