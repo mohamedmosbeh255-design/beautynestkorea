@@ -14,7 +14,15 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
   const [category, setCategory] = useState(initialCategory);
   const [concern, setConcern] = useState(initialConcern);
   const [source, setSource] = useState<"All" | "Amazon" | "Olive Young">("All");
-  const [maxPrice, setMaxPrice] = useState(30);
+  // Default must include every active product: derive the ceiling from the
+  // live catalog instead of a hardcoded $30 (e.g. triple-sets cost more).
+  // `null` means "no cap" → all products visible by default.
+  const priceUpper = useMemo(() => {
+    const max = products.reduce((m, p) => Math.max(m, p.price ?? 0), 0);
+    return Math.max(50, Math.ceil(max));
+  }, [products]);
+  const [maxPrice, setMaxPrice] = useState<number | null>(null);
+  const effectiveMaxPrice = maxPrice ?? priceUpper;
   const [sort, setSort] = useState("featured");
 
   // Sync when navigating between deep links, e.g. homepage cards
@@ -43,7 +51,7 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
       if (brand !== "All" && p.brand !== brand) return false;
       if (effectiveCategory !== "All" && p.category !== effectiveCategory) return false;
       if (effectiveConcern !== "All" && !p.concern.includes(effectiveConcern)) return false;
-      if (p.price > maxPrice) return false;
+      if (p.price > effectiveMaxPrice) return false;
       if (source === "Amazon" && !p.amazon_url) return false;
       if (source === "Olive Young" && !p.oliveyoung_url) return false;
       return true;
@@ -52,7 +60,7 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
     if (sort === "price-desc") list = [...list].sort((a, b) => b.price - a.price);
     if (sort === "rating") list = [...list].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
     return list;
-  }, [products, query, brand, effectiveCategory, effectiveConcern, source, maxPrice, sort]);
+  }, [products, query, brand, effectiveCategory, effectiveConcern, source, effectiveMaxPrice, sort]);
 
   return (
     <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
@@ -125,9 +133,9 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
 
         <div className="mt-4">
           <label className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
-            Max price: ${maxPrice}
+            Max price: ${effectiveMaxPrice}
           </label>
-          <input type="range" min={5} max={50} value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))}
+          <input type="range" min={5} max={priceUpper} value={effectiveMaxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))}
             className="mt-2 w-full accent-sage-600" />
         </div>
 
@@ -142,8 +150,8 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
           </select>
         </div>
 
-        {(query || brand !== "All" || effectiveCategory !== "All" || effectiveConcern !== "All" || source !== "All") && (
-          <button onClick={() => { setQuery(""); setBrand("All"); setCategory("All"); setConcern("All"); setSource("All"); setMaxPrice(30); }}
+        {(query || brand !== "All" || effectiveCategory !== "All" || effectiveConcern !== "All" || source !== "All" || maxPrice !== null) && (
+          <button onClick={() => { setQuery(""); setBrand("All"); setCategory("All"); setConcern("All"); setSource("All"); setMaxPrice(null); }}
             className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-blush-600 hover:underline">
             <X className="h-3.5 w-3.5" /> Clear all filters
           </button>

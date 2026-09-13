@@ -43,6 +43,8 @@ export async function createProduct(formData: FormData) {
   if (error) throw new Error(error.message);
   revalidatePath("/");
   revalidatePath("/shop");
+  revalidatePath(`/product/${parsed.data.slug}`);
+  revalidatePath("/", "layout");
   redirect("/admin/products");
 }
 
@@ -69,21 +71,28 @@ export async function updateProduct(id: string, formData: FormData) {
   };
   const parsed = productSchema.safeParse(raw);
   if (!parsed.success) throw new Error(parsed.error.issues.map((i) => i.message).join(", "));
+  // Capture the previous slug so a rename doesn't leave the old detail page cached.
+  const { data: existing } = await supabase.from("products").select("slug").eq("id", id).single();
   const { error } = await supabase.from("products").update(parsed.data).eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/");
   revalidatePath("/shop");
   revalidatePath(`/product/${parsed.data.slug}`);
+  if (existing?.slug && existing.slug !== parsed.data.slug) revalidatePath(`/product/${existing.slug}`);
+  revalidatePath("/", "layout");
   redirect("/admin/products");
 }
 
 export async function deleteProduct(id: string) {
   const supabase = await requireAdmin();
+  const { data: existing } = await supabase.from("products").select("slug").eq("id", id).single();
   const { error } = await supabase.from("products").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/");
   revalidatePath("/shop");
   revalidatePath("/admin/products");
+  if (existing?.slug) revalidatePath(`/product/${existing.slug}`);
+  revalidatePath("/", "layout");
 }
 
 export async function trackClick(productId: string, source: "amazon" | "oliveyoung") {
