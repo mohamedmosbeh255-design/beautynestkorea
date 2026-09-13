@@ -39,8 +39,8 @@ export default async function HomePage() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute -left-24 top-10 h-96 w-96 rounded-full bg-sage-100 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 top-40 h-96 w-96 rounded-full bg-blush-100 blur-3xl" />
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-14 pt-12 sm:px-6 lg:grid-cols-2 lg:pt-20">
-          <div className="animate-fade-up">
+        <div className="mx-auto max-w-7xl px-4 pb-14 pt-12 sm:px-6 lg:pt-20">
+          <div className="animate-fade-up max-w-2xl">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-sage-700 shadow-sm backdrop-blur">
               <Sparkles className="h-3.5 w-3.5" /> Trusted K-Beauty curation • Updated 2026
             </span>
@@ -73,16 +73,16 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="relative animate-fade-up-1">
+          <div className="relative mt-10 animate-fade-up-1">
             <div className="glass-strong relative overflow-hidden rounded-[2rem] p-3">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.6rem] sm:aspect-[5/4] lg:aspect-[4/5]">
+              <div className="relative aspect-[2000/768] overflow-hidden rounded-[1.6rem]">
                 <Image
                   src="https://wlbsswmkoahjzentukns.supabase.co/storage/v1/object/public/site-assets/ChatGPT%20Image%20Sep%2013,%202026,%2008_31_36%20PM.png"
                   alt="BeautyNestKorea curated K-beauty skincare banner"
                   fill
                   className="object-cover"
                   priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1280px) 100vw, 1280px"
                 />
                 <div className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-2xl bg-white/85 px-4 py-3 backdrop-blur">
                   <div>
