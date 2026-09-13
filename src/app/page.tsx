@@ -39,9 +39,9 @@ export default async function HomePage() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute -left-24 top-10 h-96 w-96 rounded-full bg-sage-100 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 top-40 h-96 w-96 rounded-full bg-blush-100 blur-3xl" />
-        <div className="mx-auto max-w-7xl px-2 pb-4 pt-2 sm:px-6 sm:pb-8 sm:pt-6">
+        <div className="mx-auto w-full max-w-[2000px] px-2 py-2 sm:px-3 sm:py-3">
           <div className="relative animate-fade-up-1">
-            <div className="glass-strong relative overflow-hidden rounded-[2rem] p-3">
+            <div className="glass-strong relative overflow-hidden rounded-[2rem] p-1">
               <div className="relative aspect-[2000/768] overflow-hidden rounded-[1.6rem]">
                 <Image
                   src="https://wlbsswmkoahjzentukns.supabase.co/storage/v1/object/public/site-assets/ChatGPT%20Image%20Sep%2013,%202026,%2008_31_36%20PM.png"
@@ -49,7 +49,7 @@ export default async function HomePage() {
                   fill
                   className="object-cover"
                   priority
-                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  sizes="(max-width: 2000px) 100vw, 2000px"
                 />
               </div>
             </div>
