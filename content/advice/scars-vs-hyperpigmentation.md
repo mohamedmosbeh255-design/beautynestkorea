@@ -8,8 +8,17 @@ image: "https://wlbsswmkoahjzentukns.supabase.co/storage/v1/object/public/site-a
 date: "2026-09-14"
 ---
 
-> **⚕️ Important — Please Read First**
-> BeautyNestKorea is an editorial skincare resource, **not a medical clinic**. This article summarises published dermatology research for education only. It does **not** diagnose, treat, or replace a consultation with a licensed dermatologist or your own doctor. Every skin is different — what worked in a study may not work for you. If you have a changing, painful, severe, or persistent skin concern, please see a qualified healthcare professional. Product mentions are cosmetic supports, never medical treatments.
+> **⚕️ A Note on Skin Health**
+>
+> BeautyNestKorea is an independent skincare and beauty publication dedicated to evidence-informed education, product research, and practical skincare guidance.
+>
+> Our articles are created to help you better understand your skin and the science behind skincare ingredients and treatments. They are for educational purposes only and should not be considered a diagnosis, personalized medical advice, or a substitute for professional care.
+>
+> Skin responds differently from person to person. Research findings and skincare results can vary depending on individual skin type, condition, sensitivity, and other factors. When we discuss treatments or professional procedures, we aim to explain the available evidence and realistic expectations—not prescribe a treatment plan.
+>
+> If you have a persistent, painful, rapidly changing, or concerning skin issue, or if you are unsure which treatment is appropriate for you, please consult a qualified dermatologist or healthcare professional.
+>
+> Product recommendations on BeautyNestKorea are cosmetic suggestions, not medical treatments. Where applicable, some links may be affiliate links, meaning we may earn a commission at no additional cost to you. Our editorial recommendations remain independent of these relationships.
 
 *Written by the BeautyNestKorea Editorial Team · Last updated September 14, 2026 · Affiliate disclosure: we may earn a small commission from product links at no extra cost to you.*
 
