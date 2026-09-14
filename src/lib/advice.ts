@@ -9,6 +9,7 @@ export interface AdviceMeta {
   category: string;
   readTime: string;
   image: string;
+  imageAlt?: string;
   date: string;
 }
 
@@ -27,6 +28,7 @@ function parseMeta(data: Record<string, unknown>, fallbackSlug: string): AdviceM
     category: str(data.category, "Ingredients"),
     readTime: str(data.readTime, "5 min read"),
     image: str(data.image),
+    imageAlt: str(data.imageAlt) || undefined,
     date: str(data.date),
   };
 }

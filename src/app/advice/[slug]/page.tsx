@@ -54,14 +54,13 @@ function slugifyHeading(children: ReactNode): string {
   return text;
 }
 
-function InternalLink({ href, children }: { href?: string; children?: ReactNode }) {
+function InternalLink({ href, children, className }: { href?: string; children?: ReactNode; className?: string }) {
   const url = href ?? "";
+  const linkClass =
+    className ?? "font-medium text-sage-700 underline decoration-sage-300 underline-offset-2 transition hover:text-sage-600 hover:decoration-sage-500";
   if (url.startsWith("/")) {
     return (
-      <Link
-        href={url}
-        className="font-medium text-sage-700 underline decoration-sage-300 underline-offset-2 transition hover:text-sage-600 hover:decoration-sage-500"
-      >
+      <Link href={url} className={linkClass}>
         {children}
       </Link>
     );
@@ -70,15 +69,16 @@ function InternalLink({ href, children }: { href?: string; children?: ReactNode 
     const target = url.slice(1);
     const resolved = ANCHOR_ALIASES[target] ?? target;
     return (
-      <a
-        href={`#${resolved}`}
-        className="font-medium text-sage-700 underline decoration-sage-300 underline-offset-2 transition hover:text-sage-600 hover:decoration-sage-500"
-      >
+      <a href={`#${resolved}`} className={linkClass}>
         {children}
       </a>
     );
   }
-  return <a href={url}>{children}</a>;
+  return (
+    <a href={url} className={className}>
+      {children}
+    </a>
+  );
 }
 
 const markdownComponents = {
@@ -120,18 +120,25 @@ const markdownComponents = {
       {children}
     </h2>
   ),
-  h3: ({ children }: { children?: ReactNode }) => (
-    <h3 id={slugifyHeading(children)} className="font-serif-display scroll-mt-24 pt-2 text-lg font-bold tracking-tight text-ink sm:text-xl">
-      {children}
-    </h3>
-  ),
+  h3: ({ children, className }: { children?: ReactNode; className?: string }) =>
+    // Raw-HTML blocks (e.g. CTA boxes) keep their own classes.
+    className ? (
+      <h3 className={className}>{children}</h3>
+    ) : (
+      <h3 id={slugifyHeading(children)} className="font-serif-display scroll-mt-24 pt-2 text-lg font-bold tracking-tight text-ink sm:text-xl">
+        {children}
+      </h3>
+    ),
   hr: () => <hr className="border-sage-100" />,
-  img: ({ src, alt }: ComponentProps<"img">) => (
+  img: ({ src, alt, className }: ComponentProps<"img">) => (
     // Markdown-body images: full-width, auto height, no layout shift on phones.
+    // Raw-HTML images keep their own classes (e.g. inline figures).
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={typeof src === "string" ? src : ""} alt={alt ?? ""} className="h-auto w-full rounded-2xl" loading="lazy" />
+    <img src={typeof src === "string" ? src : ""} alt={alt ?? ""} className={className ?? "h-auto w-full rounded-2xl"} loading="lazy" />
   ),
-  p: ({ children }: ComponentProps<"p">) => <p className="text-ink-soft">{children}</p>,
+  p: ({ children, className }: ComponentProps<"p">) => (
+    <p className={className ?? "text-ink-soft"}>{children}</p>
+  ),
   li: ({ children }: ComponentProps<"li">) => <li className="text-ink-soft">{children}</li>,
 };
 
@@ -152,7 +159,7 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
       </p>
       {post.image && (
         <div className="relative mt-6 aspect-[16/8] overflow-hidden rounded-3xl">
-          <Image src={post.image} alt={post.title} fill className="h-auto w-full object-cover" sizes="100vw" priority />
+          <Image src={post.image} alt={post.imageAlt ?? post.title} fill className="h-auto w-full object-cover" sizes="100vw" priority />
         </div>
       )}
       <div className="prose-beauty mt-8 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">

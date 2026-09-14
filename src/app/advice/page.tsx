@@ -20,7 +20,7 @@ export default function AdviceIndex() {
         {articles.map((post) => (
           <Link key={post.slug} href={`/advice/${post.slug}`} className="glass group overflow-hidden rounded-3xl transition hover:-translate-y-1 hover:shadow-xl">
             <div className="relative aspect-[16/9] overflow-hidden">
-              <Image src={post.image} alt={post.title} fill className="object-cover transition group-hover:scale-105" sizes="33vw" />
+              <Image src={post.image} alt={post.imageAlt ?? post.title} fill className="object-cover transition group-hover:scale-105" sizes="33vw" />
             </div>
             <div className="p-6">
               <p className="text-xs font-semibold uppercase tracking-wider text-sage-600">{post.category} • {post.readTime} • {post.date}</p>
