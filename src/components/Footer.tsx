@@ -71,6 +71,7 @@ export default function Footer() {
         <div>
           <h4 className="text-sm font-semibold uppercase tracking-wider text-ink">Shop</h4>
           <ul className="mt-3 space-y-2 text-sm text-ink-soft">
+            <li><Link href="/" className="hover:text-ink">Home</Link></li>
             <li><Link href="/shop" className="hover:text-ink">All products</Link></li>
             <li><Link href="/shop?concern=Acne" className="hover:text-ink">Acne care</Link></li>
             <li><Link href="/shop?concern=Anti-aging" className="hover:text-ink">Anti-aging</Link></li>
