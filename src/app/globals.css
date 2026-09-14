@@ -87,6 +87,17 @@ body {
 ::-webkit-scrollbar-thumb { background: #c6d9bf; border-radius: 8px; }
 ::-webkit-scrollbar-thumb:hover { background: #a3bf9a; }
 
+/* Inline citation markers (rendered from [[N]] references in Advice articles):
+   tiny muted superscript text — reference markers only, never links. */
+.citation-ref {
+  font-size: 0.65em;
+  color: #a8a29e;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 0.125rem;
+  white-space: nowrap;
+}
+
 /* Line clamp helper (for older browsers) */
 .clamp-2 {
   display: -webkit-box;
