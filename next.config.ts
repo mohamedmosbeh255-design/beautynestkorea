@@ -1,6 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/blog/scars-vs-dark-spots-pih-kbeauty-routine",
+        destination: "/advice/scars-vs-hyperpigmentation",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "**.amazonaws.com" },
