@@ -1,7 +1,7 @@
 ---
 title: "Scars vs Hyperpigmentation: How to Tell the Difference & What Works"
 slug: "scars-vs-hyperpigmentation"
-excerpt: "Not every dark mark is a scar. The 30-second guide to telling scars from hyperpigmentation — and what actually helps."
+excerpt: "Not every dark mark is a scar. The 30-second guide to telling scars from hyperpigmentation."
 category: "Ingredients"
 readTime: "8 min read"
 image: "https://wlbsswmkoahjzentukns.supabase.co/storage/v1/object/public/site-assets/ChatGPT%20Image%20Sep%2014,%202026,%2010_43_13%20AM.png"
