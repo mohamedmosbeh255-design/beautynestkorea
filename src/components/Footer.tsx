@@ -81,8 +81,8 @@ export default function Footer() {
         <div>
           <h4 className="text-sm font-semibold uppercase tracking-wider text-ink">Learn</h4>
           <ul className="mt-3 space-y-2 text-sm text-ink-soft">
-            <li><Link href="/blog" className="hover:text-ink">Skincare advice</Link></li>
-            <li><Link href="/blog/10-step-korean-routine-beginners" className="hover:text-ink">Beginner routine</Link></li>
+            <li><Link href="/advice" className="hover:text-ink">Skincare advice</Link></li>
+            <li><Link href="/advice/10-step-korean-routine-beginners" className="hover:text-ink">Beginner routine</Link></li>
             <li><Link href="/admin/login" className="hover:text-ink">Admin login</Link></li>
           </ul>
         </div>

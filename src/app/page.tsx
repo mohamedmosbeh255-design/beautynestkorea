@@ -3,8 +3,8 @@ import Image from "next/image";
 import { ArrowRight, ShieldCheck, Sparkles, Droplets, Sun, Leaf, Star, CircleDot } from "lucide-react";
 import { getProducts } from "@/lib/products";
 import { getConcernStats } from "@/lib/concerns";
+import { getAllAdvice } from "@/lib/advice";
 import ProductCard from "@/components/ProductCard";
-import { BLOG_POSTS } from "@/lib/data/blog";
 
 export const revalidate = 60;
 
@@ -131,18 +131,18 @@ export default async function HomePage() {
       <section className="mx-auto mt-16 max-w-7xl px-4 sm:px-6">
         <div className="flex items-end justify-between">
           <h2 className="font-serif-display text-3xl font-bold tracking-tight">Skincare advice</h2>
-          <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700 hover:underline">
+          <Link href="/advice" className="inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700 hover:underline">
             All articles <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
         <div className="mt-6 grid gap-6 md:grid-cols-3">
-          {BLOG_POSTS.map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} className="glass group overflow-hidden rounded-3xl transition hover:-translate-y-1 hover:shadow-xl">
+          {getAllAdvice().map((post) => (
+            <Link key={post.slug} href={`/advice/${post.slug}`} className="glass group overflow-hidden rounded-3xl transition hover:-translate-y-1 hover:shadow-xl">
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image src={post.image} alt={post.title} fill className="object-cover transition group-hover:scale-105" sizes="33vw" />
               </div>
               <div className="p-5">
-                <p className="text-xs font-semibold uppercase tracking-wider text-sage-600">{post.category} • {post.reading_time}</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-sage-600">{post.category} • {post.readTime}</p>
                 <h3 className="font-serif-display mt-1.5 text-lg font-bold leading-snug">{post.title}</h3>
                 <p className="mt-2 text-sm text-ink-soft clamp-2">{post.excerpt}</p>
               </div>

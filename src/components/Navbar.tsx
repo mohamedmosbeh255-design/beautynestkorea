@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const links = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
-  { href: "/blog", label: "Advice" },
+  { href: "/advice", label: "Advice" },
 ];
 
 export default function Navbar() {

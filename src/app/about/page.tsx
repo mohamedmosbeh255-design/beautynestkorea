@@ -92,7 +92,7 @@ export default function AboutPage() {
           Shop our bestsellers <ArrowRight className="h-4 w-4" />
         </Link>
         <Link
-          href="/blog"
+          href="/advice"
           className="glass inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold transition hover:bg-white/80"
         >
           Read skincare advice
