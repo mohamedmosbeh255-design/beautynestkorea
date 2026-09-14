@@ -33,13 +33,24 @@ const ANCHOR_ALIASES: Record<string, string> = {
 };
 
 // Inline reference markers like [[9]][[23]] are plain-text citations, not
-// links. Collapse every run into one compact superscript marker (e.g. 9·23)
-// so no raw double-brackets are ever visible to the reader.
+// links. Reading flow stays clean (Healthline/WebMD style): markers are
+// stripped from the article body entirely and shown ONLY as compact
+// superscript numbers in the "References (selected)" section at the bottom.
+const REFERENCES_HEADING = "### References (selected)";
+
 function renderCitations(body: string): string {
-  return body.replace(/(\[\[\d+\]\])+/g, (run) => {
+  const idx = body.indexOf(REFERENCES_HEADING);
+  const head = idx === -1 ? body : body.slice(0, idx);
+  const tail = idx === -1 ? "" : body.slice(idx);
+  const cleaned = head
+    .replace(/(\[\[\d+\]\])+/g, "")
+    .replace(/[ \t]+([.,;:!?])/g, "$1")
+    .replace(/[ \t]{2,}/g, " ");
+  const refs = tail.replace(/(\[\[\d+\]\])+/g, (run) => {
     const nums = [...run.matchAll(/\[\[(\d+)\]\]/g)].map((m) => m[1]);
     return `<sup class="citation-ref">${nums.join("·")}</sup>`;
   });
+  return cleaned + refs;
 }
 
 function slugifyHeading(children: ReactNode): string {
