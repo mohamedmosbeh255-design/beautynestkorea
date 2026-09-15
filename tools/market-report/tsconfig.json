@@ -1,0 +1,19 @@
+{
+  "purpose": "Scoped self-check for tools/market-report ONLY. The main site's tsconfig does not reference this file, and this file does not reference the site. Sources are .mjs, so the site's `tsc --noEmit` ignores them unless allowJs is enabled (see README, Build safety).",
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["es2023", "dom"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "strict": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "types": [],
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*.mjs", "types/**/*.d.ts"],
+  "exclude": ["node_modules", "reports"]
+}

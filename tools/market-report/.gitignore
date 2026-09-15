@@ -1,0 +1,8 @@
+# This tool installs nothing, but keep these out of git in case someone runs npx here.
+node_modules/
+npm-debug.log*
+.DS_Store
+
+# Generated reports are the product and stay committed; ignore scratch output only.
+reports/*.tmp
+reports/*.partial.json
