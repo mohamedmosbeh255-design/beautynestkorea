@@ -5,17 +5,17 @@ import { ShieldCheck } from "lucide-react";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Privacy policy for BeautyNestKorea: analytics, cookies and third-party links for our affiliate skincare blog.",
+    "Privacy policy for BeautyNestKorea: what we (don't) collect — no analytics, no advertising cookies — plus affiliate links and contact details.",
 };
 
 const sections = [
   {
     title: "1. What we collect",
-    body: "We do not run accounts, checkouts or newsletters that store your personal data. We do not ask for your name, address or payment details. The only data collected automatically is basic, anonymized analytics (such as pages visited, device type and approximate region) used to understand which guides are helpful and improve the site.",
+    body: "Almost nothing. This site runs no analytics script, no advertising tracker and no consent banner — because there is nothing to consent to. We do not run accounts, checkouts or newsletters, and we do not ask for your name, address or payment details. The only request logging is the standard, short-lived server log our hosting provider keeps to operate the site.",
   },
   {
     title: "2. Cookies",
-    body: "We and our service providers (analytics and affiliate/network partners such as Amazon, Olive Young and link-measurement tools) may use cookies or similar technologies to remember preferences, measure traffic and attribute affiliate referrals. You can block or delete cookies in your browser settings; the site will still work, though some embedded retailer features may behave differently.",
+    body: "We set no cookies for visitors. Our admin login (staff only) uses a Supabase authentication session, and clicking a retailer link may record an anonymised click in our database so we know which products are popular — this stores no personal data about you. Retailer and social sites you visit after clicking a link set their own cookies under their own policies.",
   },
   {
     title: "3. Affiliate & third-party links",
@@ -31,7 +31,7 @@ const sections = [
   },
   {
     title: "6. Changes & contact",
-    body: "We may update this policy as the site evolves; the current version will always be posted on this page with the year below. For privacy questions, email us anytime.",
+    body: "If we ever add analytics, cookies or accounts, we will update this policy first with a notice of what changed. The current version will always be posted on this page with the year below. For privacy questions, email us anytime.",
   },
 ];
 
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
       <p className="mt-3 max-w-2xl leading-relaxed text-ink-soft">
         Last updated: {new Date().getFullYear()} — BeautyNestKorea is a simple
         affiliate blog. We collect as little as possible: no accounts, no
-        checkouts, and no data sales — just basic analytics to keep the guides useful.
+        checkouts, no analytics scripts, no advertising cookies and no data sales.
       </p>
 
       <div className="glass mt-8 rounded-[2rem] p-8 sm:p-12">

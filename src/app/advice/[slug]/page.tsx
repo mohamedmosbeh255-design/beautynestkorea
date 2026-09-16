@@ -7,6 +7,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { getAdviceBySlug, getAllAdvice } from "@/lib/advice";
+import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import { ArrowLeft } from "lucide-react";
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1 };
@@ -164,6 +165,7 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
       )}
       <div className="prose-beauty mt-8 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
         <p className="text-base font-medium text-ink sm:text-lg">{post.excerpt}</p>
+        <AffiliateDisclosure className="mt-0 border-y border-sage-100 py-3" />
         <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={markdownComponents}>
           {renderCitations(post.body)}
         </ReactMarkdown>

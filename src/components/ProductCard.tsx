@@ -2,11 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { Star, ArrowUpRight } from "lucide-react";
 import type { Product } from "@/lib/types";
-import { formatPrice } from "@/lib/utils";
+import { formatAsOf, formatPrice } from "@/lib/utils";
 
 export default function ProductCard({ product }: { product: Product }) {
   const img = product.image_urls[0] ?? "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80";
-  const discount = product.compare_at_price && product.compare_at_price > product.price
+  // Price provenance: discount UI renders only when the product carries a
+  // last-updated date; otherwise the badge/compare-at price are omitted.
+  const priceAsOf = formatAsOf(product.updated_at);
+  const discount = priceAsOf && product.compare_at_price && product.compare_at_price > product.price
     ? Math.round((1 - product.price / product.compare_at_price) * 100)
     : 0;
   return (
@@ -52,6 +55,9 @@ export default function ProductCard({ product }: { product: Product }) {
             <ArrowUpRight className="h-4 w-4" />
           </span>
         </div>
+        {priceAsOf && (
+          <p className="mt-1 text-[11px] text-ink-soft">as of {priceAsOf}</p>
+        )}
         <div className="mt-3 flex flex-wrap gap-1.5">
           {product.concern.slice(0, 3).map((c) => (
             <span key={c} className="rounded-full bg-sage-50 px-2.5 py-0.5 text-xs font-medium text-sage-700">{c}</span>

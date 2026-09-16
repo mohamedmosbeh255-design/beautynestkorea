@@ -4,8 +4,9 @@ import { Star, ShieldCheck, Leaf, Droplets } from "lucide-react";
 import { getProductBySlug, getProducts } from "@/lib/products";
 import ImageGallery from "@/components/ImageGallery";
 import AffiliateButtons from "@/components/AffiliateButtons";
+import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import ProductCard from "@/components/ProductCard";
-import { formatPrice } from "@/lib/utils";
+import { formatAsOf, formatPrice } from "@/lib/utils";
 
 export const revalidate = 60;
 
@@ -26,7 +27,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!product) notFound();
 
   const related = (await getProducts()).filter((p) => p.slug !== product.slug && p.concern.some((c) => product.concern.includes(c))).slice(0, 3);
-  const discount = product.compare_at_price && product.compare_at_price > product.price
+  // Price provenance: discount UI renders only when the product carries a
+  // last-updated date; otherwise the badge/compare-at price are omitted.
+  const priceAsOf = formatAsOf(product.updated_at);
+  const discount = priceAsOf && product.compare_at_price && product.compare_at_price > product.price
     ? Math.round((1 - product.price / product.compare_at_price) * 100) : 0;
 
   return (
@@ -40,7 +44,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <div className="mt-3 flex items-center gap-2 text-sm">
             <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
             <span className="font-bold">{product.rating?.toFixed(1) ?? "—"}</span>
-            <span className="text-ink-soft">{(product.review_count ?? 0).toLocaleString()} verified reviews</span>
+            <span className="text-ink-soft">{(product.review_count ?? 0).toLocaleString()} Amazon reviews</span>
           </div>
 
           <div className="mt-4 flex items-baseline gap-3">
@@ -52,6 +56,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </>
             )}
           </div>
+          {priceAsOf && (
+            <p className="mt-1 text-xs text-ink-soft">Price as of {priceAsOf} — check live retailer prices before buying.</p>
+          )}
 
           <p className="mt-5 leading-relaxed text-ink-soft">{product.description}</p>
 
@@ -65,6 +72,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
 
           <div className="mt-7">
+            <AffiliateDisclosure />
             <AffiliateButtons productId={product.id} amazonUrl={product.amazon_url} oliveyoungUrl={product.oliveyoung_url} title={product.title} />
             <p className="mt-3 flex items-center gap-1.5 text-xs text-ink-soft">
               <ShieldCheck className="h-3.5 w-3.5 text-sage-600" />

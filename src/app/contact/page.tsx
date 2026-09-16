@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Mail, ArrowUpRight } from "lucide-react";
+import { isSponsoredCurationLink } from "@/lib/affiliates";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -59,7 +60,7 @@ export default function ContactPage() {
             key={label}
             href={href}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={isSponsoredCurationLink(href) ? "sponsored noopener noreferrer" : "noopener noreferrer"}
             className="glass group rounded-3xl p-6 transition hover:-translate-y-1 hover:shadow-xl"
           >
             <span className="flex items-center justify-between">

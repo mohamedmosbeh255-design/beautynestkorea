@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Sparkles, Link as LinkIcon, FileText, Mail, ShoppingBag } from "lucide-react";
+import { isSponsoredCurationLink } from "@/lib/affiliates";
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -58,7 +59,7 @@ export default function Footer() {
                 key={label}
                 href={href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={isSponsoredCurationLink(href) ? "sponsored noopener noreferrer" : "noopener noreferrer"}
                 aria-label={label}
                 title={label}
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-sage-50 text-sage-700 transition hover:bg-sage-100"

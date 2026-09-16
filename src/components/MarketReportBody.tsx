@@ -3,6 +3,8 @@ import type { ComponentProps, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { stripTitle } from "@/lib/market-report";
+import { isAmazonDpLink, withAmazonTag } from "@/lib/affiliates";
+import { AFFILIATE_DISCLOSURE_TEXT } from "@/components/AffiliateDisclosure";
 
 function slugifyHeading(children: ReactNode): string {
   const text = Array.isArray(children)
@@ -27,6 +29,20 @@ const markdownComponents = {
         >
           {children}
         </Link>
+      );
+    }
+    // Amazon /dp/ watchlist links earn via the Associates tag; all other
+    // outbound hrefs (Reddit, Trends, curation links, …) pass through byte-identical.
+    if (isAmazonDpLink(url)) {
+      return (
+        <a
+          href={withAmazonTag(url)}
+          target="_blank"
+          rel="sponsored noopener noreferrer"
+          className="font-medium text-sage-700 underline decoration-sage-300 underline-offset-2 transition hover:text-sage-600 hover:decoration-sage-500"
+        >
+          {children}
+        </a>
       );
     }
     return (
@@ -83,11 +99,23 @@ const markdownComponents = {
   em: ({ children }: { children?: ReactNode }) => <em className="text-sm text-ink-soft/80">{children}</em>,
 };
 
+/**
+ * Render-time only (report .md sources stay untouched): insert the commission
+ * disclosure immediately above the ASIN watchlist table, if present.
+ */
+function withAsinDisclosure(markdown: string): string {
+  if (markdown.includes("may earn a commission from links on this page")) return markdown;
+  return markdown.replace(
+    /(\n\| ASIN \|)/,
+    `\n\n_${AFFILIATE_DISCLOSURE_TEXT}_\n$1`
+  );
+}
+
 export default function MarketReportBody({ markdown }: { markdown: string }) {
   return (
     <div className="space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-        {stripTitle(markdown)}
+        {withAsinDisclosure(stripTitle(markdown))}
       </ReactMarkdown>
     </div>
   );
