@@ -4,7 +4,7 @@ name: Daily Skincare Market Intelligence
 # step (zero dependencies), and the generated report is committed back to the repo.
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '7 6 * * *'
   workflow_dispatch: # manual run for backfills or testing
 
 permissions:
