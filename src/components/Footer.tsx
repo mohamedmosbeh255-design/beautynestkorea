@@ -83,6 +83,8 @@ export default function Footer() {
           <ul className="mt-3 space-y-2 text-sm text-ink-soft">
             <li><Link href="/advice" className="hover:text-ink">Skincare advice</Link></li>
             <li><Link href="/advice/10-step-korean-routine-beginners" className="hover:text-ink">Beginner routine</Link></li>
+            <li><Link href="/market-report" className="hover:text-ink">Market report</Link></li>
+            <li><Link href="/market-report/archive" className="hover:text-ink">Report archive</Link></li>
             <li><Link href="/admin/login" className="hover:text-ink">Admin login</Link></li>
           </ul>
         </div>
