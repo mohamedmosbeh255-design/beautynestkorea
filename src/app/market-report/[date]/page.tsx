@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Bot, CalendarDays } from "lucide-react";
 import MarketReportBody from "@/components/MarketReportBody";
+import MedicalCaveat from "@/components/MedicalCaveat";
 import { getReportByDate, listReportDates, siteBaseUrl } from "@/lib/market-report";
 
 export const revalidate = 3600;
@@ -26,7 +27,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: url },
-    openGraph: { title, description, url, type: "article", publishedTime: `${date}T06:00:00Z` },
+    openGraph: { title, description, url, type: "article", images: [{ url: `${base}/og-default.png`, width: 1200, height: 630, alt: "BeautyNestKorea — curated K-beauty & skincare" }], publishedTime: `${date}T06:00:00Z` },
     twitter: { card: "summary_large_image", title, description },
   };
 }
@@ -91,6 +92,8 @@ export default async function DatedMarketReportPage({ params }: { params: Promis
           <Bot className="h-4 w-4" /> Updated daily by our market intelligence bot
         </span>
       </div>
+
+      <MedicalCaveat className="mt-5" />
 
       <div className="mt-8">
         <MarketReportBody markdown={report.markdown} />

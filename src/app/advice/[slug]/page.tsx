@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { getAdviceBySlug, getAllAdvice } from "@/lib/advice";
 import { siteBaseUrl } from "@/lib/market-report";
+import { articleJsonLd, breadcrumbJsonLd } from "@/lib/schema";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import { ArrowLeft } from "lucide-react";
 
@@ -159,8 +160,20 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
   const post = getAdviceBySlug(slug);
   if (!post) notFound();
 
+  const base = siteBaseUrl();
+  const canonical = `${base}/advice/${slug}`;
+  const jsonLd = [
+    articleJsonLd(post, base, canonical, `${base}/author`),
+    breadcrumbJsonLd(base, [
+      { name: "Home", path: "/" },
+      { name: "Advice", path: "/advice" },
+      { name: post.title, path: `/advice/${slug}` },
+    ]),
+  ];
+
   return (
     <article className="mx-auto max-w-prose px-4 py-10 sm:px-6">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Link href="/advice" className="inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700 hover:underline">
         <ArrowLeft className="h-4 w-4" /> All articles
       </Link>

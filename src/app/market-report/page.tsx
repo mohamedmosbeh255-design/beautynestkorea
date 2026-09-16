@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Bot, CalendarDays } from "lucide-react";
 import MarketReportBody from "@/components/MarketReportBody";
+import MedicalCaveat from "@/components/MedicalCaveat";
 import { getLatestReport, listReportDates, siteBaseUrl } from "@/lib/market-report";
 
 export const revalidate = 3600;
@@ -24,6 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: HUB_DESCRIPTION,
       url,
       type: "article",
+      images: [{ url: `${base}/og-default.png`, width: 1200, height: 630, alt: "BeautyNestKorea — curated K-beauty & skincare" }],
       publishedTime: latest ? `${latest.date}T06:00:00Z` : undefined,
     },
     twitter: { card: "summary_large_image", title: HUB_TITLE, description: HUB_DESCRIPTION },
@@ -93,6 +95,8 @@ export default async function MarketReportPage() {
           <Bot className="h-4 w-4" /> Updated daily by our market intelligence bot
         </span>
       </div>
+
+      <MedicalCaveat className="mt-5" />
 
       <div className="mt-8">
         <MarketReportBody markdown={report.markdown} />

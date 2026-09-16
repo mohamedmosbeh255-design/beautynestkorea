@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getProducts } from "@/lib/products";
 import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
+import MedicalCaveat from "@/components/MedicalCaveat";
 import ShopClient from "@/components/ShopClient";
 
 export const metadata: Metadata = {
@@ -33,6 +34,7 @@ export default async function ShopPage({
       <p className="mt-2 max-w-xl text-sm text-ink-soft sm:text-base">
         Filter by brand, concern, price and source. Every card links to both Amazon and Olive Young on the product page.
       </p>
+      <MedicalCaveat className="mt-4 max-w-xl" />
       {bestsellers.length > 0 && (
         <section className="mt-10">
           <h2 className="font-serif-display text-2xl font-bold tracking-tight sm:text-3xl">Bestsellers</h2>

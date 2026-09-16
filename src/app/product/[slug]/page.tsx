@@ -6,8 +6,10 @@ import ImageGallery from "@/components/ImageGallery";
 import AffiliateButtons from "@/components/AffiliateButtons";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import ProductCard from "@/components/ProductCard";
+import MedicalCaveat from "@/components/MedicalCaveat";
 import { formatAsOf, formatPrice } from "@/lib/utils";
 import { siteBaseUrl } from "@/lib/market-report";
+import { breadcrumbJsonLd, faqJsonLd, productJsonLd, type FaqItem } from "@/lib/schema";
 
 export const revalidate = 60;
 
@@ -35,8 +37,34 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const discount = priceAsOf && product.compare_at_price && product.compare_at_price > product.price
     ? Math.round((1 - product.price / product.compare_at_price) * 100) : 0;
 
+  const base = siteBaseUrl();
+  const canonical = `${base}/product/${slug}`;
+  // FAQ answers double as FAQPage JSON-LD — single source keeps them in sync.
+  const faqs: FaqItem[] = [
+    {
+      question: `Is ${product.title} good for sensitive skin?`,
+      answer: product.skin_type.includes("Sensitive") || product.skin_type.includes("All")
+        ? "Yes — its formula is well tolerated by sensitive types. Patch-test first."
+        : `It suits ${product.skin_type.join(", ")} skin best. Patch-test if you're sensitive.`,
+    },
+    {
+      question: "Where is it cheapest — Amazon or Olive Young?",
+      answer: "Prices rotate with sales. Use the buttons above to compare live prices; Olive Young often bundles minis and limited editions.",
+    },
+  ];
+  const jsonLd = [
+    productJsonLd(product, base, canonical),
+    faqJsonLd(faqs),
+    breadcrumbJsonLd(base, [
+      { name: "Home", path: "/" },
+      { name: "Shop", path: "/shop" },
+      { name: product.title, path: `/product/${slug}` },
+    ]),
+  ];
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="grid gap-10 lg:grid-cols-2">
         <ImageGallery images={product.image_urls} title={product.title} />
 
@@ -110,16 +138,16 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="glass mt-12 rounded-3xl p-6 sm:p-8">
         <h2 className="font-serif-display text-xl font-bold">Frequently asked</h2>
         <div className="mt-4 grid gap-4 text-sm sm:grid-cols-2">
-          <div>
-            <p className="font-semibold">Is {product.title} good for sensitive skin?</p>
-            <p className="mt-1 text-ink-soft">{product.skin_type.includes("Sensitive") || product.skin_type.includes("All") ? "Yes — its formula is well tolerated by sensitive types. Patch-test first." : "It suits " + product.skin_type.join(", ") + " skin best. Patch-test if you're sensitive."}</p>
-          </div>
-          <div>
-            <p className="font-semibold">Where is it cheapest — Amazon or Olive Young?</p>
-            <p className="mt-1 text-ink-soft">Prices rotate with sales. Use the buttons above to compare live prices; Olive Young often bundles minis and limited editions.</p>
-          </div>
+          {faqs.map((f) => (
+            <div key={f.question}>
+              <p className="font-semibold">{f.question}</p>
+              <p className="mt-1 text-ink-soft">{f.answer}</p>
+            </div>
+          ))}
         </div>
       </div>
+
+      <MedicalCaveat className="mt-8" />
     </div>
   );
 }
