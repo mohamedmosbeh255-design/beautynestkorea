@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: siteBaseUrl() },
 };
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
 // Editorial presentation per concern; unknown/custom concerns added via the
 // Admin panel fall back to rotating defaults so they still render beautifully.
@@ -55,7 +55,8 @@ export default async function HomePage() {
                   fill
                   className="object-cover"
                   priority
-                  sizes="(max-width: 2000px) 100vw, 2000px"
+                  fetchPriority="high"
+                  sizes="(max-width: 1080px) 100vw, 1080px"
                 />
               </div>
             </div>

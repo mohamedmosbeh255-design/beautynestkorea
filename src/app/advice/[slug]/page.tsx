@@ -184,7 +184,7 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
       </p>
       {post.image && (
         <div className="relative mt-6 aspect-[16/8] overflow-hidden rounded-3xl">
-          <Image src={post.image} alt={post.imageAlt ?? post.title} fill className="h-auto w-full object-cover" sizes="100vw" priority />
+          <Image src={post.image} alt={post.imageAlt ?? post.title} fill className="h-auto w-full object-cover" sizes="(max-width: 1080px) 100vw, 1080px" priority />
         </div>
       )}
       <div className="prose-beauty mt-8 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">

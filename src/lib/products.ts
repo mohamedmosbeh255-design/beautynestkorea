@@ -1,4 +1,5 @@
 import { createServerSupabase } from "@/lib/supabase/server";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { MOCK_PRODUCTS, getMockProductBySlug } from "@/lib/data/products";
 import type { Product } from "@/lib/types";
 
@@ -37,9 +38,22 @@ function devFallback<T>(mockValue: T, emptyValue: T): T {
   return process.env.NODE_ENV === "production" ? emptyValue : mockValue;
 }
 
+// Cookie-free public client for catalog reads. The session-aware
+// createServerSupabase() calls cookies(), which opts every consumer out of
+// ISR caching — public product data needs no session, so it must not pay
+// that cost. Admin paths keep the session client.
+function createPublicSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !anon) return null;
+  return createSupabaseClient(url, anon, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+}
+
 export async function getProducts(opts?: { featuredOnly?: boolean; limit?: number }): Promise<Product[]> {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicSupabase();
     if (!supabase) return filterMock(opts);
     const query = supabase.from("products").select("*").eq("is_active", true).order("created_at", { ascending: false });
     if (opts?.featuredOnly) query.eq("is_featured", true);
@@ -61,7 +75,7 @@ function filterMock(opts?: { featuredOnly?: boolean; limit?: number }) {
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
-    const supabase = await createServerSupabase();
+    const supabase = createPublicSupabase();
     if (!supabase) return getMockProductBySlug(slug);
     const { data, error } = await supabase.from("products").select("*").eq("slug", slug).eq("is_active", true).single();
     if (!error && data) return mapRow(data);

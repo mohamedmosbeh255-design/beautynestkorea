@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    formats: ["image/avif", "image/webp"],
+    // Cap generated widths at 1080px: hero srcsets previously reached w=3840.
+    deviceSizes: [640, 750, 828, 1080],
     remotePatterns: [
       { protocol: "https", hostname: "**.amazonaws.com" },
       { protocol: "https", hostname: "m.media-amazon.com" },
@@ -11,6 +14,9 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "**.oliveyoung.com" },
       { protocol: "https", hostname: "image.oliveyoung.co.kr" },
     ],
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react"],
   },
   // 301s for the 6 retired catalog slugs → closest live product (all verified live).
   // Served as literal HTTP 301s by src/middleware.ts (which runs for

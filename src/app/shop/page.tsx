@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getProducts } from "@/lib/products";
 import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
 import MedicalCaveat from "@/components/MedicalCaveat";
-import ShopClient from "@/components/ShopClient";
+import ShopFromParams from "@/components/ShopFromParams";
 
 export const metadata: Metadata = {
   title: "Shop K-Beauty Bestsellers",
@@ -11,18 +12,12 @@ export const metadata: Metadata = {
   alternates: { canonical: `${siteBaseUrl()}/shop` },
 };
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
-export default async function ShopPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ concern?: string; category?: string }>;
-}) {
+export default async function ShopPage() {
   const products = await getProducts();
-  const { concern, category } = await searchParams;
-  // Deep-link support: /shop?concern=Hydration (from homepage cards & footer)
-  // and /shop?category=Sunscreen (e.g. from blog articles) pre-select
-  // the matching filter. Unknown values fall back to "All" in ShopClient.
+  // Deep links (/shop?concern=Hydration, /shop?category=Sunscreen) are
+  // resolved client-side in ShopFromParams so this page stays static ISR.
   // Bestsellers strip: featured picks first, then top rated.
   const bestsellers = [...products]
     .sort((a, b) => Number(b.is_featured ?? false) - Number(a.is_featured ?? false) || (b.rating ?? 0) - (a.rating ?? 0))
@@ -48,7 +43,9 @@ export default async function ShopPage({
         <h2 className="font-serif-display text-2xl font-bold tracking-tight sm:text-3xl">Shop by concern</h2>
         <p className="mt-1 text-sm text-ink-soft">Pick a concern chip to narrow the shelf to your skin&apos;s needs.</p>
         <div className="mt-5">
-          <ShopClient products={products} initialConcern={concern ?? "All"} initialCategory={category ?? "All"} />
+          <Suspense fallback={<div className="glass rounded-3xl p-12 text-center text-sm text-ink-soft">Loading the shelf…</div>}>
+            <ShopFromParams products={products} />
+          </Suspense>
         </div>
       </section>
     </div>
