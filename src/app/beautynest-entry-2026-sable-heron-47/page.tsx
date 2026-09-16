@@ -1,17 +1,18 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Lock, ArrowRight } from "lucide-react";
-import EntryRedirect from "./EntryRedirect";
 
 // ─── SITE OWNER REFERENCE ─────────────────────────────────────────────
 // Unlisted staff entry point: /beautynest-entry-2026-sable-heron-47
 // (unguessable slug: year + random words). Share ONLY with staff.
+//  • PUBLIC page: logged-out staff see it (button to /admin/login);
+//    signed-in staff are sent straight to /admin by src/middleware.ts.
+//  • /admin/login itself is also public (the sign-in form must be
+//    reachable); everything else under /admin/* bounces logged-out
+//    visitors to /admin/login.
 //  • NOT linked from any public page (nav, footer, sitemap all clean).
 //  • NOT in sitemap.xml, NO robots meta — naturally undiscoverable.
-//  • Requires an authenticated Supabase session: logged-out visitors are
-//    bounced to / by src/middleware.ts, and every hit is logged there.
-//  • Authenticated staff land here, auto-continue to /admin/login
-//    (which forwards to /admin), or use the button below.
+//  • Every hit is logged in src/middleware.ts ([admin-entry] lines).
 // ─────────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
@@ -22,14 +23,13 @@ export const metadata: Metadata = {
 export default function AdminEntryPage() {
   return (
     <div className="mx-auto flex min-h-[70vh] max-w-md items-center px-4">
-      <EntryRedirect />
       <div className="glass-strong w-full rounded-[2rem] p-8 text-center">
         <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-ink text-white">
           <Lock className="h-5 w-5" />
         </span>
         <h1 className="font-serif-display mt-4 text-2xl font-bold">Admin Login — BeautyNestKorea</h1>
         <p className="mt-1 text-sm text-ink-soft">
-          Staff only. Continuing to the secure sign-in…
+          Staff only. Continue to the secure sign-in.
         </p>
         <Link
           href="/admin/login"

@@ -24,12 +24,16 @@ export async function middleware(req: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  // Unauthenticated admin traffic is bounced to the homepage (302) rather
-  // than to the login page, so /admin/* (including /admin/login) never
-  // renders publicly. Authenticated staff reach the dashboard / login page.
-  // The unlisted staff entry page follows the same rule: unauthenticated
-  // hits bounce, authenticated staff see the entry page.
-  const bounce = () => NextResponse.redirect(new URL("/", req.url), 302);
+  // /admin/login is PUBLIC — the sign-in form must stay reachable while
+  // logged out, otherwise nobody can sign in through the site.
+  if (isLoginPage) return NextResponse.next();
+
+  // Protected /admin/* bounces logged-out visitors to the login form —
+  // never to home, so staff can always reach the sign-in. The unlisted
+  // entry page stays public too: logged-out staff see it (button to
+  // /admin/login), signed-in staff skip straight to the dashboard.
+  const toLogin = () => NextResponse.redirect(new URL("/admin/login", req.url), 302);
+  const toAdmin = () => NextResponse.redirect(new URL("/admin", req.url), 302);
 
   // Security monitoring: log every hit on the unlisted entry (authed or not).
   const logEntry = (authenticated: boolean) =>
@@ -40,16 +44,13 @@ export async function middleware(req: NextRequest) {
     const isMockAdmin = req.cookies.get(MOCK_ADMIN_COOKIE)?.value === "1";
     if (isEntryPage) {
       logEntry(isMockAdmin);
-      return isMockAdmin ? NextResponse.next() : bounce();
+      return isMockAdmin ? toAdmin() : NextResponse.next();
     }
-    if (!isMockAdmin) return bounce();
-    if (isLoginPage) {
-      return NextResponse.redirect(new URL("/admin", req.url));
-    }
+    if (!isMockAdmin) return toLogin();
     return NextResponse.next();
   }
 
-  // ── Supabase mode: every /admin/* route requires a session ──
+  // ── Supabase mode: sessions required except on public auth pages ──
   const res = NextResponse.next();
   const supabase = createServerClient(url, anon, {
     cookies: {
@@ -62,12 +63,9 @@ export async function middleware(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   if (isEntryPage) {
     logEntry(Boolean(user));
-    return user ? NextResponse.next() : bounce();
+    return user ? toAdmin() : NextResponse.next();
   }
-  if (!user) return bounce();
-  if (isLoginPage) {
-    return NextResponse.redirect(new URL("/admin", req.url));
-  }
+  if (!user) return toLogin();
   return res;
 }
 
