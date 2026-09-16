@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Mail, ArrowUpRight } from "lucide-react";
 import { isSponsoredCurationLink } from "@/lib/affiliates";
+import { siteBaseUrl } from "@/lib/market-report";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
     "Contact BeautyNestKorea by email or follow us on our social platforms.",
+  alternates: { canonical: `${siteBaseUrl()}/contact` },
 };
 
 const socials = [

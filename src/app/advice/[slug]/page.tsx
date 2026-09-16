@@ -7,6 +7,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { getAdviceBySlug, getAllAdvice } from "@/lib/advice";
+import { siteBaseUrl } from "@/lib/market-report";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import { ArrowLeft } from "lucide-react";
 
@@ -16,14 +17,24 @@ export async function generateStaticParams() {
   return getAllAdvice().map((p) => ({ slug: p.slug }));
 }
 
+// Short SEO titles (≤60 chars, metadata only — on-page H1 keeps the full title).
+const METADATA_TITLES: Record<string, string> = {
+  "scars-vs-hyperpigmentation": "Scars vs Hyperpigmentation: How to Tell Them Apart",
+  "what-is-pdrn-salmon-dna-kbeauty": "What Is PDRN? Salmon DNA in K-Beauty Explained",
+  "10-step-korean-routine-beginners": "The 10-Step Korean Routine, Simplified",
+  "niacinamide-vs-vitamin-c": "Niacinamide vs Vitamin C: Which Wins?",
+};
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = getAdviceBySlug(slug);
   if (!post) return { title: "Not found" };
+  const title = METADATA_TITLES[slug] ?? post.title;
   return {
-    title: post.title,
+    title,
     description: post.excerpt,
-    openGraph: { title: post.title, description: post.excerpt, images: post.image ? [post.image] : [] },
+    alternates: { canonical: `${siteBaseUrl()}/advice/${slug}` },
+    openGraph: { title, description: post.excerpt, images: post.image ? [post.image] : [] },
   };
 }
 

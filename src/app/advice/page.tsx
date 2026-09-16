@@ -2,11 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getAllAdvice } from "@/lib/advice";
+import { siteBaseUrl } from "@/lib/market-report";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Skincare Advice & Guides",
   description: "Evidence-based K-beauty guides: routines, ingredient breakdowns and honest explainers.",
+  alternates: { canonical: `${siteBaseUrl()}/advice` },
 };
 
 export default function AdviceIndex() {

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
+import { siteBaseUrl } from "@/lib/market-report";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "Privacy policy for BeautyNestKorea: what we (don't) collect — no analytics, no advertising cookies — plus affiliate links and contact details.",
+  alternates: { canonical: `${siteBaseUrl()}/privacy` },
 };
 
 const sections = [

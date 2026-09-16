@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BadgeDollarSign } from "lucide-react";
+import { siteBaseUrl } from "@/lib/market-report";
 
 export const metadata: Metadata = {
   title: "Affiliate Disclosure",
   description:
     "FTC-compliant affiliate disclosure: how BeautyNestKorea earns commissions from Amazon Associates and other affiliate programs at no extra cost to you.",
+  alternates: { canonical: `${siteBaseUrl()}/disclosure` },
 };
 
 export default function DisclosurePage() {

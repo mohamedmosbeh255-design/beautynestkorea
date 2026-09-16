@@ -12,6 +12,16 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "image.oliveyoung.co.kr" },
     ],
   },
+  // 301s for the 6 retired catalog slugs → closest live product (all verified live).
+  // Served as literal HTTP 301s by src/middleware.ts (which runs for
+  // /product/*); the mapping lives in src/lib/retired-slugs.ts — the single
+  // source of truth also consumed by the sitemap exclusion:
+  //   beauty-of-joseon-relief-sun → beauty-of-joseon-relief-sun-triple-set
+  //   cosrx-snail-96-mucin → cosrx-6x-peptide-collagen-skin-booster-toner-serum
+  //   anua-heartleaf-toner → anua-heartleaf-77-soothing-toner
+  //   skin1004-madagascar-ampoule → skin1004-hyalu-cica-water-fit-sun-serum
+  //   laneige-water-sleeping-mask → biodance-bio-collagen-real-deep-mask
+  //   round-lab-dokdo-toner → round-lab-birch-juice-moisturizing-sunscreen
 };
 
 export default nextConfig;

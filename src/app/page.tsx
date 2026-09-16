@@ -1,10 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { ArrowRight, ShieldCheck, Sparkles, Droplets, Sun, Leaf, Star, CircleDot } from "lucide-react";
 import { getProducts } from "@/lib/products";
 import { getConcernStats } from "@/lib/concerns";
 import { getAllAdvice } from "@/lib/advice";
+import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
+
+export const metadata: Metadata = {
+  alternates: { canonical: siteBaseUrl() },
+};
 
 export const revalidate = 60;
 
@@ -55,6 +61,16 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* PAGE HEADLINE */}
+      <section className="mx-auto max-w-7xl px-4 pt-10 text-center sm:px-6">
+        <h1 className="font-serif-display mx-auto max-w-3xl text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
+          Discover K-Beauty & Skincare That Loves You Back
+        </h1>
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-ink-soft sm:text-base">
+          Curated Korean bestsellers with honest reviews and live Amazon vs Olive Young price comparison.
+        </p>
       </section>
 
       {/* SHOP BY CONCERN */}

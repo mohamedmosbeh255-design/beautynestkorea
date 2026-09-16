@@ -1,9 +1,21 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { MOCK_ADMIN_COOKIE } from "@/app/api/mock-login/route";
+import { getRetiredRedirect } from "@/lib/retired-slugs";
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  // Retired catalog slugs → closest live product with a literal 301
+  // (mirrors the next.config.ts permanent redirects; middleware runs first).
+  const productMatch = pathname.match(/^\/product\/([a-z0-9-]+)\/?$/);
+  if (productMatch) {
+    const destination = getRetiredRedirect(productMatch[1]);
+    if (destination) {
+      return NextResponse.redirect(new URL(`/product/${destination}`, req.url), 301);
+    }
+  }
+
   if (!pathname.startsWith("/admin")) return NextResponse.next();
 
   const isLoginPage = pathname === "/admin/login";
@@ -44,5 +56,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/product/:slug*"],
 };

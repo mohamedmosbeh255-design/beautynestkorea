@@ -6,30 +6,27 @@ import { getLatestReport, listReportDates, siteBaseUrl } from "@/lib/market-repo
 
 export const revalidate = 3600;
 
-function seoFor(date: string) {
-  const title = `K-Beauty Market Report — ${date}`;
-  const description = `Daily skincare market intelligence for ${date}: trending ingredients, Reddit community pulse, social signals and competitor watchlist. Updated daily by our market intelligence bot.`;
-  return { title, description };
-}
+// Evergreen hub SEO (no date): dated editions live at /market-report/[date].
+const HUB_TITLE = "K-Beauty Market Report: Daily Skincare Trends & Ingredient Movers";
+const HUB_DESCRIPTION =
+  "Daily K-beauty market intelligence: trending skincare ingredients, community buzz, social signals and price watchlists — refreshed every morning by our market intelligence bot.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const base = siteBaseUrl();
   const latest = await getLatestReport();
-  const date = latest?.date ?? "daily";
-  const { title, description } = seoFor(date);
   const url = `${base}/market-report`;
   return {
-    title,
-    description,
+    title: HUB_TITLE,
+    description: HUB_DESCRIPTION,
     alternates: { canonical: url },
     openGraph: {
-      title,
-      description,
+      title: HUB_TITLE,
+      description: HUB_DESCRIPTION,
       url,
       type: "article",
       publishedTime: latest ? `${latest.date}T06:00:00Z` : undefined,
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: { card: "summary_large_image", title: HUB_TITLE, description: HUB_DESCRIPTION },
   };
 }
 
@@ -39,8 +36,8 @@ function jsonLd(base: string, date: string) {
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      headline: `K-Beauty Market Report — ${date}`,
-      description: `Daily skincare market intelligence for ${date}: trending ingredients, community pulse, social signals and competitor watchlist.`,
+      headline: HUB_TITLE,
+      description: HUB_DESCRIPTION,
       datePublished: `${date}T06:00:00Z`,
       author: { "@type": "Organization", name: "BeautyNestKorea Market Intelligence Bot" },
       publisher: { "@type": "Organization", name: "BeautyNestKorea" },
@@ -71,7 +68,7 @@ export default async function MarketReportPage() {
     );
   }
 
-  const { title, description } = seoFor(report.date);
+  const { title, description } = { title: HUB_TITLE, description: HUB_DESCRIPTION };
 
   return (
     <article className="mx-auto max-w-prose px-4 py-10 sm:px-6">
@@ -84,6 +81,9 @@ export default async function MarketReportPage() {
         {title}
       </h1>
       <p className="mt-3 text-base text-ink-soft sm:text-lg">{description}</p>
+      <p className="mt-2 text-sm font-medium text-ink-soft">
+        Showing the latest edition below ({report.date}) — new reports publish daily at 06:00 UTC.
+      </p>
 
       <div className="mt-5 flex flex-wrap items-center gap-2 text-sm">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-sage-100 px-3 py-1.5 font-semibold text-sage-800">

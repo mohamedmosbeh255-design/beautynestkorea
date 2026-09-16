@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Sparkles, FlaskConical, Scale, HeartHandshake, ArrowRight } from "lucide-react";
+import { siteBaseUrl } from "@/lib/market-report";
 
 export const metadata: Metadata = {
   title: "About BeautyNestKorea",
   description:
     "Our honest K-beauty curation story: how we test and compare products across Amazon and Olive Young, and our mission for glass skin for everyone.",
+  alternates: { canonical: `${siteBaseUrl()}/about` },
 };
 
 const steps = [

@@ -7,6 +7,7 @@ import AffiliateButtons from "@/components/AffiliateButtons";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import ProductCard from "@/components/ProductCard";
 import { formatAsOf, formatPrice } from "@/lib/utils";
+import { siteBaseUrl } from "@/lib/market-report";
 
 export const revalidate = 60;
 
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: product.title,
     description: product.description.slice(0, 155),
+    alternates: { canonical: `${siteBaseUrl()}/product/${slug}` },
     openGraph: { title: product.title, description: product.description.slice(0, 155), images: product.image_urls.slice(0, 1) },
   };
 }
