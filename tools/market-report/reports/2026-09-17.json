@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-17",
+  "generatedAt": "2026-09-17T10:13:04.377Z",
+  "tool": "market-report v1.0.0",
+  "trendTerms": [],
+  "ingredients": [],
+  "brands": [],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "failed",
+      "detail": "no posts retrievable from JSON or Atom"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 3/4 sources produced data · degraded (documented fallback): TikTok Creative Center · failed: Reddit community (SkincareAddiction + KoreanBeauty)",
+    "**Trend mover:** none. 12/12 Google Trends markets answered (120 items scanned) but no skin-related query surfaced — a dry day for this feed, reported as-is.",
+    "**Community pulse:** no community data today — both the public JSON and the Atom fallback returned nothing usable.",
+    "**Biggest mover vs 2026-09-16:** up — nothing rose; down — Benzoyl Peroxide -1 (now 0).",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **sunscreen**, the strongest demand signal available today (social source: static-fallback)."
+  ]
+}
