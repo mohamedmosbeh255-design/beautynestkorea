@@ -32,6 +32,7 @@ export function sleep(ms) {
  * @property {number} [status]
  * @property {string} [body]
  * @property {string} [error]
+ * @property {number} [retryAfterMs]  set when a 429 carried a Retry-After header
  * @property {number} ms
  */
 
@@ -56,6 +57,8 @@ export async function fetchText(url, opts = {}) {
   let lastError = 'unknown error';
   /** @type {number|undefined} */
   let lastStatus;
+  /** @type {number|undefined} */
+  let lastRetryAfterMs;
 
   for (let attempt = 1; attempt <= attempts; attempt++) {
     const controller = new AbortController();
@@ -68,10 +71,13 @@ export async function fetchText(url, opts = {}) {
       if (!res.ok) {
         lastError = `HTTP ${res.status}`;
         lastStatus = res.status;
-        // 429 is rate limiting (e.g. Reddit's limiter): back off and retry.
-        // Other 4xx are permanent for our purposes (blocked / gated / not found).
+        // 429 is rate limiting (e.g. Reddit's limiter). Honour the advertised Retry-After
+        // (capped so one hostile header cannot stall the whole run), else back off a little.
+        const advertised = res.headers.get('retry-after');
+        const advertisedMs = advertised && /^\d+$/.test(advertised.trim()) ? Number(advertised.trim()) * 1000 : undefined;
+        if (advertisedMs) lastRetryAfterMs = advertisedMs;
         if (res.status === 429) {
-          await sleep(retryDelayMs * attempt);
+          await sleep(Math.min(advertisedMs ?? retryDelayMs * attempt, 20000));
           continue;
         }
         if (res.status >= 400 && res.status < 500) break;
@@ -91,6 +97,7 @@ export async function fetchText(url, opts = {}) {
     ok: false,
     error: lastError,
     ...(lastStatus ? { status: lastStatus } : {}),
+    ...(lastRetryAfterMs ? { retryAfterMs: lastRetryAfterMs } : {}),
     ms: Date.now() - started,
   };
 }

@@ -2,9 +2,11 @@ name: Daily Skincare Market Intelligence
 
 # Runs at 06:00 UTC daily. No server: GitHub hosts the runner, the tool needs no install
 # step (zero dependencies), and the generated report is committed back to the repo.
+# `--guard` makes the job fail (and GitHub e-mail the failure) if a run would produce a
+# report with no measurable data at all, so an empty report cannot land silently.
 on:
   schedule:
-    - cron: '7 6 * * *'
+    - cron: '0 6 * * *'
   workflow_dispatch: # manual run for backfills or testing
 
 permissions:
@@ -36,7 +38,8 @@ jobs:
         working-directory: tools/market-report
         env:
           TZ: UTC
-        run: node src/index.mjs
+        # --guard: fail loudly (and notify) if the run produced no measurable data at all.
+        run: node src/index.mjs --guard
 
       - name: Commit report
         run: |
