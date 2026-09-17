@@ -2,19 +2,21 @@
  * SECTION 2 SOURCE (PRIMARY DEMAND SIGNAL) — Community Pulse.
  * r/SkincareAddiction + r/KoreanBeauty, top posts of the day.
  *
- * Transport strategy (verified 2026-09-15, updated 2026-09-17):
+ * Transport strategy (verified 2026-09-15, extended 2026-09-17):
  *   1) Public JSON endpoint (per spec) answers 403 for every non-browser client,
  *      even with a realistic User-Agent.
  *   2) Reddit's public Atom feed answers 200, so it is the documented fallback.
  *   3) Since 2026-09-17 the CDN also 403s this tool's own agent on the Atom feed
  *      (both JSON and Atom returned 403 from a machine where the same Atom URL with
- *      a browser agent returned 200), so the Atom call retries once with BROWSER_UA
- *      and the report prints which agent the data actually came through.
+ *      a browser agent returned 200), so the Atom call walks an ordered list of
+ *      host/agent combinations (see ATOM_ATTEMPTS) and the report prints which one
+ *      actually delivered the data. A 429 is never retried blindly: the advertised
+ *      Retry-After is honoured once, then the run moves on.
  * The report records which transport each subreddit used, because the two differ:
  * JSON carries score/comments; Atom carries feed order (already Reddit's top-of-day
  * ranking) plus the post body. Missing fields are reported as "n/a", never guessed.
  *
- * No Amazon, no paid API, no scraping of logged-in surfaces.
+ * No Amazon, no paid API, no scraping of logged-in surfaces, no OAuth token required.
  */
 import { BROWSER_UA, fetchJson, fetchText, sleep } from '../lib/http.mjs';
 import { blocks, stripTags, tagAttr, tagText } from '../lib/xml.mjs';
@@ -23,6 +25,18 @@ import { BRANDS, INGREDIENTS } from '../lib/terms.mjs';
 import { table, truncate } from '../lib/markdown.mjs';
 
 const LIMIT = 30;
+
+/**
+ * Ordered host/agent combinations for the Atom fallback. Least intrusive first:
+ * the tool's own agent on the canonical host, then a browser-like agent (the CDN blocks
+ * non-browser agents), then the same browser agent on the legacy host. `old.reddit.com`
+ * redirects to `www` for most routes today, so it is a last resort, not a bypass.
+ */
+const ATOM_ATTEMPTS = [
+  { host: 'https://www.reddit.com', agent: /** @type {'tool'|'browser'} */ ('tool'), label: 'tool UA' },
+  { host: 'https://www.reddit.com', agent: /** @type {'tool'|'browser'} */ ('browser'), label: 'browser UA' },
+  { host: 'https://old.reddit.com', agent: /** @type {'tool'|'browser'} */ ('browser'), label: 'browser UA (legacy host)' },
+];
 
 /**
  * @typedef {Object} Post
@@ -84,35 +98,34 @@ function parseAtom(sub, body, status, ua) {
 
 /** Transport 2 — public Atom feed, verified working when JSON is blocked. */
 async function viaAtom(sub) {
-  const url = `https://www.reddit.com/r/${sub}/top/.rss?t=day`;
-  const opts = {
-    accept: 'application/atom+xml, application/xml;q=0.9, */*;q=0.8',
-    // Reddit's limiter answers 429 under bursty traffic: retry briefly, then give up
-    // and let the report note the failed subreddit rather than burning the whole run.
-    attempts: 3,
-    retryDelayMs: 2000,
-  };
+  const path = `/r/${sub}/top/.rss?t=day`;
+  /** @type {string[]} */
+  const failures = [];
 
-  // Pass 1 — the tool's own agent, so the politest transport is tried first.
-  const polite = await fetchText(url, opts);
-  if (polite.ok && polite.body) return parseAtom(sub, polite.body, polite.status, 'tool UA');
+  // Ordered, least-intrusive combinations first. Each combination is tried once — a 403
+  // means "you are blocked", so repeating the same request is pointless; the next entry
+  // changes the host or the agent instead. Every failure is named in the report.
+  for (const attempt of ATOM_ATTEMPTS) {
+    const url = `${attempt.host}${path}`;
+    const res = await fetchText(url, {
+      accept: 'application/atom+xml, application/xml;q=0.9, */*;q=0.8',
+      attempts: 2,
+      retryDelayMs: 3000,
+      ...(attempt.agent === 'browser' ? { headers: { 'User-Agent': BROWSER_UA } } : {}),
+    });
 
-  // Pass 2 — one retry with a browser-like agent, but only when the failure was a
-  // block (403). A 429 means "slow down", so retrying there would be impolite and
-  // pointless: the report records the rate limit and moves on. See BROWSER_UA in
-  // lib/http.mjs for the live evidence behind this fallback.
-  if (polite.status === 403) {
-    await sleep(1500);
-    const browser = await fetchText(url, { ...opts, headers: { 'User-Agent': BROWSER_UA } });
-    if (browser.ok && browser.body) return parseAtom(sub, browser.body, browser.status, 'browser UA');
-    return {
-      ok: false,
-      error: `tool UA: HTTP 403; browser UA: ${browser.error || 'empty response'}`,
-      status: polite.status,
-    };
+    if (res.ok && res.body) {
+      return parseAtom(sub, res.body, res.status, `${attempt.label} via ${attempt.host.replace('https://', '')}`);
+    }
+
+    failures.push(`${attempt.label} → ${res.error || 'empty response'}${res.retryAfterMs ? ` (Retry-After ${Math.round(res.retryAfterMs / 1000)}s)` : ''}`);
+
+    // 429 means "slow down": wait what Reddit advertised (capped), then move on. A 403 or
+    // any other failure gets a short pause so three combinations never fire back-to-back.
+    await sleep(res.status === 429 ? Math.min(res.retryAfterMs ?? 5000, 20000) : 1500);
   }
 
-  return { ok: false, error: polite.error || 'empty response', status: polite.status };
+  return { ok: false, error: failures.join('; '), status: 403 };
 }
 
 /** Extract canonical ingredients + brands from a post's text. */
@@ -136,9 +149,11 @@ export async function collectCommunity() {
   const perSub = [];
 
   for (const sub of SUBREDDITS) {
-    // Politeness delay: two subreddit requests back-to-back triggers Reddit's
-    // rate limiter (observed live: HTTP 429 on the second subreddit).
-    if (posts.length || perSub.length) await sleep(5000);
+    // Politeness delay: back-to-back requests across subreddits trigger Reddit's rate
+    // limiter (observed live: HTTP 429 on the second subreddit at 5s spacing, again at
+    // 3 requests per subreddit). 10s keeps a two-subreddit run well inside the limiter's
+    // comfort zone without slowing the workflow meaningfully.
+    if (posts.length || perSub.length) await sleep(10000);
 
     const json = await viaJson(sub);
     let result = json;

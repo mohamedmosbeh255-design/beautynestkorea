@@ -10,7 +10,7 @@ export const revalidate = 3600;
 // Evergreen hub SEO (no date): dated editions live at /market-report/[date].
 const HUB_TITLE = "K-Beauty Market Report: Daily Skincare Trends & Ingredient Movers";
 const HUB_DESCRIPTION =
-  "Daily K-beauty market intelligence: trending skincare ingredients, community buzz, social signals and price watchlists — refreshed every morning by our market intelligence bot.";
+  "Daily K-beauty market intelligence: Wikipedia ingredient-interest trends, community buzz, skincare news headlines, social signals and price watchlists — refreshed every morning by our market intelligence bot.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const base = siteBaseUrl();

@@ -1,4 +1,4 @@
-# Daily Skincare Market Intelligence — MVP v1
+# Daily Skincare Market Intelligence — v1.1
 
 A self-contained, **zero-dependency** tool that builds one markdown intelligence report per day and commits it to the repository. No server, no cron daemon on your machine, no paid API, and **no Amazon requests at all**.
 
@@ -8,13 +8,14 @@ Runs unattended at **06:00 UTC** via GitHub Actions and writes `reports/YYYY-MM-
 
 ## What it produces
 
-| # | Section | Source | Status in v1 |
+| # | Section | Source | Status in v1.1 |
 |---|---|---|---|
-| 1 | Top Trending Ingredients | Google Trends daily RSS, 12 markets queried individually | Works. Feed is news-driven, so some days legitimately return zero skin matches — stated, never faked |
-| 2 | Community Pulse | r/SkincareAddiction + r/KoreanBeauty | Works via documented Atom fallback (public JSON endpoint is currently 403) |
-| 3 | Social Signals | TikTok Creative Center | Probed live; endpoint is gated, so the curated fallback list is used and the probe verdict is printed as evidence |
-| 4 | Competitor Watchlist | Static ASIN list | Table renders with `TODO (PA-API)` placeholders by design |
-| 5 | Auto-Summary | Rule-based over sections 1–4 | Exactly five lines, each derived from measured values |
+| 1 | Top Trending Ingredients | **Wikimedia pageviews** for 18 tracked ingredient articles (two complete days compared) + Google Trends daily RSS as a labelled secondary signal | Live. 18/18 article requests answered 200 on 2026-09-17 |
+| 2 | Community Pulse | r/SkincareAddiction + r/KoreanBeauty | Works via documented Atom fallback when Reddit answers; cloud-runner IPs are commonly 403/429'd and the report says so instead of inventing posts |
+| 3 | Market News Pulse | **Google News RSS** (EN + KO queries), filtered by the ingredient/brand lexicon | Live. 200 headlines read, 58 lexicon-matched on 2026-09-17. Editorial coverage — *not* consumer demand |
+| 4 | Social Signals | TikTok Creative Center | Probed live; endpoint is gated, so the curated fallback list is used and the probe verdict is printed as evidence |
+| 5 | Competitor Watchlist | Static ASIN list | Table renders with `TODO (PA-API)` placeholders by design |
+| 6 | Auto-Summary | Rule-based over sections 1–5 | Every line derived from measured values |
 
 Every report also carries a **Source status** table (state + duration per source), a **Methodology & caveats** block, and an explicit note whenever a source degraded or failed.
 
@@ -80,27 +81,40 @@ If your site's `tsconfig.json` ever enables `allowJs`/`checkJs`, add one line to
 
 ## Sources in detail (and what each one really does today)
 
-All statuses below were measured on **2026-09-15** from a normal consumer connection; the tool re-checks them on every run and prints the outcome in the report itself.
+All statuses below were measured on **2026-09-15 → 2026-09-17** from a normal consumer connection; the tool re-checks them on every run and prints the outcome in the report itself.
 
-### 1. Google Trends RSS — `src/sources/trends.mjs`
+### 1. Wikimedia pageviews (ingredient interest) — `src/sources/wikimedia.mjs`
+- **Endpoint used:** `https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/<ARTICLE>/daily/<start>/<end>` → verified `200` for **18/18** tracked article titles with this tool's own User-Agent (2026-09-17).
+- **Why it is the primary trend signal:** Google Trends' daily RSS is news-driven and returned **0 skin-related matches from 120 items/day** for three days straight, and its informal keyword endpoints are unusable (`/trends/api/dailytrends` → `404`, `/trends/api/explore` → `429`, both verified live on 2026-09-17). Wikimedia answers cloud runners, needs no key, no cookie and no browser.
+- **What the numbers mean:** article views for one *complete* day (yesterday) compared with the day before — a partial "today" bucket is never compared. Titles are per-ingredient (`Retinol`, `Tretinoin`, `Adapalene`, `Centella_asiatica`, `Snail_slime`, …), so a multi-article ingredient (retinoids) is summed from its articles.
+- **Honest limitation:** pageviews measure **public curiosity**, not sales, not search volume, not social chatter. The report says exactly that under the table ("Proxy note"), and missing data is printed as `n/a` — never estimated.
+- **Politeness:** one request per article with a 1.2s gap (bursts get `429`), 20s timeout, and each failed title is listed with its reason.
+
+### 2. Google Trends RSS (now a labelled secondary signal) — `src/sources/trends.mjs`
 - **Endpoint used:** `https://trends.google.com/trending/rss?geo=<MARKET>` → verified `200`.
 - **Retired endpoint:** `https://trends.google.com/trends/trendingsearches/daily/rss?geo=<MARKET>` → verified `404`. The module probes it once for diagnostics and **skips it gracefully**; a 404 is recorded as a degradation, never as a run failure.
-- **Why 12 markets:** Google Trends has no "worldwide" feed and no per-keyword RSS. "Worldwide" here means 12 markets (US, GB, CA, AU, IN, DE, FR, JP, KR, BR, SG, AE) queried individually, then aggregated: a term surfacing in more markets ranks higher, with peak traffic as the tie-breaker. Each surviving row shows its top five countries.
-- **Honest limitation:** the feed is news- and sports-driven, so days with zero skin-related matches happen (including on the sample date). The report says so explicitly instead of manufacturing a ranking.
+- **Why 12 markets:** Google Trends has no "worldwide" feed and no per-keyword RSS. "Worldwide" here means 12 markets (US, GB, CA, AU, IN, DE, FR, JP, KR, BR, SG, AE) queried individually, then aggregated: a term surfacing in more markets ranks higher, with peak traffic as the tie-breaker.
+- **Honest limitation:** the feed is news- and sports-driven (0 skin matches on 2026-09-15 → 2026-09-17). The report prints the market count, the items scanned and the zero explicitly rather than manufacturing a ranking.
 
-### 2. Reddit — `src/sources/reddit.mjs` (primary demand signal)
+### 3. Reddit — `src/sources/reddit.mjs` (community demand signal)
 - **Transport 1 (spec default):** `https://www.reddit.com/r/<sub>/top.json?t=day&limit=30` → verified `403` for every non-browser client, including with a realistic User-Agent.
-- **Transport 2 (documented fallback):** `https://www.reddit.com/r/<sub>/top/.rss?t=day` → verified `200`.
-- **Rate limiting:** two subreddit requests back-to-back returned `429` (observed live). The tool now (a) waits 1.5s between subreddits and (b) retries `429` with back-off inside `src/lib/http.mjs`, while treating other 4xx as permanent.
-- **Field honesty:** JSON gives real `score`/`num_comments`; Atom does not, so fallback rows read `n/a (RSS transport)` rather than a guessed number. Ranking falls back to Reddit's own top-of-day ordering, which is the feed's native sort.
+- **Transport 2 (documented fallback):** `https://www.reddit.com/r/<sub>/top/.rss?t=day` → verified `200` from a residential connection with a browser agent; from GitHub's cloud runners it has answered `403` then `429`.
+- **Ordered attempts:** the Atom call walks `ATOM_ATTEMPTS` — tool UA on `www.reddit.com`, then browser UA on `www.reddit.com`, then browser UA on `old.reddit.com` — and the report names the combination that actually delivered the data.
+- **Rate limiting:** a `429` is never retried blindly: the tool waits the advertised `Retry-After` (capped at 20s) once and then moves on, and there is now a 10s gap between subreddits (5s was measured to trigger `429`).
+- **Field honesty:** JSON gives real `score`/`num_comments`; Atom does not, so fallback rows read `n/a (RSS transport)` rather than a guessed number.
 - **Extraction:** ingredient and brand mentions are matched from a curated lexicon (`src/lib/terms.mjs`: 29 ingredients, 33 brands) with word-boundary regexes, so `acne` does not match `acneform`.
 
-### 3. TikTok Creative Center — `src/sources/tiktok.mjs`
-- Both public ranking endpoints are probed each run: one answers `404`, the other `200` with `{"code":40101,"msg":"no permission"}`. The exact verdict is written into the report as evidence.
-- Because the ranking is gated, v1 renders the **curated fallback list** (20 hashtags with category + buyer intent) from `src/lib/lexicon.mjs`, and labels the section as a fallback so nobody mistakes it for live data. Refresh it quarterly.
+### 4. Google News RSS (market news pulse) — `src/sources/news.mjs`
+- **Endpoints used:** two public Google News RSS queries (English US, Korean KR), each verified `200` with ~100 dated headlines on 2026-09-17.
+- **Filtering:** headlines are matched against the same ingredient/brand lexicon, so the table only shows skincare-relevant coverage; the rest are counted as "read but skipped" and never padded into the table. Each row prints publisher + UTC timestamp, and duplicate titles across queries are de-duplicated.
+- **Honest limitation:** editorial coverage is a *coverage* signal — it is not consumer demand. The report labels it that way in the table footnote and in the methodology block.
 
-### 4. Competitor watchlist — `src/sources/amazon.mjs`
-- **Zero network calls by design.** The file contains a rule comment: the project was IP-throttled by Amazon after earlier scraping, so v1 issues no Amazon request at all.
+### 5. TikTok Creative Center — `src/sources/tiktok.mjs`
+- Both public ranking endpoints are probed each run: one answers `404`, the other `200` with `{"code":40101,"msg":"no permission"}`. The exact verdict is written into the report as evidence.
+- Because the ranking is gated, the tool renders the **curated fallback list** (20 hashtags with category + buyer intent) from `src/lib/lexicon.mjs`, and labels the section as a fallback so nobody mistakes it for live data. Refresh it quarterly.
+
+### 6. Competitor watchlist — `src/sources/amazon.mjs`
+- **Zero network calls by design.** The file contains a rule comment: the project was IP-throttled by Amazon after earlier scraping, so it issues no Amazon request at all.
 - The six ASINs render as a table with `Price`, `Rating` and `BSR` columns set to `TODO (PA-API)`, each row linked with a plain `https://www.amazon.com/dp/<ASIN>` URL (rendered, never fetched).
 - When PA-API credentials exist, only this file changes: fill the three fields from the API and delete the note.
 
@@ -123,6 +137,7 @@ All statuses below were measured on **2026-09-15** from a normal consumer connec
 | `--dir PATH` | Output directory (default: `tools/market-report/reports`) |
 | `--print` | Also print the complete markdown to stdout |
 | `--strict` | Exit non-zero when *every* source failed |
+| `--guard` | Exit non-zero when the report carries no measurable data at all (no pageviews, no headlines, no posts, no trend matches). Used in CI so an empty report fails the run instead of landing silently |
 | `--help` | Usage summary |
 
 ---
@@ -136,8 +151,9 @@ The workflow lives in two places so it works whichever directory is the reposito
 
 Details that matter:
 
-- **Schedule:** `cron: '0 6 * * *'` (06:00 UTC). GitHub cron is UTC-only and can start a few minutes late under load; that is normal. `workflow_dispatch` is enabled for manual runs and backfills.
-- **No install step:** the job goes straight from `actions/setup-node@v4` to `node src/index.mjs`, because there are no dependencies.
+- **Schedule:** `cron: '0 6 * * *'` (06:00 UTC). GitHub cron is UTC-only and can start late under load — observed live: a scheduled run fired at 11:31 UTC instead of 06:00, so treat the timestamp as approximate and verify the report date, not the clock. `workflow_dispatch` is enabled for manual runs and backfills.
+- **No install step:** the job goes straight from `actions/setup-node@v4` to `node src/index.mjs --guard`, because there are no dependencies.
+- **Empty-report guard:** `--guard` exits non-zero when a run would produce a report with zero measurable data, which makes the job (and its GitHub notification) fail instead of archiving an empty report.
 - **Permissions:** `contents: write`, needed for the commit step. The commit uses the standard `github-actions[bot]` identity, and a `git pull --rebase --autostash` before `git push` to survive a concurrent push.
 - **Artifacts:** the report is also uploaded as a workflow artifact (15-day retention), so you keep a copy even if the commit step is blocked by branch protection.
 - **Concurrency:** grouped by `market-report` so two runs cannot race on the same file.
@@ -149,7 +165,7 @@ If your default branch is protected, either allow the bot to push or drop the co
 These are enforced in code, not just documented:
 
 1. **No Amazon scraping.** `src/sources/amazon.mjs` performs zero HTTP calls, and there is no Amazon URL anywhere else in the tool. Reintroducing a fetch there breaks the project's stated rule.
-2. **No paid APIs.** Every request goes to a public endpoint: Google Trends RSS, Reddit's public feeds, TikTok's public (gated) endpoints.
+2. **No paid APIs.** Every request goes to a public endpoint: Wikimedia pageviews, Google Trends RSS, Reddit's public feeds, Google News RSS, TikTok's public (gated) endpoints.
 3. **No silent failure.** Any degraded or failed source is written into the report with its reason, and the source table shows state + duration.
 4. **No invented data.** When a feed has no skin-related content, the report says so. Numbers that a transport cannot supply are printed as `n/a`, never estimated.
 5. **No dependency creep.** `dependencies` and `devDependencies` stay empty; the RSS/Atom reader is hand-rolled on purpose.
@@ -158,14 +174,16 @@ These are enforced in code, not just documented:
 
 ## Known limitations & v2 backlog
 
-| Limitation in v1 | Cheapest path to fix |
+| Limitation in v1.1 | Cheapest path to fix |
 |---|---|
-| Google Trends daily RSS is news-driven, so skin-specific matches are rare | Add the informal interest-over-time endpoint per keyword (fragile), or track a fixed keyword set through a licensed trends provider |
+| Google Trends daily RSS is news-driven, so skin-specific matches are rare (0 on 2026-09-15 → 17); its keyword endpoints are dead/blocked (`dailytrends` 404, `explore` 429) | Already handled by demoting it to a secondary signal; a licensed trends provider is the only robust replacement |
+| Ingredient interest is measured via English Wikipedia pageviews (a curiosity proxy, not sales or search volume) | Add more languages/projects (`de.wikipedia`, `ko.wikipedia`) once the per-title map grows; keep the proxy note in the report |
+| News headlines are editorial coverage, not demand | Add optional keyword-volume verification (PA-API / licensed data) before turning coverage into a demand claim |
 | TikTok rankings gated (`40101 no permission`) | TikTok Business API credentials, or a maintained quarterly list (current approach) |
-| Reddit JSON blocked; Atom lacks score/comments | Reddit OAuth (script app) — 100 requests/minute with real scores and comment counts |
+| Reddit JSON blocked; Atom lacks score/comments; cloud IPs are often 403/429 | Reddit OAuth (script app) — 100 requests/minute with real scores and comment counts. The tool already walks host/agent combinations and honours Retry-After, so nothing is lost when it stays blocked |
 | Watchlist has no live price/rating/BSR | Amazon PA-API 5.0 with real credentials (columns already wired) |
-| Single-day view | The `.json` snapshot per report already enables week-over-week deltas; add a rollup command |
-| Ingredient extraction is lexicon-based | Expand `src/lib/terms.mjs`; a synonym/typo map is the highest-yield next step |
+| Single-day view | The `.json` snapshot per report already carries `wikiViews` + community tallies for deltas; add a rollup command |
+| Ingredient extraction is lexicon-based | Expand `src/lib/terms.mjs` / `src/lib/lexicon.mjs`; a synonym/typo map is the highest-yield next step |
 
 ---
 
@@ -175,10 +193,10 @@ These are enforced in code, not just documented:
 |---|---|---|
 | `Google Trends RSS … N market(s) skipped` | Those markets 404/429'd that run | Usually transient; the run already retried |
 | `HTTP 403` on both Reddit transports | Reddit blocked the runner IP (common on cloud IPs) | Expected and handled; consider Reddit OAuth for reliability |
-| `HTTP 429` from Reddit | Rate limiter | Handled with back-off; the 1.5s inter-request delay exists for this |
-| `curated static fallback (endpoint gated)` | TikTok ranking unavailable | Expected in v1 |
+| `HTTP 429` from Reddit | Rate limiter | Handled: the advertised `Retry-After` is honoured once (capped at 20s), then the run moves on — the 10s gap between subreddits exists for this |
+| `curated static fallback (endpoint gated)` | TikTok ranking unavailable | Expected; the news section (3) is the live signal |
 | `failed sub(s): KoreanBeauty` | That subreddit gave nothing usable | Report still renders; re-run later |
-| Report committed but empty sections | All upstream feeds were down that day | Check the Source status table; use `--strict` in CI to get alerted |
+| Report committed with empty sections | Upstream feeds were down that day | Check the Source status table; CI runs with `--guard`, so a fully empty report fails the job and notifies |
 
 ---
 
@@ -198,26 +216,29 @@ tools/market-report/
 └── src/
     ├── index.mjs                 CLI, fault isolation, document assembly, file output
     ├── lib/
-    │   ├── http.mjs              fetch with timeout, retries, 429 back-off
+    │   ├── http.mjs              fetch with timeout, retries, Retry-After honouring
     │   ├── xml.mjs               RSS + Atom scanner, entity decoding
-    │   ├── lexicon.mjs           12 markets, 127 keywords, 20 fallback hashtags, 6 ASINs
+    │   ├── lexicon.mjs           12 markets, 127 keywords, 18 wiki articles, 2 news queries, 20 fallback hashtags, 6 ASINs
     │   ├── terms.mjs             29 ingredients + 33 brands
     │   ├── log.mjs               per-source status tracking
     │   ├── markdown.mjs          tables, lists, truncation, escaping
     │   ├── history.mjs           previous-snapshot loading + movers
-    │   ── summary.mjs           the five rule-based summary lines
+    │   ── summary.mjs           the rule-based summary lines
     ── sources/
-        ├── reddit.mjs            section 2 — primary demand signal
-        ├── trends.mjs            section 1 — Google Trends RSS
-        ├── tiktok.mjs            section 3 — social signals
-        └── amazon.mjs            section 4 — watchlist table (no network)
+        ├── wikimedia.mjs         section 1 — ingredient interest (Wikipedia pageviews)
+        ├── trends.mjs            section 1 (secondary) — Google Trends RSS
+        ├── reddit.mjs            section 2 — community demand signal
+        ├── news.mjs              section 3 — market news pulse (Google News RSS)
+        ├── tiktok.mjs            section 4 — social signals
+        └── amazon.mjs            section 5 — watchlist table (no network)
 ```
 
 ---
 
 ## Maintenance checklist
 
-- **Quarterly:** refresh `TIKTOK_FALLBACK_HASHTAGS` and re-check that the Google Trends endpoint path still answers 200.
+- **Quarterly:** refresh `TIKTOK_FALLBACK_HASHTAGS`, re-check the Google Trends endpoint path, and sanity-check a few `WIKI_ARTICLES` titles (a renamed Wikipedia article answers `404` and is listed as a skipped title).
 - **When PA-API is ready:** fill price/rating/BSR in `src/sources/amazon.mjs` only.
-- **When a brand or ingredient trend appears:** add it to `src/lib/terms.mjs` so tomorrow's report picks it up automatically.
+- **When a brand or ingredient trend appears:** add it to `src/lib/terms.mjs` (and to `WIKI_ARTICLES` if it has a Wikipedia article) so tomorrow's report picks it up automatically.
+- **When a news topic matters:** add a query to `NEWS_QUERIES` in `src/lib/lexicon.mjs` — the filter stays lexicon-based, so extras only add coverage, never noise.
 - **Monthly:** review a few reports for sections that are persistently empty, and fix the cause rather than accepting it.

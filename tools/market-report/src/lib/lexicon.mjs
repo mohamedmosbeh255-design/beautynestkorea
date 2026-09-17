@@ -42,6 +42,53 @@ export const SKINCARE_KEYWORDS = [
 /** Subreddits for Community Pulse. */
 export const SUBREDDITS = ['SkincareAddiction', 'KoreanBeauty'];
 
+/**
+ * Market-news queries (Google News RSS, v1.1 / section 3). Google News RSS is a public,
+ * token-free, server-friendly feed, which is why it replaces the gated TikTok ranking as
+ * the live section-3 source. Each query returns ~100 dated headlines; the report filters
+ * them against the skincare lexicon and prints only real titles with their publisher.
+ * Honest scope: editorial coverage, NOT consumer demand — the methodology says so.
+ */
+export const NEWS_QUERIES = [
+  {
+    id: 'en',
+    label: 'English (US) — skincare ingredients & K-beauty',
+    url: 'https://news.google.com/rss/search?q=(skincare+OR+%22k-beauty%22)+(ingredient+OR+retinol+OR+%22snail+mucin%22+OR+PDRN)&hl=en-US&gl=US&ceid=US:en',
+  },
+  {
+    id: 'ko',
+    label: 'Korean (KR) — 스킨케어 성분 (skincare ingredients)',
+    url: 'https://news.google.com/rss/search?q=%EC%8A%A4%ED%82%A8%EC%BC%80%EC%96%B4+%EC%84%B1%EB%B6%84&hl=ko&gl=KR&ceid=KR:ko',
+  },
+];
+
+/**
+ * Ingredient-interest proxy (v1.1 / section 1): English Wikipedia article titles, one per
+ * tracked ingredient. The Wikimedia pageviews API is public, token-free and answers cloud
+ * IPs reliably (verified live 2026-09-17: 18/18 titles answered 200 from this machine),
+ * unlike Google Trends' daily RSS which is news-driven and rarely carries skincare queries.
+ * Titles must be exact article names: an unknown title answers 404 and is reported as such,
+ * never guessed. Adding an ingredient here widens the section automatically.
+ */
+export const WIKI_ARTICLES = {
+  'Retinol / Retinoids': ['Retinol', 'Tretinoin', 'Adapalene'],
+  'Niacinamide': ['Niacinamide'],
+  'Hyaluronic Acid': ['Hyaluronic_acid'],
+  'Ceramides': ['Ceramide'],
+  'Centella Asiatica (Cica)': ['Centella_asiatica'],
+  'Azelaic Acid': ['Azelaic_acid'],
+  'Salicylic Acid (BHA)': ['Salicylic_acid'],
+  'Glycolic / AHA': ['Glycolic_acid'],
+  'Vitamin C': ['Vitamin_C'],
+  'Benzoyl Peroxide': ['Benzoyl_peroxide'],
+  'Snail Mucin': ['Snail_slime'],
+  'Bakuchiol': ['Bakuchiol'],
+  'Panthenol (B5)': ['Panthenol'],
+  'Squalane': ['Squalane'],
+  'Tranexamic Acid': ['Tranexamic_acid'],
+  'Kojic Acid': ['Kojic_acid'],
+};
+
 /** Competitor watchlist. Static by design: NO Amazon requests are made from this tool. */
 export const WATCHLIST = [
   { asin: 'B08CMS8P67', label: 'Watchlist item 1' },

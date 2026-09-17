@@ -1,8 +1,8 @@
 {
   "name": "@beautynest/market-report",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "description": "Daily Skincare Market Intelligence MVP v1 - zero-dependency report generator (Google Trends RSS, Reddit public feeds, TikTok Creative Center with static fallback, static Amazon watchlist).",
+  "description": "Daily Skincare Market Intelligence (v1.1) - zero-dependency report generator (Wikimedia pageviews for ingredient interest, Google Trends RSS secondary, Reddit public feeds, Google News RSS EN+KO, TikTok Creative Center curated fallback, static Amazon watchlist).",
   "type": "module",
   "engines": {
     "node": ">=20"
