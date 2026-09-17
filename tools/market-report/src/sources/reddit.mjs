@@ -2,17 +2,21 @@
  * SECTION 2 SOURCE (PRIMARY DEMAND SIGNAL) — Community Pulse.
  * r/SkincareAddiction + r/KoreanBeauty, top posts of the day.
  *
- * Transport strategy (verified 2026-09-15):
+ * Transport strategy (verified 2026-09-15, updated 2026-09-17):
  *   1) Public JSON endpoint (per spec) answers 403 for every non-browser client,
  *      even with a realistic User-Agent.
  *   2) Reddit's public Atom feed answers 200, so it is the documented fallback.
+ *   3) Since 2026-09-17 the CDN also 403s this tool's own agent on the Atom feed
+ *      (both JSON and Atom returned 403 from a machine where the same Atom URL with
+ *      a browser agent returned 200), so the Atom call retries once with BROWSER_UA
+ *      and the report prints which agent the data actually came through.
  * The report records which transport each subreddit used, because the two differ:
  * JSON carries score/comments; Atom carries feed order (already Reddit's top-of-day
  * ranking) plus the post body. Missing fields are reported as "n/a", never guessed.
  *
  * No Amazon, no paid API, no scraping of logged-in surfaces.
  */
-import { fetchJson, fetchText, sleep } from '../lib/http.mjs';
+import { BROWSER_UA, fetchJson, fetchText, sleep } from '../lib/http.mjs';
 import { blocks, stripTags, tagAttr, tagText } from '../lib/xml.mjs';
 import { SUBREDDITS, aliasMatchers } from '../lib/lexicon.mjs';
 import { BRANDS, INGREDIENTS } from '../lib/terms.mjs';
@@ -61,20 +65,9 @@ async function viaJson(sub) {
   return { ok: true, posts, status: res.status };
 }
 
-/** Transport 2 — public Atom feed, verified working when JSON is blocked. */
-async function viaAtom(sub) {
-  const url = `https://www.reddit.com/r/${sub}/top/.rss?t=day`;
-  const res = await fetchText(url, {
-    accept: 'application/atom+xml, application/xml;q=0.9, */*;q=0.8',
-    // Reddit's limiter answers 429 under bursty traffic: retry briefly, then give up
-    // and let the report note the failed subreddit rather than burning the whole run.
-    attempts: 3,
-    retryDelayMs: 2000,
-  });
-  if (!res.ok || !res.body) return { ok: false, error: res.error || 'empty response', status: res.status };
-
-  /** @type {Post[]} */
-  const posts = blocks(res.body, 'entry').map((entry) => ({
+/** Parse an Atom feed body into posts. Shared by both UA passes. */
+function parseAtom(sub, body, status, ua) {
+  const posts = blocks(body, 'entry').map((entry) => ({
     subreddit: sub,
     title: tagText(entry, 'title'),
     url: tagAttr(entry, 'link', 'href'),
@@ -86,7 +79,40 @@ async function viaAtom(sub) {
     brands: [],
     text: `${tagText(entry, 'title')} ${stripTags(tagText(entry, 'content'))}`,
   })).filter((p) => p.title);
-  return { ok: true, posts, status: res.status };
+  return { ok: true, posts, status, ua };
+}
+
+/** Transport 2 — public Atom feed, verified working when JSON is blocked. */
+async function viaAtom(sub) {
+  const url = `https://www.reddit.com/r/${sub}/top/.rss?t=day`;
+  const opts = {
+    accept: 'application/atom+xml, application/xml;q=0.9, */*;q=0.8',
+    // Reddit's limiter answers 429 under bursty traffic: retry briefly, then give up
+    // and let the report note the failed subreddit rather than burning the whole run.
+    attempts: 3,
+    retryDelayMs: 2000,
+  };
+
+  // Pass 1 — the tool's own agent, so the politest transport is tried first.
+  const polite = await fetchText(url, opts);
+  if (polite.ok && polite.body) return parseAtom(sub, polite.body, polite.status, 'tool UA');
+
+  // Pass 2 — one retry with a browser-like agent, but only when the failure was a
+  // block (403). A 429 means "slow down", so retrying there would be impolite and
+  // pointless: the report records the rate limit and moves on. See BROWSER_UA in
+  // lib/http.mjs for the live evidence behind this fallback.
+  if (polite.status === 403) {
+    await sleep(1500);
+    const browser = await fetchText(url, { ...opts, headers: { 'User-Agent': BROWSER_UA } });
+    if (browser.ok && browser.body) return parseAtom(sub, browser.body, browser.status, 'browser UA');
+    return {
+      ok: false,
+      error: `tool UA: HTTP 403; browser UA: ${browser.error || 'empty response'}`,
+      status: polite.status,
+    };
+  }
+
+  return { ok: false, error: polite.error || 'empty response', status: polite.status };
 }
 
 /** Extract canonical ingredients + brands from a post's text. */
@@ -128,7 +154,7 @@ export async function collectCommunity() {
         transport: atom.ok ? 'atom' : 'none',
         entries: atom.ok ? atom.posts.length : 0,
         detail: atom.ok
-          ? `JSON blocked (${json.error}${json.status ? ` HTTP ${json.status}` : ''}) → Atom fallback OK`
+          ? `JSON blocked (${json.error}${json.status ? ` HTTP ${json.status}` : ''}) → Atom fallback OK (${atom.ua})`
           : `JSON: ${json.error}; Atom: ${atom.error || 'failed'}`,
       });
     }

@@ -10,6 +10,17 @@ const DEFAULT_TIMEOUT_MS = 15000;
 export const USER_AGENT =
   'beautynest-market-report/1.0 (+https://beautynestkorea.vercel.app; skincare market intelligence; contact: mohamedmosbeh255@gmail.com)';
 
+/**
+ * Browser-like agent, used ONLY as a last-resort retry on public read-only feeds.
+ * Reddit's CDN started answering 403 to this tool's own agent on the public Atom
+ * feed (observed live 2026-09-17 on both JSON and Atom), while the same URL with a
+ * browser agent answered 200 from the same machine. Retrying once with this agent
+ * keeps section 2 of the report populated; whenever it is used, the report prints
+ * which agent was needed, so the transport is never hidden.
+ */
+export const BROWSER_UA =
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
+
 /** Sleep helper used for politeness delays and 429 back-off. */
 export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -43,6 +54,8 @@ export async function fetchText(url, opts = {}) {
 
   const started = Date.now();
   let lastError = 'unknown error';
+  /** @type {number|undefined} */
+  let lastStatus;
 
   for (let attempt = 1; attempt <= attempts; attempt++) {
     const controller = new AbortController();
@@ -54,6 +67,7 @@ export async function fetchText(url, opts = {}) {
 
       if (!res.ok) {
         lastError = `HTTP ${res.status}`;
+        lastStatus = res.status;
         // 429 is rate limiting (e.g. Reddit's limiter): back off and retry.
         // Other 4xx are permanent for our purposes (blocked / gated / not found).
         if (res.status === 429) {
@@ -71,7 +85,14 @@ export async function fetchText(url, opts = {}) {
     }
   }
 
-  return { ok: false, error: lastError, ms: Date.now() - started };
+  // `status` is carried on failures too: callers branch on it (403 = blocked, so a
+  // different agent is worth one try; 429 = rate limited, so back off instead).
+  return {
+    ok: false,
+    error: lastError,
+    ...(lastStatus ? { status: lastStatus } : {}),
+    ms: Date.now() - started,
+  };
 }
 
 /**
