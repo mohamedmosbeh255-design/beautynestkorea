@@ -132,7 +132,7 @@ export default function ProductForm({
           <label className={label}>Image URLs * (one per line)</label>
           <textarea {...register("image_urls")} rows={3} className={input} placeholder="https://... (or Supabase storage URL after upload)" />
           {errors.image_urls && <p className="mt-1 text-xs text-red-600">{errors.image_urls.message as string}</p>}
-          <p className="mt-1 text-[11px] text-ink-soft">Tip: upload to Supabase Storage bucket <code>product-images</code> (public) and paste URLs here. Direct file upload UI can be added next.</p>
+          <p className="mt-1 text-[11px] text-ink-soft">Upload ONLY your own photos to the <code>product-images</code> bucket (public) and paste URLs here. Never upload retailer images (Amazon / Olive Young) — those stay hotlinked from the retailer CDN (see Image policy in README).</p>
         </div>
         <div>
           <label className={label}>Amazon affiliate link</label>

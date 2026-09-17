@@ -23,6 +23,33 @@ Dev admin bypass (mock mode only): `admin@beautynestkorea.com` / `admin123`.
    insert into public.admin_users (id, email) values ('<uuid>', 'you@domain.com');
    ```
 
+## Image policy (locked — do not re-host retailer images)
+
+(a) **Own photos are the default.** Every product image on the site is shot by the owner.
+User-shot photos are the *only* product assets uploaded to Supabase Storage
+(`product-images` bucket) or Vercel. A product with no own photo yet shows a
+neutral "photo coming soon" placeholder while its shop buttons keep linking out.
+
+(b) **Retailer images are hotlinked, never re-hosted.** Images served from
+`m.media-amazon.com` or the Olive Young CDN (`*.oliveyoung.com`,
+`image.oliveyoung.co.kr`) must never be downloaded, cropped, edited,
+screenshotted, copied, or re-hosted — on Supabase Storage, Vercel, or anywhere
+else. The one-off migration script that did this has been permanently deleted.
+
+(c) **Hotlinking is a documented fallback with limits.** A hotlinked retailer
+image is allowed only as a fallback (never the default), only under the
+retailer's affiliate terms: served from the retailer's own CDN, always wrapped
+in a link to the related product detail page with
+`rel="nofollow sponsored noopener"`, never used for Amazon customer-review text
+or star ratings, and never used in email / PDF / print / offline promotion.
+The license is limited and revocable.
+
+(d) **Self-created assets stay self-hosted.** Hero images, logo, OG images and
+brand graphics are made by the owner and live in `public/` or Supabase
+`site-assets`. Retailer-sourced images use a plain `<img>` with explicit
+width/height and `loading="lazy"` (no proxy transformation); `next/image`
+optimization stays reserved for self-hosted assets.
+
 ## Routes
 
 | Route | Description |
