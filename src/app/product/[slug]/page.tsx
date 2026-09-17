@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { Star, ShieldCheck, Leaf, Droplets } from "lucide-react";
 import { getProductBySlug, getProducts } from "@/lib/products";
 import ImageGallery from "@/components/ImageGallery";
 import AffiliateButtons from "@/components/AffiliateButtons";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+import { productConcernsToSlugs } from "@/lib/advice-kb";
 import ProductCard from "@/components/ProductCard";
 import MedicalCaveat from "@/components/MedicalCaveat";
 import { formatAsOf, formatPrice } from "@/lib/utils";
@@ -100,6 +102,23 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <span key={s} className="rounded-full bg-blush-50 px-3 py-1 text-xs font-semibold text-blush-600">{s} skin</span>
             ))}
           </div>
+
+          {(() => {
+            const guides = productConcernsToSlugs(product.concern);
+            return guides.length > 0 ? (
+              <p className="mt-3 text-sm text-ink-soft">
+                Related {guides.length === 1 ? "guide" : "guides"}:{" "}
+                {guides.map((g, i) => (
+                  <span key={g.slug}>
+                    {i > 0 && " · "}
+                    <Link href={`/advice/${g.slug}`} className="font-semibold text-sage-700 hover:underline">
+                      {g.title}
+                    </Link>
+                  </span>
+                ))}
+              </p>
+            ) : null;
+          })()}
 
           <div className="mt-7">
             <AffiliateDisclosure />
