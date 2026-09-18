@@ -8,14 +8,20 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { getAdviceBySlug, getAllAdvice } from "@/lib/advice";
 import { siteBaseUrl } from "@/lib/market-report";
-import { articleJsonLd, breadcrumbJsonLd } from "@/lib/schema";
+import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/schema";
+import { getConcernBySlug, getConcernSlugs } from "@/lib/advice-kb";
+import ConcernArticle from "@/components/ConcernArticle";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+import EducationalDisclaimer from "@/components/EducationalDisclaimer";
 import { ArrowLeft } from "lucide-react";
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1 };
 
 export async function generateStaticParams() {
-  return getAllAdvice().map((p) => ({ slug: p.slug }));
+  return [
+    ...getAllAdvice().map((p) => ({ slug: p.slug })),
+    ...getConcernSlugs().map((slug) => ({ slug })),
+  ];
 }
 
 // Short SEO titles (≤60 chars, metadata only — on-page H1 keeps the full title).
@@ -28,6 +34,17 @@ const METADATA_TITLES: Record<string, string> = {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+  const concern = getConcernBySlug(slug);
+  if (concern) {
+    const title = `${concern.title}: Routine, Ingredients & FAQs`;
+    const description = concern.blurb;
+    return {
+      title,
+      description,
+      alternates: { canonical: `${siteBaseUrl()}/advice/${slug}` },
+      openGraph: { title, description },
+    };
+  }
   const post = getAdviceBySlug(slug);
   if (!post) return { title: "Not found" };
   const title = METADATA_TITLES[slug] ?? post.title;
@@ -157,6 +174,27 @@ const markdownComponents = {
 
 export default async function AdviceArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+
+  // Concern guides (docs/advice-kb.md) share this route with journal articles.
+  const concern = getConcernBySlug(slug);
+  if (concern) {
+    const base = siteBaseUrl();
+    const jsonLd = [
+      faqJsonLd(concern.faqs.map((f) => ({ question: f.q, answer: f.a }))),
+      breadcrumbJsonLd(base, [
+        { name: "Home", path: "/" },
+        { name: "Advice", path: "/advice" },
+        { name: concern.title, path: `/advice/${slug}` },
+      ]),
+    ];
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <ConcernArticle concern={concern} />
+      </>
+    );
+  }
+
   const post = getAdviceBySlug(slug);
   if (!post) notFound();
 
@@ -190,6 +228,7 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
       <div className="prose-beauty mt-8 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
         <p className="text-base font-medium text-ink sm:text-lg">{post.excerpt}</p>
         <AffiliateDisclosure className="mt-0 border-y border-sage-100 py-3" />
+        <EducationalDisclaimer />
         <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={markdownComponents}>
           {renderCitations(post.body)}
         </ReactMarkdown>

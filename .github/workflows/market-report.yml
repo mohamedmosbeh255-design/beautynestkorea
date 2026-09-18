@@ -41,6 +41,14 @@ jobs:
         # --guard: fail loudly (and notify) if the run produced no measurable data at all.
         run: node src/index.mjs --guard
 
+      # Advice hub rebuild: validate docs/advice-kb.md (10 concerns, no banned
+      # medical-marketing words) + the latest report snapshot. The commit step
+      # below pushes the new report, which triggers a Vercel rebuild — so the
+      # advice pages regenerate daily from the KB + the fresh snapshot.
+      - name: Validate advice inputs
+        working-directory: tools/market-report
+        run: node scripts/check-advice-source.mjs
+
       - name: Commit report
         run: |
           set -euo pipefail

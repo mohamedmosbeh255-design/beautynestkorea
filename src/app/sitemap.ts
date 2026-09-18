@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { MOCK_PRODUCTS } from "@/lib/data/products";
 import { getAllAdvice } from "@/lib/advice";
+import { getConcernSlugs } from "@/lib/advice-kb";
 import { listReportDatesSync, siteBaseUrl } from "@/lib/market-report";
 import { RETIRED_PRODUCT_SLUGS } from "@/lib/retired-slugs";
 
@@ -37,10 +38,11 @@ async function getLiveProductRows(): Promise<LiveProductRow[]> {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteBaseUrl();
-  const [products, advice, reportDates] = await Promise.all([
+  const [products, advice, reportDates, concernSlugs] = await Promise.all([
     getLiveProductRows(),
     Promise.resolve(getAllAdvice()),
     Promise.resolve(listReportDatesSync()),
+    Promise.resolve(getConcernSlugs()),
   ]);
 
   return [
@@ -57,5 +59,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: p.updated_at ? new Date(p.updated_at) : p.created_at ? new Date(p.created_at) : new Date(),
       })),
     ...advice.map((p) => ({ url: `${base}/advice/${p.slug}`, lastModified: new Date(p.date) })),
+    ...concernSlugs.map((slug) => ({ url: `${base}/advice/${slug}`, lastModified: new Date() })),
   ];
 }
