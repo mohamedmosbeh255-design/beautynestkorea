@@ -6,7 +6,7 @@
  * Until then the placeholder below attributes nothing — update it before
  * relying on market-report links to earn.
  */
-export const AFFILIATE_TAG = "beautynestkorea-20";
+export const AFFILIATE_TAG = "beautynest202-20";
 
 const DP_RE = /^https:\/\/(www\.)?amazon\.com\/dp\/[A-Z0-9]+/i;
 
