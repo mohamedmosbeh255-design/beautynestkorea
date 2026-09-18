@@ -135,7 +135,7 @@ Book a pro for: rapidly changing marks; painful/itchy/growing raised scars or ke
 
 **Does vitamin C lighten dark spots?** L-ascorbic acid 10–20% has clinical support, but stability matters [[113]][[117]].
 
-**Is azelaic acid safe for darker skin?** Yes — well tolerated, effective for PIH/melasma, plus anti-acne [[46]][[47]].
+**Is azelaic acid safe for darker skin?** Yes — generally well tolerated in deeper tones, and commonly chosen for brightening uneven tone and supporting blemish-prone skin [[46]][[47]].
 
 **Breakouts after retinol — purging?** Maybe if in usual zones and settling in weeks. Persistent sting/redness = irritation — slow down [[28]][[30]].
 
