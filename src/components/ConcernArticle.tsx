@@ -1,22 +1,18 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, FlaskConical, Moon, Sun, TriangleAlert, Activity } from "lucide-react";
+import { ArrowLeft, ArrowRight, FlaskConical, Moon, Sun, TriangleAlert, Activity, ExternalLink } from "lucide-react";
 import type { KbConcern } from "@/lib/advice-kb";
-import { getConcernSignal, resolveConcernProducts } from "@/lib/advice-kb";
+import { getConcernSignal, getConcernShopFilter, getRelatedConcerns, resolveConcernProducts } from "@/lib/advice-kb";
+import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import EducationalDisclaimer from "@/components/EducationalDisclaimer";
-import ProductCard from "@/components/ProductCard";
-import { getProducts } from "@/lib/products";
 
 /** Full concern guide: explanation, ingredients, routines, FAQs, product matches. */
 export default async function ConcernArticle({ concern }: { concern: KbConcern }) {
-  const [{ matched }, signal] = await Promise.all([
+  const [{ matched }, signal, shopFilter] = await Promise.all([
     resolveConcernProducts(concern.productNames),
     Promise.resolve(getConcernSignal(concern.ingredientNames)),
+    Promise.resolve(getConcernShopFilter(concern.slug)),
   ]);
-  // Product cards for matched slugs (keeps card styling consistent site-wide).
-  const catalog = await getProducts();
-  const cards = matched
-    .map((m) => catalog.find((p) => p.slug === m.slug))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+  const related = getRelatedConcerns(concern.slug);
 
   return (
     <article className="mx-auto max-w-prose px-4 py-10 sm:px-6">
@@ -111,22 +107,67 @@ export default async function ConcernArticle({ concern }: { concern: KbConcern }
         ))}
       </div>
 
-      {cards.length > 0 && (
+      {matched.length > 0 && (
         <div className="mt-10">
           <h2 className="font-serif-display text-2xl font-bold tracking-tight">Matching products</h2>
           <p className="mt-1 text-sm text-ink-soft">
-            From our catalog — each page compares Amazon vs Olive Young prices.
+            From our catalog — open a product to compare live retailer prices.
           </p>
-          <div className="mt-5 grid gap-6 sm:grid-cols-2">
-            {cards.map((p) => (
-              <ProductCard key={p.id} product={p} />
+          <AffiliateDisclosure className="mt-4" />
+          <ul className="mt-2 space-y-3">
+            {matched.map((m) => (
+              <li
+                key={m.slug}
+                className="glass flex flex-wrap items-center justify-between gap-3 rounded-2xl px-5 py-4"
+              >
+                <span>
+                  <span className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-sage-600">
+                    {m.brand}
+                  </span>
+                  <Link href={`/product/${m.slug}`} className="font-serif-display font-bold hover:underline">
+                    {m.name}
+                  </Link>
+                </span>
+                <Link
+                  href={`/product/${m.slug}`}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-xs font-bold text-white transition hover:bg-sage-700"
+                >
+                  Check current price on Amazon <ExternalLink className="h-3.5 w-3.5" />
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
+          {shopFilter && (
+            <Link
+              href={`/shop?concern=${encodeURIComponent(shopFilter)}`}
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700 hover:underline"
+            >
+              Browse all {concern.title} products <ArrowRight className="h-4 w-4" />
+            </Link>
+          )}
         </div>
       )}
 
       <EducationalDisclaimer className="mt-10" />
       <p className="mt-3 text-xs text-ink-soft">{concern.caveat}</p>
+
+      {related.length > 0 && (
+        <div className="mt-8">
+          <h2 className="font-serif-display text-xl font-bold tracking-tight">Related guides</h2>
+          <p className="mt-1 text-sm text-ink-soft">Easily confused with this concern — compare the angles.</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {related.map((r) => (
+              <Link
+                key={r.slug}
+                href={`/advice/${r.slug}`}
+                className="inline-flex items-center gap-1.5 rounded-full bg-sage-50 px-4 py-2 text-sm font-semibold text-sage-700 transition hover:bg-sage-100"
+              >
+                {r.title} <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       <Link
         href="/advice"

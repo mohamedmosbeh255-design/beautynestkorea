@@ -6,6 +6,7 @@ import { getAdviceKb } from "@/lib/advice-kb";
 import { siteBaseUrl } from "@/lib/market-report";
 import { ArrowRight } from "lucide-react";
 import AdviceHubClient from "@/components/AdviceHubClient";
+import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import ConcernFinder from "@/components/ConcernFinder";
 import EducationalDisclaimer from "@/components/EducationalDisclaimer";
 
@@ -26,6 +27,7 @@ export default function AdviceIndex() {
       <p className="mt-2 max-w-xl text-ink-soft">
         Pick a concern for a routine-first guide, or read an in-depth explainer below.
       </p>
+      <AffiliateDisclosure className="mt-3 max-w-xl" />
 
       <AdviceHubClient
         concerns={concerns.map((c) => ({

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { getProducts } from "@/lib/products";
+import { getAllConcernNames } from "@/lib/concerns";
 import { MOCK_PRODUCTS } from "@/lib/data/products";
 import { listReportDatesSync } from "@/lib/market-report";
 
@@ -217,8 +218,7 @@ export function getConcernSignal(ingredientNames: string[]): ConcernSignal | nul
 }
 
 // Product concern label → KB slug (for "related guides" links on product pages).
-const CONCERN_LINK_RULES: Array<[RegExp, string]> = [
-  [/acne/i, "acne"],
+const CONCERN_LINK_RULES: Array<[RegExp, string]> = [  [/acne/i, "acne"],
   [/anti-aging|fine lines|wrinkles?|elasticity|aging/i, "anti-aging-fine-lines"],
   [/hydration|hydrating|dehydrat/i, "dehydration"],
   [/brightening|dark spots|pigmentation|dull/i, "hyperpigmentation-dark-spots"],
@@ -245,4 +245,40 @@ export function productConcernsToSlugs(concerns: string[]): Array<{ slug: string
     }
   }
   return out;
+}
+
+// KB slug → /shop?concern= filter label. The link renders only when the
+// filter actually exists in the live catalog (checked at build time).
+const SHOP_FILTER_BY_SLUG: Record<string, string> = {
+  acne: "Acne",
+  "hyperpigmentation-dark-spots": "Brightening",
+  dehydration: "Hydration",
+  "anti-aging-fine-lines": "Anti-aging",
+  "sensitive-skin-redness": "Sensitive",
+  "enlarged-pores": "Pores",
+};
+
+/** Shop filter label for "Browse all {concern} products", or null when absent. */
+export async function getConcernShopFilter(slug: string): Promise<string | null> {
+  const wanted = SHOP_FILTER_BY_SLUG[slug];
+  if (!wanted) return null;
+  const names = getAllConcernNames(await getProducts());
+  return names.includes(wanted) ? wanted : null;
+}
+
+// Reciprocal links between easily confused concerns (distinct angles,
+// rendered as "Related guides" on each page).
+const RELATED_CONCERNS: Record<string, string[]> = {
+  blackheads: ["enlarged-pores", "oily-skin-sebum-control"],
+  "enlarged-pores": ["blackheads", "oily-skin-sebum-control"],
+  "oily-skin-sebum-control": ["blackheads", "enlarged-pores"],
+};
+
+/** Related concern guides for reciprocal internal linking. */
+export function getRelatedConcerns(slug: string): Array<{ slug: string; title: string }> {
+  const { concerns } = getAdviceKb();
+  return (RELATED_CONCERNS[slug] ?? [])
+    .map((s) => concerns.find((c) => c.slug === s))
+    .filter((c): c is KbConcern => Boolean(c))
+    .map((c) => ({ slug: c.slug, title: c.title }));
 }
