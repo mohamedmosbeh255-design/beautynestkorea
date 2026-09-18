@@ -1,25 +1,27 @@
 name: Daily Skincare Market Intelligence
 
-# Runs at 06:00 UTC daily. No server: GitHub hosts the runner, the tool needs no install
-# step (zero dependencies), and the generated report is committed back to the repo.
+# Runs at 06:00 UTC daily + a 09:30 UTC same-day safety net. No server:
+# GitHub hosts the runner, the tool needs no install step (zero dependencies),
+# and the generated report is committed back to the repo.
 # `--guard` makes the job fail (and GitHub e-mail the failure) if a run would produce a
 # report with no measurable data at all, so an empty report cannot land silently.
 on:
   schedule:
     - cron: '0 6 * * *'
+    - cron: '30 9 * * *'
   workflow_dispatch: # manual run for backfills or testing
 
 permissions:
   contents: write # required to commit reports/
 
 concurrency:
-  group: market-report
-  cancel-in-progress: false
+  group: market-report-${{ github.ref }}
+  cancel-in-progress: false # never cancel a publishing run
 
 jobs:
   report:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
@@ -34,12 +36,44 @@ jobs:
 
       # No `npm install` step on purpose: the tool has zero runtime dependencies.
 
+      # Safety-net gate: if today's report is already published and fresh
+      # (e.g. the 06:00 run landed it), stand down immediately — no duplicate
+      # work. Later steps are gated on this output.
+      - name: Check freshness
+        id: fresh
+        working-directory: tools/market-report
+        run: |
+          TODAY=$(date -u +%F)
+          FILE="reports/${TODAY}.md"
+          if [ -s "$FILE" ] && grep -q "# Daily Skincare Market Intelligence — ${TODAY}" "$FILE"; then
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+            echo "Today's report (${TODAY}) already published and fresh — standing down."
+          else
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+            echo "No fresh report for ${TODAY} — running the pipeline."
+          fi
+
       - name: Generate daily report
+        if: steps.fresh.outputs.fresh != 'true'
         working-directory: tools/market-report
         env:
           TZ: UTC
         # --guard: fail loudly (and notify) if the run produced no measurable data at all.
-        run: node src/index.mjs --guard
+        # Retry loop (3 attempts, 60s backoff) so one throttled source cannot fail the day.
+        run: |
+          for attempt in 1 2 3; do
+            if node src/index.mjs --guard; then
+              echo "Report generated on attempt ${attempt}."
+              break
+            fi
+            code=$?
+            if [ "${attempt}" -eq 3 ]; then
+              echo "Report generation failed after 3 attempts."
+              exit "${code}"
+            fi
+            echo "Attempt ${attempt} failed (exit ${code}) — retrying in 60s…"
+            sleep 60
+          done
 
       # Advice hub rebuild: validate docs/advice-kb.md (10 concerns, no banned
       # medical-marketing words) + the latest report snapshot. The commit step
@@ -50,6 +84,7 @@ jobs:
         run: node scripts/check-advice-source.mjs
 
       - name: Commit report
+        if: steps.fresh.outputs.fresh != 'true'
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -64,7 +99,7 @@ jobs:
           git push
 
       - name: Upload report artifact
-        if: always()
+        if: always() && steps.fresh.outputs.fresh != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: market-report-${{ github.run_id }}
@@ -72,3 +107,21 @@ jobs:
             tools/market-report/reports/*.md
             tools/market-report/reports/*.json
           retention-days: 15
+
+      # Failure must be LOUD: append one line per failed run to the pipeline
+      # log and commit it, so a missed day can never hide in silence.
+      - name: Record pipeline failure
+        if: failure()
+        run: |
+          set -euo pipefail
+          STATUS="tools/market-report/reports/_pipeline-status.md"
+          if [ ! -f "$STATUS" ]; then
+            printf '# Pipeline status\n\nAppend-only log of failed runs. One line per failure.\n' > "$STATUS"
+          fi
+          printf -- '- %s run %s FAILED (event: %s)\n' "$(date -u +%FT%TZ)" "${{ github.run_id }}" "${{ github.event_name }}" >> "$STATUS"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$STATUS"
+          git commit -m "chore(market-report): record pipeline failure $(date -u +%F)" || exit 0
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push || true
