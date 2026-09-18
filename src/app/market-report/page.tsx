@@ -73,30 +73,33 @@ export default async function MarketReportPage() {
   const { title, description } = { title: HUB_TITLE, description: HUB_DESCRIPTION };
 
   return (
-    <article className="mx-auto max-w-prose px-4 py-10 sm:px-6">
+    <article className="report-article mx-auto w-full max-w-[1216px] px-4 py-10 sm:px-6">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(base, report.date)) }}
       />
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">Market intelligence</p>
-      <h1 className="font-serif-display mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-4xl">
-        {title}
-      </h1>
-      <p className="mt-3 text-base text-ink-soft sm:text-lg">{description}</p>
-      <p className="mt-2 text-sm font-medium text-ink-soft">
-        Showing the latest edition below ({report.date}) — new reports publish daily at 06:00 UTC.
-      </p>
+      {/* Header block keeps its own prose measure — visually unchanged. */}
+      <div className="mx-auto w-full max-w-prose">
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">Market intelligence</p>
+        <h1 className="font-serif-display mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-4xl">
+          {title}
+        </h1>
+        <p className="mt-3 text-base text-ink-soft sm:text-lg">{description}</p>
+        <p className="mt-2 text-sm font-medium text-ink-soft">
+          Showing the latest edition below ({report.date}) — new reports publish daily at 06:00 UTC.
+        </p>
 
-      <div className="mt-5 flex flex-wrap items-center gap-2 text-sm">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-sage-100 px-3 py-1.5 font-semibold text-sage-800">
-          <CalendarDays className="h-4 w-4" /> {report.date}
-        </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-blush-100 px-3 py-1.5 font-semibold text-blush-600">
-          <Bot className="h-4 w-4" /> Updated daily by our market intelligence bot
-        </span>
+        <div className="mt-5 flex flex-wrap items-center gap-2 text-sm">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-sage-100 px-3 py-1.5 font-semibold text-sage-800">
+            <CalendarDays className="h-4 w-4" /> {report.date}
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-blush-100 px-3 py-1.5 font-semibold text-blush-600">
+            <Bot className="h-4 w-4" /> Updated daily by our market intelligence bot
+          </span>
+        </div>
+
+        <MedicalCaveat className="mt-5" />
       </div>
-
-      <MedicalCaveat className="mt-5" />
 
       <div className="mt-8">
         <MarketReportBody markdown={report.markdown} reportDate={report.date} ingredientSnapshot={snapshot} />
