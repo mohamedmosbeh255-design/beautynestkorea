@@ -106,7 +106,7 @@ Evidence is thin and mixed. Small studies suggest possible modest cheek fullness
 | Melasma | Tinted SPF, azelaic, TXA; HQ under care only | Lasers (cautious), peels | Chronic/relapsing; heat & visible light trigger [[61]][[78]] |
 
 ### Where Korean Skincare Fits
-K-beauty's strength is a gentle, consistent, barrier-first routine with diligent SPF — exactly what evidence supports for pigment care. Hydration + ceramides prevent irritation-driven pigment [[29]]; elegant high-SPF (incl. tinted) tackles the #1 factor [[63]][[68]]; introducing one active at a time mirrors "start low and slow" [[29]]. But no essence fills an ice-pick scar or lifts a fold. K-beauty builds the calm, protected canvas where pigment fades and procedures recover faster. See our [SKIN1004 Hyalu-Cica Sun Serum](/product/skin1004-hyalu-cica-water-fit-sun-serum), [acne care](/shop?concern=Acne), and [brightening picks](/shop?concern=Brightening).
+K-beauty's strength is a gentle, consistent, barrier-first routine with diligent SPF — exactly what evidence supports for pigment care. Hydration + ceramides support a resilient barrier, which helps keep irritation — and the pigment that can follow it — from taking hold [[29]]; elegant high-SPF (incl. tinted) tackles the #1 factor [[63]][[68]]; introducing one active at a time mirrors "start low and slow" [[29]]. But no essence fills an ice-pick scar or lifts a fold. K-beauty builds the calm, protected canvas where pigment fades and procedures recover faster. See our [SKIN1004 Hyalu-Cica Sun Serum](/product/skin1004-hyalu-cica-water-fit-sun-serum), [acne care](/shop?concern=Acne), and [brightening picks](/shop?concern=Brightening).
 
 ### When to See a Dermatologist
 Book a pro for: rapidly changing marks; painful/itchy/growing raised scars or keloids; severe/cystic acne that's scarring [[69]][[71]]; pigment persisting 6–12 months despite good care; suspected melasma; signs of infection; or anything that worries you [[70]].
@@ -135,7 +135,7 @@ Book a pro for: rapidly changing marks; painful/itchy/growing raised scars or ke
 
 **Does vitamin C lighten dark spots?** L-ascorbic acid 10–20% has clinical support, but stability matters [[113]][[117]].
 
-**Is azelaic acid safe for darker skin?** Yes — well tolerated, effective for PIH/melasma, plus anti-acne [[46]][[47]].
+**Is azelaic acid safe for darker skin?** Yes — generally well tolerated in deeper tones, and commonly chosen for brightening uneven tone and supporting blemish-prone skin [[46]][[47]].
 
 **Breakouts after retinol — purging?** Maybe if in usual zones and settling in weeks. Persistent sting/redness = irritation — slow down [[28]][[30]].
 
