@@ -1,0 +1,256 @@
+{
+  "date": "2026-09-18",
+  "generatedAt": "2026-09-18T10:13:05.828Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 838,
+      "previous": 770,
+      "delta": 68
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 431,
+      "previous": 397,
+      "delta": 34
+    },
+    {
+      "name": "Ceramides",
+      "views": 207,
+      "previous": 175,
+      "delta": 32
+    },
+    {
+      "name": "Vitamin C",
+      "views": 777,
+      "previous": 765,
+      "delta": 12
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 212,
+      "previous": 203,
+      "delta": 9
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 56,
+      "previous": 54,
+      "delta": 2
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 416,
+      "previous": 417,
+      "delta": -1
+    },
+    {
+      "name": "Niacinamide",
+      "views": 22,
+      "previous": 25,
+      "delta": -3
+    },
+    {
+      "name": "Squalane",
+      "views": 91,
+      "previous": 99,
+      "delta": -8
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 678,
+      "previous": 692,
+      "delta": -14
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 40,
+      "previous": 58,
+      "delta": -18
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 196,
+      "previous": 215,
+      "delta": -19
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 96,
+      "previous": 118,
+      "delta": -22
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 53,
+      "previous": 80,
+      "delta": -27
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 411,
+      "previous": 451,
+      "delta": -40
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 391,
+      "previous": 440,
+      "delta": -49
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [
+    {
+      "name": "Retinol / Retinoids",
+      "count": 5
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 4
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 3
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 2
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 2
+    },
+    {
+      "name": "Niacinamide",
+      "count": 2
+    },
+    {
+      "name": "Vitamin C",
+      "count": 2
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Glycolic / AHA",
+      "count": 1
+    },
+    {
+      "name": "Micellar Water",
+      "count": 1
+    },
+    {
+      "name": "Panthenol (B5)",
+      "count": 1
+    },
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 1
+    },
+    {
+      "name": "Peptides",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "Anua",
+      "count": 2
+    },
+    {
+      "name": "La Roche-Posay",
+      "count": 2
+    },
+    {
+      "name": "Avène",
+      "count": 1
+    },
+    {
+      "name": "Bioderma",
+      "count": 1
+    },
+    {
+      "name": "Neutrogena",
+      "count": 1
+    },
+    {
+      "name": "Paula's Choice",
+      "count": 1
+    },
+    {
+      "name": "The Ordinary",
+      "count": 1
+    },
+    {
+      "name": "Torriden",
+      "count": 1
+    }
+  ],
+  "newsHeadlines": [],
+  "newsIngredients": [],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-09-17 vs 2026-09-16"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "25 posts analysed · Atom fallback used (public JSON blocked) · failed sub(s): KoreanBeauty"
+    },
+    {
+      "id": "news",
+      "state": "failed",
+      "detail": "no skincare-matching headline in either query"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 5/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · failed: Google News RSS (EN + KO)",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-09-17 vs 2026-09-16). Biggest rise: **Salicylic Acid (BHA)** +68 views (+8.8%). Highest volume: **Salicylic Acid (BHA)** (838 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** 25 posts analysed; the most-discussed ingredient is **Retinol / Retinoids** (5 posts), with **Anua** the most-mentioned brand (2 posts).",
+    "**News pulse:** no skincare-matching headline in today's news feeds — the per-query log in section 3 shows what each feed returned.",
+    "**Biggest mover (pageviews 2026-09-17 vs 2026-09-16):** up — Salicylic Acid (BHA) +68 views; down — Centella Asiatica (Cica) -49 views. Community mention deltas: up — Retinol / Retinoids +5, down — none.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Retinol / Retinoids**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
