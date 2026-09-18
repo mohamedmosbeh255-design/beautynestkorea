@@ -73,11 +73,12 @@ export default async function MarketReportPage() {
   const { title, description } = { title: HUB_TITLE, description: HUB_DESCRIPTION };
 
   return (
-    <article className="mx-auto max-w-prose px-4 py-10 sm:px-6">
+    <article className="report-article mx-auto w-full max-w-[1216px] px-4 py-10 sm:px-6">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(base, report.date)) }}
       />
+      {/* Header shares the exact body measure — direct article children, no narrow wrapper. */}
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">Market intelligence</p>
       <h1 className="font-serif-display mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-4xl">
         {title}
