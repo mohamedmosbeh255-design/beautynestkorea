@@ -63,7 +63,7 @@ export default async function DatedMarketReportPage({ params }: { params: Promis
   ];
 
   return (
-    <article className="mx-auto max-w-prose px-4 py-10 sm:px-6">
+    <article className="report-article mx-auto w-full max-w-[1216px] px-4 py-10 sm:px-6">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="flex items-center justify-between">
         <Link
@@ -97,7 +97,7 @@ export default async function DatedMarketReportPage({ params }: { params: Promis
       <MedicalCaveat className="mt-5" />
 
       <div className="mt-8">
-        <MarketReportBody markdown={report.markdown} reportDate={report.date} ingredientSnapshot={snapshot} fullWidthTables />
+        <MarketReportBody markdown={report.markdown} reportDate={report.date} ingredientSnapshot={snapshot} />
       </div>
     </article>
   );
