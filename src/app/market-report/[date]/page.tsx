@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Bot, CalendarDays } from "lucide-react";
 import MarketReportBody from "@/components/MarketReportBody";
 import MedicalCaveat from "@/components/MedicalCaveat";
-import { getReportByDate, listReportDates, siteBaseUrl } from "@/lib/market-report";
+import { getReportByDate, getReportSnapshot, listReportDates, siteBaseUrl } from "@/lib/market-report";
 
 export const revalidate = 3600;
 
@@ -37,6 +37,7 @@ export default async function DatedMarketReportPage({ params }: { params: Promis
   const base = siteBaseUrl();
   const report = await getReportByDate(date);
   if (!report) notFound();
+  const snapshot = await getReportSnapshot(report.date);
 
   const url = `${base}/market-report/${date}`;
   const jsonLd = [
@@ -96,7 +97,7 @@ export default async function DatedMarketReportPage({ params }: { params: Promis
       <MedicalCaveat className="mt-5" />
 
       <div className="mt-8">
-        <MarketReportBody markdown={report.markdown} />
+        <MarketReportBody markdown={report.markdown} reportDate={report.date} ingredientSnapshot={snapshot} />
       </div>
     </article>
   );

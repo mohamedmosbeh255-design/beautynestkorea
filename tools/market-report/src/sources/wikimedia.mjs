@@ -140,9 +140,13 @@ function pctText(n) {
   return n > 0 ? `+${n.toFixed(1)}%` : `${n.toFixed(1)}%`;
 }
 
-/** Render section 1 as markdown. */
-export function renderIngredientInterestSection(result) {
+/** Render section 1 as markdown. Renders ALL measured ingredients (no cap),
+ * sorted by Δ% descending (nulls last). If a finite `cap` is ever passed,
+ * the biggest riser and biggest faller are always kept and a visible
+ * "Showing X of Y" footnote is printed — a cap must never silently drop them. */
+export function renderIngredientInterestSection(result, opts = {}) {
   const { rows, stats } = result;
+  const cap = opts.cap ?? Infinity;
   const measured = rows.filter((r) => r.views !== null);
   const lines = [];
 
@@ -155,7 +159,27 @@ export function renderIngredientInterestSection(result) {
   if (!measured.length) {
     lines.push('> **No ingredient pageview data today.** Every tracked article request failed; the per-title log below is the evidence, and nothing is estimated to fill the gap.');
   } else {
-    const body = rows.slice(0, 14).map((r, i) => [
+    // Display order is Δ% descending — independent of the delta sort used
+    // for the mover lines below, so the table answers "what moved most in
+    // relative terms" at a glance.
+    const byPct = [...measured].sort((a, b) => {
+      if (a.pct === null && b.pct === null) return (b.delta ?? 0) - (a.delta ?? 0);
+      if (a.pct === null) return 1;
+      if (b.pct === null) return -1;
+      return b.pct - a.pct || (b.delta ?? 0) - (a.delta ?? 0);
+    });
+    let shown = byPct;
+    let footnote = null;
+    if (Number.isFinite(cap) && byPct.length > cap) {
+      const riser = [...measured].filter((r) => r.delta !== null && r.delta > 0).sort((a, b) => b.delta - a.delta)[0];
+      const faller = [...measured].filter((r) => r.delta !== null && r.delta < 0).sort((a, b) => a.delta - b.delta)[0];
+      shown = byPct.slice(0, cap);
+      for (const must of [riser, faller]) {
+        if (must && !shown.includes(must)) shown[shown.length - 1] = must;
+      }
+      footnote = `Showing ${shown.length} of ${measured.length} measured ingredients`;
+    }
+    const body = shown.map((r, i) => [
       `${i + 1}`,
       r.name,
       r.views === null ? 'n/a' : r.views.toLocaleString('en-US'),
@@ -165,6 +189,10 @@ export function renderIngredientInterestSection(result) {
       truncate(r.articles.join(', ').replace(/_/g, ' '), 34),
     ]);
     lines.push(table(['#', 'Ingredient', `Views ${stats.latestDate}`, `Prev day ${stats.previousDate}`, 'Δ', 'Δ %', 'Wikipedia article(s)'], body));
+    if (footnote) {
+      lines.push('');
+      lines.push(`_${footnote}_`);
+    }
 
     const top = measured.find((r) => r.delta !== null && r.delta > 0);
     const fallen = [...measured].reverse().find((r) => r.delta !== null && r.delta < 0);

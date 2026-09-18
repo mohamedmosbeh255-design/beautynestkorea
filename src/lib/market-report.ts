@@ -112,6 +112,63 @@ export async function getReportByDate(date: string): Promise<MarketReport | null
   return null;
 }
 
+export interface WikiSnapshotView {
+  name: string;
+  views: number | null;
+  previous: number | null;
+  delta: number | null;
+}
+
+async function readLocalSnapshot(date: string): Promise<WikiSnapshotView[] | null> {
+  try {
+    const raw = await fs.readFile(path.join(reportsDir(), `${date}.json`), "utf8");
+    return extractWikiViews(JSON.parse(raw));
+  } catch {
+    return null;
+  }
+}
+
+async function fetchRemoteSnapshot(date: string): Promise<WikiSnapshotView[] | null> {
+  try {
+    const res = await fetch(`${MARKET_REPORT_RAW_BASE}/${date}.json`, {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return null;
+    return extractWikiViews(await res.json());
+  } catch {
+    return null;
+  }
+}
+
+function extractWikiViews(json: unknown): WikiSnapshotView[] | null {
+  const rows = (json as { wikiViews?: unknown })?.wikiViews;
+  if (!Array.isArray(rows) || rows.length === 0) return null;
+  const views = rows
+    .map((r) => {
+      const row = r as Record<string, unknown>;
+      if (typeof row.name !== "string") return null;
+      const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : null);
+      return { name: row.name, views: num(row.views), previous: num(row.previous), delta: num(row.delta) };
+    })
+    .filter((r): r is WikiSnapshotView => r !== null && r.views !== null);
+  return views.length > 0 ? views : null;
+}
+
+/**
+ * Read-only snapshot for a report date (stored .json untouched): powers the
+ * complete ingredient table rendered on report pages. Local first, remote fallback.
+ */
+export async function getReportSnapshot(date: string): Promise<WikiSnapshotView[] | null> {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return null;
+  return (await readLocalSnapshot(date)) ?? (await fetchRemoteSnapshot(date));
+}
+
+/** Shift a YYYY-MM-DD date by N days (UTC). */
+export function shiftDateStr(date: string, days: number): string {
+  const t = Date.UTC(Number(date.slice(0, 4)), Number(date.slice(5, 7)) - 1, Number(date.slice(8, 10)));
+  return new Date(t + days * 86400000).toISOString().slice(0, 10);
+}
+
 /** Strip the leading "# ..." title line so the page can render its own H1. */
 export function stripTitle(markdown: string): string {
   return markdown.replace(/^\s*#[^\n]*\n/, "").trimStart();
