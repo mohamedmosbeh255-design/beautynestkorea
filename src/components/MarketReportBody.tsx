@@ -73,7 +73,12 @@ const isCommunityPosts = (headers: string[]) =>
  * overflows), stacked cards below md — title link preserved, Score/Comments
  * (and every other column) shown as meta lines so no data hides at any width.
  */
-function CommunityPostsTable({ headers, rows, original }: TableParts & { original: ReactNode }) {
+function CommunityPostsTable({
+  headers,
+  rows,
+  original,
+  fullWidth = false,
+}: TableParts & { original: ReactNode; fullWidth?: boolean }) {
   const idx = (re: RegExp) => headers.findIndex((h) => re.test(h));
   const ti = idx(/title/i);
   const si = idx(/\bsub\b/i);
@@ -82,12 +87,12 @@ function CommunityPostsTable({ headers, rows, original }: TableParts & { origina
   const sci = idx(/score/i);
   const ci = idx(/comment/i);
   if (ti === -1 || sci === -1 || ci === -1) {
-    return <ScrollableTable>{original}</ScrollableTable>;
+    return <ScrollableTable fullWidth={fullWidth}>{original}</ScrollableTable>;
   }
   return (
     <>
       <div className="hidden md:block">
-        <ScrollableTable>{original}</ScrollableTable>
+        <ScrollableTable fullWidth={fullWidth}>{original}</ScrollableTable>
       </div>
       <ul className="space-y-3 md:hidden" data-testid="community-stacked">
         {rows.map((cells, r) => {
@@ -115,15 +120,15 @@ function CommunityPostsTable({ headers, rows, original }: TableParts & { origina
   );
 }
 
-function ReportTable({ children }: { children?: ReactNode }) {
+function ReportTable({ children, fullWidth = false }: { children?: ReactNode; fullWidth?: boolean }) {
   const parts = getTableParts(children);
   if (parts && isCommunityPosts(parts.headers)) {
-    return <CommunityPostsTable headers={parts.headers} rows={parts.rows} original={children} />;
+    return <CommunityPostsTable headers={parts.headers} rows={parts.rows} original={children} fullWidth={fullWidth} />;
   }
-  return <ScrollableTable>{children}</ScrollableTable>;
+  return <ScrollableTable fullWidth={fullWidth}>{children}</ScrollableTable>;
 }
 
-const markdownComponents = {
+const baseMarkdownComponents = {
   a: ({ href, children }: { href?: string; children?: ReactNode }) => {
     const url = href ?? "";
     if (url.startsWith("/")) {
@@ -166,7 +171,7 @@ const markdownComponents = {
       {children}
     </blockquote>
   ),
-  table: ReportTable,
+  table: ({ children }: { children?: ReactNode }) => <ReportTable fullWidth={false}>{children}</ReportTable>,
   thead: ({ children }: { children?: ReactNode }) => <thead className="bg-sage-50">{children}</thead>,
   th: ({ children }: { children?: ReactNode }) => (
     <th className="border-b border-sage-100 px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-sage-700">
@@ -271,18 +276,26 @@ export default function MarketReportBody({
   markdown,
   reportDate,
   ingredientSnapshot = null,
+  fullWidthTables = false,
 }: {
   markdown: string;
   reportDate?: string;
   ingredientSnapshot?: WikiSnapshotView[] | null;
+  fullWidthTables?: boolean;
 }) {
   const body =
     reportDate && ingredientSnapshot
       ? withFullIngredientTable(stripTitle(markdown), reportDate, ingredientSnapshot)
       : stripTitle(markdown);
+  const components = {
+    ...baseMarkdownComponents,
+    table: ({ children }: { children?: ReactNode }) => (
+      <ReportTable fullWidth={fullWidthTables}>{children}</ReportTable>
+    ),
+  };
   return (
     <div className="space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {withAsinDisclosure(body)}
       </ReactMarkdown>
     </div>
