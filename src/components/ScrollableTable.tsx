@@ -8,8 +8,22 @@ import { cn } from "@/lib/utils";
  * right-edge fade render ONLY while the table actually overflows its
  * container (measured live, updated on scroll + resize), so short tables
  * never show chrome they don't need.
+ *
+ * `fullWidth` (report pages, ≥1024px only): breaks the wrapper out of the
+ * narrow prose column to width min(100vw − 48px, 1440px), centered — wide
+ * tables fit without scrolling while the header/nav (separate max-w-7xl
+ * wrapper) stays put. Below lg the wrapper behaves exactly as before, and
+ * overflow-x-auto remains as a safety net for anything wider than 1440px.
  */
-export default function ScrollableTable({ children, className }: { children: ReactNode; className?: string }) {
+export default function ScrollableTable({
+  children,
+  className,
+  fullWidth = false,
+}: {
+  children: ReactNode;
+  className?: string;
+  fullWidth?: boolean;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [overflowing, setOverflowing] = useState(false);
   const [atEnd, setAtEnd] = useState(true);
@@ -33,7 +47,13 @@ export default function ScrollableTable({ children, className }: { children: Rea
   const showHint = overflowing && !atEnd;
 
   return (
-    <div className={cn("relative -mx-4 px-4 sm:mx-0 sm:px-0", className)}>
+    <div
+      className={cn(
+        "relative -mx-4 px-4 sm:mx-0 sm:px-0",
+        fullWidth && "lg:left-1/2 lg:w-[min(100vw-48px,1440px)] lg:max-w-none lg:-translate-x-1/2",
+        className
+      )}
+    >
       <div ref={ref} className="overflow-x-auto" data-testid="table-scroll">
         <div className="overflow-hidden rounded-2xl border border-sage-100">
           <table className="w-full min-w-[560px] border-collapse text-sm">{children}</table>

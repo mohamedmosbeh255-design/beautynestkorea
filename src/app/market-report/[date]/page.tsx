@@ -97,7 +97,7 @@ export default async function DatedMarketReportPage({ params }: { params: Promis
       <MedicalCaveat className="mt-5" />
 
       <div className="mt-8">
-        <MarketReportBody markdown={report.markdown} reportDate={report.date} ingredientSnapshot={snapshot} />
+        <MarketReportBody markdown={report.markdown} reportDate={report.date} ingredientSnapshot={snapshot} fullWidthTables />
       </div>
     </article>
   );
