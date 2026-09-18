@@ -100,3 +100,67 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Report pages: ONE shared content measure for every direct article child
+ * (headings, paragraphs, lists, boxouts AND table wrappers) — same left
+ * edge, same right edge, same axis. Unlayered on purpose so the measure
+ * wins over layout utilities; scoped to >=768px so mobile keeps its
+ * full-bleed behavior. Header/nav live in a separate wrapper, untouched.
+ */
+:root {
+  --report-measure: 1120px;
+}
+
+@media (min-width: 768px) {
+  .report-article > * {
+    width: min(100% - 48px, var(--report-measure));
+    margin-inline: auto;
+  }
+}
+
+/* Report tables below 768px: every table becomes stacked cards. The renderer
+ * stamps each td with data-label from its column header; the label shows via
+ * ::before. Values wrap and can never clip. Applies to all present + future
+ * report tables automatically — no per-table code.
+ */
+@media (max-width: 767px) {
+  .report-table thead {
+    display: none;
+  }
+  .report-table,
+  .report-table tbody {
+    display: block;
+  }
+  .report-table tr {
+    display: block;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--color-sage-100);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 0.25rem 1rem;
+  }
+  .report-table tr:last-child {
+    margin-bottom: 0;
+  }
+  .report-table td {
+    display: block;
+    border-bottom: 0;
+    padding: 0.45rem 0;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .report-table td + td {
+    border-top: 1px solid var(--color-sage-50);
+  }
+  .report-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-sage-600);
+    margin-bottom: 2px;
+  }
+}

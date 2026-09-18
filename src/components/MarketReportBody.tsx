@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { Children, isValidElement, type ComponentProps, type ReactNode } from "react";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ComponentProps,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { shiftDateStr, stripTitle, type WikiSnapshotView } from "@/lib/market-report";
@@ -30,102 +37,50 @@ function nodeText(node: ReactNode): string {
   return "";
 }
 
-interface TableParts {
-  headers: string[];
-  rows: ReactNode[][];
-}
-
-/** Pull header labels + body-cell nodes out of a rendered GFM table. Null when the shape is unexpected. */
-function getTableParts(children: ReactNode): TableParts | null {
-  // NOTE: thead/tbody/th/td render through custom components (function type),
-  // so match structurally: collect every <tr> anywhere in the subtree.
-  const trs: ReactNode[][] = [];
-  const collect = (node: ReactNode): void => {
-    Children.forEach(node, (child) => {
-      if (!isValidElement(child)) return;
-      if (child.type === "tr") {
-        const cells: ReactNode[] = [];
-        Children.forEach((child.props as { children?: ReactNode }).children, (cell) => {
-          if (isValidElement(cell)) cells.push((cell.props as { children?: ReactNode }).children);
-        });
-        if (cells.length > 0) trs.push(cells);
-      } else {
-        collect((child.props as { children?: ReactNode }).children);
-      }
-    });
-  };
-  try {
-    collect(children);
-  } catch {
-    return null;
-  }
-  if (trs.length < 2) return null;
-  const headers = trs[0].map(nodeText);
-  if (headers.every((h) => h === "")) return null;
-  return { headers, rows: trs.slice(1) };
-}
-
-const isCommunityPosts = (headers: string[]) =>
-  headers.some((h) => /score/i.test(h)) && headers.some((h) => /comment/i.test(h));
-
 /**
- * Community "Top posts" table: full 7-column table on md+ (scrollable when it
- * overflows), stacked cards below md — title link preserved, Score/Comments
- * (and every other column) shown as meta lines so no data hides at any width.
+ * ONE shared responsive table for every report table (present + future).
+ * Each body cell gets a data-label from its column header at render time;
+ * CSS below 768px turns rows into stacked cards (thead hidden, label shown
+ * via td::before). Desktop keeps the full table inside the overflow safety
+ * net. No per-table special cases.
  */
-function CommunityPostsTable({
-  headers,
-  rows,
-  original,
-  fullWidth = false,
-}: TableParts & { original: ReactNode; fullWidth?: boolean }) {
-  const idx = (re: RegExp) => headers.findIndex((h) => re.test(h));
-  const ti = idx(/title/i);
-  const si = idx(/\bsub\b/i);
-  const ii = idx(/ingredient/i);
-  const bi = idx(/brand/i);
-  const sci = idx(/score/i);
-  const ci = idx(/comment/i);
-  if (ti === -1 || sci === -1 || ci === -1) {
-    return <ScrollableTable fullWidth={fullWidth}>{original}</ScrollableTable>;
-  }
-  return (
-    <>
-      <div className="hidden md:block">
-        <ScrollableTable fullWidth={fullWidth}>{original}</ScrollableTable>
-      </div>
-      <ul className="space-y-3 md:hidden" data-testid="community-stacked">
-        {rows.map((cells, r) => {
-          const meta = [
-            si !== -1 && nodeText(cells[si]) ? `r/${nodeText(cells[si])}` : null,
-            `Score: ${nodeText(cells[sci]) || "n/a"}`,
-            `Comments: ${nodeText(cells[ci]) || "n/a"}`,
-          ].filter(Boolean) as string[];
-          const extra = [
-            ii !== -1 && nodeText(cells[ii]) && nodeText(cells[ii]) !== "—"
-              ? `Ingredients: ${nodeText(cells[ii])}` : null,
-            bi !== -1 && nodeText(cells[bi]) && nodeText(cells[bi]) !== "—"
-              ? `Brands: ${nodeText(cells[bi])}` : null,
-          ].filter(Boolean) as string[];
-          return (
-            <li key={r} className="rounded-2xl border border-sage-100 bg-white/60 px-4 py-3">
-              <div className="text-sm font-semibold leading-snug text-ink">{cells[ti]}</div>
-              <p className="mt-1.5 text-xs text-ink-soft">{meta.join(" · ")}</p>
-              {extra.length > 0 && <p className="mt-1 text-xs text-ink-soft">{extra.join(" · ")}</p>}
-            </li>
+function ResponsiveTable({ children }: { children?: ReactNode }) {
+  const headersRef: { list: string[] | null } = { list: null };
+  const inject = (node: ReactNode): ReactNode =>
+    Children.map(node, (child) => {
+      if (!isValidElement(child)) return child;
+      if (child.type === "tr") {
+        const cells = Children.toArray(
+          (child.props as { children?: ReactNode }).children
+        ).filter(isValidElement);
+        if (headersRef.list === null) {
+          headersRef.list = cells.map((c) =>
+            nodeText((c.props as { children?: ReactNode }).children)
           );
-        })}
-      </ul>
-    </>
+          return child;
+        }
+        const labels = headersRef.list;
+        return cloneElement(
+          child,
+          {},
+          cells.map((c, i) =>
+            cloneElement(c as ReactElement<Record<string, unknown>>, {
+              "data-label": labels[i] ?? "",
+            })
+          )
+        );
+      }
+      const sub = (child.props as { children?: ReactNode }).children;
+      if (sub == null) return child;
+      return cloneElement(child, {}, inject(sub));
+    });
+  return (
+    <ScrollableTable>
+      <table className="report-table w-full min-w-[560px] border-collapse text-sm">
+        {inject(children)}
+      </table>
+    </ScrollableTable>
   );
-}
-
-function ReportTable({ children, fullWidth = false }: { children?: ReactNode; fullWidth?: boolean }) {
-  const parts = getTableParts(children);
-  if (parts && isCommunityPosts(parts.headers)) {
-    return <CommunityPostsTable headers={parts.headers} rows={parts.rows} original={children} fullWidth={fullWidth} />;
-  }
-  return <ScrollableTable fullWidth={fullWidth}>{children}</ScrollableTable>;
 }
 
 const baseMarkdownComponents = {
@@ -171,16 +126,22 @@ const baseMarkdownComponents = {
       {children}
     </blockquote>
   ),
-  table: ({ children }: { children?: ReactNode }) => <ReportTable fullWidth={false}>{children}</ReportTable>,
+  table: ({ children }: { children?: ReactNode }) => <ResponsiveTable>{children}</ResponsiveTable>,
   thead: ({ children }: { children?: ReactNode }) => <thead className="bg-sage-50">{children}</thead>,
   th: ({ children }: { children?: ReactNode }) => (
     <th className="border-b border-sage-100 px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-sage-700">
       {children}
     </th>
   ),
-  td: ({ children }: { children?: ReactNode }) => (
-    <td className="border-b border-sage-50 px-4 py-3 align-top text-ink-soft last:border-b-0">{children}</td>
-  ),
+  td: (props: ComponentProps<"td"> & { node?: unknown; "data-label"?: string }) => {
+    const { children, node: _drop, ...rest } = props;
+    void _drop; // react-markdown internals — never rendered
+    return (
+      <td {...rest} className="border-b border-sage-50 px-4 py-3 align-top text-ink-soft last:border-b-0">
+        {children}
+      </td>
+    );
+  },
   h2: ({ children }: { children?: ReactNode }) => (
     <h2
       id={slugifyHeading(children)}
@@ -276,26 +237,18 @@ export default function MarketReportBody({
   markdown,
   reportDate,
   ingredientSnapshot = null,
-  fullWidthTables = false,
 }: {
   markdown: string;
   reportDate?: string;
   ingredientSnapshot?: WikiSnapshotView[] | null;
-  fullWidthTables?: boolean;
 }) {
   const body =
     reportDate && ingredientSnapshot
       ? withFullIngredientTable(stripTitle(markdown), reportDate, ingredientSnapshot)
       : stripTitle(markdown);
-  const components = {
-    ...baseMarkdownComponents,
-    table: ({ children }: { children?: ReactNode }) => (
-      <ReportTable fullWidth={fullWidthTables}>{children}</ReportTable>
-    ),
-  };
   return (
     <div className="space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={baseMarkdownComponents}>
         {withAsinDisclosure(body)}
       </ReactMarkdown>
     </div>
