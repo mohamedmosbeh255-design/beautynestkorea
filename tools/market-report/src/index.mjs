@@ -10,7 +10,7 @@
  *   - No paid APIs, no Amazon requests, no headless browsers.
  *   - Zero dependencies: Node >= 20 built-ins only.
  */
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -49,6 +49,16 @@ function parseArgs(argv) {
 /** Today's date in UTC as YYYY-MM-DD (the workflow runs at 06:00 UTC). */
 function utcDate(now = new Date()) {
   return now.toISOString().slice(0, 10);
+}
+
+/** True when the day's report file already exists with the right title and real content. */
+function existingFresh(dir, date) {
+  try {
+    const md = readFileSync(join(dir, `${date}.md`), 'utf8');
+    return md.length > 5000 && md.includes(`# Daily Skincare Market Intelligence — ${date}`);
+  } catch {
+    return false;
+  }
 }
 
 const HELP = `Daily Skincare Market Intelligence v${VERSION}
@@ -274,6 +284,15 @@ async function main() {
   }
 
   const date = opts.date || utcDate();
+  // Idempotency guard: today's report already published and fresh (right
+  // title line, non-trivial size) → skip regeneration entirely. Protects the
+  // 09:30 safety net and manual re-runs from duplicate work and needless
+  // upstream traffic. Delete the day's files to force a regeneration.
+  if (existingFresh(opts.dir, date)) {
+    console.log(`market-report v${VERSION} · ${date}`);
+    console.log('already published and fresh — skipping regeneration (idempotent skip)');
+    return;
+  }
   const ctx = await collectAll(date);
   const { markdown, summary } = renderDocument(ctx);
   const snapshot = renderSnapshot(ctx, summary);
