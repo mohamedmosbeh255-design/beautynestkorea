@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ArrowRight, Bot, CalendarDays } from "lucide-react";
 import MarketReportBody from "@/components/MarketReportBody";
 import MedicalCaveat from "@/components/MedicalCaveat";
-import { getLatestReport, listReportDates, siteBaseUrl } from "@/lib/market-report";
+import { getLatestReport, getReportSnapshot, listReportDates, siteBaseUrl } from "@/lib/market-report";
 
 export const revalidate = 3600;
 
@@ -60,7 +60,7 @@ function jsonLd(base: string, date: string) {
 export default async function MarketReportPage() {
   const base = siteBaseUrl();
   const [report, dates] = await Promise.all([getLatestReport(), listReportDates()]);
-
+  const snapshot = report ? await getReportSnapshot(report.date) : null;
   if (!report) {
     return (
       <div className="mx-auto max-w-prose px-4 py-16 sm:px-6">
@@ -99,7 +99,7 @@ export default async function MarketReportPage() {
       <MedicalCaveat className="mt-5" />
 
       <div className="mt-8">
-        <MarketReportBody markdown={report.markdown} />
+        <MarketReportBody markdown={report.markdown} reportDate={report.date} ingredientSnapshot={snapshot} />
       </div>
 
       <div className="glass mt-10 flex flex-wrap items-center justify-between gap-3 rounded-2xl p-5">
