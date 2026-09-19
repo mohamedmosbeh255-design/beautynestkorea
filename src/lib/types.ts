@@ -15,6 +15,7 @@ export interface Product {
   key_ingredients: string[];
   image_urls: string[];
   amazon_url?: string | null;
+  amazon_asin?: string | null;
   oliveyoung_url?: string | null;
   rating?: number | null;
   review_count?: number | null;

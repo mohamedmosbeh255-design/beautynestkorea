@@ -21,6 +21,7 @@ create table if not exists public.products (
   image_urls text[] not null default '{}',
   amazon_url text,
   oliveyoung_url text,
+  amazon_asin text, -- bare ASIN (B0…) for dynamic ?tag= link building; NULL = use amazon_url verbatim
   rating numeric(2,1) default 4.5,
   review_count integer default 0,
   is_featured boolean not null default false,
@@ -49,6 +50,10 @@ create index if not exists idx_products_brand on public.products (brand);
 create index if not exists idx_products_category on public.products (category);
 create index if not exists idx_products_featured on public.products (is_featured) where is_featured = true;
 create index if not exists idx_products_active on public.products (is_active) where is_active = true;
+
+-- ASIN builder column (added 2026-09-19): bare ASIN for dynamic ?tag= links.
+-- Run on existing databases; fresh creates get it from the table def above.
+alter table public.products add column if not exists amazon_asin text;
 
 -- ─── categories ────────────────────────────────────────────
 -- Concern/category catalog (Acne, Hydration, ...). The storefront derives

@@ -19,6 +19,7 @@ function mapRow(row: any): Product {
     key_ingredients: row.key_ingredients ?? [],
     image_urls: row.image_urls ?? [],
     amazon_url: row.amazon_url,
+    amazon_asin: row.amazon_asin ?? null,
     oliveyoung_url: row.oliveyoung_url,
     rating: row.rating != null ? Number(row.rating) : null,
     review_count: row.review_count ?? 0,

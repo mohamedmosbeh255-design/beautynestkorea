@@ -122,7 +122,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
           <div className="mt-7">
             <AffiliateDisclosure />
-            <AffiliateButtons productId={product.id} amazonUrl={product.amazon_url} oliveyoungUrl={product.oliveyoung_url} title={product.title} />
+            <AffiliateButtons productId={product.id} amazonUrl={product.amazon_url} amazonAsin={product.amazon_asin} oliveyoungUrl={product.oliveyoung_url} title={product.title} />
             <p className="mt-3 flex items-center gap-1.5 text-xs text-ink-soft">
               <ShieldCheck className="h-3.5 w-3.5 text-sage-600" />
               Prices checked weekly. We may earn a commission at no cost to you.
