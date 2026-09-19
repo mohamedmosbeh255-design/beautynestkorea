@@ -19,6 +19,7 @@ export const productSchema = z.object({
   key_ingredients: z.preprocess(stringToArray, z.array(z.string()).default([])),
   image_urls: z.preprocess(stringToArray, z.array(z.string().url("Must be a valid URL")).min(1, "At least one image URL is required")),
   amazon_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
+  amazon_asin: z.string().regex(/^B0[0-9A-Z]{8}$/, "Must look like B0XXXXXXXX").optional().or(z.literal("")).or(z.null()),
   oliveyoung_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
   rating: z.coerce.number().min(0).max(5).optional().nullable(),
   review_count: z.coerce.number().min(0).optional().nullable(),

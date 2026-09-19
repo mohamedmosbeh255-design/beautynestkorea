@@ -30,12 +30,23 @@ export default function AffiliateButtons({
     }
   };
 
-  // href priority: verified ASIN → dynamically built, tagged dp link.
-  // Otherwise the stored amazon_url renders VERBATIM (short links are never
-  // rewritten — no params appended); empty amazon_url renders no button.
-  const amazonHref = amazonAsin
-    ? withAmazonTag(`https://www.amazon.com/dp/${amazonAsin}`)
-    : amazonUrl;
+  // href priority: effective ASIN (stored column, else derived from a full
+  // Amazon URL via the same regex as lib/products.ts) → tagged dp link.
+  // Else the stored amazon_url passes through withAmazonTag (identity for
+  // short links and non-dp URLs — never rewritten); empty → no button.
+  const asinMatch = typeof amazonUrl === "string"
+    ? amazonUrl.match(/(?:\/dp\/|\/gp\/product\/)(B0[0-9A-Z]{8})\b/)
+    : null;
+  const effectiveAsin = (typeof amazonAsin === "string" && amazonAsin.trim() !== "")
+    ? amazonAsin.trim()
+    : asinMatch
+      ? asinMatch[1]
+      : null;
+  const amazonHref = effectiveAsin
+    ? withAmazonTag(`https://www.amazon.com/dp/${effectiveAsin}`)
+    : typeof amazonUrl === "string" && amazonUrl !== ""
+      ? withAmazonTag(amazonUrl)
+      : null;
 
   if (!amazonHref && !oliveyoungUrl) return null;
 

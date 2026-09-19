@@ -16,6 +16,8 @@ export interface Product {
   image_urls: string[];
   amazon_url?: string | null;
   amazon_asin?: string | null;
+  /** Effective ASIN: amazon_asin column, else derived from a full amazon_url. Null for short links. */
+  asin?: string | null;
   oliveyoung_url?: string | null;
   rating?: number | null;
   review_count?: number | null;
