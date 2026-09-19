@@ -3,6 +3,13 @@ import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { MOCK_PRODUCTS, getMockProductBySlug } from "@/lib/data/products";
 import type { Product } from "@/lib/types";
 
+/** Derive a bare ASIN from a full Amazon URL (/dp/ or /gp/product/, uppercase-only). Short links carry none. */
+export function extractAsinFromUrl(url?: string | null): string | null {
+  if (!url) return null;
+  const m = String(url).match(/(?:\/dp\/|\/gp\/product\/)(B0[0-9A-Z]{8})\b/);
+  return m ? m[1] : null;
+}
+
 function mapRow(row: any): Product {
   return {
     id: String(row.id),
@@ -20,6 +27,11 @@ function mapRow(row: any): Product {
     image_urls: row.image_urls ?? [],
     amazon_url: row.amazon_url,
     amazon_asin: row.amazon_asin ?? null,
+    // Effective ASIN: stored column first, else derived from a full Amazon URL.
+    // Short links (amzn.to) never yield one — they stay verbatim fallbacks.
+    asin: (typeof row.amazon_asin === "string" && row.amazon_asin.trim() !== ""
+      ? row.amazon_asin.trim()
+      : extractAsinFromUrl(row.amazon_url)),
     oliveyoung_url: row.oliveyoung_url,
     rating: row.rating != null ? Number(row.rating) : null,
     review_count: row.review_count ?? 0,

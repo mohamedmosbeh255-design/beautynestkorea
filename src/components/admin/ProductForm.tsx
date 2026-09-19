@@ -17,6 +17,8 @@ export default function ProductForm({
   const {
     register,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { errors: formErrors },
   } = useForm<any>({
     resolver: zodResolver(productSchema) as any,
@@ -33,6 +35,7 @@ export default function ProductForm({
       key_ingredients: (initial?.key_ingredients ?? []).join(", "),
       image_urls: (initial?.image_urls ?? []).join("\n"),
       amazon_url: initial?.amazon_url ?? "",
+      amazon_asin: initial?.amazon_asin ?? "",
       oliveyoung_url: initial?.oliveyoung_url ?? "",
       rating: initial?.rating ?? 4.5,
       review_count: initial?.review_count ?? 0,
@@ -44,6 +47,12 @@ export default function ProductForm({
   const errors = formErrors as any;
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+
+  // Local hint state (not watch()) so the React Compiler keeps optimizing this form.
+  const [showShortHint, setShowShortHint] = useState<boolean>(() =>
+    /amzn\.to|link\.amazon/i.test(String(initial?.amazon_url ?? "")) &&
+    !String(initial?.amazon_asin ?? "").trim()
+  );
 
   const onSubmit = async (values: any) => {
     setSubmitting(true);
@@ -64,6 +73,7 @@ export default function ProductForm({
       fd.set("key_ingredients", toList(values.key_ingredients).join(", "));
       fd.set("image_urls", toList(values.image_urls).join("\n"));
       fd.set("amazon_url", values.amazon_url ?? "");
+      fd.set("amazon_asin", (values.amazon_asin ?? "").toString().trim().toUpperCase());
       fd.set("oliveyoung_url", values.oliveyoung_url ?? "");
       if (values.rating != null) fd.set("rating", String(values.rating));
       fd.set("review_count", String(values.review_count ?? 0));
@@ -136,8 +146,54 @@ export default function ProductForm({
         </div>
         <div>
           <label className={label}>Amazon affiliate link</label>
-          <input {...register("amazon_url")} className={input} placeholder="https://amazon.com/..." />
+          {(() => {
+            const { onChange: amazonOnChange, ...amazonRest } = register("amazon_url");
+            return (
+              <input
+                {...amazonRest}
+                className={input}
+                placeholder="https://amazon.com/..."
+                onChange={(e) => {
+                  amazonOnChange(e);
+                  const m = e.target.value.match(/(?:\/dp\/|\/gp\/product\/)(B0[0-9A-Z]{8})\b/);
+                  if (m && !String(getValues("amazon_asin") ?? "").trim()) {
+                    setValue("amazon_asin", m[1], { shouldValidate: true });
+                  }
+                  setShowShortHint(
+                    /amzn\.to|link\.amazon/i.test(e.target.value) &&
+                      !String(getValues("amazon_asin") ?? "").trim()
+                  );
+                }}
+              />
+            );
+          })()}
           {errors.amazon_url && <p className="mt-1 text-xs text-red-600">{errors.amazon_url.message}</p>}
+          {showShortHint && (
+            <p className="mt-1 text-xs text-amber-700">
+              Short links hide the product code. Open the link once and paste the full address from your browser bar (…/dp/B0…).
+            </p>
+          )}
+        </div>
+        <div>
+          <label className={label}>Amazon ASIN (optional)</label>
+          {(() => {
+            const { onChange: asinOnChange, ...asinRest } = register("amazon_asin");
+            return (
+              <input
+                {...asinRest}
+                className={input}
+                placeholder="B0XXXXXXXX"
+                onChange={(e) => {
+                  asinOnChange(e);
+                  setShowShortHint(
+                    /amzn\.to|link\.amazon/i.test(String(getValues("amazon_url") ?? "")) &&
+                      !e.target.value.trim()
+                  );
+                }}
+              />
+            );
+          })()}
+          {errors.amazon_asin && <p className="mt-1 text-xs text-red-600">{errors.amazon_asin.message}</p>}
         </div>
         <div>
           <label className={label}>Olive Young affiliate link</label>
