@@ -1,15 +1,18 @@
 "use client";
 
 import { ExternalLink, ShoppingCart } from "lucide-react";
+import { withAmazonTag } from "@/lib/affiliates";
 
 export default function AffiliateButtons({
   productId,
   amazonUrl,
+  amazonAsin,
   oliveyoungUrl,
   title,
 }: {
   productId: string;
   amazonUrl?: string | null;
+  amazonAsin?: string | null;
   oliveyoungUrl?: string | null;
   title: string;
 }) {
@@ -27,15 +30,22 @@ export default function AffiliateButtons({
     }
   };
 
-  if (!amazonUrl && !oliveyoungUrl) return null;
+  // href priority: verified ASIN → dynamically built, tagged dp link.
+  // Otherwise the stored amazon_url renders VERBATIM (short links are never
+  // rewritten — no params appended); empty amazon_url renders no button.
+  const amazonHref = amazonAsin
+    ? withAmazonTag(`https://www.amazon.com/dp/${amazonAsin}`)
+    : amazonUrl;
 
-  const both = Boolean(amazonUrl && oliveyoungUrl);
+  if (!amazonHref && !oliveyoungUrl) return null;
+
+  const both = Boolean(amazonHref && oliveyoungUrl);
 
   return (
     <div className={both ? "grid gap-3 sm:grid-cols-2" : "grid gap-3 grid-cols-1"}>
-      {amazonUrl ? (
+      {amazonHref ? (
         <a
-          href={amazonUrl}
+          href={amazonHref}
           target="_blank"
           rel="nofollow sponsored noopener"
           onClick={() => track("amazon")}
