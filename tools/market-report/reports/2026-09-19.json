@@ -1,0 +1,344 @@
+{
+  "date": "2026-09-19",
+  "generatedAt": "2026-09-19T09:54:07.985Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 410,
+      "previous": 391,
+      "delta": 19
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 63,
+      "previous": 53,
+      "delta": 10
+    },
+    {
+      "name": "Squalane",
+      "views": 100,
+      "previous": 91,
+      "delta": 9
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 49,
+      "previous": 40,
+      "delta": 9
+    },
+    {
+      "name": "Niacinamide",
+      "views": 30,
+      "previous": 22,
+      "delta": 8
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 679,
+      "previous": 678,
+      "delta": 1
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 49,
+      "previous": 56,
+      "delta": -7
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 85,
+      "previous": 96,
+      "delta": -11
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 183,
+      "previous": 196,
+      "delta": -13
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 195,
+      "previous": 212,
+      "delta": -17
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 398,
+      "previous": 416,
+      "delta": -18
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 382,
+      "previous": 411,
+      "delta": -29
+    },
+    {
+      "name": "Ceramides",
+      "views": 169,
+      "previous": 207,
+      "delta": -38
+    },
+    {
+      "name": "Vitamin C",
+      "views": 733,
+      "previous": 777,
+      "delta": -44
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 372,
+      "previous": 431,
+      "delta": -59
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 691,
+      "previous": 838,
+      "delta": -147
+    }
+  ],
+  "trendTerms": [
+    "nature news"
+  ],
+  "ingredients": [
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 6
+    },
+    {
+      "name": "Niacinamide",
+      "count": 4
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 4
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 3
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 3
+    },
+    {
+      "name": "Panthenol (B5)",
+      "count": 3
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 3
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 2
+    },
+    {
+      "name": "Vitamin C",
+      "count": 2
+    },
+    {
+      "name": "Ceramides",
+      "count": 1
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    },
+    {
+      "name": "Hypochlorous Acid",
+      "count": 1
+    },
+    {
+      "name": "Kojic Acid",
+      "count": 1
+    },
+    {
+      "name": "Mineral / Zinc SPF",
+      "count": 1
+    },
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "CeraVe",
+      "count": 4
+    },
+    {
+      "name": "Skin1004",
+      "count": 2
+    },
+    {
+      "name": "The Ordinary",
+      "count": 2
+    },
+    {
+      "name": "Aquaphor",
+      "count": 1
+    },
+    {
+      "name": "Avène",
+      "count": 1
+    },
+    {
+      "name": "Byoma",
+      "count": 1
+    },
+    {
+      "name": "COSRX",
+      "count": 1
+    },
+    {
+      "name": "Haruharu Wonder",
+      "count": 1
+    },
+    {
+      "name": "La Roche-Posay",
+      "count": 1
+    },
+    {
+      "name": "Neutrogena",
+      "count": 1
+    },
+    {
+      "name": "Purito Seoul",
+      "count": 1
+    },
+    {
+      "name": "Round Lab",
+      "count": 1
+    },
+    {
+      "name": "Tatcha",
+      "count": 1
+    },
+    {
+      "name": "Torriden",
+      "count": 1
+    }
+  ],
+  "newsHeadlines": [
+    "Should Guys in Their 20s and 30s Be Using Retinol? Dermatologists Explain.",
+    "This bestselling retinol shot helps tighten skin and eliminate wrinkles for only $20",
+    "I Don't Use Retinol—But These Alternatives Still Deliver Impressive Results",
+    "PDRN make-up: How K-beauty’s trending skin care ingredient is moving into colour cosmetics",
+    "Shoppers in Their 40s Switched Their Expensive Skincare for This $20 Retinol Cream",
+    "CeraVe’s anti-ageing products rival ‘far more expensive’ options",
+    "블랑드비, 특허 성분·PDRN 담은 ‘페이스 큐어’ 스킨케어 라인 공식 론칭",
+    "K-beauty giant Cosmax moves a gentler retinol into stick form",
+    "The Best Clean Retinol Products That Actually Work",
+    "Move over, snail mucin: COSRX has a $14 PDRN face mask thousands are buying",
+    "Shoppers In Their 70s And 80s Say This $19 Anti-Aging Retinol Serum Turned Back The Clock On Their Skin",
+    "What is PDRN? An aesthetic doctor explains the skincare trend transforming mature skin"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 37
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 12
+    },
+    {
+      "name": "Exosomes",
+      "count": 4
+    },
+    {
+      "name": "Peptides",
+      "count": 3
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 3
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 1
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Hypochlorous Acid",
+      "count": 1
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-09-18 vs 2026-09-17"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 1 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "30 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "200 headline(s) read · 60 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 6/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · no source failed",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-09-18 vs 2026-09-17). Biggest rise: **Centella Asiatica (Cica)** +19 views (+4.9%). Highest volume: **Centella Asiatica (Cica)** (410 views). Secondary Google Trends signal: \"nature news\" in 1 market(s).",
+    "**Community pulse:** 30 posts analysed; the most-discussed ingredient is **Sunscreen (unspecified)** (6 posts), with **CeraVe** the most-mentioned brand (4 posts).",
+    "**News pulse:** 200 headline(s) read across 2 quer(ies), 60 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (37 headline(s)), brand **Medicube** (4 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-09-18 vs 2026-09-17):** up — Centella Asiatica (Cica) +19 views; down — Salicylic Acid (BHA) -147 views. Community mention deltas: up — Centella Asiatica (Cica) +3, down — Glycolic / AHA -1.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Sunscreen (unspecified)**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
