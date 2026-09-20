@@ -6,7 +6,8 @@ import type { ComponentProps, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { getAdviceBySlug, getAllAdvice } from "@/lib/advice";
+import { getAdviceBySlug, getAllAdvice, extractArticleFaqs, stripFaqCitations } from "@/lib/advice";
+import { BRAND_AUTHOR } from "../../../../config/authors";
 import { siteBaseUrl } from "@/lib/market-report";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/schema";
 import { getConcernBySlug, getConcernSlugs } from "@/lib/advice-kb";
@@ -200,8 +201,26 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
 
   const base = siteBaseUrl();
   const canonical = `${base}/advice/${slug}`;
+  // Journal-article FAQPage: emitted only for articles that opt in via
+  // frontmatter `faqSchema: true`, built from the same markdown the reader
+  // sees — visible copy and schema can never drift apart.
+  const articleFaqs = post.faqSchema ? extractArticleFaqs(post.body) : [];
   const jsonLd = [
-    articleJsonLd(post, base, canonical, `${base}/author`),
+    articleJsonLd(post, base, canonical, `${base}/author`, {
+      headline: post.headline,
+      dateModified: post.dateModified,
+      authorName: BRAND_AUTHOR.name,
+    }),
+    ...(articleFaqs.length > 0
+      ? [
+          faqJsonLd(
+            articleFaqs.map((f) => ({
+              question: f.question,
+              answer: stripFaqCitations(f.answer),
+            }))
+          ),
+        ]
+      : []),
     breadcrumbJsonLd(base, [
       { name: "Home", path: "/" },
       { name: "Advice", path: "/advice" },
