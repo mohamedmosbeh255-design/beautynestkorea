@@ -5,8 +5,6 @@ headline: "Does Salicylic Acid Interfere With Minoxidil?"
 excerpt: "Salicylic acid, aspirin, and minoxidil: what the sulfotransferase research actually tested, what it did not prove, and what not to change on your own."
 category: "Ingredients"
 readTime: "3 min read"
-image: "https://wlbsswmkoahjzentukns.supabase.co/storage/v1/object/public/product-images/salicylic-acid-and-minoxidil-hero.png"
-imageAlt: "Evidence guide on salicylic acid and minoxidil"
 date: "2026-09-20"
 faqSchema: true
 ---
