@@ -2,9 +2,11 @@
 
 import { ExternalLink, ShoppingCart } from "lucide-react";
 import { withAmazonTag } from "@/lib/affiliates";
+import { trackAffiliateClick } from "@/lib/analytics";
 
 export default function AffiliateButtons({
   productId,
+  productSlug = "",
   amazonUrl,
   amazonAsin,
   oliveyoungUrl,
@@ -12,6 +14,7 @@ export default function AffiliateButtons({
   stackButtons = false,
 }: {
   productId: string;
+  productSlug?: string;
   amazonUrl?: string | null;
   amazonAsin?: string | null;
   oliveyoungUrl?: string | null;
@@ -20,6 +23,9 @@ export default function AffiliateButtons({
   stackButtons?: boolean;
 }) {
   const track = (source: "amazon" | "oliveyoung") => {
+    // GA4 first (beacon transport survives the navigation), then the
+    // first-party click log. Neither may block or break the outbound link.
+    trackAffiliateClick({ retailer: source, product_slug: productSlug });
     try {
       fetch("/api/track-click", {
         method: "POST",
