@@ -70,17 +70,23 @@ export function faqJsonLd(items: FaqItem[]) {
   };
 }
 
-export function articleJsonLd(post: AdviceArticle, base: string, canonical: string, authorUrl: string) {
+export function articleJsonLd(
+  post: AdviceArticle,
+  base: string,
+  canonical: string,
+  authorUrl: string,
+  overrides?: { headline?: string; dateModified?: string; authorName?: string }
+) {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: post.title,
+    headline: overrides?.headline || post.title,
     description: post.excerpt,
     ...(post.image ? { image: [post.image] } : {}),
-    author: { "@type": "Organization", name: "BeautyNestKorea", url: authorUrl },
+    author: { "@type": "Organization", name: overrides?.authorName || "BeautyNestKorea", url: authorUrl },
     publisher: { "@type": "Organization", name: "BeautyNestKorea" },
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: overrides?.dateModified || post.date,
     mainEntityOfPage: canonical,
   };
 }
