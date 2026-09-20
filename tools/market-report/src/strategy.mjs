@@ -150,8 +150,12 @@ async function main() {
       const n = aliasHits(a.text, aliases);
       if (n > 0) {
         hits += n;
-        files.push(a.slug);
-        if (aliasHits(a.title.toLowerCase(), aliases) > 0 || a.slug.includes(s.name.toLowerCase().split(' ')[0])) inTitle = true;
+        // A file qualifies as placement only with >=2 mentions or a
+        // title/slug match — a single passing mention is not topical proof.
+        const titleHit = aliasHits(a.title.toLowerCase(), aliases) > 0
+          || a.slug.includes(s.name.toLowerCase().split(' ')[0]);
+        files.push({ slug: a.slug, qualified: n >= 2 || titleHit });
+        if (titleHit) inTitle = true;
       }
     }
     const level = inTitle || hits >= 5 ? 'full' : hits >= 1 ? 'partial' : 'missing';
@@ -189,6 +193,8 @@ async function main() {
   // 4) Priority matrix.
   const highCount = Math.max(1, Math.ceil(scored.length / 3));
   const highSet = new Set(scored.slice(0, highCount).map((s) => s.name));
+  /** Slugs that genuinely cover the ingredient (never a passing mention). */
+  const qualifiedSlugs = (files) => files.filter((f) => f.qualified).map((f) => f.slug);
   const matrix = scored.map((s) => {
     const cov = coverage.get(s.name);
     const tier = highSet.has(s.name) ? (cov.level === 'missing' ? 'P1' : cov.level === 'partial' ? 'P2' : 'P3') : 'P3';
@@ -208,7 +214,8 @@ async function main() {
     L.push('None — every high-scoring ingredient already has at least partial coverage.');
   } else {
     for (const m of p1) {
-      const place = m.files.length ? m.files.slice(0, 3).map((f) => `/advice/${f}`).join(', ') : 'new article';
+      const qs = qualifiedSlugs(m.files);
+      const place = qs.length ? qs.slice(0, 3).map((f) => `/advice/${f}`).join(', ') : 'new article (manual review)';
       L.push(`- **${m.name}** — score ${m.score} (${m.direction}) · coverage: missing · action: publish a routine-first guide before the signal cools · placement: ${place}`);
     }
   }
@@ -220,14 +227,14 @@ async function main() {
     L.push('No partially-covered ingredients — the library is either silent or thorough on everything scored.');
   } else {
     for (const m of partials) {
-      const files = lower.filter((a) => m.files.includes(a.slug));
+      const files = lower.filter((a) => m.files.some((f) => f.slug === a.slug));
       const existing = [];
       const absent = [];
       for (const [angle, keys] of Object.entries(ANGLES)) {
         const hit = files.some((a) => keys.some((k) => a.text.includes(k)));
         (hit ? existing : absent).push(angle);
       }
-      L.push(`- **${m.name}** — score ${m.score} (${m.direction}) · in: ${m.files.map((f) => `/advice/${f}`).join(', ')}`);
+      L.push(`- **${m.name}** — score ${m.score} (${m.direction}) · in: ${m.files.map((f) => `/advice/${f.slug}`).join(', ')}`);
       L.push(`  - present angles: ${existing.length ? existing.join(', ') : 'none detected'} · absent angles: ${absent.length ? absent.join(', ') : 'none'}`);
     }
   }
@@ -250,7 +257,8 @@ async function main() {
   L.push('| Priority | Ingredient | Score | Trend | Coverage | Action | Placement |');
   L.push('| --- | --- | --- | --- | --- | --- | --- |');
   for (const m of matrix) {
-    const place = m.files.length ? m.files.slice(0, 2).map((f) => `/advice/${f}`).join(', ') : 'new article';
+    const qs = qualifiedSlugs(m.files);
+    const place = qs.length ? qs.slice(0, 2).map((f) => `/advice/${f}`).join(', ') : 'new article (manual review)';
     const action = m.tier === 'P1'
       ? 'publish a routine-first guide'
       : m.tier === 'P2'
