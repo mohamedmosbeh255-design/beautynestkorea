@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     images: [defaultOgImage],
   },
   robots: { index: true, follow: true },
+  verification: { google: "yfQq38bdrPGptdm_SqzvdEAoyrnKZSS0ZhIZnloDV04" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
