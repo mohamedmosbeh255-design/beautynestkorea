@@ -71,6 +71,7 @@ export default async function RoutinePicks({ picks }: { picks: RoutinePick[] }) 
                 <div className="mt-4">
                   <AffiliateButtons
                     productId={product.id}
+                    productSlug={product.slug}
                     amazonUrl={product.amazon_url}
                     amazonAsin={product.amazon_asin}
                     oliveyoungUrl={effectiveOyUrl(product.oliveyoung_url)}
