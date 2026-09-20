@@ -6,7 +6,8 @@ import type { ComponentProps, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { getAdviceBySlug, getAllAdvice, extractArticleFaqs, stripFaqCitations } from "@/lib/advice";
+import { getAdviceBySlug, getAllAdvice, extractArticleFaqs, stripFaqCitations, splitRoutinePicks } from "@/lib/advice";
+import RoutinePicks from "@/components/RoutinePicks";
 import { BRAND_AUTHOR } from "../../../../config/authors";
 import { siteBaseUrl } from "@/lib/market-report";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/schema";
@@ -248,9 +249,27 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
         <p className="text-base font-medium text-ink sm:text-lg">{post.excerpt}</p>
         <AffiliateDisclosure className="mt-0 border-y border-sage-100 py-3" />
         <EducationalDisclaimer />
-        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={markdownComponents}>
-          {renderCitations(post.body)}
-        </ReactMarkdown>
+        {(() => {
+          const split = splitRoutinePicks(post.body);
+          if (!split) {
+            return (
+              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={markdownComponents}>
+                {renderCitations(post.body)}
+              </ReactMarkdown>
+            );
+          }
+          return (
+            <>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={markdownComponents}>
+                {renderCitations(split.before)}
+              </ReactMarkdown>
+              <RoutinePicks picks={split.picks} />
+              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={markdownComponents}>
+                {renderCitations(split.after)}
+              </ReactMarkdown>
+            </>
+          );
+        })()}
       </div>
     </article>
   );

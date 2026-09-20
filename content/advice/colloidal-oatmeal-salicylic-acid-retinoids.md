@@ -84,10 +84,10 @@ Reintroduce one active at a time, at low frequency, and give it a week or two be
 
 ## Gentle Routine Picks
 
-- [Purito Seoul Daily Soft Touch Sunscreen](/product/purito-seoul-daily-soft-touch-sunscreen): a lightweight SPF50+ PA++++ that sits comfortably under makeup, for the morning step this guide never skips.
-- [ROUND LAB Birch Juice Moisturizing UV LOCK Sunscreen](/product/round-lab-birch-juice-moisturizing-sunscreen): a moisturizing UV filter with a dewy, non-stripping feel for dry or simplified routines.
-- [Anua Heartleaf 77 Soothing Toner](/product/anua-heartleaf-77-soothing-toner): a watery heartleaf toner for back-to-basics weeks, hydration first and actives later.
-- [medicube PDRN Salmon DNA CICA Soothing Toner](/product/medicube-pdrn-cica-soothing-toner): a fragrance-light CICA toner for when comfort matters more than actives.
+- [Purito Seoul Daily Soft Touch Sunscreen](/product/purito-seoul-daily-soft-touch-sunscreen): A lightweight daily SPF50+ PA++++ finish that sits comfortably under makeup — the morning step this guide never skips.
+- [ROUND LAB Birch Juice Moisturizing UV LOCK Sunscreen](/product/round-lab-birch-juice-moisturizing-sunscreen): A moisturizing UV filter with a dewy, non-stripping feel for dry or simplified routines.
+- [Anua Heartleaf 77 Soothing Toner](/product/anua-heartleaf-77-soothing-toner): A watery heartleaf toner for the back-to-basics weeks: hydration first, actives later.
+- [medicube PDRN Salmon DNA CICA Soothing Toner](/product/medicube-pdrn-cica-soothing-toner): A fragrance-light CICA toner for when comfort matters more than actives.
 
 [Browse all hydration products](/shop?concern=Hydration) · Related reading: [damaged skin barrier](/advice/damaged-skin-barrier) · [sensitive skin and redness](/advice/sensitive-skin-redness)
 
