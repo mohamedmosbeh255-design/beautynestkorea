@@ -103,3 +103,33 @@ export function stripFaqCitations(text: string): string {
     .replace(/[ \t]+([.,;:!?])/g, "$1")
     .replace(/[ \t]{2,}/g, " ");
 }
+
+export interface RoutinePick {
+  slug: string;
+  blurb: string;
+}
+
+/**
+ * Split a "## Gentle Routine Picks" section (bullets `- [Label](/product/<slug>): "blurb"`)
+ * out of an article body. Returns null when absent — those articles render untouched.
+ */
+export function splitRoutinePicks(body: string): { before: string; picks: RoutinePick[]; after: string } | null {
+  const lines = body.split("\n");
+  const headIdx = lines.findIndex((l) => l.trim() === "## Gentle Routine Picks");
+  if (headIdx === -1) return null;
+  const picks: RoutinePick[] = [];
+  let i = headIdx + 1;
+  for (; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (line === "") continue;
+    const m = line.match(/^-\s*\[.+?\]\(\/product\/([a-z0-9-]+)\)\s*:+\s*"?(.*?)"?\s*$/);
+    if (!m) break;
+    picks.push({ slug: m[1], blurb: m[2] });
+  }
+  if (picks.length === 0) return null;
+  return {
+    before: lines.slice(0, headIdx).join("\n"),
+    picks,
+    after: lines.slice(i).join("\n"),
+  };
+}
