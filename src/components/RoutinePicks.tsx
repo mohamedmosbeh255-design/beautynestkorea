@@ -5,6 +5,22 @@ import AffiliateButtons from "@/components/AffiliateButtons";
 import type { RoutinePick } from "@/lib/advice";
 
 /**
+ * Empty or bare-homepage Olive Young URLs are placeholders, not destinations:
+ * hide the button entirely rather than linking nowhere useful.
+ */
+function effectiveOyUrl(url?: string | null): string | null {
+  const u = (url ?? "").trim();
+  if (!u) return null;
+  try {
+    const parsed = new URL(u);
+    if ((parsed.pathname === "" || parsed.pathname === "/") && !parsed.search) return null;
+  } catch {
+    return u;
+  }
+  return u;
+}
+
+/**
  * House product-card embed for advice "Gentle Routine Picks": product image +
  * title + the pick blurb verbatim + retailer buttons (Amazon href built from
  * the verified ASIN via the same AffiliateButtons mechanism as product pages).
@@ -57,8 +73,9 @@ export default async function RoutinePicks({ picks }: { picks: RoutinePick[] }) 
                     productId={product.id}
                     amazonUrl={product.amazon_url}
                     amazonAsin={product.amazon_asin}
-                    oliveyoungUrl={product.oliveyoung_url}
+                    oliveyoungUrl={effectiveOyUrl(product.oliveyoung_url)}
                     title={product.title}
+                    stackButtons
                   />
                 </div>
               </div>
