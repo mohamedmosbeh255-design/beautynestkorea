@@ -155,9 +155,11 @@ export default async function HomePage() {
         <div className="mt-6 grid gap-6 md:grid-cols-3">
           {getAllAdvice().map((post) => (
             <Link key={post.slug} href={`/advice/${post.slug}`} className="glass group overflow-hidden rounded-3xl transition hover:-translate-y-1 hover:shadow-xl">
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <Image src={post.image} alt={post.title} fill className="object-cover transition group-hover:scale-105" sizes="33vw" />
-              </div>
+              {post.image ? (
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image src={post.image} alt={post.title} fill className="object-cover transition group-hover:scale-105" sizes="33vw" />
+                </div>
+              ) : null}
               <div className="p-5">
                 <p className="text-xs font-semibold uppercase tracking-wider text-sage-600">{post.category} • {post.readTime}</p>
                 <h3 className="font-serif-display mt-1.5 text-lg font-bold leading-snug">{post.title}</h3>
