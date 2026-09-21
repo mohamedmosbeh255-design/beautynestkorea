@@ -1,0 +1,294 @@
+{
+  "date": "2026-09-21",
+  "generatedAt": "2026-09-21T11:22:11.033Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Retinol / Retinoids",
+      "views": 781,
+      "previous": 624,
+      "delta": 157
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 738,
+      "previous": 632,
+      "delta": 106
+    },
+    {
+      "name": "Vitamin C",
+      "views": 678,
+      "previous": 637,
+      "delta": 41
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 318,
+      "previous": 298,
+      "delta": 20
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 94,
+      "previous": 74,
+      "delta": 20
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 56,
+      "previous": 51,
+      "delta": 5
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 164,
+      "previous": 161,
+      "delta": 3
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 62,
+      "previous": 60,
+      "delta": 2
+    },
+    {
+      "name": "Niacinamide",
+      "views": 15,
+      "previous": 15,
+      "delta": 0
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 43,
+      "previous": 44,
+      "delta": -1
+    },
+    {
+      "name": "Ceramides",
+      "views": 145,
+      "previous": 149,
+      "delta": -4
+    },
+    {
+      "name": "Squalane",
+      "views": 61,
+      "previous": 71,
+      "delta": -10
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 382,
+      "previous": 398,
+      "delta": -16
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 169,
+      "previous": 186,
+      "delta": -17
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 316,
+      "previous": 357,
+      "delta": -41
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 364,
+      "previous": 463,
+      "delta": -99
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 11
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 9
+    },
+    {
+      "name": "Niacinamide",
+      "count": 6
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 6
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 5
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 4
+    },
+    {
+      "name": "Vitamin C",
+      "count": 3
+    },
+    {
+      "name": "Glycolic / AHA",
+      "count": 2
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    },
+    {
+      "name": "Urea",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "The Ordinary",
+      "count": 4
+    },
+    {
+      "name": "CeraVe",
+      "count": 3
+    },
+    {
+      "name": "La Roche-Posay",
+      "count": 2
+    },
+    {
+      "name": "Anua",
+      "count": 1
+    },
+    {
+      "name": "Avène",
+      "count": 1
+    },
+    {
+      "name": "Bioderma",
+      "count": 1
+    },
+    {
+      "name": "COSRX",
+      "count": 1
+    },
+    {
+      "name": "Neutrogena",
+      "count": 1
+    },
+    {
+      "name": "Nivea",
+      "count": 1
+    }
+  ],
+  "newsHeadlines": [
+    "We tested more than a dozen viral Medicube products — these are the ones actually worth it",
+    "Should Guys in Their 20s and 30s Be Using Retinol? Dermatologists Explain.",
+    "I Don't Use Retinol—But These Alternatives Still Deliver Impressive Results",
+    "Shoppers in Their 40s Switched Their Expensive Skincare for This $20 Retinol Cream",
+    "PDRN make-up: How K-beauty’s trending skin care ingredient is moving into colour cosmetics",
+    "CeraVe’s anti-ageing products rival ‘far more expensive’ options",
+    "블랑드비, 특허 성분·PDRN 담은 ‘페이스 큐어’ 스킨케어 라인 공식 론칭",
+    "K-beauty giant Cosmax moves a gentler retinol into stick form",
+    "The Best Clean Retinol Products That Actually Work",
+    "Move over, snail mucin: COSRX has a $14 PDRN face mask thousands are buying",
+    "Shoppers In Their 70s And 80s Say This $19 Anti-Aging Retinol Serum Turned Back The Clock On Their Skin",
+    "What is PDRN? An aesthetic doctor explains the skincare trend transforming mature skin"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 33
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 11
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 5
+    },
+    {
+      "name": "Exosomes",
+      "count": 4
+    },
+    {
+      "name": "Peptides",
+      "count": 4
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Hypochlorous Acid",
+      "count": 1
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-09-20 vs 2026-09-19"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 111 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "25 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "200 headline(s) read · 56 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 6/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · no source failed",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-09-20 vs 2026-09-19). Biggest rise: **Retinol / Retinoids** +157 views (+25.2%). Highest volume: **Retinol / Retinoids** (781 views). Secondary Google Trends signal: none today (12/12 markets answered, 111 items scanned, 0 skincare matches).",
+    "**Community pulse:** 25 posts analysed; the most-discussed ingredient is **Sunscreen (unspecified)** (11 posts), with **The Ordinary** the most-mentioned brand (4 posts).",
+    "**News pulse:** 200 headline(s) read across 2 quer(ies), 56 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (33 headline(s)), brand **Medicube** (4 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-09-20 vs 2026-09-19):** up — Retinol / Retinoids +157 views; down — Azelaic Acid -99 views. Community mention deltas: up — Niacinamide +5, down — Micellar Water -1.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Sunscreen (unspecified)**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
