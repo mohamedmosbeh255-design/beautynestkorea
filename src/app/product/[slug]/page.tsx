@@ -15,6 +15,23 @@ import { breadcrumbJsonLd, faqJsonLd, productJsonLd, type FaqItem } from "@/lib/
 
 export const revalidate = 60;
 
+// Per-retailer price snapshots for products with verified dual-retailer
+// pricing. Amazon row renders FIRST. Outbound links reuse
+// <AffiliateButtons/> below, so BOTH retailers fire affiliate_click
+// (retailer + product_slug) through the standard tracker.
+const RETAILER_PRICE_DETAILS: Record<
+  string,
+  { asOf: string; rows: Array<{ retailer: string; price: string; perMl: string; note: string }> }
+> = {
+  "arencia-vitamin-c-booster-shot": {
+    asOf: "Sep 21, 2026",
+    rows: [
+      { retailer: "Amazon", price: "$22.00", perMl: "$0.73/ml", note: "30ml · 30K+ bought in past month" },
+      { retailer: "Olive Young", price: "$27.91", perMl: "$0.47/ml", note: "30ml Double Set (60ml total)" },
+    ],
+  },
+};
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
@@ -122,11 +139,34 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
           <div className="mt-7">
             <AffiliateDisclosure />
+            {RETAILER_PRICE_DETAILS[slug] && (
+              <div className="mb-3 rounded-3xl border border-sage-100 bg-white/60 p-5">
+                <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-sage-700">Where to buy</h2>
+                <dl className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {RETAILER_PRICE_DETAILS[slug].rows.map((row) => (
+                    <div key={row.retailer} className="rounded-2xl bg-white/80 px-4 py-3">
+                      <dt className="text-xs font-bold uppercase tracking-wider text-sage-600">{row.retailer}</dt>
+                      <dd className="mt-1 text-lg font-bold">
+                        {row.price} <span className="text-sm font-semibold text-ink-soft">({row.perMl})</span>
+                      </dd>
+                      <dd className="mt-0.5 text-xs text-ink-soft">{row.note}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
             <AffiliateButtons productId={product.id} productSlug={product.slug} amazonUrl={product.amazon_url} amazonAsin={product.amazon_asin} oliveyoungUrl={product.oliveyoung_url} title={product.title} />
-            <p className="mt-3 flex items-center gap-1.5 text-xs text-ink-soft">
-              <ShieldCheck className="h-3.5 w-3.5 text-sage-600" />
-              Prices checked weekly. We may earn a commission at no cost to you.
-            </p>
+            {RETAILER_PRICE_DETAILS[slug] ? (
+              <p className="mt-3 text-xs text-ink-soft">
+                Prices as of {RETAILER_PRICE_DETAILS[slug].asOf} — per-ml based on 30ml (Amazon) and 60ml double-set total
+                (Olive Young). Check live retailer prices before buying. We may earn a commission at no cost to you.
+              </p>
+            ) : (
+              <p className="mt-3 flex items-center gap-1.5 text-xs text-ink-soft">
+                <ShieldCheck className="h-3.5 w-3.5 text-sage-600" />
+                Prices checked weekly. We may earn a commission at no cost to you.
+              </p>
+            )}
           </div>
 
           <div className="glass mt-7 rounded-3xl p-6">

@@ -141,6 +141,34 @@ export const MOCK_PRODUCTS: Product[] = [
     is_featured: false,
     is_active: true,
   },
+  {
+    id: "7",
+    slug: "arencia-vitamin-c-booster-shot",
+    title: "Vitamin C Booster Shot Serum 30ml",
+    brand: "Arencia",
+    description:
+      "Brightening booster serum with vitamin C, glutathione, niacinamide and vitamin E. Made to improve the look of dark spots and fine lines while supporting a glass-skin glow. 30ml bottle — compare per-ml prices below before choosing a retailer.",
+    price: 22.0,
+    compare_at_price: null,
+    currency: "$",
+    category: "Serum",
+    concern: ["Brightening", "Anti-aging", "Hydration"],
+    skin_type: ["All"],
+    key_ingredients: ["Vitamin C", "Glutathione", "Niacinamide", "Vitamin E"],
+    image_urls: [
+      "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=800&q=80",
+      "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80",
+    ],
+    amazon_url: "https://www.amazon.com/dp/B0FX418XT8",
+    amazon_asin: "B0FX418XT8",
+    oliveyoung_url: "https://global.oliveyoung.com/product/detail?prdtNo=GA260439702",
+    rating: 4.4,
+    review_count: 3866,
+    is_featured: true,
+    is_active: true,
+    created_at: "2026-09-21T12:00:00.000Z",
+    updated_at: "2026-09-21T12:00:00.000Z",
+  },
 ];
 
 export function getMockProductBySlug(slug: string) {
