@@ -20,7 +20,9 @@ date: "2026-09-14"
 >
 > Product recommendations on BeautyNestKorea are cosmetic suggestions, not medical treatments. Where applicable, some links may be affiliate links, meaning we may earn a commission at no additional cost to you. Our editorial recommendations remain independent of these relationships.
 
-*Written by the BeautyNestKorea Editorial Team · Last updated September 14, 2026 · Affiliate disclosure: we may earn a small commission from product links at no extra cost to you.*
+**By BeautyNestKorea Editorial Team**
+Published: 2026-09-14 · Last updated: 2026-09-14
+The BeautyNestKorea Editorial Team researches K-beauty formulations and pricing, cross-checking retailer data and peer-reviewed sources. Content is educational only — not medical advice.
 
 ---
 

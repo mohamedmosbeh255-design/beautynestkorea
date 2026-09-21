@@ -76,7 +76,7 @@ export default function ProductForm({
       fd.set("amazon_url", values.amazon_url ?? "");
       fd.set("amazon_asin", (values.amazon_asin ?? "").toString().trim().toUpperCase());
       fd.set("oliveyoung_url", values.oliveyoung_url ?? "");
-      if (values.rating != null)       fd.set("rating", String(values.rating));
+      if (values.rating != null) fd.set("rating", String(values.rating));
       fd.set("review_count", String(values.review_count ?? 0));
       fd.set("price_checked_at", String(values.price_checked_at ?? "").trim());
       if (values.is_featured) fd.set("is_featured", "on");

@@ -8,6 +8,10 @@ image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200
 date: "2026-08-20"
 ---
 
+**By BeautyNestKorea Editorial Team**
+Published: 2026-08-20 · Last updated: 2026-08-20
+The BeautyNestKorea Editorial Team researches K-beauty formulations and pricing, cross-checking retailer data and peer-reviewed sources. Content is educational only — not medical advice.
+
 The famous 10-step Korean skincare routine is more philosophy than prescription: layer lightweight hydration, protect your barrier, and never skip sunscreen.
 
 For beginners, start with five essentials: an oil cleanser at night, a gentle water cleanser, a hydrating toner, a treatment serum for your main concern, and moisturizer plus SPF in the morning.
