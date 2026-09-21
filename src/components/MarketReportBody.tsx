@@ -10,7 +10,7 @@ import {
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { shiftDateStr, stripTitle, type WikiSnapshotView } from "@/lib/market-report";
-import { isAmazonDpLink, withAmazonTag } from "@/lib/affiliates";
+import { isAmazonDpLink, isAffiliateDomainLink, withAmazonTag } from "@/lib/affiliates";
 import { AFFILIATE_DISCLOSURE_TEXT } from "@/components/AffiliateDisclosure";
 import ScrollableTable from "@/components/ScrollableTable";
 
@@ -96,14 +96,15 @@ const baseMarkdownComponents = {
         </Link>
       );
     }
-    // Amazon /dp/ watchlist links earn via the Associates tag; all other
-    // outbound hrefs (Reddit, Trends, curation links, …) pass through byte-identical.
-    if (isAmazonDpLink(url)) {
+    // Amazon /dp/ watchlist links earn via the Associates tag; every affiliate-domain
+    // link (Amazon, Olive Young) carries target + rel="nofollow sponsored noopener".
+    // All other outbound hrefs (Reddit, Trends, curation links, …) pass through byte-identical.
+    if (isAmazonDpLink(url) || isAffiliateDomainLink(url)) {
       return (
         <a
           href={withAmazonTag(url)}
           target="_blank"
-          rel="sponsored noopener noreferrer"
+          rel="nofollow sponsored noopener"
           className="font-medium text-sage-700 underline decoration-sage-300 underline-offset-2 transition hover:text-sage-600 hover:decoration-sage-500"
         >
           {children}

@@ -7,6 +7,7 @@ import { getConcernStats } from "@/lib/concerns";
 import { getAllAdvice } from "@/lib/advice";
 import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
+import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 
 export const metadata: Metadata = {
   alternates: { canonical: siteBaseUrl() },
@@ -120,6 +121,7 @@ export default async function HomePage() {
             View all <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+        <AffiliateDisclosure className="mt-3 max-w-xl" />
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {grid.map((p) => <ProductCard key={p.id} product={p} />)}
         </div>

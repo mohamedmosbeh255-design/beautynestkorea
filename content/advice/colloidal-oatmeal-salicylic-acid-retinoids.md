@@ -16,8 +16,6 @@ faqSchema: true
 Published: 2026-09-19 · Last updated: 2026-09-20
 Researched from FDA and American Academy of Dermatology sources. **Not medically reviewed.**
 
-*Affiliate disclosure: we may earn a commission when you buy through links on this page, at no extra cost to you. As an Amazon Associate we earn from qualifying purchases. This supports our independent reviews.*
-
 > **Educational only.** This guide covers cosmetic skincare, not diagnosis or treatment. Patch-test new products and see a dermatologist for persistent issues. **Seek urgent medical care for swelling of the face, mouth or throat, or any difficulty breathing.**
 
 Most skincare advice assumes your barrier is intact. After hives, a reaction, or a stretch of over-exfoliation, that assumption is wrong, and following a normal "actives" routine tends to make things worse. This guide covers the four decisions that matter most in those weeks: which oat ingredient you are actually buying, whether new breakouts mean progress or damage, and how to reintroduce glycolic and salicylic acid without starting over.

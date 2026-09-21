@@ -82,7 +82,7 @@ export default function AffiliateButtons({
         <a
           href={oliveyoungUrl}
           target="_blank"
-          rel="sponsored noopener noreferrer"
+          rel="nofollow sponsored noopener"
           onClick={() => track("oliveyoung")}
           className={`inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-sage-600 bg-sage-50 px-6 py-4 text-sm font-bold text-sage-700 transition hover:bg-sage-100${stacked ? " w-full whitespace-nowrap" : ""}`}
           aria-label={`View ${title} on Olive Young`}
