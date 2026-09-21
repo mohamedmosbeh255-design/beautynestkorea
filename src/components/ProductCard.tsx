@@ -2,14 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { Star, ArrowUpRight } from "lucide-react";
 import type { Product } from "@/lib/types";
-import { formatAsOf, formatPrice } from "@/lib/utils";
+import { formatPriceChecked, formatPrice } from "@/lib/utils";
 
 export default function ProductCard({ product }: { product: Product }) {
   const img = product.image_urls[0] ?? "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80";
-  // Price provenance: discount UI renders only when the product carries a
-  // last-updated date; otherwise the badge/compare-at price are omitted.
-  const priceAsOf = formatAsOf(product.updated_at);
-  const discount = priceAsOf && product.compare_at_price && product.compare_at_price > product.price
+  // Price provenance: the WHOLE price block (price, discount badge, stamp)
+  // renders only with a verified priceCheckedAt date. Unknown → NULL → hidden.
+  const priceChecked = formatPriceChecked(product.priceCheckedAt);
+  const discount = priceChecked && product.compare_at_price && product.compare_at_price > product.price
     ? Math.round((1 - product.price / product.compare_at_price) * 100)
     : 0;
   return (
@@ -44,19 +44,21 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="font-semibold">{product.rating?.toFixed(1) ?? "—"}</span>
           <span className="text-ink-soft">({(product.review_count ?? 0).toLocaleString()})</span>
         </div>
-        <div className="mt-3 flex items-center justify-between">
-          <div className="flex items-baseline gap-2">
-            <span className="text-lg font-bold">{formatPrice(product.price, product.currency)}</span>
-            {discount > 0 && (
-              <span className="text-sm text-ink-soft line-through">{formatPrice(product.compare_at_price, product.currency)}</span>
-            )}
-          </div>
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-ink text-white transition group-hover:bg-sage-600">
-            <ArrowUpRight className="h-4 w-4" />
-          </span>
-        </div>
-        {priceAsOf && (
-          <p className="mt-1 text-[11px] text-ink-soft">as of {priceAsOf}</p>
+        {priceChecked && (
+          <>
+            <div className="mt-3 flex items-center justify-between">
+              <div className="flex items-baseline gap-2">
+                <span className="text-lg font-bold">{formatPrice(product.price, product.currency)}</span>
+                {discount > 0 && (
+                  <span className="text-sm text-ink-soft line-through">{formatPrice(product.compare_at_price, product.currency)}</span>
+                )}
+              </div>
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-ink text-white transition group-hover:bg-sage-600">
+                <ArrowUpRight className="h-4 w-4" />
+              </span>
+            </div>
+            <p className="mt-1 text-[11px] text-ink-soft">Price checked {priceChecked} · may have changed</p>
+          </>
         )}
         <div className="mt-3 flex flex-wrap gap-1.5">
           {product.concern.slice(0, 3).map((c) => (

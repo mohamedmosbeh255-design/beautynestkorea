@@ -55,6 +55,11 @@ create index if not exists idx_products_active on public.products (is_active) wh
 -- Run on existing databases; fresh creates get it from the table def above.
 alter table public.products add column if not exists amazon_asin text;
 
+-- Price provenance (added 2026-09-21): verified price-check timestamp.
+-- NULL = collection date unknown → the storefront hides the price block
+-- entirely. Never backfill from updated_at (that tracks edits, not checks).
+alter table public.products add column if not exists price_checked_at timestamptz;
+
 -- ─── categories ────────────────────────────────────────────
 -- Concern/category catalog (Acne, Hydration, ...). The storefront derives
 -- "Shop by Concern" cards from product data, so new concerns added on
@@ -157,9 +162,9 @@ create policy "Admins full access categories"
 -- ─── Seed data (optional) ──────────────────────────────────
 -- Live-catalog insert for the Arencia Vitamin C serum (conflict-safe;
 -- mirrors the Admin-panel row so fresh databases surface it on day one).
-insert into public.products (slug, title, brand, description, price, compare_at_price, category, concern, skin_type, key_ingredients, image_urls, amazon_url, amazon_asin, oliveyoung_url, rating, review_count, is_featured)
+insert into public.products (slug, title, brand, description, price, compare_at_price, category, concern, skin_type, key_ingredients, image_urls, amazon_url, amazon_asin, oliveyoung_url, rating, review_count, is_featured, price_checked_at)
 values
-  ('arencia-vitamin-c-booster-shot', 'Vitamin C Booster Shot Serum 30ml', 'Arencia', 'Brightening booster serum with vitamin C, glutathione, niacinamide and vitamin E. Made to improve the look of dark spots and fine lines while supporting a glass-skin glow. 30ml bottle.', 22.00, null, 'Serum', '{Brightening,Anti-aging,Hydration}', '{All}', '{Vitamin C,Glutathione,Niacinamide,Vitamin E}', '{https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=800&q=80,https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80}', 'https://www.amazon.com/dp/B0FX418XT8', 'B0FX418XT8', 'https://global.oliveyoung.com/product/detail?prdtNo=GA260439702', 4.4, 3866, true)
+  ('arencia-vitamin-c-booster-shot', 'Vitamin C Booster Shot Serum 30ml', 'Arencia', 'Brightening booster serum with vitamin C, glutathione, niacinamide and vitamin E. Made to improve the look of dark spots and fine lines while supporting a glass-skin glow. 30ml bottle.', 22.00, null, 'Serum', '{Brightening,Anti-aging,Hydration}', '{All}', '{Vitamin C,Glutathione,Niacinamide,Vitamin E}', '{https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=800&q=80,https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80}', 'https://www.amazon.com/dp/B0FX418XT8', 'B0FX418XT8', 'https://global.oliveyoung.com/product/detail?prdtNo=GA260439702', 4.4, 3866, true, '2026-09-21T12:00:00+00')
 on conflict (slug) do nothing;
 
 insert into public.products (slug, title, brand, description, price, compare_at_price, category, concern, skin_type, key_ingredients, image_urls, amazon_url, oliveyoung_url, rating, review_count, is_featured)

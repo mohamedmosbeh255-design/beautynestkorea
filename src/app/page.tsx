@@ -70,7 +70,7 @@ export default async function HomePage() {
           Discover K-Beauty & Skincare That Loves You Back
         </h1>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-ink-soft sm:text-base">
-          Curated Korean bestsellers with honest reviews and live Amazon vs Olive Young price comparison.
+          Curated Korean bestsellers with honest reviews and Amazon vs Olive Young price comparison, re-checked monthly.
         </p>
       </section>
 

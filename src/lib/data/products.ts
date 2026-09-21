@@ -168,6 +168,8 @@ export const MOCK_PRODUCTS: Product[] = [
     is_active: true,
     created_at: "2026-09-21T12:00:00.000Z",
     updated_at: "2026-09-21T12:00:00.000Z",
+    // Verified price-check timestamp (known collection date 2026-09-21).
+    priceCheckedAt: "2026-09-21T12:00:00.000Z",
   },
 ];
 

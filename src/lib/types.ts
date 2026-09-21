@@ -21,6 +21,12 @@ export interface Product {
   oliveyoung_url?: string | null;
   rating?: number | null;
   review_count?: number | null;
+  /**
+   * Verified price-check timestamp (DB: price_checked_at). NULL = unknown →
+   * the storefront must HIDE the price block entirely. Never derive this
+   * from updated_at/created_at — those track edits, not price checks.
+   */
+  priceCheckedAt?: string | null;
   is_featured?: boolean;
   is_active?: boolean;
   created_at?: string;

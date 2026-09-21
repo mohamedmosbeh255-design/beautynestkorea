@@ -35,6 +35,8 @@ function mapRow(row: any): Product {
     oliveyoung_url: row.oliveyoung_url,
     rating: row.rating != null ? Number(row.rating) : null,
     review_count: row.review_count ?? 0,
+    // Verified price-check timestamp only — never updated_at (edit time).
+    priceCheckedAt: (row.price_checked_at as string | null) ?? null,
     is_featured: Boolean(row.is_featured),
     is_active: row.is_active ?? true,
     created_at: row.created_at,
