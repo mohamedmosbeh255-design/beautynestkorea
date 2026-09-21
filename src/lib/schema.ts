@@ -31,6 +31,9 @@ export interface FaqItem {
 
 export function productJsonLd(product: Product, base: string, canonical: string) {
   const asin = extractAsin(product.amazon_url);
+  // Null-price omission rule (mirrors the UI layer): offers render ONLY with
+  // a verified priceCheckedAt date — never an undated or guessed price.
+  const hasVerifiedPrice = formatPriceCheckedValue(product.priceCheckedAt) != null;
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -48,14 +51,29 @@ export function productJsonLd(product: Product, base: string, canonical: string)
           },
         }
       : {}),
-    offers: {
-      "@type": "Offer",
-      url: canonical,
-      priceCurrency: priceCurrencyCode(product.currency),
-      price: product.price.toFixed(2),
-      availability: "https://schema.org/InStock",
-    },
+    ...(hasVerifiedPrice
+      ? {
+          offers: {
+            "@type": "Offer",
+            url: canonical,
+            priceCurrency: priceCurrencyCode(product.currency),
+            price: product.price.toFixed(2),
+            availability:
+              product.is_active === false
+                ? "https://schema.org/OutOfStock"
+                : "https://schema.org/InStock",
+          },
+        }
+      : {}),
   };
+}
+
+/** "September 2026" from a verified price-check timestamp; null when unknown. */
+function formatPriceCheckedValue(iso?: string | null): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
 }
 
 export function faqJsonLd(items: FaqItem[]) {
@@ -83,8 +101,13 @@ export function articleJsonLd(
     headline: overrides?.headline || post.title,
     description: post.excerpt,
     ...(post.image ? { image: [post.image] } : {}),
-    author: { "@type": "Organization", name: overrides?.authorName || "BeautyNestKorea", url: authorUrl },
-    publisher: { "@type": "Organization", name: "BeautyNestKorea" },
+    author: {
+      "@type": "Person",
+      name: overrides?.authorName || "Mohamed Mosbeh",
+      jobTitle: "Founder & Lead Researcher",
+      url: authorUrl,
+    },
+    publisher: { "@type": "Organization", name: "BeautyNestKorea", url: base },
     datePublished: post.date,
     dateModified: overrides?.dateModified || post.date,
     mainEntityOfPage: canonical,
@@ -111,6 +134,7 @@ export function organizationJsonLd(base: string) {
       "@type": "Organization",
       name: "BeautyNestKorea",
       url: base,
+      logo: `${base}/og-default.png`,
       sameAs: [
         "https://www.facebook.com/mohamed.mosbeh.508798/",
         "https://www.instagram.com/beautynest_k_beauty_expert/",

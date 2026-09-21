@@ -36,11 +36,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) return { title: "Product not found" };
+  // OG fallback chain: product hero → branded default card (1200×630).
+  const ogImages = product.image_urls.length > 0
+    ? product.image_urls.slice(0, 1)
+    : [`${siteBaseUrl()}/og-default.png`];
   return {
     title: product.title,
     description: product.description.slice(0, 155),
     alternates: { canonical: `${siteBaseUrl()}/product/${slug}` },
-    openGraph: { title: product.title, description: product.description.slice(0, 155), images: product.image_urls.slice(0, 1) },
+    openGraph: { title: product.title, description: product.description.slice(0, 155), type: "website", images: ogImages },
   };
 }
 

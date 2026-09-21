@@ -8,7 +8,6 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { getAdviceBySlug, getAllAdvice, extractArticleFaqs, stripFaqCitations, splitRoutinePicks } from "@/lib/advice";
 import RoutinePicks from "@/components/RoutinePicks";
-import { BRAND_AUTHOR } from "../../../../config/authors";
 import { siteBaseUrl } from "@/lib/market-report";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/schema";
 import { getConcernBySlug, getConcernSlugs } from "@/lib/advice-kb";
@@ -45,7 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title,
       description,
       alternates: { canonical: `${siteBaseUrl()}/advice/${slug}` },
-      openGraph: { title, description },
+      openGraph: { title, description, type: "article", images: [`${siteBaseUrl()}/og-default.png`] },
     };
   }
   const post = getAdviceBySlug(slug);
@@ -55,7 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title,
     description: post.excerpt,
     alternates: { canonical: `${siteBaseUrl()}/advice/${slug}` },
-    openGraph: { title, description: post.excerpt, images: post.image ? [post.image] : [] },
+    openGraph: { title, description: post.excerpt, type: "article", images: post.image ? [post.image] : [`${siteBaseUrl()}/og-default.png`] },
   };
 }
 
@@ -220,7 +219,8 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
     articleJsonLd(post, base, canonical, `${base}/author`, {
       headline: post.headline,
       dateModified: post.dateModified,
-      authorName: BRAND_AUTHOR.name,
+      // Real byline: Person object per §6 — never the brand organization.
+      authorName: "Mohamed Mosbeh",
     }),
     ...(articleFaqs.length > 0
       ? [
