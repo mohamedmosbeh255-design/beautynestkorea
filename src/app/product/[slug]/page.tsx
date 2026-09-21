@@ -200,7 +200,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       )}
 
-      {/* SEO FAQ */}
+      {/* FAQ */}
       <div className="glass mt-12 rounded-3xl p-6 sm:p-8">
         <h2 className="font-serif-display text-xl font-bold">Frequently asked</h2>
         <div className="mt-4 grid gap-4 text-sm sm:grid-cols-2">
