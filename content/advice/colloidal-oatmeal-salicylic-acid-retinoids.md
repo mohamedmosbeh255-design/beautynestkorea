@@ -12,7 +12,7 @@ dateModified: "2026-09-20"
 faqSchema: true
 ---
 
-**By BeautyNestKorea Editorial Team**
+<!-- AUTHOR_PENDING -->
 Published: 2026-09-19 · Last updated: 2026-09-20
 Researched from FDA and American Academy of Dermatology sources. **Not medically reviewed.**
 

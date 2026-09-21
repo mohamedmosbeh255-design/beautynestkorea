@@ -9,7 +9,7 @@ imageAlt: "medicube Salmon DNA PDRN Pink Vitamin Coated Sheet Mask — clinical 
 date: "2026-09-05"
 ---
 
-**By BeautyNestKorea Editorial Team**
+<!-- AUTHOR_PENDING -->
 Published: 2026-09-05 · Last updated: 2026-09-05
 The BeautyNestKorea Editorial Team researches K-beauty formulations and pricing, cross-checking retailer data and peer-reviewed sources. Content is educational only — not medical advice.
 

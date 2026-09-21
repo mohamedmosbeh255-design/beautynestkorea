@@ -8,7 +8,7 @@ image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200
 date: "2026-08-20"
 ---
 
-**By BeautyNestKorea Editorial Team**
+<!-- AUTHOR_PENDING -->
 Published: 2026-08-20 · Last updated: 2026-08-20
 The BeautyNestKorea Editorial Team researches K-beauty formulations and pricing, cross-checking retailer data and peer-reviewed sources. Content is educational only — not medical advice.
 
