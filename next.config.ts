@@ -28,6 +28,17 @@ const nextConfig: NextConfig = {
   //   skin1004-madagascar-ampoule → skin1004-hyalu-cica-water-fit-sun-serum
   //   laneige-water-sleeping-mask → biodance-bio-collagen-real-deep-mask
   //   round-lab-dokdo-toner → round-lab-birch-juice-moisturizing-sunscreen
+  //
+  // Synonym concern slugs → canonical 'anti-aging' (308 Permanent Redirect).
+  // No /category/* routes exist yet; these keep synonym URLs canonical
+  // forever while the storefront merges 'elasticity'/'firming' tags into
+  // Anti-aging at the data layer (src/lib/concerns.ts).
+  async redirects() {
+    return [
+      { source: "/category/elasticity", destination: "/category/anti-aging", permanent: true },
+      { source: "/category/firming", destination: "/category/anti-aging", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

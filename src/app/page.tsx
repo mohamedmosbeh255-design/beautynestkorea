@@ -37,8 +37,10 @@ export default async function HomePage() {
   const allProducts = await getProducts();
   const grid = featured.length > 0 ? featured : allProducts.slice(0, 3);
   // Dynamic: derived from live product data — adding a product with a new
-  // concern in Admin automatically adds/updates a card here.
-  const concernStats = getConcernStats(allProducts);
+  // concern in Admin automatically adds/updates a card here. Zero-product
+  // concerns never appear (counts come from products), so empty cards
+  // cannot render; every card below carries a count + non-empty blurb.
+  const concernStats = getConcernStats(allProducts).filter(({ count }) => count > 0);
 
   return (
     <div>

@@ -6,7 +6,7 @@ import type { Product } from "@/lib/types";
 import { CATEGORIES } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
 import { cn } from "@/lib/utils";
-import { getAllConcernNames } from "@/lib/concerns";
+import { getAllConcernNames, productMatchesConcern } from "@/lib/concerns";
 
 export default function ShopClient({ products, initialConcern = "All", initialCategory = "All" }: { products: Product[]; initialConcern?: string; initialCategory?: string }) {
   const [query, setQuery] = useState("");
@@ -50,7 +50,7 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
       if (query && !`${p.title} ${p.brand} ${p.category}`.toLowerCase().includes(query.toLowerCase())) return false;
       if (brand !== "All" && p.brand !== brand) return false;
       if (effectiveCategory !== "All" && p.category !== effectiveCategory) return false;
-      if (effectiveConcern !== "All" && !p.concern.includes(effectiveConcern)) return false;
+      if (effectiveConcern !== "All" && !productMatchesConcern(p, effectiveConcern)) return false;
       if (p.price > effectiveMaxPrice) return false;
       if (source === "Amazon" && !p.amazon_url) return false;
       if (source === "Olive Young" && !p.oliveyoung_url) return false;
