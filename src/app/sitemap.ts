@@ -51,6 +51,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/advice`, lastModified: new Date() },
     { url: `${base}/market-report`, lastModified: new Date() },
     { url: `${base}/market-report/archive`, lastModified: new Date() },
+    { url: `${base}/tools/image-optimizer`, lastModified: new Date() },
+    { url: `${base}/about`, lastModified: new Date() },
+    { url: `${base}/contact`, lastModified: new Date() },
+    { url: `${base}/privacy`, lastModified: new Date() },
+    { url: `${base}/disclosure`, lastModified: new Date() },
+    { url: `${base}/affiliate-disclosure`, lastModified: new Date() },
+    { url: `${base}/author`, lastModified: new Date() },
     ...reportDates.map((d) => ({ url: `${base}/market-report/${d}`, lastModified: new Date(d) })),
     ...products
       .filter((p): p is LiveProductRow & { slug: string } => Boolean(p.slug))
