@@ -12,6 +12,8 @@ dateModified: "2026-09-20"
 faqSchema: true
 ---
 
+**Affiliate Disclosure:** We may earn a commission when you buy through links on this page, at no extra cost to you.
+
 <!-- AUTHOR_PENDING -->
 Published: 2026-09-19 · Last updated: 2026-09-20
 Researched from FDA and American Academy of Dermatology sources. **Not medically reviewed.**
