@@ -135,7 +135,7 @@ export default async function HomePage() {
             {[
               { title: "Price-checked twice", desc: "Every product links to both Amazon and Olive Young so you pick the cheaper, faster option." },
               { title: "Ingredients first", desc: "We list key actives, skin-type fit and concerns — no marketing fluff, just what works." },
-              { title: "Routines that stick", desc: "Free SEO-backed guides help you layer products correctly, morning and night." },
+              { title: "Routines that stick", desc: "Step-by-step routine guides so you layer products in the right order, morning and night." },
             ].map((v) => (
               <div key={v.title} className="rounded-2xl bg-white/70 p-6">
                 <h3 className="font-serif-display text-lg font-bold">{v.title}</h3>
