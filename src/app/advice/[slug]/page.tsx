@@ -14,6 +14,7 @@ import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/schema";
 import { getConcernBySlug, getConcernSlugs } from "@/lib/advice-kb";
 import ConcernArticle from "@/components/ConcernArticle";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+import { isAffiliateDomainLink } from "@/lib/affiliates";
 import EducationalDisclaimer from "@/components/EducationalDisclaimer";
 import { ArrowLeft } from "lucide-react";
 
@@ -102,6 +103,15 @@ function InternalLink({ href, children, className }: { href?: string; children?:
     const resolved = ANCHOR_ALIASES[target] ?? target;
     return (
       <a href={`#${resolved}`} className={linkClass}>
+        {children}
+      </a>
+    );
+  }
+  // Affiliate-domain outbound links (Amazon, Olive Young): FTC/compliance
+  // attrs, enforced for literals by eslint-rules/affiliate-link-attrs.mjs.
+  if (isAffiliateDomainLink(url)) {
+    return (
+      <a href={url} target="_blank" rel="nofollow sponsored noopener" className={linkClass}>
         {children}
       </a>
     );

@@ -8,6 +8,10 @@ image: "https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1200
 date: "2026-08-12"
 ---
 
+By Mohamed Mosbeh · Founder & Lead Researcher, BeautyNestKorea
+Published: 2026-08-12 · Last updated: 2026-08-12
+Mohamed Mosbeh founded BeautyNestKorea to bring transparent, per-ml price comparisons and evidence-based K-beauty guidance to shoppers.
+
 Niacinamide (vitamin B3) regulates oil, minimizes pores and fades hyperpigmentation gently — suitable for almost all skin types, including sensitive.
 
 Vitamin C (L-ascorbic acid and derivatives) is a stronger antioxidant brightener but can irritate sensitive skin and oxidize quickly if poorly formulated.

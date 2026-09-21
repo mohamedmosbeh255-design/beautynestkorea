@@ -12,11 +12,11 @@ dateModified: "2026-09-20"
 faqSchema: true
 ---
 
-**By BeautyNestKorea Editorial Team**
-Published: 2026-09-19 · Last updated: 2026-09-20
-Researched from FDA and American Academy of Dermatology sources. **Not medically reviewed.**
+**Affiliate Disclosure:** We may earn a commission when you buy through links on this page, at no extra cost to you.
 
-*Affiliate disclosure: we may earn a commission when you buy through links on this page, at no extra cost to you. As an Amazon Associate we earn from qualifying purchases. This supports our independent reviews.*
+By Mohamed Mosbeh · Founder & Lead Researcher, BeautyNestKorea
+Published: 2026-09-19 · Last updated: 2026-09-20
+Mohamed Mosbeh founded BeautyNestKorea to bring transparent, per-ml price comparisons and evidence-based K-beauty guidance to shoppers.
 
 > **Educational only.** This guide covers cosmetic skincare, not diagnosis or treatment. Patch-test new products and see a dermatologist for persistent issues. **Seek urgent medical care for swelling of the face, mouth or throat, or any difficulty breathing.**
 

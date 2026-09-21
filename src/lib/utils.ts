@@ -11,11 +11,12 @@ export function formatPrice(price: number | null | undefined, currency = "$") {
 }
 
 /**
- * Price provenance stamp: "September 2026" from a product's last-updated
- * field. Returns null when no usable date exists — callers must then omit
- * discount badges rather than show undated prices as deals.
+ * Price provenance stamp: "September 2026" from a product's VERIFIED
+ * price-checked timestamp. Returns null when no usable date exists —
+ * callers must then HIDE the price block entirely rather than show an
+ * undated price as current (affiliate accuracy: never show an unknown date).
  */
-export function formatAsOf(iso?: string | null): string | null {
+export function formatPriceChecked(iso?: string | null): string | null {
   if (!iso) return null;
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return null;

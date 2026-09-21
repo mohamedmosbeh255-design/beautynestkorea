@@ -35,6 +35,7 @@ export async function createProduct(formData: FormData) {
     oliveyoung_url: formData.get("oliveyoung_url") || null,
     rating: formData.get("rating") || null,
     review_count: formData.get("review_count") || 0,
+    price_checked_at: (formData.get("price_checked_at") as string | null) || null,
     is_featured: formData.get("is_featured") === "on",
     is_active: formData.get("is_active") !== "off",
   };
@@ -68,6 +69,7 @@ export async function updateProduct(id: string, formData: FormData) {
     oliveyoung_url: formData.get("oliveyoung_url") || null,
     rating: formData.get("rating") || null,
     review_count: formData.get("review_count") || 0,
+    price_checked_at: (formData.get("price_checked_at") as string | null) || null,
     is_featured: formData.get("is_featured") === "on",
     is_active: formData.get("is_active") !== "off",
   };

@@ -23,6 +23,15 @@ export const productSchema = z.object({
   oliveyoung_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
   rating: z.coerce.number().min(0).max(5).optional().nullable(),
   review_count: z.coerce.number().min(0).optional().nullable(),
+  // Verified price-check date (YYYY-MM-DD). Empty/null = unknown → the
+  // storefront hides the price block. Never auto-fill from updated_at.
+  price_checked_at: z
+    .string()
+    .optional()
+    .nullable()
+    .refine((v) => v == null || String(v).trim() === "" || !Number.isNaN(Date.parse(String(v))), {
+      message: "Must be a valid date",
+    }),
   is_featured: z.boolean().default(false),
   is_active: z.boolean().default(true),
 });

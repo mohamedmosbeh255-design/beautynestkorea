@@ -111,7 +111,7 @@ export default async function ConcernArticle({ concern }: { concern: KbConcern }
         <div className="mt-10">
           <h2 className="font-serif-display text-2xl font-bold tracking-tight">Matching products</h2>
           <p className="mt-1 text-sm text-ink-soft">
-            From our catalog — open a product to compare live retailer prices.
+            From our catalog — open a product to compare current retailer prices.
           </p>
           <AffiliateDisclosure className="mt-4" />
           <ul className="mt-2 space-y-3">

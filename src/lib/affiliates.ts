@@ -31,3 +31,13 @@ export function withAmazonTag(href: string): string {
 export function isSponsoredCurationLink(href: string): boolean {
   return /benable\.com|c8ke\.me|sites\.google\.com/i.test(href);
 }
+
+/**
+ * Affiliate outbound domains (Amazon, Olive Young). EVERY link to these
+ * must render target="_blank" + rel="nofollow sponsored noopener" —
+ * enforced by eslint-rules/affiliate-link-attrs.mjs for literal hrefs and
+ * centralized here for dynamic ones (AffiliateButtons, markdown renderers).
+ */
+export function isAffiliateDomainLink(href: string): boolean {
+  return /amazon\.com|oliveyoung\.com/i.test(href);
+}

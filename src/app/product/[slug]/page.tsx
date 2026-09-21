@@ -9,7 +9,7 @@ import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import { productConcernsToSlugs } from "@/lib/advice-kb";
 import ProductCard from "@/components/ProductCard";
 import MedicalCaveat from "@/components/MedicalCaveat";
-import { formatAsOf, formatPrice } from "@/lib/utils";
+import { formatPriceChecked, formatPrice } from "@/lib/utils";
 import { siteBaseUrl } from "@/lib/market-report";
 import { breadcrumbJsonLd, faqJsonLd, productJsonLd, type FaqItem } from "@/lib/schema";
 
@@ -24,7 +24,7 @@ const RETAILER_PRICE_DETAILS: Record<
   { asOf: string; rows: Array<{ retailer: string; price: string; perMl: string; note: string }> }
 > = {
   "arencia-vitamin-c-booster-shot": {
-    asOf: "Sep 21, 2026",
+    asOf: "2026-09-21",
     rows: [
       { retailer: "Amazon", price: "$22.00", perMl: "$0.73/ml", note: "30ml · 30K+ bought in past month" },
       { retailer: "Olive Young", price: "$27.91", perMl: "$0.47/ml", note: "30ml Double Set (60ml total)" },
@@ -50,11 +50,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!product) notFound();
 
   const related = (await getProducts()).filter((p) => p.slug !== product.slug && p.concern.some((c) => product.concern.includes(c))).slice(0, 3);
-  // Price provenance: discount UI renders only when the product carries a
-  // last-updated date; otherwise the badge/compare-at price are omitted.
-  const priceAsOf = formatAsOf(product.updated_at);
-  const discount = priceAsOf && product.compare_at_price && product.compare_at_price > product.price
+  // Price provenance: the price block renders ONLY with a verified
+  // priceCheckedAt date. Unknown → NULL → hidden entirely.
+  const priceChecked = formatPriceChecked(product.priceCheckedAt);
+  const discount = priceChecked && product.compare_at_price && product.compare_at_price > product.price
     ? Math.round((1 - product.price / product.compare_at_price) * 100) : 0;
+  const whereToBuyAsOf = slug in RETAILER_PRICE_DETAILS
+    ? formatPriceChecked(RETAILER_PRICE_DETAILS[slug].asOf)
+    : null;
 
   const base = siteBaseUrl();
   const canonical = `${base}/product/${slug}`;
@@ -68,7 +71,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     },
     {
       question: "Where is it cheapest — Amazon or Olive Young?",
-      answer: "Prices rotate with sales. Use the buttons above to compare live prices; Olive Young often bundles minis and limited editions.",
+      answer: "Prices rotate with sales. Use the buttons above to compare current retailer prices; Olive Young often bundles minis and limited editions.",
     },
   ];
   const jsonLd = [
@@ -96,17 +99,19 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <span className="text-ink-soft">{(product.review_count ?? 0).toLocaleString()} Amazon reviews</span>
           </div>
 
-          <div className="mt-4 flex items-baseline gap-3">
-            <span className="text-3xl font-bold">{formatPrice(product.price, product.currency)}</span>
-            {discount > 0 && (
-              <>
-                <span className="text-lg text-ink-soft line-through">{formatPrice(product.compare_at_price, product.currency)}</span>
-                <span className="rounded-full bg-blush-500 px-2.5 py-1 text-xs font-bold text-white">Save {discount}%</span>
-              </>
-            )}
-          </div>
-          {priceAsOf && (
-            <p className="mt-1 text-xs text-ink-soft">Price as of {priceAsOf} — check live retailer prices before buying.</p>
+          {priceChecked && (
+            <>
+              <div className="mt-4 flex items-baseline gap-3">
+                <span className="text-3xl font-bold">{formatPrice(product.price, product.currency)}</span>
+                {discount > 0 && (
+                  <>
+                    <span className="text-lg text-ink-soft line-through">{formatPrice(product.compare_at_price, product.currency)}</span>
+                    <span className="rounded-full bg-blush-500 px-2.5 py-1 text-xs font-bold text-white">Save {discount}%</span>
+                  </>
+                )}
+              </div>
+              <p className="mt-1 text-xs text-ink-soft">Price checked {priceChecked} · may have changed</p>
+            </>
           )}
 
           <p className="mt-5 leading-relaxed text-ink-soft">{product.description}</p>
@@ -158,8 +163,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <AffiliateButtons productId={product.id} productSlug={product.slug} amazonUrl={product.amazon_url} amazonAsin={product.amazon_asin} oliveyoungUrl={product.oliveyoung_url} title={product.title} />
             {RETAILER_PRICE_DETAILS[slug] ? (
               <p className="mt-3 text-xs text-ink-soft">
-                Prices as of {RETAILER_PRICE_DETAILS[slug].asOf} — per-ml based on 30ml (Amazon) and 60ml double-set total
-                (Olive Young). Check live retailer prices before buying. We may earn a commission at no cost to you.
+                {whereToBuyAsOf ? (
+                  <>Prices checked {whereToBuyAsOf} · may have changed — per-ml based on 30ml (Amazon) and 60ml double-set total (Olive Young). </>
+                ) : null}
+                Check current retailer prices before buying. We may earn a commission at no cost to you.
               </p>
             ) : (
               <p className="mt-3 flex items-center gap-1.5 text-xs text-ink-soft">

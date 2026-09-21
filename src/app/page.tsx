@@ -7,6 +7,7 @@ import { getConcernStats } from "@/lib/concerns";
 import { getAllAdvice } from "@/lib/advice";
 import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
+import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 
 export const metadata: Metadata = {
   alternates: { canonical: siteBaseUrl() },
@@ -70,7 +71,7 @@ export default async function HomePage() {
           Discover K-Beauty & Skincare That Loves You Back
         </h1>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-ink-soft sm:text-base">
-          Curated Korean bestsellers with honest reviews and live Amazon vs Olive Young price comparison.
+          Curated Korean bestsellers with honest reviews and Amazon vs Olive Young price comparison, re-checked monthly.
         </p>
       </section>
 
@@ -120,6 +121,7 @@ export default async function HomePage() {
             View all <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+        <AffiliateDisclosure className="mt-3 max-w-xl" />
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {grid.map((p) => <ProductCard key={p.id} product={p} />)}
         </div>

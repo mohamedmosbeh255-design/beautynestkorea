@@ -86,6 +86,7 @@ export default function Footer() {
             <li><Link href="/advice/10-step-korean-routine-beginners" className="hover:text-ink">Beginner routine</Link></li>
             <li><Link href="/market-report" className="hover:text-ink">Market report</Link></li>
             <li><Link href="/market-report/archive" className="hover:text-ink">Report archive</Link></li>
+            <li><Link href="/tools/image-optimizer" className="hover:text-ink">Image optimizer</Link></li>
           </ul>
         </div>
         <div>
@@ -93,7 +94,7 @@ export default function Footer() {
           <ul className="mt-3 space-y-2 text-sm text-ink-soft">
             <li><Link href="/about" className="hover:text-ink">About us</Link></li>
             <li><Link href="/contact" className="hover:text-ink">Contact us</Link></li>
-            <li><Link href="/disclosure" className="hover:text-ink">Affiliate disclosure</Link></li>
+            <li><Link href="/affiliate-disclosure" className="hover:text-ink">Affiliate disclosure</Link></li>
             <li><Link href="/privacy" className="hover:text-ink">Privacy policy</Link></li>
           </ul>
         </div>
