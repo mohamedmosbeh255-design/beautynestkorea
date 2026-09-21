@@ -16,9 +16,11 @@ export default function ContactPage() {
 
       <div className="glass mt-8 max-w-2xl rounded-[2rem] p-8 sm:p-10">
         <p className="leading-relaxed text-ink-soft">
-          For questions, reach us via our Pinterest profile DM.
+          Email us directly:{" "}
+          <a href="mailto:mohamedmosbeh255@gmail.com" className="font-semibold text-sage-700 hover:underline">
+            mohamedmosbeh255@gmail.com
+          </a>
         </p>
-        {/* EMAIL_PENDING: swap for real address */}
       </div>
 
       <p className="mt-6 text-sm text-ink-soft">

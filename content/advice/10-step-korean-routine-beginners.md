@@ -8,9 +8,9 @@ image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200
 date: "2026-08-20"
 ---
 
-<!-- AUTHOR_PENDING -->
+By Mohamed Mosbeh · Founder & Lead Researcher, BeautyNestKorea
 Published: 2026-08-20 · Last updated: 2026-08-20
-The BeautyNestKorea Editorial Team researches K-beauty formulations and pricing, cross-checking retailer data and peer-reviewed sources. Content is educational only — not medical advice.
+Mohamed Mosbeh founded BeautyNestKorea to bring transparent, per-ml price comparisons and evidence-based K-beauty guidance to shoppers.
 
 The famous 10-step Korean skincare routine is more philosophy than prescription: layer lightweight hydration, protect your barrier, and never skip sunscreen.
 

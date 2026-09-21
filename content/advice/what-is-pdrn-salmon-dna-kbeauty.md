@@ -9,9 +9,9 @@ imageAlt: "medicube Salmon DNA PDRN Pink Vitamin Coated Sheet Mask — clinical 
 date: "2026-09-05"
 ---
 
-<!-- AUTHOR_PENDING -->
+By Mohamed Mosbeh · Founder & Lead Researcher, BeautyNestKorea
 Published: 2026-09-05 · Last updated: 2026-09-05
-The BeautyNestKorea Editorial Team researches K-beauty formulations and pricing, cross-checking retailer data and peer-reviewed sources. Content is educational only — not medical advice.
+Mohamed Mosbeh founded BeautyNestKorea to bring transparent, per-ml price comparisons and evidence-based K-beauty guidance to shoppers.
 
 PDRN (polydeoxyribonucleotide) is a DNA-derived ingredient, most famously sourced from salmon, long used in Korean dermatology clinics for skin repair and regeneration. In K-beauty it has jumped from in-office treatments into serums and sheet masks promising faster recovery and bounce.
 

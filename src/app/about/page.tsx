@@ -16,15 +16,15 @@ export default function AboutPage() {
       <h1 className="font-serif-display mt-2 text-4xl font-bold tracking-tight">
         About BeautyNestKorea
       </h1>
-      {/* AUTHOR_PENDING */}
-      <p className="mt-3 text-sm text-ink-soft">Written by the site editor — full name to be added.</p>
+      <p className="mt-3 text-sm text-ink-soft">By Mohamed Mosbeh · Founder & Lead Researcher, BeautyNestKorea</p>
 
       <div className="glass mt-8 rounded-[2rem] p-8 sm:p-12">
         <div className="max-w-3xl space-y-4 text-sm leading-relaxed text-ink-soft sm:text-base">
           <p>
-            BeautyNestKorea is an independent K-beauty publication. We research
-            formulations, compare retailer prices, and publish educational
-            skincare guides — no paid placements decide what we recommend.
+            BeautyNestKorea is an independent K-beauty publication founded by
+            Mohamed Mosbeh. We research formulations, compare retailer prices,
+            and publish educational skincare guides — no paid placements decide
+            what we recommend.
           </p>
           <p>
             How products are checked: every product we list is verified against
