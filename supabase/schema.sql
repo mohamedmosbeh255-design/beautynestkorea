@@ -155,6 +155,13 @@ create policy "Admins full access categories"
 --   with check (bucket_id = 'product-images' and exists (select 1 from public.admin_users where admin_users.id = auth.uid()));
 
 -- ─── Seed data (optional) ──────────────────────────────────
+-- Live-catalog insert for the Arencia Vitamin C serum (conflict-safe;
+-- mirrors the Admin-panel row so fresh databases surface it on day one).
+insert into public.products (slug, title, brand, description, price, compare_at_price, category, concern, skin_type, key_ingredients, image_urls, amazon_url, amazon_asin, oliveyoung_url, rating, review_count, is_featured)
+values
+  ('arencia-vitamin-c-booster-shot', 'Vitamin C Booster Shot Serum 30ml', 'Arencia', 'Brightening booster serum with vitamin C, glutathione, niacinamide and vitamin E. Made to improve the look of dark spots and fine lines while supporting a glass-skin glow. 30ml bottle.', 22.00, null, 'Serum', '{Brightening,Anti-aging,Hydration}', '{All}', '{Vitamin C,Glutathione,Niacinamide,Vitamin E}', '{https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=800&q=80,https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80}', 'https://www.amazon.com/dp/B0FX418XT8', 'B0FX418XT8', 'https://global.oliveyoung.com/product/detail?prdtNo=GA260439702', 4.4, 3866, true)
+on conflict (slug) do nothing;
+
 insert into public.products (slug, title, brand, description, price, compare_at_price, category, concern, skin_type, key_ingredients, image_urls, amazon_url, oliveyoung_url, rating, review_count, is_featured)
 values
   ('beauty-of-joseon-relief-sun', 'Relief Sun : Rice + Probiotics SPF50+', 'Beauty of Joseon', 'A lightweight organic sunscreen with rice extract and grain probiotics that hydrates while protecting. No white cast, perfect under makeup.', 18.00, 22.00, 'Sunscreen', '{Hydration,Brightening,Sensitive}', '{All,Sensitive,Dry}', '{Rice Extract,Probiotics,Niacinamide}', '{https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80}', 'https://www.amazon.com/s?k=beauty+of+joseon+relief+sun', 'https://www.oliveyoung.com/', 4.8, 12400, true),

@@ -18,6 +18,7 @@ Look for niacinamide at 4–10% and vitamin C derivatives like SAP/MAP if pure a
 
 ### Shop our K-beauty picks
 
+- [Arencia Vitamin C Booster Shot Serum](/product/arencia-vitamin-c-booster-shot)
 - [Quasi Bio Collagen Glow Up Mask](/product/quasi-bio-collagen-glow-up-mask)
 - [Biodance Hydro Cera-Nol Real Deep Mask](/product/biodance-hydro-cera-nol-real-deep-mask)
 - [Medicube Salmon DNA PDRN Pink Vitamin Sheet Mask](/product/medicube-salmon-dna-pdrn-pink-vitamin-sheet-mask)
