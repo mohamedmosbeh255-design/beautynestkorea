@@ -149,7 +149,6 @@ export default async function ConcernArticle({ concern }: { concern: KbConcern }
       )}
 
       <EducationalDisclaimer className="mt-10" />
-      <p className="mt-3 text-xs text-ink-soft">{concern.caveat}</p>
 
       {related.length > 0 && (
         <div className="mt-8">
