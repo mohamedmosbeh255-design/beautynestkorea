@@ -40,6 +40,23 @@ export interface BlogSection {
   closing?: string[];
 }
 
+/** DB-backed editorial article (Supabase `articles` table). */
+export interface Article {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt?: string | null;
+  cover_image_url?: string | null;
+  category: string;
+  published_at?: string | null;
+  is_published: boolean;
+  /** Strategically linked products (max 5) for the "Recommended Products" section. */
+  related_product_ids: string[];
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -58,3 +75,4 @@ export interface BlogPost {
 export const CONCERNS = ["Acne", "Anti-aging", "Hydration", "Brightening", "Sensitive", "Pores"] as const;
 export const CATEGORIES = ["Cleanser", "Toner", "Serum", "Moisturizer", "Cream", "Sunscreen", "Mask", "Exfoliant", "Eye Care"] as const;
 export const BRANDS = ["Beauty of Joseon", "COSRX", "Laneige", "Anua", "SKIN1004", "Round Lab", "Isntree", "Missha"] as const;
+export const ARTICLE_CATEGORIES = ["Skincare Routines", "Ingredient Guides", "Product Reviews", "K-Beauty Trends", "Skin Concerns", "Guides"] as const;

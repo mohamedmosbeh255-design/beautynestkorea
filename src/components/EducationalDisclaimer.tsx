@@ -12,8 +12,8 @@ export default function EducationalDisclaimer({ className }: { className?: strin
     >
       <FlaskConical className="mt-0.5 h-4 w-4 shrink-0 text-sage-600" />
       <span>
-        Educational only — cosmetic guidance, not medical advice. Patch-test new
-        products and see a dermatologist for persistent issues.
+        Educational only — cosmetic guidance and product curation, not medical
+        advice. Patch-test new products and see a dermatologist for persistent issues.
       </span>
     </p>
   );

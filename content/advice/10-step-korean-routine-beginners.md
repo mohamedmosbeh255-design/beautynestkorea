@@ -8,7 +8,7 @@ image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200
 date: "2026-08-20"
 ---
 
-By Mohamed Mosbeh · Founder & Lead Researcher, BeautyNestKorea
+By Mohamed Mosbeh · Founder & Beauty Curator, BeautyNestKorea
 Published: 2026-08-20 · Last updated: 2026-08-20
 Mohamed Mosbeh founded BeautyNestKorea to bring transparent, per-ml price comparisons and evidence-based K-beauty guidance to shoppers.
 

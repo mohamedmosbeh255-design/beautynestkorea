@@ -38,6 +38,37 @@ export const productSchema = z.object({
 
 export type ProductFormValues = z.infer<typeof productSchema>;
 
+const uuidArray = (val: unknown): string[] => {
+  if (Array.isArray(val)) return val.map((s) => String(s).trim()).filter(Boolean);
+  if (typeof val === "string") return val.split(/[,\n]/).map((s) => s.trim()).filter(Boolean);
+  return [];
+};
+
+const uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+export const articleSchema = z.object({
+  title: z.string().min(3, "Title must be at least 3 characters"),
+  slug: z.string().min(3, "Slug is required").regex(/^[a-z0-9-]+$/, "Slug must be lowercase alphanumeric with dashes"),
+  content: z.string().min(50, "Content must be at least 50 characters (markdown supported)"),
+  excerpt: z.string().max(300, "Excerpt must be under 300 characters").optional().or(z.literal("")).or(z.null()),
+  cover_image_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
+  category: z.string().min(2, "Category is required"),
+  published_at: z
+    .string()
+    .optional()
+    .nullable()
+    .refine((v) => v == null || String(v).trim() === "" || !Number.isNaN(Date.parse(String(v))), {
+      message: "Must be a valid date",
+    }),
+  is_published: z.boolean().default(false),
+  related_product_ids: z
+    .preprocess(uuidArray, z.array(z.string()))
+    .refine((ids) => ids.length <= 5, { message: "Pick at most 5 related products" })
+    .refine((ids) => ids.every((id) => uuidRe.test(id)), { message: "Invalid product id selected" }),
+});
+
+export type ArticleFormValues = z.infer<typeof articleSchema>;
+
 export const loginSchema = z.object({
   email: z.string().email("Enter a valid email"),
   password: z.string().min(6, "Password must be at least 6 characters"),

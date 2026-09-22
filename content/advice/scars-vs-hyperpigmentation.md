@@ -20,7 +20,7 @@ date: "2026-09-14"
 >
 > Product recommendations on BeautyNestKorea are cosmetic suggestions, not medical treatments. Where applicable, some links may be affiliate links, meaning we may earn a commission at no additional cost to you. Our editorial recommendations remain independent of these relationships.
 
-By Mohamed Mosbeh · Founder & Lead Researcher, BeautyNestKorea
+By Mohamed Mosbeh · Founder & Beauty Curator, BeautyNestKorea
 Published: 2026-09-14 · Last updated: 2026-09-14
 Mohamed Mosbeh founded BeautyNestKorea to bring transparent, per-ml price comparisons and evidence-based K-beauty guidance to shoppers.
 

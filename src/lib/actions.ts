@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createServerSupabase } from "@/lib/supabase/server";
-import { productSchema } from "@/lib/validations";
+import { productSchema, articleSchema } from "@/lib/validations";
 import { slugify } from "@/lib/utils";
 import {
   findDuplicates,
@@ -199,4 +199,143 @@ export async function trackClick(productId: string, source: "amazon" | "oliveyou
   } catch {
     // non-blocking
   }
+}
+
+// ─── Articles (DB-backed guides with strategic product linking) ───
+
+type ArticleSupabase = NonNullable<Awaited<ReturnType<typeof createServerSupabase>>>;
+
+/** Keep only ids that exist as ACTIVE products (drops stale/deactivated links). */
+async function validateRelatedProductIds(
+  supabase: ArticleSupabase,
+  ids: string[]
+): Promise<string[]> {
+  const unique = [...new Set(ids.map(String))].slice(0, 5);
+  if (unique.length === 0) return [];
+  const { data, error } = await supabase
+    .from("products")
+    .select("id")
+    .in("id", unique)
+    .eq("is_active", true);
+  if (error) throw new Error(error.message);
+  const valid = new Set((data ?? []).map((r) => String(r.id)));
+  // Preserve the admin-chosen order.
+  return unique.filter((id) => valid.has(id));
+}
+
+async function assertArticleSlugFree(
+  supabase: ArticleSupabase,
+  slug: string,
+  excludeId?: string
+): Promise<void> {
+  let query = supabase.from("articles").select("id").eq("slug", slug).limit(1);
+  if (excludeId) query = query.neq("id", excludeId);
+  const { data, error } = await query;
+  if (error) throw new Error(error.message);
+  if (data && data.length > 0) {
+    throw new Error(`An article with the slug “${slug}” already exists. Use a different slug.`);
+  }
+}
+
+function toArticleDate(input: unknown, isPublished: boolean): string | null {
+  const raw = String(input ?? "").trim();
+  if (raw) {
+    const d = new Date(raw);
+    if (Number.isNaN(d.getTime())) throw new Error("Published date must be a valid date");
+    return d.toISOString();
+  }
+  // Auto-stamp the moment an article goes live without an explicit date.
+  return isPublished ? new Date().toISOString() : null;
+}
+
+function parseArticleForm(formData: FormData) {
+  const raw = {
+    title: formData.get("title"),
+    slug: (formData.get("slug") as string) || slugify(String(formData.get("title") ?? "")),
+    content: formData.get("content"),
+    excerpt: formData.get("excerpt") || null,
+    cover_image_url: formData.get("cover_image_url") || null,
+    category: formData.get("category"),
+    published_at: (formData.get("published_at") as string | null) || null,
+    is_published: formData.get("is_published") === "on",
+    related_product_ids: formData.getAll("related_product_ids"),
+  };
+  const parsed = articleSchema.safeParse(raw);
+  if (!parsed.success) throw new Error(parsed.error.issues.map((i) => i.message).join(", "));
+  return parsed.data;
+}
+
+export async function createArticle(formData: FormData) {
+  const supabase = await requireAdmin();
+  const data = parseArticleForm(formData);
+  await assertArticleSlugFree(supabase, data.slug);
+  const related_product_ids = await validateRelatedProductIds(supabase, data.related_product_ids);
+  const { error } = await supabase.from("articles").insert({
+    title: data.title,
+    slug: data.slug,
+    content: data.content,
+    excerpt: data.excerpt || null,
+    cover_image_url: data.cover_image_url || null,
+    category: data.category,
+    published_at: toArticleDate(data.published_at, data.is_published),
+    is_published: data.is_published,
+    related_product_ids,
+  });
+  if (error) {
+    if ((error as { code?: string }).code === "23505") {
+      throw new Error(`An article with the slug “${data.slug}” already exists. Use a different slug.`);
+    }
+    throw new Error(error.message);
+  }
+  revalidatePath("/");
+  revalidatePath("/articles");
+  revalidatePath(`/articles/${data.slug}`);
+  revalidatePath("/", "layout");
+  redirect("/admin/articles");
+}
+
+export async function updateArticle(id: string, formData: FormData) {
+  const supabase = await requireAdmin();
+  const data = parseArticleForm(formData);
+  await assertArticleSlugFree(supabase, data.slug, id);
+  const related_product_ids = await validateRelatedProductIds(supabase, data.related_product_ids);
+  const { data: existing } = await supabase.from("articles").select("slug").eq("id", id).single();
+  const { error } = await supabase
+    .from("articles")
+    .update({
+      title: data.title,
+      slug: data.slug,
+      content: data.content,
+      excerpt: data.excerpt || null,
+      cover_image_url: data.cover_image_url || null,
+      category: data.category,
+      published_at: toArticleDate(data.published_at, data.is_published),
+      is_published: data.is_published,
+      related_product_ids,
+    })
+    .eq("id", id);
+  if (error) {
+    if ((error as { code?: string }).code === "23505") {
+      throw new Error(`An article with the slug “${data.slug}” already exists. Use a different slug.`);
+    }
+    throw new Error(error.message);
+  }
+  revalidatePath("/");
+  revalidatePath("/articles");
+  revalidatePath(`/articles/${data.slug}`);
+  if (existing?.slug && existing.slug !== data.slug) revalidatePath(`/articles/${existing.slug}`);
+  revalidatePath("/", "layout");
+  redirect("/admin/articles");
+}
+
+export async function deleteArticle(id: string) {
+  const supabase = await requireAdmin();
+  const { data: existing } = await supabase.from("articles").select("slug").eq("id", id).single();
+  const { error } = await supabase.from("articles").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidatePath("/");
+  revalidatePath("/articles");
+  revalidatePath("/admin/articles");
+  if (existing?.slug) revalidatePath(`/articles/${existing.slug}`);
+  revalidatePath("/", "layout");
 }

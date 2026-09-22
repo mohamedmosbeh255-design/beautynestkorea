@@ -16,7 +16,7 @@ export default function AboutPage() {
       <h1 className="font-serif-display mt-2 text-4xl font-bold tracking-tight">
         About BeautyNestKorea
       </h1>
-      <p className="mt-3 text-sm text-ink-soft">By Mohamed Mosbeh · Founder & Lead Researcher, BeautyNestKorea</p>
+      <p className="mt-3 text-sm text-ink-soft">By Mohamed Mosbeh · Founder & Beauty Curator, BeautyNestKorea</p>
 
       <div className="glass mt-8 rounded-[2rem] p-8 sm:p-12">
         <div className="max-w-3xl space-y-4 text-sm leading-relaxed text-ink-soft sm:text-base">
@@ -43,9 +43,9 @@ export default function AboutPage() {
           <p>
             Our mission is simple: help every skin type build a minimal routine
             that actually sticks, with honest ingredient callouts and realistic
-            expectations. Content here is educational only and never medical
-            advice — patch-test new products and see a dermatologist for
-            persistent or concerning issues.
+            expectations. Content here is educational cosmetic guidance —
+            product reviews and curation, never medical advice. Patch-test new
+            products and see a dermatologist for persistent or concerning issues.
           </p>
         </div>
       </div>

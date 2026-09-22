@@ -14,7 +14,7 @@ faqSchema: true
 
 **Affiliate Disclosure:** We may earn a commission when you buy through links on this page, at no extra cost to you.
 
-By Mohamed Mosbeh · Founder & Lead Researcher, BeautyNestKorea
+By Mohamed Mosbeh · Founder & Beauty Curator, BeautyNestKorea
 Published: 2026-09-19 · Last updated: 2026-09-20
 Mohamed Mosbeh founded BeautyNestKorea to bring transparent, per-ml price comparisons and evidence-based K-beauty guidance to shoppers.
 

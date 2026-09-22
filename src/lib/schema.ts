@@ -104,7 +104,7 @@ export function articleJsonLd(
     author: {
       "@type": "Person",
       name: overrides?.authorName || "Mohamed Mosbeh",
-      jobTitle: "Founder & Lead Researcher",
+      jobTitle: "Founder & Beauty Curator",
       url: authorUrl,
     },
     publisher: { "@type": "Organization", name: "BeautyNestKorea", url: base },

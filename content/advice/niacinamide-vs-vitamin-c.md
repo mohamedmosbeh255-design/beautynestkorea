@@ -1,14 +1,14 @@
 ---
 title: "Niacinamide vs Vitamin C: Which Brightening Ingredient Wins?"
 slug: "niacinamide-vs-vitamin-c"
-excerpt: "Both brighten and fade dark spots — but they work differently. Dermat-backed guide to choosing (or combining) them."
+excerpt: "Both brighten and fade dark spots — but they work differently. A beauty curator's guide to choosing (or combining) them."
 category: "Ingredients"
 readTime: "5 min read"
 image: "https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1200&auto=format&fit=crop"
 date: "2026-08-12"
 ---
 
-By Mohamed Mosbeh · Founder & Lead Researcher, BeautyNestKorea
+By Mohamed Mosbeh · Founder & Beauty Curator, BeautyNestKorea
 Published: 2026-08-12 · Last updated: 2026-08-12
 Mohamed Mosbeh founded BeautyNestKorea to bring transparent, per-ml price comparisons and evidence-based K-beauty guidance to shoppers.
 

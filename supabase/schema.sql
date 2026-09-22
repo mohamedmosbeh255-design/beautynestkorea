@@ -183,6 +183,53 @@ insert into public.categories (name, slug, description) values
   ('Pores', 'pores', 'Refine & balance oil')
 on conflict (slug) do nothing;
 
+-- ─── articles (guides with strategic product linking) ─────
+-- DB-backed editorial content (Skincare Routines, Ingredient Guides, ...).
+-- related_product_ids stores up to 5 product UUIDs shown as the
+-- "Recommended Products" section on the public article page (internal
+-- dofollow links → product pages, which carry the affiliate CTAs).
+-- NOTE: uuid[] elements cannot hold a FK constraint — the server actions
+-- validate every id against public.products (active rows only) on save.
+create table if not exists public.articles (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  slug text unique not null,
+  content text not null default '',
+  excerpt text,
+  cover_image_url text,
+  category text not null default 'Guides',
+  published_at timestamptz,
+  is_published boolean not null default false,
+  related_product_ids uuid[] not null default '{}',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+drop trigger if exists set_articles_updated_at on public.articles;
+create trigger set_articles_updated_at
+  before update on public.articles
+  for each row execute function public.handle_updated_at();
+
+create index if not exists idx_articles_slug on public.articles (slug);
+create index if not exists idx_articles_published on public.articles (is_published, published_at desc) where is_published = true;
+
+alter table public.articles enable row level security;
+
+-- Public can read published articles only
+drop policy if exists "Public read published articles" on public.articles;
+create policy "Public read published articles"
+  on public.articles for select
+  to anon, authenticated
+  using (is_published = true);
+
+-- Admins (via admin_users) manage articles
+drop policy if exists "Admins full access articles" on public.articles;
+create policy "Admins full access articles"
+  on public.articles for all
+  to authenticated
+  using (exists (select 1 from public.admin_users where admin_users.id = auth.uid()))
+  with check (exists (select 1 from public.admin_users where admin_users.id = auth.uid()));
+
 -- ─── Admin bootstrap (run AFTER creating your auth user) ─────
 -- 1. Supabase Dashboard → Authentication → Users → Add user (email + password).
 --    If "Confirm email" is on in Auth → Providers → Email, confirm the user

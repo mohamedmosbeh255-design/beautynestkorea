@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LayoutDashboard, Package, Plus, ExternalLink, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, Plus, Newspaper, FilePlus2, ExternalLink, LogOut } from "lucide-react";
 import { isSupabaseConfigured } from "@/lib/supabase/server";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -21,6 +21,12 @@ export default async function DashboardLayout({ children }: { children: React.Re
         </Link>
         <Link href="/admin/products/new" className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white hover:bg-sage-700">
           <Plus className="h-4 w-4" /> Add product
+        </Link>
+        <Link href="/admin/articles" className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium hover:bg-white/70">
+          <Newspaper className="h-4 w-4" /> Articles
+        </Link>
+        <Link href="/admin/articles/new" className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium hover:bg-white/70">
+          <FilePlus2 className="h-4 w-4" /> Add article
         </Link>
         <span className="flex-1" />
         <Link href="/" className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm text-ink-soft hover:bg-white/70">
