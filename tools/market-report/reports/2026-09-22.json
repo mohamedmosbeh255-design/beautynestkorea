@@ -1,0 +1,230 @@
+{
+  "date": "2026-09-22",
+  "generatedAt": "2026-09-22T10:31:45.025Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Glycolic / AHA",
+      "views": 250,
+      "previous": 169,
+      "delta": 81
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 368,
+      "previous": 316,
+      "delta": 52
+    },
+    {
+      "name": "Niacinamide",
+      "views": 16,
+      "previous": 15,
+      "delta": 1
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 53,
+      "previous": 56,
+      "delta": -3
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [
+    {
+      "name": "Glycolic / AHA",
+      "count": 6
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 6
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 5
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 4
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 4
+    },
+    {
+      "name": "Urea",
+      "count": 3
+    },
+    {
+      "name": "Niacinamide",
+      "count": 2
+    },
+    {
+      "name": "Ceramides",
+      "count": 1
+    },
+    {
+      "name": "Kojic Acid",
+      "count": 1
+    },
+    {
+      "name": "Micellar Water",
+      "count": 1
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 1
+    },
+    {
+      "name": "Vitamin C",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "CeraVe",
+      "count": 5
+    },
+    {
+      "name": "Nivea",
+      "count": 2
+    },
+    {
+      "name": "Anua",
+      "count": 1
+    },
+    {
+      "name": "Avène",
+      "count": 1
+    },
+    {
+      "name": "Eucerin",
+      "count": 1
+    },
+    {
+      "name": "Glow Recipe",
+      "count": 1
+    },
+    {
+      "name": "La Roche-Posay",
+      "count": 1
+    },
+    {
+      "name": "Medicube",
+      "count": 1
+    },
+    {
+      "name": "The Ordinary",
+      "count": 1
+    }
+  ],
+  "newsHeadlines": [
+    "Should You Add Gold To Your Peptides?",
+    "The most lightweight K-beauty PDRN cream is now on a rare pre-Prime Day sale",
+    "We tested more than a dozen viral Medicube products — these are the ones actually worth it",
+    "6 Things Dermatologists Wish Everyone Knew Before Using Retinol",
+    "Dermatologists Want Guys in Their 20s and 30s to Start Using Retinol. Here’s How to Start.",
+    "This bestselling retinol shot helps tighten skin and eliminate wrinkles for only $20",
+    "14 Best Retinol Serums For Every Skin Concern, From Acne To Ageing",
+    "I Don't Use Retinol—But These Alternatives Still Deliver Impressive Results",
+    "Shoppers in Their 40s Switched Their Expensive Skincare for This $20 Retinol Cream",
+    "PDRN make-up: How K-beauty’s trending skin care ingredient is moving into colour cosmetics",
+    "블랑드비, 특허 성분·PDRN 담은 ‘페이스 큐어’ 스킨케어 라인 공식 론칭",
+    "K-beauty giant Cosmax moves a gentler retinol into stick form"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 35
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 13
+    },
+    {
+      "name": "Peptides",
+      "count": 5
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 5
+    },
+    {
+      "name": "Exosomes",
+      "count": 4
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Hypochlorous Acid",
+      "count": 1
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "4 ingredient(s) measured · 18/18 article requests OK · 2026-09-21 vs 2026-09-20"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "25 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "200 headline(s) read · 60 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 6/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · no source failed",
+    "**Ingredient interest:** 4/16 tracked ingredients measured (Wikipedia pageviews, 2026-09-21 vs 2026-09-20). Biggest rise: **Glycolic / AHA** +81 views (+47.9%). Highest volume: **Glycolic / AHA** (250 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** 25 posts analysed; the most-discussed ingredient is **Glycolic / AHA** (6 posts), with **CeraVe** the most-mentioned brand (5 posts).",
+    "**News pulse:** 200 headline(s) read across 2 quer(ies), 60 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (35 headline(s)), brand **Medicube** (4 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-09-21 vs 2026-09-20):** up — Glycolic / AHA +81 views; down — Snail Mucin -3 views. Community mention deltas: up — Glycolic / AHA +4, down — Hyaluronic Acid -1.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Glycolic / AHA**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
