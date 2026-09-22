@@ -27,6 +27,7 @@ async function getById(id: string) {
       key_ingredients: data.key_ingredients ?? [],
       image_urls: data.image_urls ?? [],
       amazon_url: data.amazon_url,
+      amazon_asin: data.amazon_asin ?? null,
       oliveyoung_url: data.oliveyoung_url,
       rating: data.rating != null ? Number(data.rating) : null,
       review_count: data.review_count ?? 0,

@@ -4,8 +4,34 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { productSchema } from "@/lib/validations";
 import { CONCERNS, CATEGORIES, type Product } from "@/lib/types";
+import { checkDuplicates } from "@/lib/actions";
+import { REASON_LABELS, type DuplicateMatch } from "@/lib/duplicates";
 import { useState } from "react";
-import { Loader2 } from "lucide-react";
+import Link from "next/link";
+import { Loader2, AlertTriangle, X } from "lucide-react";
+
+/** Recover structured matches from a server-side DUPLICATE_PRODUCT error. */
+function parseDuplicateError(message: string): DuplicateMatch[] | null {
+  if (!message.startsWith("DUPLICATE_PRODUCT:")) return null;
+  const idx = message.lastIndexOf("::");
+  if (idx === -1) return null;
+  try {
+    const payload = JSON.parse(message.slice(idx + 2).trim()) as Array<{
+      id: string;
+      slug: string;
+      title: string;
+      reasons: DuplicateMatch["reasons"];
+      similarity: number;
+    }>;
+    return payload.map((p) => ({
+      product: { id: p.id, slug: p.slug, title: p.title },
+      reasons: p.reasons,
+      similarity: p.similarity,
+    }));
+  } catch {
+    return null;
+  }
+}
 
 export default function ProductForm({
   initial,
@@ -47,7 +73,10 @@ export default function ProductForm({
 
   const errors = formErrors as any;
   const [submitting, setSubmitting] = useState(false);
+  const [checking, setChecking] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [duplicates, setDuplicates] = useState<DuplicateMatch[] | null>(null);
+  const excludeId = initial?.id ? String(initial.id) : null;
 
   // Local hint state (not watch()) so the React Compiler keeps optimizing this form.
   const [showShortHint, setShowShortHint] = useState<boolean>(() =>
@@ -59,6 +88,23 @@ export default function ProductForm({
     setSubmitting(true);
     setFormError(null);
     try {
+      // 1) Duplicate prevention: pre-save check (exact links/ASIN/slug + fuzzy title).
+      //    Any match BLOCKS the save and opens the warning modal instead.
+      setChecking(true);
+      const matches = await checkDuplicates({
+        title: String(values.title ?? ""),
+        slug: String(values.slug ?? ""),
+        amazon_url: String(values.amazon_url ?? ""),
+        amazon_asin: String(values.amazon_asin ?? ""),
+        oliveyoung_url: String(values.oliveyoung_url ?? ""),
+        excludeId,
+      });
+      setChecking(false);
+      if (matches.length > 0) {
+        setDuplicates(matches);
+        setSubmitting(false);
+        return;
+      }
       const fd = new FormData();
       fd.set("title", values.title);
       fd.set("slug", values.slug);
@@ -83,6 +129,15 @@ export default function ProductForm({
       if (!values.is_active) fd.set("is_active", "off");
       await action(fd);
     } catch (e: any) {
+      // 2) Server-side enforcement fallback: if the row was created between
+      //    the pre-check and the insert (or the pre-check was bypassed),
+      //    the action throws DUPLICATE_PRODUCT — surface the same modal.
+      const serverMatches = parseDuplicateError(String(e?.message ?? ""));
+      if (serverMatches && serverMatches.length > 0) {
+        setDuplicates(serverMatches);
+        setSubmitting(false);
+        return;
+      }
       setFormError(e?.message ?? "Something went wrong");
       setSubmitting(false);
     }
@@ -231,8 +286,72 @@ export default function ProductForm({
         className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-ink px-8 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-sage-700 disabled:opacity-60"
       >
         {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
-        {initial?.title ? "Save changes" : "Add product"}
+        {checking ? "Checking for duplicates…" : initial?.title ? "Save changes" : "Add product"}
       </button>
+
+      {duplicates && duplicates.length > 0 && (
+        <div
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="duplicate-modal-title"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          onClick={() => setDuplicates(null)}
+        >
+          <div
+            className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl sm:p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-100">
+                  <AlertTriangle className="h-5 w-5 text-amber-700" />
+                </span>
+                <h2 id="duplicate-modal-title" className="text-lg font-bold">
+                  Possible duplicate — save blocked
+                </h2>
+              </div>
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setDuplicates(null)}
+                className="rounded-full p-1.5 hover:bg-sage-50"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <p className="mt-3 text-sm text-ink-soft">
+              This product matches {duplicates.length === 1 ? "an existing product" : `${duplicates.length} existing products`}.
+              Saving was blocked to protect database hygiene and avoid SEO cannibalization.
+              Please edit the existing product instead.
+            </p>
+            <ul className="mt-4 grid gap-3">
+              {duplicates.map((m) => (
+                <li key={m.product.id} className="rounded-2xl border border-amber-200 bg-amber-50/60 p-3.5">
+                  <p className="text-sm font-bold">{m.product.title}</p>
+                  <p className="mt-0.5 text-xs text-ink-soft">
+                    {m.reasons.map((r) => REASON_LABELS[r]).join(" • ")}
+                    {m.reasons.includes("similar_title") && typeof m.similarity === "number"
+                      ? ` (${Math.round(m.similarity * 100)}% match)` : ""}
+                  </p>
+                  <Link
+                    href={`/admin/products/${m.product.id}/edit`}
+                    className="mt-2 inline-flex rounded-full bg-ink px-4 py-1.5 text-xs font-semibold text-white hover:bg-sage-700"
+                  >
+                    Edit existing product instead
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <button
+              type="button"
+              onClick={() => setDuplicates(null)}
+              className="mt-5 w-full rounded-2xl border border-sage-200 px-4 py-2.5 text-sm font-semibold hover:bg-sage-50"
+            >
+              Keep editing — I&apos;ll change the links / title
+            </button>
+          </div>
+        </div>
+      )}
     </form>
   );
 }
