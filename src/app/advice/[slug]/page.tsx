@@ -141,10 +141,16 @@ const markdownComponents = {
     </summary>
   ),
   table: ({ children }: { children?: ReactNode }) => (
+    // Mobile swipe-scroll: the <table> itself is the scroll container
+    // (display:block + overflow-x:auto + touch momentum). Scoped here in the
+    // advice markdown renderer so no other site table is affected.
     <div className="-mx-4 px-4 sm:mx-0 sm:px-0">
-      <div className="overflow-x-auto rounded-2xl border border-sage-100" style={{ WebkitOverflowScrolling: "touch" }}>
-        <table className="w-full border-collapse text-sm" style={{ minWidth: "max(100%, 560px)" }}>{children}</table>
-      </div>
+      <table
+        className="block w-full overflow-x-auto whitespace-nowrap rounded-2xl border border-sage-100 border-collapse text-sm"
+        style={{ WebkitOverflowScrolling: "touch", minWidth: "max(100%, 560px)" }}
+      >
+        {children}
+      </table>
     </div>
   ),
   thead: ({ children }: { children?: ReactNode }) => <thead className="bg-sage-50">{children}</thead>,
