@@ -118,6 +118,36 @@ body {
   }
 }
 
+/* Advice / article tables: force horizontal swipe-scroll on mobile.
+ * The article body wrapper is `.prose-beauty` (selectors `.prose` and
+ * `.article-content` included for coverage). `!important` beats markdown
+ * table-layout constraints so EVERY table (comparison, scorecard,
+ * ingredients) overflows + scrolls instead of squashing or clipping.
+ * Scoped strictly to article content — report tables (`.report-table`
+ * stacked cards) and all other site tables are untouched.
+ */
+.prose table,
+.prose-beauty table,
+.article-content table {
+  display: block !important;
+  width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  min-width: 600px !important; /* Forces overflow on screens smaller than 600px */
+  border-collapse: separate; /* Prevents fixed layout issues */
+  border-spacing: 0;
+}
+
+.prose table th,
+.prose table td,
+.prose-beauty table th,
+.prose-beauty table td,
+.article-content table th,
+.article-content table td {
+  white-space: nowrap !important; /* Prevents text wrapping which breaks scroll */
+  padding: 0.75rem 1rem;
+}
+
 /* Report tables below 768px: every table becomes stacked cards. The renderer
  * stamps each td with data-label from its column header; the label shows via
  * ::before. Values wrap and can never clip. Applies to all present + future
