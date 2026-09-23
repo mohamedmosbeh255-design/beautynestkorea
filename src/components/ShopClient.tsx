@@ -6,7 +6,7 @@ import type { Product } from "@/lib/types";
 import { CATEGORIES } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
 import { cn } from "@/lib/utils";
-import { getAllConcernNames, productMatchesConcern } from "@/lib/concerns";
+import { getActiveConcernNames, normalizeConcernName, productMatchesConcern } from "@/lib/concerns";
 
 export default function ShopClient({ products, initialConcern = "All", initialCategory = "All" }: { products: Product[]; initialConcern?: string; initialCategory?: string }) {
   const [query, setQuery] = useState("");
@@ -36,10 +36,17 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
   }, [initialCategory]);
 
   const brands = useMemo(() => ["All", ...Array.from(new Set(products.map((p) => p.brand)))], [products]);
-  // Dynamic chips: every concern present on products (incl. custom ones
-  // added via Admin) gets a filter chip automatically.
-  const concerns = useMemo(() => ["All", ...getAllConcernNames(products)], [products]);
-  const effectiveConcern = concerns.includes(concern) ? concern : "All";
+  // Dynamic chips: active (normalized, product-backed) concerns only, so a
+  // renamed canonical ("Sensitive" → "Sensitive Skin") never renders a stale
+  // twin chip. Deep-linked legacy labels resolve through the same normalizer
+  // instead of resetting the filter to All.
+  const concerns = useMemo(() => ["All", ...getActiveConcernNames(products)], [products]);
+  const normalizedIncoming = normalizeConcernName(concern);
+  const effectiveConcern = concerns.includes(concern)
+    ? concern
+    : concerns.includes(normalizedIncoming)
+      ? normalizedIncoming
+      : "All";
   // Fixed catalog list so new categories (e.g. "Cream") appear even
   // before any product uses them.
   const categories = useMemo(() => ["All", ...CATEGORIES], []);

@@ -29,14 +29,16 @@ const nextConfig: NextConfig = {
   //   laneige-water-sleeping-mask → biodance-bio-collagen-real-deep-mask
   //   round-lab-dokdo-toner → round-lab-birch-juice-moisturizing-sunscreen
   //
-  // Synonym concern slugs → canonical 'anti-aging' (308 Permanent Redirect).
-  // No /category/* routes exist yet; these keep synonym URLs canonical
-  // forever while the storefront merges 'elasticity'/'firming' tags into
-  // Anti-aging at the data layer (src/lib/concerns.ts).
+  // Synonym concern slugs → canonical targets (308 Permanent Redirect).
+  // Plus the pre-rename 'sensitive' slug → 'sensitive-skin': the canonical
+  // display name changed (owner-approved), so the old slug aliases instead of
+  // 404ing or duplicating content. Targets live at src/app/category/[slug];
+  // synonym merges themselves happen at the data layer (src/lib/concerns.ts).
   async redirects() {
     return [
       { source: "/category/elasticity", destination: "/category/anti-aging", permanent: true },
       { source: "/category/firming", destination: "/category/anti-aging", permanent: true },
+      { source: "/category/sensitive", destination: "/category/sensitive-skin", permanent: true },
     ];
   },
 };

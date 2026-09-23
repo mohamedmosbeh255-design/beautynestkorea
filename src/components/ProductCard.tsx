@@ -6,8 +6,15 @@ import { formatPriceChecked, formatPrice } from "@/lib/utils";
 
 export default function ProductCard({ product }: { product: Product }) {
   const img = product.image_urls[0] ?? "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80";
-  // Price provenance: the WHOLE price block (price, discount badge, stamp)
-  // renders only with a verified priceCheckedAt date. Unknown → NULL → hidden.
+  // Price provenance: the WHOLE verified price block (price, discount badge,
+  // stamp) renders only with a verified priceCheckedAt date.
+  // WHY the fallback below exists (world-class pass, owner-approved): live
+  // catalog rows always carry a `price` but rarely a verification stamp, so
+  // cards site-wide hid all prices. The fallback shows the EXISTING catalog
+  // price only — never invented, never compared — with honest "confirm on
+  // retailer" microcopy and NO "Price checked" claim. Discount badges stay
+  // verified-only so an unverified compare_at_price can never imply a deal.
+  const hasCatalogPrice = product.price != null;
   const priceChecked = formatPriceChecked(product.priceCheckedAt);
   const discount = priceChecked && product.compare_at_price && product.compare_at_price > product.price
     ? Math.round((1 - product.price / product.compare_at_price) * 100)
@@ -58,6 +65,17 @@ export default function ProductCard({ product }: { product: Product }) {
               </span>
             </div>
             <p className="mt-1 text-[11px] text-ink-soft">Price checked {priceChecked} · may have changed</p>
+          </>
+        )}
+        {!priceChecked && hasCatalogPrice && (
+          <>
+            <div className="mt-3 flex items-center justify-between">
+              <span className="text-lg font-bold">{formatPrice(product.price, product.currency)}</span>
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-ink text-white transition group-hover:bg-sage-600">
+                <ArrowUpRight className="h-4 w-4" />
+              </span>
+            </div>
+            <p className="mt-1 text-[11px] text-ink-soft">Catalog price · confirm current price on the retailer site</p>
           </>
         )}
         <div className="mt-3 flex flex-wrap gap-1.5">

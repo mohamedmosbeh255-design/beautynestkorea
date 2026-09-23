@@ -17,13 +17,20 @@ export const revalidate = 3600;
 
 // Editorial presentation per concern; unknown/custom concerns added via the
 // Admin panel fall back to rotating defaults so they still render beautifully.
+// Keys MUST match normalizeConcernName() output in src/lib/concerns.ts —
+// every live-DB label (incl. "Redness", "Sun Protection", "Dryness") gets a
+// curated blurb here so no card ever renders empty.
 const CONCERN_META: Record<string, { icon: typeof Leaf; blurb: string; gradient: string }> = {
   Acne: { icon: Leaf, blurb: "Calm breakouts, fade marks", gradient: "from-sage-100 to-sage-200" },
   "Anti-aging": { icon: Sun, blurb: "Firm, smooth & glow", gradient: "from-blush-100 to-blush-200" },
   Hydration: { icon: Droplets, blurb: "Glass-skin moisture", gradient: "from-sky-100 to-sage-100" },
   Brightening: { icon: Star, blurb: "Fade dark spots, glow", gradient: "from-amber-100 to-blush-100" },
-  Sensitive: { icon: ShieldCheck, blurb: "Gentle, barrier-first", gradient: "from-sage-50 to-sky-100" },
+  Hyperpigmentation: { icon: Star, blurb: "Target dark spots & melasma", gradient: "from-amber-100 to-blush-100" },
+  "Sensitive Skin": { icon: ShieldCheck, blurb: "Gentle, barrier-first", gradient: "from-sage-50 to-sky-100" },
+  Redness: { icon: ShieldCheck, blurb: "Soothe redness & irritation", gradient: "from-blush-50 to-sage-100" },
   Pores: { icon: CircleDot, blurb: "Refine & balance oil", gradient: "from-stone-100 to-sage-100" },
+  "Sun Protection": { icon: Sun, blurb: "Daily SPF without white cast", gradient: "from-amber-50 to-sky-100" },
+  Dryness: { icon: Droplets, blurb: "Deep moisture for dry skin", gradient: "from-sky-100 to-sage-100" },
 };
 
 const FALLBACK_META = [

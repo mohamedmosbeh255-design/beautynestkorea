@@ -5,7 +5,7 @@ import { getConcernSlugs } from "@/lib/advice-kb";
 import { listReportDatesSync, siteBaseUrl } from "@/lib/market-report";
 import { RETIRED_PRODUCT_SLUGS } from "@/lib/retired-slugs";
 import { getProducts } from "@/lib/products";
-import { getAllConcernNames } from "@/lib/concerns";
+import { getActiveConcernNames } from "@/lib/concerns";
 
 interface LiveProductRow {
   slug: string | null;
@@ -75,7 +75,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   let categories: string[] = [];
   try {
-    categories = getAllConcernNames(await getProducts()).map(toSlug).filter(Boolean);
+    categories = getActiveConcernNames(await getProducts()).map(toSlug).filter(Boolean);
   } catch {
     categories = [];
   }

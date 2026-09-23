@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getProducts } from "@/lib/products";
-import { getAllConcernNames, normalizeConcernName, productMatchesConcern } from "@/lib/concerns";
+import { getActiveConcernNames, normalizeConcernName, productMatchesConcern } from "@/lib/concerns";
 import ProductCard from "@/components/ProductCard";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import { siteBaseUrl } from "@/lib/market-report";
@@ -32,7 +32,9 @@ function slugifyConcern(name: string): string {
  */
 async function resolveConcern(slug: string): Promise<string | null> {
   const products = await getProducts();
-  const names = getAllConcernNames(products);
+  // Active names only (see getActiveConcernNames): stale labels like the old
+  // "Sensitive" can never resolve to a second page shadowing "Sensitive Skin".
+  const names = getActiveConcernNames(products);
   const want = slugifyConcern(normalizeConcernName(slug.replace(/-/g, " ")));
   // Direct canonical hit first (stable, cheapest).
   const direct = names.find((n) => slugifyConcern(n) === slug);
@@ -46,7 +48,8 @@ export async function generateStaticParams() {
   const products = await getProducts();
   // Canonical slugs only: synonym URLs stay live via the next.config.ts 301s
   // but are never emitted as canonical, so no duplicate-content signals.
-  return getAllConcernNames(products).map((name) => ({ slug: slugifyConcern(name) }));
+  // Active names only — a renamed canonical never leaves a stale twin page.
+  return getActiveConcernNames(products).map((name) => ({ slug: slugifyConcern(name) }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
