@@ -15,6 +15,7 @@ import { getConcernBySlug, getConcernSlugs } from "@/lib/advice-kb";
 import ConcernArticle from "@/components/ConcernArticle";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import ShareButtons from "@/components/ShareButtons";
+import ListenButton from "@/components/ListenButton";
 import { isAffiliateDomainLink } from "@/lib/affiliates";
 import EducationalDisclaimer from "@/components/EducationalDisclaimer";
 import { ArrowLeft } from "lucide-react";
@@ -245,7 +246,7 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
           <Image src={post.image} alt={post.imageAlt ?? post.title} fill className="h-auto w-full object-cover" sizes="(max-width: 1080px) 100vw, 1080px" priority />
         </div>
       )}
-      <div className="prose-beauty mt-8 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
+      <div id="article-body" className="prose-beauty mt-8 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
         <p className="text-base font-medium text-ink sm:text-lg">{post.excerpt}</p>
         <AffiliateDisclosure className="mt-0 border-y border-sage-100 py-3" />
         <EducationalDisclaimer />
@@ -270,7 +271,8 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
             </>
           );
         })()}
-        <div className="border-t border-sage-100 pt-5">
+        <div data-tts-exclude className="flex flex-wrap items-center gap-3 border-t border-sage-100 pt-5">
+          <ListenButton targetId="article-body" title={post.title} />
           <ShareButtons title={post.title} path={`/advice/${slug}`} />
         </div>
       </div>

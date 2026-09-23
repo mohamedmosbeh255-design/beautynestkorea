@@ -11,6 +11,7 @@ import { breadcrumbJsonLd } from "@/lib/schema";
 import { isAffiliateDomainLink } from "@/lib/affiliates";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import ShareButtons from "@/components/ShareButtons";
+import ListenButton from "@/components/ListenButton";
 import ArticleTable, { ArticleTableCell, ArticleTableHead, ArticleTableHeader } from "@/components/ArticleTable";
 import EducationalDisclaimer from "@/components/EducationalDisclaimer";
 import ProductCard from "@/components/ProductCard";
@@ -148,7 +149,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {article.excerpt && (
         <p className="mt-6 text-base font-medium leading-relaxed text-ink sm:text-lg">{article.excerpt}</p>
       )}
-      <div className="prose-beauty mt-6 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
+      <div id="article-body" className="prose-beauty mt-6 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
@@ -178,7 +179,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         >
           {article.content}
         </ReactMarkdown>
-        <div className="border-t border-sage-100 pt-5">
+        <div data-tts-exclude className="flex flex-wrap items-center gap-3 border-t border-sage-100 pt-5">
+          <ListenButton targetId="article-body" title={article.title} />
           <ShareButtons title={article.title} path={`/articles/${slug}`} />
         </div>
       </div>
