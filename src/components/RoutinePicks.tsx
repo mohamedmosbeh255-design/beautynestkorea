@@ -1,29 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ShoppingCart } from "lucide-react";
 import { getProductBySlug } from "@/lib/products";
-import AffiliateButtons from "@/components/AffiliateButtons";
 import type { RoutinePick } from "@/lib/advice";
 
 /**
- * Empty or bare-homepage Olive Young URLs are placeholders, not destinations:
- * hide the button entirely rather than linking nowhere useful.
- */
-function effectiveOyUrl(url?: string | null): string | null {
-  const u = (url ?? "").trim();
-  if (!u) return null;
-  try {
-    const parsed = new URL(u);
-    if ((parsed.pathname === "" || parsed.pathname === "/") && !parsed.search) return null;
-  } catch {
-    return u;
-  }
-  return u;
-}
-
-/**
  * House product-card embed for advice "Gentle Routine Picks": product image +
- * title + the pick blurb verbatim + retailer buttons (Amazon href built from
- * the verified ASIN via the same AffiliateButtons mechanism as product pages).
+ * title + the pick blurb verbatim + an internal link to the product page.
+ * Funnel rule: advice cards NEVER link outbound to Amazon directly — users
+ * must land on our product page first (cookies + full details). The product
+ * page already carries the correct affiliate CTA via AffiliateButtons.
  * Slugs that don't resolve are skipped, never rendered broken.
  */
 export default async function RoutinePicks({ picks }: { picks: RoutinePick[] }) {
@@ -69,15 +55,13 @@ export default async function RoutinePicks({ picks }: { picks: RoutinePick[] }) 
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{pick.blurb}</p>
                 <div className="mt-4">
-                  <AffiliateButtons
-                    productId={product.id}
-                    productSlug={product.slug}
-                    amazonUrl={product.amazon_url}
-                    amazonAsin={product.amazon_asin}
-                    oliveyoungUrl={effectiveOyUrl(product.oliveyoung_url)}
-                    title={product.title}
-                    stackButtons
-                  />
+                  <Link
+                    href={`/product/${product.slug}`}
+                    className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-[#FF9900] px-6 py-4 text-sm font-bold text-black shadow-lg shadow-orange-200 transition hover:brightness-95"
+                    aria-label={`View ${product.title} — product page`}
+                  >
+                    <ShoppingCart className="h-5 w-5" /> View on Amazon
+                  </Link>
                 </div>
               </div>
             </div>

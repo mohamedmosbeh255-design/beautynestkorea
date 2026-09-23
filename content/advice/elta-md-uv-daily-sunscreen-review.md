@@ -13,7 +13,7 @@ faqSchema: true
 
 *By Mohamed Mosbeh · Founder & Beauty Curator, BeautyNestKorea · Last updated: September 2026*
 
-If you have been hunting for a sunscreen that moisturizes, disappears into the skin, and does not leave a chalky film, you have almost certainly run into **EltaMD UV Daily**. It is one of the most dermatologist-recommended face sunscreens in the US, it carries Amazon's Choice, it holds a 4.6/5 rating across more than 44,000 reviews, and it moved over 10,000 units in a single month.
+If you have been hunting for a sunscreen that moisturizes, disappears into the skin, and does not leave a chalky film, you have almost certainly run into [**EltaMD UV Daily**](/product/eltamd-uv-daily-broad-spectrum-spf-40). It is one of the most dermatologist-recommended face sunscreens in the US, it carries Amazon's Choice, it holds a 4.6/5 rating across more than 44,000 reviews, and it moved over 10,000 units in a single month.
 
 Popularity alone is not a buying reason, though. This review breaks the product down line by line: the active ingredients with their published percentages, the real difference between the SPF 40 and SPF 50 versions, how the three tints behave, and — most importantly — who should actually buy it and who should walk away.
 
@@ -31,7 +31,7 @@ Popularity alone is not a buying reason, though. This review breaks the product 
 | Size | 1.7 fl oz (48 g) |
 | Free from | Fragrance · Parabens · rated non-comedogenic |
 | Water resistance | **None** — the label says to use a water-resistant sunscreen when swimming or sweating |
-| Price observed | $41.00 untinted 1.7 oz (≈$24.12/oz), $47.00 tinted, plus $113.52 shipping and import charges to Tunisia at the time of writing |
+| Price observed | $41.00 untinted 1.7 oz (≈$24.12/oz), $47.00 tinted, plus $113.52 shipping and import charges to Tunisia at the time of writing · [View Product Page](/product/eltamd-uv-daily-broad-spectrum-spf-40) |
 
 > **A note on pricing:** prices, shipping, and import duties change constantly and are calculated by destination and weight. Always confirm the final checkout total, and compare authorized local retailers before buying.
 

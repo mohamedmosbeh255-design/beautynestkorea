@@ -141,9 +141,9 @@ const markdownComponents = {
     </summary>
   ),
   table: ({ children }: { children?: ReactNode }) => (
-    <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-      <div className="overflow-hidden rounded-2xl border border-sage-100">
-        <table className="w-full min-w-[560px] border-collapse text-sm">{children}</table>
+    <div className="-mx-4 px-4 sm:mx-0 sm:px-0">
+      <div className="overflow-x-auto rounded-2xl border border-sage-100" style={{ WebkitOverflowScrolling: "touch" }}>
+        <table className="w-full border-collapse text-sm" style={{ minWidth: "max(100%, 560px)" }}>{children}</table>
       </div>
     </div>
   ),
