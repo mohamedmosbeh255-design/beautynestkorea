@@ -1,0 +1,334 @@
+{
+  "date": "2026-09-23",
+  "generatedAt": "2026-09-23T10:26:05.324Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Tranexamic Acid",
+      "views": 451,
+      "previous": 368,
+      "delta": 83
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 439,
+      "previous": 357,
+      "delta": 82
+    },
+    {
+      "name": "Ceramides",
+      "views": 212,
+      "previous": 166,
+      "delta": 46
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 445,
+      "previous": 404,
+      "delta": 41
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 289,
+      "previous": 250,
+      "delta": 39
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 920,
+      "previous": 896,
+      "delta": 24
+    },
+    {
+      "name": "Niacinamide",
+      "views": 15,
+      "previous": 16,
+      "delta": -1
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 46,
+      "previous": 50,
+      "delta": -4
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 57,
+      "previous": 65,
+      "delta": -8
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 97,
+      "previous": 109,
+      "delta": -12
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 743,
+      "previous": 757,
+      "delta": -14
+    },
+    {
+      "name": "Squalane",
+      "views": 74,
+      "previous": 89,
+      "delta": -15
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 37,
+      "previous": 53,
+      "delta": -16
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 313,
+      "previous": 336,
+      "delta": -23
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 161,
+      "previous": 212,
+      "delta": -51
+    },
+    {
+      "name": "Vitamin C",
+      "views": 800,
+      "previous": 864,
+      "delta": -64
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 9
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 7
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 6
+    },
+    {
+      "name": "Glycolic / AHA",
+      "count": 4
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 3
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 2
+    },
+    {
+      "name": "Collagen",
+      "count": 2
+    },
+    {
+      "name": "Vitamin C",
+      "count": 2
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 1
+    },
+    {
+      "name": "Ginseng",
+      "count": 1
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    },
+    {
+      "name": "Kojic Acid",
+      "count": 1
+    },
+    {
+      "name": "Micellar Water",
+      "count": 1
+    },
+    {
+      "name": "Niacinamide",
+      "count": 1
+    },
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 1
+    },
+    {
+      "name": "Squalane",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "CeraVe",
+      "count": 4
+    },
+    {
+      "name": "The Ordinary",
+      "count": 3
+    },
+    {
+      "name": "Innisfree",
+      "count": 2
+    },
+    {
+      "name": "Vaseline",
+      "count": 2
+    },
+    {
+      "name": "Anua",
+      "count": 1
+    },
+    {
+      "name": "Avène",
+      "count": 1
+    },
+    {
+      "name": "Beauty of Joseon",
+      "count": 1
+    },
+    {
+      "name": "Biodance",
+      "count": 1
+    },
+    {
+      "name": "EltaMD",
+      "count": 1
+    },
+    {
+      "name": "La Roche-Posay",
+      "count": 1
+    },
+    {
+      "name": "Medicube",
+      "count": 1
+    },
+    {
+      "name": "Nivea",
+      "count": 1
+    },
+    {
+      "name": "Skin1004",
+      "count": 1
+    }
+  ],
+  "newsHeadlines": [
+    "What is ectoin, the new retinol taking over skincare?",
+    "What Comes After Retinol? Inside Skincare’s New Generation of Renewal Ingredients",
+    "I tried a prescription-strength retinoid and it’s a game-changer for signs of ageing",
+    "Should You Add Gold To Your Peptides?",
+    "The most lightweight K-beauty PDRN cream is now on a rare pre-Prime Day sale",
+    "We tested more than a dozen viral Medicube products — these are the ones actually worth it",
+    "6 Things Dermatologists Wish Everyone Knew Before Using Retinol",
+    "Dermatologists Want Guys in Their 20s and 30s to Start Using Retinol. Here’s How to Start.",
+    "Honest Skincare Publishes 2026 Retinol Serum Guide Covering 19 Formulas Priced From $9 to $580",
+    "14 Best Retinol Serums For Every Skin Concern, From Acne To Ageing",
+    "I Don't Use Retinol—But These Alternatives Still Deliver Impressive Results",
+    "Shoppers in Their 40s Switched Their Expensive Skincare for This $20 Retinol Cream"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 31
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 16
+    },
+    {
+      "name": "Exosomes",
+      "count": 4
+    },
+    {
+      "name": "Peptides",
+      "count": 4
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 4
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Hypochlorous Acid",
+      "count": 1
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-09-22 vs 2026-09-21"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "30 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "200 headline(s) read · 59 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 6/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · no source failed",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-09-22 vs 2026-09-21). Biggest rise: **Tranexamic Acid** +83 views (+22.6%). Highest volume: **Tranexamic Acid** (451 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** 30 posts analysed; the most-discussed ingredient is **Sunscreen (unspecified)** (9 posts), with **CeraVe** the most-mentioned brand (4 posts).",
+    "**News pulse:** 200 headline(s) read across 2 quer(ies), 59 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (31 headline(s)), brand **Medicube** (4 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-09-22 vs 2026-09-21):** up — Tranexamic Acid +83 views; down — Vitamin C -64 views. Community mention deltas: up — Salicylic Acid (BHA) +5, down — Ceramides -1.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Sunscreen (unspecified)**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
