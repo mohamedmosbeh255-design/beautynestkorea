@@ -118,34 +118,33 @@ body {
   }
 }
 
-/* Advice / article tables: force horizontal swipe-scroll on mobile.
- * The article body wrapper is `.prose-beauty` (selectors `.prose` and
- * `.article-content` included for coverage). `!important` beats markdown
- * table-layout constraints so EVERY table (comparison, scorecard,
- * ingredients) overflows + scrolls instead of squashing or clipping.
- * Scoped strictly to article content — report tables (`.report-table`
- * stacked cards) and all other site tables are untouched.
+/* Article-body tables safety net (soft fallback, NO !important).
+ * Primary fix is the shared <ArticleTable /> renderer (single Tailwind scroll
+ * container, used by every article route). This rule only rescues unstyled
+ * tables that bypass the renderer (e.g. raw HTML in markdown) — the
+ * :not(.article-table) guard keeps it off renderer output, so there is never
+ * a double scroll container.
+ * Strictly scoped to article content wrappers — admin panels, dashboards,
+ * product tables, and report `.report-table` cards are never matched.
  */
-.prose table,
-.prose-beauty table,
-.article-content table {
-  display: block !important;
-  width: 100% !important;
-  overflow-x: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  min-width: 600px !important; /* Forces overflow on screens smaller than 600px */
-  border-collapse: separate; /* Prevents fixed layout issues */
+.prose table:not(.article-table),
+.prose-beauty table:not(.article-table),
+.article-content table:not(.article-table) {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  min-width: 560px;
   border-spacing: 0;
 }
 
-.prose table th,
-.prose table td,
-.prose-beauty table th,
-.prose-beauty table td,
-.article-content table th,
-.article-content table td {
-  white-space: nowrap !important; /* Prevents text wrapping which breaks scroll */
-  padding: 0.75rem 1rem;
+.prose table:not(.article-table) th,
+.prose table:not(.article-table) td,
+.prose-beauty table:not(.article-table) th,
+.prose-beauty table:not(.article-table) td,
+.article-content table:not(.article-table) th,
+.article-content table:not(.article-table) td {
+  white-space: nowrap;
 }
 
 /* Report tables below 768px: every table becomes stacked cards. The renderer

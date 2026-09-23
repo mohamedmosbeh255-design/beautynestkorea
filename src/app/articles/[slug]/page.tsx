@@ -10,6 +10,7 @@ import { siteBaseUrl } from "@/lib/market-report";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { isAffiliateDomainLink } from "@/lib/affiliates";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+import ArticleTable, { ArticleTableCell, ArticleTableHead, ArticleTableHeader } from "@/components/ArticleTable";
 import EducationalDisclaimer from "@/components/EducationalDisclaimer";
 import ProductCard from "@/components/ProductCard";
 import { ArrowLeft } from "lucide-react";
@@ -151,6 +152,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           remarkPlugins={[remarkGfm]}
           components={{
             a: BodyLink,
+            table: ArticleTable,
+            thead: ArticleTableHead,
+            th: ArticleTableHeader,
+            td: ArticleTableCell,
             h2: ({ children }) => (
               <h2 className="font-serif-display scroll-mt-24 pt-4 text-xl font-bold tracking-tight text-ink sm:text-2xl">
                 {children}

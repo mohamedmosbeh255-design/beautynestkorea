@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { getAdviceBySlug, getAllAdvice, extractArticleFaqs, stripFaqCitations, splitRoutinePicks } from "@/lib/advice";
 import RoutinePicks from "@/components/RoutinePicks";
+import ArticleTable, { ArticleTableCell, ArticleTableHead, ArticleTableHeader } from "@/components/ArticleTable";
 import { siteBaseUrl } from "@/lib/market-report";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/schema";
 import { getConcernBySlug, getConcernSlugs } from "@/lib/advice-kb";
@@ -140,28 +141,10 @@ const markdownComponents = {
       {children}
     </summary>
   ),
-  table: ({ children }: { children?: ReactNode }) => (
-    // Mobile swipe-scroll: the <table> itself is the scroll container
-    // (display:block + overflow-x:auto + touch momentum). Scoped here in the
-    // advice markdown renderer so no other site table is affected.
-    <div className="-mx-4 px-4 sm:mx-0 sm:px-0">
-      <table
-        className="block w-full overflow-x-auto whitespace-nowrap rounded-2xl border border-sage-100 border-collapse text-sm"
-        style={{ WebkitOverflowScrolling: "touch", minWidth: "max(100%, 560px)" }}
-      >
-        {children}
-      </table>
-    </div>
-  ),
-  thead: ({ children }: { children?: ReactNode }) => <thead className="bg-sage-50">{children}</thead>,
-  th: ({ children }: { children?: ReactNode }) => (
-    <th className="border-b border-sage-100 px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-sage-700">
-      {children}
-    </th>
-  ),
-  td: ({ children }: { children?: ReactNode }) => (
-    <td className="border-b border-sage-50 px-4 py-3 align-top text-ink-soft last:border-b-0">{children}</td>
-  ),
+  table: ArticleTable,
+  thead: ArticleTableHead,
+  th: ArticleTableHeader,
+  td: ArticleTableCell,
   h2: ({ children }: { children?: ReactNode }) => (
     <h2 id={slugifyHeading(children)} className="font-serif-display scroll-mt-24 pt-4 text-xl font-bold tracking-tight text-ink sm:text-2xl">
       {children}
