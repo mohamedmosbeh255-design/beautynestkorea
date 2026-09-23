@@ -10,6 +10,7 @@ import { siteBaseUrl } from "@/lib/market-report";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { isAffiliateDomainLink } from "@/lib/affiliates";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+import ShareButtons from "@/components/ShareButtons";
 import ArticleTable, { ArticleTableCell, ArticleTableHead, ArticleTableHeader } from "@/components/ArticleTable";
 import EducationalDisclaimer from "@/components/EducationalDisclaimer";
 import ProductCard from "@/components/ProductCard";
@@ -177,6 +178,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         >
           {article.content}
         </ReactMarkdown>
+        <div className="border-t border-sage-100 pt-5">
+          <ShareButtons title={article.title} path={`/articles/${slug}`} />
+        </div>
       </div>
 
       <EducationalDisclaimer className="mt-10" />

@@ -6,6 +6,7 @@ import { getProducts } from "@/lib/products";
 import { getActiveConcernNames, normalizeConcernName, productMatchesConcern } from "@/lib/concerns";
 import ProductCard from "@/components/ProductCard";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteBaseUrl } from "@/lib/market-report";
 import { breadcrumbJsonLd } from "@/lib/schema";
 
@@ -90,6 +91,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <Link href="/shop" className="inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700 hover:underline">
         <ArrowLeft className="h-4 w-4" /> All products
       </Link>
+      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: `${concern} skincare` }]} />
       <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-sage-600">Shop by concern</p>
       <h1 className="font-serif-display mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{concern} skincare</h1>
       <p className="mt-3 max-w-2xl text-base text-ink-soft">

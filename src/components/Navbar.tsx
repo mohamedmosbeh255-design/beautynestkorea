@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles, ShoppingBag, BookOpen, Menu, X } from "lucide-react";
+import { Sparkles, ShoppingBag, BookOpen, Menu, Search, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import SearchBox from "@/components/SearchBox";
 
 const links = [
   { href: "/", label: "Home" },
@@ -49,11 +50,19 @@ export default function Navbar() {
             >
               <ShoppingBag className="h-4 w-4" /> Shop bestsellers
             </Link>
+            <SearchBox />
           </div>
 
           <button className="rounded-full p-2 hover:bg-white/70 md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
+          <Link
+            href="/search"
+            className="rounded-full p-2.5 text-ink-soft transition hover:bg-white/70 hover:text-ink md:hidden"
+            aria-label="Search products and articles"
+          >
+            <Search className="h-5 w-5" />
+          </Link>
         </nav>
         {open && (
           <div className="border-t border-white/60 px-4 pb-4 pt-2 md:hidden">

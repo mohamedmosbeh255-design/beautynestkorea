@@ -9,6 +9,7 @@ import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import { productConcernsToSlugs } from "@/lib/advice-kb";
 import ProductCard from "@/components/ProductCard";
 import MedicalCaveat from "@/components/MedicalCaveat";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { formatPriceChecked, formatPrice } from "@/lib/utils";
 import { siteBaseUrl } from "@/lib/market-report";
 import { breadcrumbJsonLd, faqJsonLd, productJsonLd, type FaqItem } from "@/lib/schema";
@@ -91,7 +92,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className="grid gap-10 lg:grid-cols-2">
+      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: product.title }]} />
+      <div className="mt-6 grid gap-10 lg:grid-cols-2">
         <ImageGallery images={product.image_urls} title={product.title} />
 
         <div className="animate-fade-up">

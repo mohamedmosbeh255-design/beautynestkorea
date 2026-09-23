@@ -10,7 +10,17 @@ import ProductCard from "@/components/ProductCard";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 
 export const metadata: Metadata = {
+  title: "BeautyNestKorea — Curated K-Beauty & Skincare That Loves You Back",
+  description:
+    "Discover curated Korean bestsellers with honest reviews, ingredient-first guides, and Amazon vs Olive Young price comparison — re-checked regularly.",
   alternates: { canonical: siteBaseUrl() },
+  openGraph: {
+    title: "BeautyNestKorea — Curated K-Beauty & Skincare",
+    description:
+      "Curated Korean bestsellers with honest reviews and Amazon vs Olive Young price comparison.",
+    type: "website",
+    images: [`${siteBaseUrl()}/og-default.png`],
+  },
 };
 
 export const revalidate = 3600;

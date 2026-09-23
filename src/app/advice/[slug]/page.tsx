@@ -14,6 +14,7 @@ import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/schema";
 import { getConcernBySlug, getConcernSlugs } from "@/lib/advice-kb";
 import ConcernArticle from "@/components/ConcernArticle";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+import ShareButtons from "@/components/ShareButtons";
 import { isAffiliateDomainLink } from "@/lib/affiliates";
 import EducationalDisclaimer from "@/components/EducationalDisclaimer";
 import { ArrowLeft } from "lucide-react";
@@ -269,6 +270,9 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
             </>
           );
         })()}
+        <div className="border-t border-sage-100 pt-5">
+          <ShareButtons title={post.title} path={`/advice/${slug}`} />
+        </div>
       </div>
     </article>
   );

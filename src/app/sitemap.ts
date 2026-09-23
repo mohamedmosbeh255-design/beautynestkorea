@@ -94,6 +94,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/disclosure`, lastModified: new Date() },
     { url: `${base}/affiliate-disclosure`, lastModified: new Date() },
     { url: `${base}/author`, lastModified: new Date() },
+    { url: `${base}/how-we-review`, lastModified: new Date() },
     ...reportDates.map((d) => ({ url: `${base}/market-report/${d}`, lastModified: new Date(d) })),
     ...[...new Set(categories)].map((slug) => ({ url: `${base}/category/${slug}`, lastModified: new Date() })),
     ...products
