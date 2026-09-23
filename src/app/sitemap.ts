@@ -4,6 +4,8 @@ import { getAllAdvice } from "@/lib/advice";
 import { getConcernSlugs } from "@/lib/advice-kb";
 import { listReportDatesSync, siteBaseUrl } from "@/lib/market-report";
 import { RETIRED_PRODUCT_SLUGS } from "@/lib/retired-slugs";
+import { getProducts } from "@/lib/products";
+import { getAllConcernNames } from "@/lib/concerns";
 
 interface LiveProductRow {
   slug: string | null;
@@ -66,6 +68,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     Promise.resolve(getConcernSlugs()),
     getLiveArticleRows(),
   ]);
+  // Canonical category URLs only (synonyms alias via 301, never canonical).
+  // Same slug scheme as src/app/category/[slug]/page.tsx — kept inline so the
+  // sitemap never depends on a route module.
+  const toSlug = (name: string) =>
+    name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  let categories: string[] = [];
+  try {
+    categories = getAllConcernNames(await getProducts()).map(toSlug).filter(Boolean);
+  } catch {
+    categories = [];
+  }
 
   return [
     { url: `${base}/`, lastModified: new Date() },
@@ -82,6 +95,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/affiliate-disclosure`, lastModified: new Date() },
     { url: `${base}/author`, lastModified: new Date() },
     ...reportDates.map((d) => ({ url: `${base}/market-report/${d}`, lastModified: new Date(d) })),
+    ...[...new Set(categories)].map((slug) => ({ url: `${base}/category/${slug}`, lastModified: new Date() })),
     ...products
       .filter((p): p is LiveProductRow & { slug: string } => Boolean(p.slug))
       .map((p) => ({
