@@ -18,6 +18,7 @@ import { SourceLog } from './lib/log.mjs';
 import { buildSummary } from './lib/summary.mjs';
 import { loadPreviousSnapshot } from './lib/history.mjs';
 import { numbered, table } from './lib/markdown.mjs';
+import { engagementScore } from './lib/processor.mjs';
 import { collectTrends, renderTrendsSection } from './sources/trends.mjs';
 import { collectIngredientInterest, renderIngredientInterestSection } from './sources/wikimedia.mjs';
 import { collectCommunity, renderCommunitySection } from './sources/reddit.mjs';
@@ -241,7 +242,7 @@ function renderDocument(ctx) {
   out.push('## Methodology & caveats');
   out.push('');
   out.push('- **Trends:** the primary signal is **ingredient interest** measured as English Wikipedia pageviews for 18 tracked articles (Wikimedia pageviews API: public, no key, no cookie), comparing two complete days. Pageviews are a *curiosity* proxy — not sales, not search volume. Google Trends RSS is kept as a secondary signal only: it publishes no global feed and no per-keyword RSS, so "worldwide" is 12 markets queried individually, and its daily feed is news/sports-driven (0 skincare matches on 2026-09-15 → 2026-09-17). Google Trends\' informal keyword endpoints were re-probed on 2026-09-17: `/trends/api/dailytrends` answers 404 (retired) and `/trends/api/explore` answers 429 (throttled), so neither is used.');
-  out.push('- **Community:** the public JSON endpoint is currently blocked (HTTP 403 for non-browser clients); the Atom feed is the documented fallback, which is why score/comments read "n/a (RSS transport)" on fallback rows.');
+  out.push('- **Community:** the public JSON endpoint is currently blocked (HTTP 403 for non-browser clients), so the Atom feed is the documented fallback. Score shows engagement (upvotes + comments) where Reddit shares both counts; "—" means Reddit shared no counts for that row, never an error. Titles keep their source wording; feed-truncated titles are restored from the post URL where possible and stay linked to the full post.');
   out.push('- **Social:** TikTok Creative Center hashtag rankings are gated behind an authenticated session, so the curated list in `src/lib/lexicon.mjs` is used and the probe verdicts are printed as evidence.');
   out.push('- **News:** Google News RSS headlines (English + Korean queries) are filtered against the same ingredient/brand lexicon and printed with publisher and timestamp. Editorial coverage is a *coverage* signal, not consumer demand or sales volume; unmatched headlines are counted as read-but-skipped, never padded into the table.');
   out.push('- **Watchlist:** price/rating/BSR stay `TODO (PA-API)`; this tool never contacts Amazon.');
@@ -266,6 +267,18 @@ function renderSnapshot(ctx, summary) {
     trendTerms: favorite.matches.map((m) => m.term),
     ingredients: pulse.ingredientCounts,
     brands: pulse.brandCounts,
+    // Full-fidelity community rows (untruncated titles + engagement) so the
+    // site can restore display text and rank without re-reading the feeds.
+    communityPosts: pulse.posts.map((p) => ({
+      url: p.url,
+      title: p.title,
+      subreddit: p.subreddit,
+      score: typeof p.score === 'number' ? p.score : null,
+      comments: typeof p.comments === 'number' ? p.comments : null,
+      engagement: engagementScore(p.score, p.comments),
+      ingredients: p.ingredients,
+      brands: p.brands,
+    })),
     newsHeadlines: press.items.map((i) => i.title),
     newsIngredients: press.stats.ingredientCounts,
     hashtags: signals.hashtags.map((h) => h.hashtag),

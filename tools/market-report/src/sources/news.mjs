@@ -18,7 +18,8 @@ import { fetchText } from '../lib/http.mjs';
 import { blocks, tagText } from '../lib/xml.mjs';
 import { NEWS_QUERIES, aliasMatchers } from '../lib/lexicon.mjs';
 import { BRANDS, INGREDIENTS } from '../lib/terms.mjs';
-import { table, truncate } from '../lib/markdown.mjs';
+import { table } from '../lib/markdown.mjs';
+import { cleanNewsItem } from '../lib/processor.mjs';
 
 const MAX_ITEMS = 12;
 
@@ -111,7 +112,7 @@ export async function collectNews() {
         seen.brands = Array.from(new Set([...seen.brands, ...brands]));
         continue;
       }
-      byTitle.set(key, {
+      byTitle.set(key, cleanNewsItem({
         title,
         url: tagText(item, 'link'),
         publisher,
@@ -119,7 +120,7 @@ export async function collectNews() {
         query: query.id,
         ingredients,
         brands,
-      });
+      }));
     }
 
     queries.push({
@@ -164,7 +165,7 @@ export function renderNewsSection(result) {
   } else {
     const rows = items.map((it, i) => [
       `${i + 1}`,
-      truncate(it.title, 78),
+      it.title,
       it.publisher || '—',
       utcStamp(it.published),
       it.ingredients.concat(it.brands).slice(0, 3).join(', ') || '—',
@@ -184,7 +185,7 @@ export function renderNewsSection(result) {
     }
     if (items[0].url) {
       lines.push('');
-      lines.push(`**Lead story:** [${truncate(items[0].title, 90)}](${items[0].url}) — ${items[0].publisher || 'publisher n/a'}, ${utcStamp(items[0].published)}`);
+      lines.push(`**Lead story:** [${items[0].title}](${items[0].url}) — ${items[0].publisher || 'publisher n/a'}, ${utcStamp(items[0].published)}`);
     }
   }
 

@@ -12,6 +12,7 @@ import remarkGfm from "remark-gfm";
 import { shiftDateStr, stripTitle, type WikiSnapshotView } from "@/lib/market-report";
 import { isAmazonDpLink, isAffiliateDomainLink, withAmazonTag } from "@/lib/affiliates";
 import { AFFILIATE_DISCLOSURE_TEXT } from "@/components/AffiliateDisclosure";
+import ReportTitleToggle from "@/components/ReportTitleToggle";
 import ScrollableTable from "@/components/ScrollableTable";
 
 function slugifyHeading(children: ReactNode): string {
@@ -41,8 +42,10 @@ function nodeText(node: ReactNode): string {
  * ONE shared responsive table for every report table (present + future).
  * Each body cell gets a data-label from its column header at render time;
  * CSS below 768px turns rows into stacked cards (thead hidden, label shown
- * via td::before). Desktop keeps the full table inside the overflow safety
- * net. No per-table special cases.
+ * via td::before). Title/Headline columns additionally get a clamped cell
+ * with tooltip + inline expand (see ReportTitleToggle), so long titles never
+ * hard-cut and never blow out the layout. Desktop keeps the full table inside
+ * the overflow safety net. No per-table special cases.
  */
 function ResponsiveTable({ children }: { children?: ReactNode }) {
   const headersRef: { list: string[] | null } = { list: null };
@@ -63,11 +66,27 @@ function ResponsiveTable({ children }: { children?: ReactNode }) {
         return cloneElement(
           child,
           {},
-          cells.map((c, i) =>
-            cloneElement(c as ReactElement<Record<string, unknown>>, {
-              "data-label": labels[i] ?? "",
-            })
-          )
+          cells.map((c, i) => {
+            const label = labels[i] ?? "";
+            const cellProps = c.props as { children?: ReactNode; className?: string };
+            if (label.trim().toLowerCase() === "title" || label.trim().toLowerCase() === "headline") {
+              const text = nodeText(cellProps.children);
+              return cloneElement(
+                c as ReactElement<Record<string, unknown>>,
+                {
+                  "data-label": label,
+                  className: `${cellProps.className ?? ""} report-title-cell`.trim(),
+                },
+                <ReportTitleToggle text={text}>{cellProps.children}</ReportTitleToggle>
+              );
+            }
+            return cloneElement(
+              c as ReactElement<Record<string, unknown>>,
+              {
+                "data-label": labels[i] ?? "",
+              }
+            );
+          })
         );
       }
       const sub = (child.props as { children?: ReactNode }).children;

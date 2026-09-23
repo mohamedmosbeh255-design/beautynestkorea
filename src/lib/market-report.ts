@@ -1,5 +1,6 @@
 import { promises as fs, readdirSync } from "node:fs";
 import path from "node:path";
+import { cleanReportMarkdown, type CommunityPostAux, type ReportAux } from "./market-report-processor";
 
 export const MARKET_REPORT_REPO = "mohamedmosbeh255-design/beautynestkorea";
 export const MARKET_REPORT_BRANCH = "main";
@@ -97,19 +98,35 @@ export async function getLatestReport(): Promise<MarketReport | null> {
   if (dates.length === 0) return null;
   const date = dates[0];
   const remote = await fetchRemoteReport(date);
-  if (remote) return { date, markdown: remote, source: "remote" };
+  if (remote) return { date, markdown: await cleanedReport(date, remote), source: "remote" };
   const local = await readLocalReport(date);
-  if (local) return { date, markdown: local, source: "local" };
+  if (local) return { date, markdown: await cleanedReport(date, local), source: "local" };
   return null;
 }
 
 export async function getReportByDate(date: string): Promise<MarketReport | null> {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return null;
   const remote = await fetchRemoteReport(date);
-  if (remote) return { date, markdown: remote, source: "remote" };
+  if (remote) return { date, markdown: await cleanedReport(date, remote), source: "remote" };
   const local = await readLocalReport(date);
-  if (local) return { date, markdown: local, source: "local" };
+  if (local) return { date, markdown: await cleanedReport(date, local), source: "local" };
   return null;
+}
+
+/**
+ * Processing pipeline (fetch-time): every report passes through
+ * cleanReportMarkdown before it reaches the UI, so historical files AND
+ * future ones render without feed artifacts. Full-fidelity snapshot data
+ * (full headlines, community posts) powers the restoration; without it the
+ * cleaner degrades to ellipsis normalization — never invented text.
+ */
+async function cleanedReport(date: string, markdown: string): Promise<string> {
+  try {
+    const aux = await getReportAuxData(date);
+    return cleanReportMarkdown(markdown, aux);
+  } catch {
+    return markdown;
+  }
 }
 
 export interface WikiSnapshotView {
@@ -120,24 +137,63 @@ export interface WikiSnapshotView {
 }
 
 async function readLocalSnapshot(date: string): Promise<WikiSnapshotView[] | null> {
-  try {
-    const raw = await fs.readFile(path.join(reportsDir(), `${date}.json`), "utf8");
-    return extractWikiViews(JSON.parse(raw));
-  } catch {
-    return null;
-  }
+  const json = await readReportJson(date);
+  return json ? extractWikiViews(json) : null;
 }
 
 async function fetchRemoteSnapshot(date: string): Promise<WikiSnapshotView[] | null> {
+  const json = await fetchRemoteJson(date);
+  return json ? extractWikiViews(json) : null;
+}
+
+/** Raw parsed snapshot JSON (local first, remote fallback). Shared reader. */
+async function readReportJson(date: string): Promise<unknown | null> {
+  try {
+    const raw = await fs.readFile(path.join(reportsDir(), `${date}.json`), "utf8");
+    return JSON.parse(raw) as unknown;
+  } catch {
+    return fetchRemoteJson(date);
+  }
+}
+
+async function fetchRemoteJson(date: string): Promise<unknown | null> {
   try {
     const res = await fetch(`${MARKET_REPORT_RAW_BASE}/${date}.json`, {
       next: { revalidate: 3600 },
     });
     if (!res.ok) return null;
-    return extractWikiViews(await res.json());
+    return (await res.json()) as unknown;
   } catch {
     return null;
   }
+}
+
+/**
+ * Full-fidelity aux data for the cleaning pipeline: complete news headlines
+ * plus community posts (full titles, counts). Additive snapshot fields —
+ * older snapshots simply yield empty arrays and the cleaner falls back to
+ * ellipsis normalization.
+ */
+export async function getReportAuxData(date: string): Promise<ReportAux> {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return {};
+  const json = await readReportJson(date);
+  if (!json || typeof json !== "object") return {};
+  const record = json as Record<string, unknown>;
+  const newsHeadlines = Array.isArray(record.newsHeadlines)
+    ? (record.newsHeadlines as unknown[]).filter((h): h is string => typeof h === "string" && h.trim() !== "")
+    : [];
+  const communityPosts: CommunityPostAux[] = Array.isArray(record.communityPosts)
+    ? (record.communityPosts as unknown[])
+        .filter((p): p is Record<string, unknown> => Boolean(p) && typeof p === "object")
+        .map((p) => ({
+          url: typeof p.url === "string" ? p.url : "",
+          title: typeof p.title === "string" ? p.title : "",
+          score: typeof p.score === "number" && Number.isFinite(p.score) ? p.score : null,
+          comments: typeof p.comments === "number" && Number.isFinite(p.comments) ? p.comments : null,
+        }))
+        .filter((p) => p.url !== "" && p.title !== "")
+    : [];
+  return { newsHeadlines, communityPosts };
 }
 
 function extractWikiViews(json: unknown): WikiSnapshotView[] | null {

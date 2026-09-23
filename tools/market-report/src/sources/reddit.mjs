@@ -14,7 +14,12 @@
  *      Retry-After is honoured once, then the run moves on.
  * The report records which transport each subreddit used, because the two differ:
  * JSON carries score/comments; Atom carries feed order (already Reddit's top-of-day
- * ranking) plus the post body. Missing fields are reported as "n/a", never guessed.
+ * ranking) plus the post body. Missing counts are stored as null and rendered as
+ * an em dash by the processing pipeline (src/lib/processor.mjs) — user-facing
+ * text never carries transport internals.
+ *
+ * Titles are restored where possible from the post URL slug and normalized by
+ * the same pipeline, so cut-off feed text never reaches the report raw.
  *
  * No Amazon, no paid API, no scraping of logged-in surfaces, no OAuth token required.
  */
@@ -22,7 +27,8 @@ import { BROWSER_UA, fetchJson, fetchText, sleep } from '../lib/http.mjs';
 import { blocks, stripTags, tagAttr, tagText } from '../lib/xml.mjs';
 import { SUBREDDITS, aliasMatchers } from '../lib/lexicon.mjs';
 import { BRANDS, INGREDIENTS } from '../lib/terms.mjs';
-import { table, truncate } from '../lib/markdown.mjs';
+import { table } from '../lib/markdown.mjs';
+import { cleanCommunityPost, displayCount, displayScore, formatDetectedList } from '../lib/processor.mjs';
 
 const LIMIT = 30;
 
@@ -44,12 +50,13 @@ const ATOM_ATTEMPTS = [
  * @property {string} title
  * @property {string} url
  * @property {string} published
- * @property {number|string} score
- * @property {number|string} comments
+ * @property {number|null} score      null when the transport shares no count
+ * @property {number|null} comments   null when the transport shares no count
  * @property {'json'|'atom'} transport
  * @property {string[]} ingredients
  * @property {string[]} brands
  * @property {string} [text]
+ * @property {boolean} [titleTruncated]  feed cut the title; restored/flagged by processor
  */
 
 /** Transport 1 — public JSON (spec default). */
@@ -68,8 +75,8 @@ async function viaJson(sub) {
       title: String(d.title || '').trim(),
       url: d.permalink ? `https://www.reddit.com${d.permalink}` : String(d.url || ''),
       published: d.created_utc ? new Date(d.created_utc * 1000).toISOString() : '',
-      score: typeof d.score === 'number' ? d.score : 'n/a',
-      comments: typeof d.num_comments === 'number' ? d.num_comments : 'n/a',
+      score: typeof d.score === 'number' ? d.score : null,
+      comments: typeof d.num_comments === 'number' ? d.num_comments : null,
       transport: /** @type {'json'} */ ('json'),
       ingredients: [],
       brands: [],
@@ -86,8 +93,8 @@ function parseAtom(sub, body, status, ua) {
     title: tagText(entry, 'title'),
     url: tagAttr(entry, 'link', 'href'),
     published: tagText(entry, 'published') || tagText(entry, 'updated'),
-    score: 'n/a (RSS transport)',
-    comments: 'n/a (RSS transport)',
+    score: null,
+    comments: null,
     transport: /** @type {'atom'} */ ('atom'),
     ingredients: [],
     brands: [],
@@ -175,7 +182,9 @@ export async function collectCommunity() {
     }
 
     if (!result.ok) continue;
-    for (const p of result.posts) posts.push(annotate(p, ingMatchers, brandMatchers));
+    // Processing pipeline: clean every post BEFORE ranking/tallying/rendering
+    // so tables, heat tallies, and the JSON snapshot share one clean dataset.
+    for (const p of result.posts) posts.push(cleanCommunityPost(annotate(p, ingMatchers, brandMatchers)));
   }
 
   // Rank: real scores first (JSON), then keep Reddit's top-of-day order (Atom).
@@ -227,12 +236,12 @@ export function renderCommunitySection(result) {
     ['#', 'Title', 'Sub', 'Ingredients detected', 'Brands detected', 'Score', 'Comments'],
     posts.map((p, i) => [
       `${i + 1}`,
-      `[${truncate(p.title, 70)}](${p.url})`,
+      `[${p.title}](${p.url})`,
       p.subreddit,
-      p.ingredients.slice(0, 4).join(', ') || '—',
-      p.brands.slice(0, 3).join(', ') || '—',
-      `${p.score}`,
-      `${p.comments}`,
+      formatDetectedList(p.ingredients, 4),
+      formatDetectedList(p.brands, 3),
+      displayScore(p.score, p.comments),
+      displayCount(p.comments),
     ]),
   ));
 

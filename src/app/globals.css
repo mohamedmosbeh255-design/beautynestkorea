@@ -147,6 +147,19 @@ body {
   white-space: nowrap;
 }
 
+/* Market report title/headline cells: clamp long titles to two lines with room
+ * for the inline Read more/less control. Desktop bounds the column so one
+ * long headline can't stretch the table; mobile stacked cards size naturally.
+ */
+.report-title-cell {
+  min-width: 0;
+}
+@media (min-width: 768px) {
+  .report-title-cell {
+    max-width: 460px;
+  }
+}
+
 /* Report tables below 768px: every table becomes stacked cards. The renderer
  * stamps each td with data-label from its column header; the label shows via
  * ::before. Values wrap and can never clip. Applies to all present + future
