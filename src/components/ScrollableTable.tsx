@@ -45,8 +45,12 @@ export default function ScrollableTable({
   return (
     <div className={cn("relative -mx-4 px-4 sm:mx-0 sm:px-0", className)}>
       <div ref={ref} className="overflow-x-auto" data-testid="table-scroll">
+        {/* No <table> element here on purpose: the child IS the table (see
+            ResponsiveTable). A wrapper <table> around it nested two tables,
+            and the outer one's min-width forced a 560px overflow on phones
+            that no card CSS could undo. */}
         <div className="overflow-hidden rounded-2xl border border-sage-100">
-          <table className="w-full min-w-[560px] border-collapse text-sm">{children}</table>
+          {children}
         </div>
       </div>
       {showHint && (

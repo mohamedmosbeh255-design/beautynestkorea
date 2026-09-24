@@ -267,7 +267,10 @@ export default function MarketReportBody({
       ? withFullIngredientTable(stripTitle(markdown), reportDate, ingredientSnapshot)
       : stripTitle(markdown);
   return (
-    <div className="space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
+    // scroll-mt-20: anchor jumps anywhere into the report stop below the
+    // 64px sticky header, so it can never cover the first card. No visual
+    // change — scroll margin only affects scrolled-to position.
+    <div className="scroll-mt-20 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={baseMarkdownComponents}>
         {withAsinDisclosure(body)}
       </ReactMarkdown>
