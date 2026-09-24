@@ -19,7 +19,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50">
-      <div className="glass border-x-0 border-t-0">
+      {/* Solid page-matching background (not translucent glass): tags, prices
+          and buttons must never show through while scrolling. z-50 already
+          tops all page content; only the admin modal shares it (never on
+          storefront pages at the same time). */}
+      <div className="border-b border-sage-100 bg-cream shadow-[0_1px_12px_rgba(43,43,46,0.06)]">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
           <Link href="/" className="flex items-center gap-2.5">
             <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-sage-400 to-sage-600 text-white shadow-lg shadow-sage-200">
