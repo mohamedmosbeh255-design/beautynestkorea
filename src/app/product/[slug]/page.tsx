@@ -116,7 +116,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   </>
                 )}
               </div>
-              <p className="mt-1 text-xs text-ink-soft">Price checked {priceChecked} · may have changed</p>
+              <p className="mt-1 text-xs text-ink-soft">Prices &amp; ratings as of {priceChecked} · may change anytime on Amazon &amp; Olive Young · check the retailer for current info</p>
             </>
           )}
 
@@ -170,14 +170,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             {RETAILER_PRICE_DETAILS[slug] ? (
               <p className="mt-3 text-xs text-ink-soft">
                 {whereToBuyAsOf ? (
-                  <>Prices checked {whereToBuyAsOf} · may have changed — per-ml based on 30ml (Amazon) and 60ml double-set total (Olive Young). </>
+                  <>Prices &amp; ratings as of {whereToBuyAsOf} · may change anytime on Amazon &amp; Olive Young · check the retailer for current info — per-ml based on 30ml (Amazon) and 60ml double-set total (Olive Young). </>
                 ) : null}
-                Check current retailer prices before buying. We may earn a commission at no cost to you.
+                We may earn a commission at no cost to you.
               </p>
             ) : (
               <p className="mt-3 flex items-center gap-1.5 text-xs text-ink-soft">
                 <ShieldCheck className="h-3.5 w-3.5 text-sage-600" />
-                Prices checked weekly. We may earn a commission at no cost to you.
+                Prices &amp; ratings may change anytime on Amazon &amp; Olive Young · check the retailer for current info. We may earn a commission at no cost to you.
               </p>
             )}
           </div>
