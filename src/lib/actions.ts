@@ -89,6 +89,26 @@ export async function checkDuplicates(input: DuplicateCheckInput): Promise<Dupli
   return findDuplicates(input, candidates);
 }
 
+/**
+ * Today in UTC as YYYY-MM-DD — the price_checked_at stamp format the admin
+ * date input and the DB column both accept.
+ */
+function todayStamp(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+/**
+ * Automatic price-check stamping (owner-approved): a product whose price is
+ * (re)entered is being verified right now, so an empty stamp would wrongly
+ * hide its price block storefront-wide. An explicitly entered date is always
+ * respected (backdating a real check must survive).
+ */
+function autoStamp(raw: { price_checked_at: string | null; price: unknown }): string | null {
+  const explicit = (raw.price_checked_at ?? "").trim();
+  if (explicit !== "") return raw.price_checked_at;
+  return raw.price != null && String(raw.price).trim() !== "" ? todayStamp() : null;
+}
+
 export async function createProduct(formData: FormData) {
   const supabase = await requireAdmin();
   const raw = {
@@ -112,6 +132,9 @@ export async function createProduct(formData: FormData) {
     is_featured: formData.get("is_featured") === "on",
     is_active: formData.get("is_active") !== "off",
   };
+  // New products are priced right now: auto-stamp so the price block shows
+  // immediately (an explicit date still wins).
+  raw.price_checked_at = autoStamp(raw);
   const parsed = productSchema.safeParse(raw);
   if (!parsed.success) throw new Error(parsed.error.issues.map((i) => i.message).join(", "));
   // Duplicate prevention (server-side enforcement): block identical
@@ -155,6 +178,21 @@ export async function updateProduct(id: string, formData: FormData) {
     is_featured: formData.get("is_featured") === "on",
     is_active: formData.get("is_active") !== "off",
   };
+  // Capture the previous row BEFORE validation so a changed price/rating can
+  // re-stamp the check date below (and a rename still clears the old cache).
+  const { data: existing } = await supabase
+    .from("products")
+    .select("slug, price, rating")
+    .eq("id", id)
+    .single();
+  // A (re)entered price or rating is being verified right now: stamp today,
+  // overriding even an explicit date (the new numbers supersede it). Untouched
+  // numbers keep the submitted value via autoStamp (explicit date or empty).
+  const priceChanged = existing != null && Number(existing.price) !== Number(raw.price);
+  const ratingChanged =
+    existing != null && (existing.rating ?? null) !== (raw.rating != null && raw.rating !== "" ? Number(raw.rating) : null);
+  if (priceChanged || ratingChanged) raw.price_checked_at = todayStamp();
+  else raw.price_checked_at = autoStamp(raw);
   const parsed = productSchema.safeParse(raw);
   if (!parsed.success) throw new Error(parsed.error.issues.map((i) => i.message).join(", "));
   // Duplicate prevention (server-side enforcement): same checks as create,
@@ -167,8 +205,6 @@ export async function updateProduct(id: string, formData: FormData) {
     oliveyoung_url: parsed.data.oliveyoung_url ?? null,
     excludeId: id,
   });
-  // Capture the previous slug so a rename doesn't leave the old detail page cached.
-  const { data: existing } = await supabase.from("products").select("slug").eq("id", id).single();
   const { error } = await supabase.from("products").update(parsed.data).eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/");

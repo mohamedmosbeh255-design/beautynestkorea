@@ -269,7 +269,7 @@ export default function ProductForm({
           <label className={label}>Price last checked (YYYY-MM-DD)</label>
           <input type="date" {...register("price_checked_at")} className={input} />
           {errors.price_checked_at && <p className="mt-1 text-xs text-red-600">{errors.price_checked_at.message}</p>}
-          <p className="mt-1 text-[11px] text-ink-soft">Leave empty if unknown — the price block hides until a real check date is saved. Never copy updated_at here.</p>
+          <p className="mt-1 text-[11px] text-ink-soft">Auto-set to today whenever the price or rating is saved — fill in only to backdate a real check. Never copy updated_at here.</p>
         </div>
         <div className="flex items-center gap-6 md:col-span-2">
           <label className="flex items-center gap-2 text-sm font-medium">

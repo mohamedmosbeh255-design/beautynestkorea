@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Star, ArrowUpRight } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { formatPriceChecked, formatPrice } from "@/lib/utils";
+import PriceNote from "@/components/PriceNote";
 
 export default function ProductCard({ product }: { product: Product }) {
   const img = product.image_urls[0] ?? "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80";
@@ -64,7 +65,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 <ArrowUpRight className="h-4 w-4" />
               </span>
             </div>
-            <p className="mt-1 text-[11px] text-ink-soft">Prices &amp; ratings as of {priceChecked} · may change anytime on Amazon &amp; Olive Young · check the retailer for current info</p>
+            <p className="mt-1 text-[11px] text-ink-soft"><PriceNote checkedDate={priceChecked} /></p>
           </>
         )}
         {!priceChecked && hasCatalogPrice && (
@@ -75,7 +76,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 <ArrowUpRight className="h-4 w-4" />
               </span>
             </div>
-            <p className="mt-1 text-[11px] text-ink-soft">Prices &amp; ratings may change anytime on Amazon &amp; Olive Young · check the retailer for current info</p>
+            <p className="mt-1 text-[11px] text-ink-soft"><PriceNote /></p>
           </>
         )}
         <div className="mt-3 flex flex-wrap gap-1.5">
