@@ -169,6 +169,26 @@ body {
   .report-table thead {
     display: none;
   }
+  /* Cards fit the viewport: the Tailwind min-w-[560px] (needed for desktop
+   * horizontal scroll) would otherwise force 560px-wide cards on ~350px
+   * phones, cutting values off the right edge. Unlayered author CSS beats
+   * layered utilities, so no !important is needed. The overflow-x-auto
+   * wrapper stays untouched as the scroll container for genuinely wide
+   * content — it simply stays dormant when nothing overflows. */
+  .report-table {
+    min-width: 0;
+  }
+  /* Titles wrap naturally instead of clipping: the 2-line clamp + Read more
+   * control is a desktop treatment — in stacked-card mode the full title
+   * shows and the now-redundant toggle hides. Desktop CSS below is untouched. */
+  .report-table .clamp-2 {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+  }
+  .report-table .report-title-toggle > button {
+    display: none;
+  }
   .report-table,
   .report-table tbody {
     display: block;
