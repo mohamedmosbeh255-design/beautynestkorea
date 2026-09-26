@@ -114,7 +114,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <div className="mt-3 flex items-center gap-2 text-sm">
             <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
             <span className="font-bold">{product.rating?.toFixed(1) ?? "—"}</span>
-            <span className="text-ink-soft">{(product.review_count ?? 0).toLocaleString()} Amazon reviews</span>
+            <span className="text-ink-soft">{(product.review_count ?? 0).toLocaleString()} {(product.amazon_url?.trim() || product.asin || product.amazon_asin?.trim()) ? "Amazon reviews" : "reviews"}</span>
           </div>
 
           {priceChecked && (
