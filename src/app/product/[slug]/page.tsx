@@ -34,6 +34,17 @@ const RETAILER_PRICE_DETAILS: Record<
   },
 };
 
+// Product-page-only full-date stamp (e.g. "Sep 24, 2026") for the main
+// price line. Shared formatPriceChecked (month + year) is left untouched
+// so cards and other surfaces keep today's output. Null → null, so old
+// products without a date render exactly as today (no backfill, no guess).
+function formatPriceCheckedFull(iso?: string | null): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
@@ -58,7 +69,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const related = (await getProducts()).filter((p) => p.slug !== product.slug && p.concern.some((c) => product.concern.includes(c))).slice(0, 3);
   // Price provenance: the price block renders ONLY with a verified
   // priceCheckedAt date. Unknown → NULL → hidden entirely.
-  const priceChecked = formatPriceChecked(product.priceCheckedAt);
+  const priceChecked = formatPriceCheckedFull(product.priceCheckedAt);
   const discount = priceChecked && product.compare_at_price && product.compare_at_price > product.price
     ? Math.round((1 - product.price / product.compare_at_price) * 100) : 0;
   const whereToBuyAsOf = slug in RETAILER_PRICE_DETAILS

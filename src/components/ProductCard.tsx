@@ -2,8 +2,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { Star, ArrowUpRight } from "lucide-react";
 import type { Product } from "@/lib/types";
-import { formatPriceChecked, formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 import PriceNote from "@/components/PriceNote";
+
+// Card/listing-only full-date stamp (e.g. "Sep 24, 2026"). Shared
+// formatPriceChecked (month + year) is left untouched so the product page's
+// "Where to buy" snapshot keeps today's output. Null → null, so products
+// without a date render exactly as today (no backfill, no guess).
+function formatPriceCheckedFull(iso?: string | null): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+}
 
 export default function ProductCard({ product }: { product: Product }) {
   const img = product.image_urls[0] ?? "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80";
@@ -16,7 +27,7 @@ export default function ProductCard({ product }: { product: Product }) {
   // retailer" microcopy and NO stale "Price checked" claim. Discount badges stay
   // verified-only so an unverified compare_at_price can never imply a deal.
   const hasCatalogPrice = product.price != null;
-  const priceChecked = formatPriceChecked(product.priceCheckedAt);
+  const priceChecked = formatPriceCheckedFull(product.priceCheckedAt);
   const discount = priceChecked && product.compare_at_price && product.compare_at_price > product.price
     ? Math.round((1 - product.price / product.compare_at_price) * 100)
     : 0;
