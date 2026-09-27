@@ -8,7 +8,7 @@ export default async function NewArticlePage() {
   const products = (await getAllProductsAdmin()) ?? [];
   const safeProducts = Array.isArray(products) ? products : [];
   const productOptions = safeProducts
-    .filter((p) => p != null && p.is_active !== false)
+    .filter((p) => p != null && p.is_active !== false && p.id != null && typeof p.title === "string" && typeof p.brand === "string")
     .map((p) => ({ id: String(p.id), title: p.title, brand: p.brand }));
   return (
     <div className="max-w-3xl">

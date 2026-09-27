@@ -48,6 +48,8 @@ export default function ArticleForm({
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [selected, setSelected] = useState<string[]>(initial?.related_product_ids ?? []);
+  // Related-products guard: never let a nullish prop reach `.length`/`.map` below.
+  const options = Array.isArray(productOptions) ? productOptions : [];
   // Auto-generate slug from title until the editor touches the slug field.
   const [slugTouched, setSlugTouched] = useState(Boolean(initial?.slug));
 
@@ -144,11 +146,11 @@ export default function ArticleForm({
         </div>
         <div className="md:col-span-2">
           <label className={label}>Related products ({selected.length}/{MAX_RELATED}) — drives the “Recommended Products” section</label>
-          {productOptions.length === 0 ? (
+          {options.length === 0 ? (
             <p className="rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">No active products yet. Add products first, then link them here.</p>
           ) : (
             <ul className="grid max-h-64 gap-2 overflow-y-auto rounded-2xl border border-sage-100 bg-white/60 p-3">
-              {productOptions.map((p) => {
+              {options.map((p) => {
                 const checked = selected.includes(p.id);
                 const disabled = !checked && selected.length >= MAX_RELATED;
                 return (
