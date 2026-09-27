@@ -104,12 +104,12 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 export async function getAllProductsAdmin(): Promise<Product[]> {
   try {
     const supabase = await createServerSupabase();
-    if (!supabase) return MOCK_PRODUCTS; // local preview mode
+    if (!supabase) return Array.isArray(MOCK_PRODUCTS) ? MOCK_PRODUCTS : []; // local preview mode
     const { data, error } = await supabase.from("products").select("*").order("created_at", { ascending: false });
-    if (!error && data) return data.map(mapRow);
+    if (!error && Array.isArray(data)) return data.filter((row) => row != null).map(mapRow);
     // Configured but unreadable (e.g. SQL not run yet): mocks in dev, empty in prod.
-    return devFallback(MOCK_PRODUCTS, []);
+    return devFallback(Array.isArray(MOCK_PRODUCTS) ? MOCK_PRODUCTS : [], []);
   } catch {
-    return devFallback(MOCK_PRODUCTS, []);
+    return devFallback(Array.isArray(MOCK_PRODUCTS) ? MOCK_PRODUCTS : [], []);
   }
 }

@@ -5,9 +5,10 @@ import { getAllProductsAdmin } from "@/lib/products";
 export const dynamic = "force-dynamic";
 
 export default async function NewArticlePage() {
-  const products = await getAllProductsAdmin();
-  const productOptions = products
-    .filter((p) => p.is_active !== false)
+  const products = (await getAllProductsAdmin()) ?? [];
+  const safeProducts = Array.isArray(products) ? products : [];
+  const productOptions = safeProducts
+    .filter((p) => p != null && p.is_active !== false)
     .map((p) => ({ id: String(p.id), title: p.title, brand: p.brand }));
   return (
     <div className="max-w-3xl">
