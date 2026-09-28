@@ -306,22 +306,33 @@ export async function createArticle(formData: FormData) {
   const data = parseArticleForm(formData);
   await assertArticleSlugFree(supabase, data.slug);
   const related_product_ids = await validateRelatedProductIds(supabase, data.related_product_ids);
-  const { error } = await supabase.from("articles").insert({
-    title: data.title,
-    slug: data.slug,
-    content: data.content,
-    excerpt: data.excerpt || null,
-    cover_image_url: data.cover_image_url || null,
-    category: data.category,
-    published_at: toArticleDate(data.published_at, data.is_published),
-    is_published: data.is_published,
-    related_product_ids,
-  });
-  if (error) {
-    if ((error as { code?: string }).code === "23505") {
+  try {
+    const { error } = await supabase.from("articles").insert({
+      title: data.title,
+      slug: data.slug,
+      content: data.content,
+      excerpt: data.excerpt || null,
+      cover_image_url: data.cover_image_url || null,
+      category: data.category,
+      published_at: toArticleDate(data.published_at, data.is_published),
+      is_published: data.is_published,
+      related_product_ids,
+    });
+    if (error) throw error;
+  } catch (e) {
+    console.error("[createArticle] insert failed", {
+      message: e instanceof Error ? e.message : String(e),
+      stack: e instanceof Error ? e.stack : undefined,
+      cause: e instanceof Error ? (e as { cause?: unknown }).cause : undefined,
+      code: (e as { code?: string })?.code,
+      details: (e as { details?: unknown })?.details,
+      hint: (e as { hint?: unknown })?.hint,
+      slug: data.slug,
+    });
+    if ((e as { code?: string })?.code === "23505") {
       throw new Error(`An article with the slug “${data.slug}” already exists. Use a different slug.`);
     }
-    throw new Error(error.message);
+    throw new Error(`Save failed: ${e instanceof Error ? e.message : String(e)}`);
   }
   revalidatePath("/");
   revalidatePath("/articles");
