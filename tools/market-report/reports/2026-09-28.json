@@ -1,0 +1,466 @@
+{
+  "date": "2026-09-28",
+  "generatedAt": "2026-09-28T12:17:18.505Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Vitamin C",
+      "views": 712,
+      "previous": 605,
+      "delta": 107
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 690,
+      "previous": 590,
+      "delta": 100
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 165,
+      "previous": 132,
+      "delta": 33
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 391,
+      "previous": 359,
+      "delta": 32
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 339,
+      "previous": 309,
+      "delta": 30
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 54,
+      "previous": 32,
+      "delta": 22
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 76,
+      "previous": 59,
+      "delta": 17
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 284,
+      "previous": 270,
+      "delta": 14
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 93,
+      "previous": 79,
+      "delta": 14
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 342,
+      "previous": 330,
+      "delta": 12
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 645,
+      "previous": 634,
+      "delta": 11
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 181,
+      "previous": 170,
+      "delta": 11
+    },
+    {
+      "name": "Niacinamide",
+      "views": 17,
+      "previous": 11,
+      "delta": 6
+    },
+    {
+      "name": "Squalane",
+      "views": 73,
+      "previous": 75,
+      "delta": -2
+    },
+    {
+      "name": "Ceramides",
+      "views": 126,
+      "previous": 133,
+      "delta": -7
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 37,
+      "previous": 56,
+      "delta": -19
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 14
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 8
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 7
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 3
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 2
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 2
+    },
+    {
+      "name": "Niacinamide",
+      "count": 2
+    },
+    {
+      "name": "Vitamin C",
+      "count": 2
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Glycolic / AHA",
+      "count": 1
+    },
+    {
+      "name": "Micellar Water",
+      "count": 1
+    },
+    {
+      "name": "Mineral / Zinc SPF",
+      "count": 1
+    },
+    {
+      "name": "Panthenol (B5)",
+      "count": 1
+    },
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 1
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "La Roche-Posay",
+      "count": 4
+    },
+    {
+      "name": "CeraVe",
+      "count": 3
+    },
+    {
+      "name": "Purito Seoul",
+      "count": 2
+    },
+    {
+      "name": "The Ordinary",
+      "count": 2
+    },
+    {
+      "name": "Anua",
+      "count": 1
+    },
+    {
+      "name": "Avène",
+      "count": 1
+    },
+    {
+      "name": "Beauty of Joseon",
+      "count": 1
+    },
+    {
+      "name": "Byoma",
+      "count": 1
+    },
+    {
+      "name": "Laneige",
+      "count": 1
+    },
+    {
+      "name": "Medicube",
+      "count": 1
+    },
+    {
+      "name": "Nivea",
+      "count": 1
+    },
+    {
+      "name": "Paula's Choice",
+      "count": 1
+    },
+    {
+      "name": "Round Lab",
+      "count": 1
+    },
+    {
+      "name": "Supergoop",
+      "count": 1
+    },
+    {
+      "name": "Vaseline",
+      "count": 1
+    }
+  ],
+  "communityPosts": [
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1ws8nih/psa_please_do_not_put_tretinion_under_your_eyes/",
+      "title": "[PSA] Please do NOT put tretinion under your eyes - You will regret.",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1ws0w61/acne_stopping_azelaic_acid_was_the_best_thing_i/",
+      "title": "[Acne] Stopping Azelaic Acid Was the Best Thing I Did For My Skin",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Azelaic Acid"
+      ],
+      "brands": [
+        "Vaseline"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1wryks3/product_request_seeking_a_gentle_low_ph_daily/",
+      "title": "[Product request] Seeking a gentle low ph daily cleanser to restore barrier",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Azelaic Acid",
+        "Sunscreen (unspecified)",
+        "Micellar Water"
+      ],
+      "brands": [
+        "La Roche-Posay",
+        "Byoma"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1writy5/antiaging_body_retinol_or_ahabha/",
+      "title": "[Anti-aging] body retinol or aha/bha?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Salicylic Acid (BHA)",
+        "Glycolic / AHA"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1wrqs4h/acne_this_thing_is_bothering_me/",
+      "title": "[Acne] This thing is bothering me",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1ws4p0z/product_request_quitting_actives_and_looking_for/",
+      "title": "[Product request] quitting actives and looking for a moisturizer to help restore my dry, acne prone skin",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": [
+        "Laneige"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1ws40ox/misc_why_is_my_nose_always_red/",
+      "title": "[Misc] Why is my nose always red?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1wrnya0/product_request_help_red_splotchy_skin/",
+      "title": "[Product Request] HELP!! Red Splotchy Skin",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1wrwlfw/product_request_affordable_lightweight_sunscreen/",
+      "title": "[Product Request] Affordable lightweight sunscreen?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Sunscreen (unspecified)"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1wrohfd/dupe_for_supergoop_superscreen_sun_care/",
+      "title": "Dupe for supergoop SUPERSCREEN? [Sun Care]",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "Round Lab",
+        "Supergoop"
+      ]
+    }
+  ],
+  "newsHeadlines": [
+    "Shoppers Say This Hydrating Retinol Serum Made Their ‘Fine Lines Disappear’ in Days, and It’s Only $10 a Bottle",
+    "Uniproma’s recombinant PDRN cream shortlisted for 2026 Laura Marshall Award",
+    "This L'Oréal Paris's PDRN serum left me with a just-had-a-facial glow",
+    "L'Oréal Paris brings the K-beauty ingredient PDRN to Revitalift",
+    "What does retinol actually do for your skin? Here’s what the experts say",
+    "€17 serum or vegan cream: the best PDRN skincare products compared in 2026",
+    "What is ectoin, the new retinol taking over skincare?",
+    "What Comes After Retinol? Inside Skincare’s New Generation of Renewal Ingredients",
+    "6 Things Dermatologists Wish Everyone Knew Before Using Retinol",
+    "From Smoothing Wrinkles to Clearing Acne, These Retinol Serums Do It All",
+    "The most lightweight K-beauty PDRN cream is now on a rare pre-Prime Day sale",
+    "We tested more than a dozen viral Medicube products — these are the ones actually worth it"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 34
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 16
+    },
+    {
+      "name": "Exosomes",
+      "count": 4
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 4
+    },
+    {
+      "name": "Peptides",
+      "count": 2
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Hypochlorous Acid",
+      "count": 1
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-09-27 vs 2026-09-26"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "40 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "200 headline(s) read · 60 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 6/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · no source failed",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-09-27 vs 2026-09-26). Biggest rise: **Vitamin C** +107 views (+17.7%). Highest volume: **Vitamin C** (712 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** 40 posts analysed; the most-discussed ingredient is **Sunscreen (unspecified)** (14 posts), with **La Roche-Posay** the most-mentioned brand (4 posts).",
+    "**News pulse:** 200 headline(s) read across 2 quer(ies), 60 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (34 headline(s)), brand **Medicube** (4 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-09-27 vs 2026-09-26):** up — Vitamin C +107 views; down — Snail Mucin -19 views. Community mention deltas: up — Collagen +1, down — Azelaic Acid -1.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Sunscreen (unspecified)**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
