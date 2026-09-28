@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { getAllAdvice } from "@/lib/advice";
+import { getAllAdvice, type AdviceMeta } from "@/lib/advice";
+import { getPublishedArticles } from "@/lib/articles";
 import { getAdviceKb } from "@/lib/advice-kb";
 import { siteBaseUrl } from "@/lib/market-report";
 import { ArrowRight } from "lucide-react";
@@ -17,8 +18,64 @@ export const metadata: Metadata = {
   alternates: { canonical: `${siteBaseUrl()}/advice` },
 };
 
-export default function AdviceIndex() {
-  const articles = getAllAdvice();
+export const revalidate = 300;
+
+interface GuideCard extends AdviceMeta {
+  href: string;
+  isDb: boolean;
+}
+
+function toTimestamp(value: string): number {
+  const t = Date.parse(value ?? "");
+  return Number.isNaN(t) ? 0 : t;
+}
+
+function formatDbDate(iso?: string | null): string {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toISOString().slice(0, 10);
+}
+
+function readTimeFor(content: string): string {
+  const words = String(content ?? "").trim().split(/\s+/).filter(Boolean).length;
+  return `${Math.max(1, Math.round(words / 200))} min read`;
+}
+
+// DB cards for the merged grid. Never throws: any failure degrades to
+// static-guides-only so the hub cannot 500.
+async function getDbCards(): Promise<GuideCard[]> {
+  try {
+    const rows = await getPublishedArticles();
+    return rows.map((a) => ({
+      title: a.title,
+      slug: a.slug,
+      excerpt: a.excerpt ?? "",
+      category: a.category,
+      readTime: readTimeFor(a.content),
+      image: a.cover_image_url ?? "",
+      imageAlt: a.title,
+      date: formatDbDate(a.published_at),
+      href: `/articles/${a.slug}`,
+      isDb: true,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function AdviceIndex() {
+  const staticCards: GuideCard[] = getAllAdvice().map((post) => ({
+    ...post,
+    href: `/advice/${post.slug}`,
+    isDb: false,
+  }));
+  const dbCards = await getDbCards();
+  // Newest first. Array.sort is stable: static-vs-static order on ties is
+  // preserved because static cards are inserted first.
+  const articles = [...staticCards, ...dbCards].sort(
+    (a, b) => toTimestamp(b.date) - toTimestamp(a.date)
+  );
   const { concerns } = getAdviceKb();
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
@@ -47,7 +104,7 @@ export default function AdviceIndex() {
       </div>
       <div className="mt-6 grid gap-6 md:grid-cols-3">
         {articles.map((post) => (
-          <Link key={post.slug} href={`/advice/${post.slug}`} className="glass group overflow-hidden rounded-3xl transition hover:-translate-y-1 hover:shadow-xl">
+          <Link key={`${post.isDb ? "article" : "advice"}-${post.slug}`} href={post.href} className="glass group overflow-hidden rounded-3xl transition hover:-translate-y-1 hover:shadow-xl">
             {post.image ? (
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image src={post.image} alt={post.imageAlt ?? post.title} fill className="object-cover transition group-hover:scale-105" sizes="33vw" />
@@ -55,6 +112,9 @@ export default function AdviceIndex() {
             ) : null}
             <div className="p-6">
               <p className="text-xs font-semibold uppercase tracking-wider text-sage-600">{post.category} • {post.readTime} • {post.date}</p>
+              {post.isDb ? (
+                <span className="mt-2 inline-block rounded-full bg-sage-100 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-sage-700">Journal</span>
+              ) : null}
               <h3 className="font-serif-display mt-2 text-xl font-bold leading-snug">{post.title}</h3>
               <p className="mt-2 text-sm text-ink-soft clamp-3">{post.excerpt}</p>
               <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700">
