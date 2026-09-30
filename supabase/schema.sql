@@ -230,6 +230,47 @@ create policy "Admins full access articles"
   using (exists (select 1 from public.admin_users where admin_users.id = auth.uid()))
   with check (exists (select 1 from public.admin_users where admin_users.id = auth.uid()));
 
+-- ─── site_settings (dynamic footer — Hybrid A+B) ─────────
+-- Key-value store for site-wide settings. The footer reads key
+-- 'footer-v1' via the cookie-free anon REST fetch with 24h ISR cache
+-- (see src/lib/footer.ts). The frozen DEFAULT_FOOTER in code is the
+-- fallback when this row is missing/unreadable — so this migration is
+-- purely additive and can never break the storefront.
+create table if not exists public.site_settings (
+  key text primary key,
+  value jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
+);
+
+drop trigger if exists set_site_settings_updated_at on public.site_settings;
+create trigger set_site_settings_updated_at
+  before update on public.site_settings
+  for each row execute function public.handle_updated_at();
+
+alter table public.site_settings enable row level security;
+
+-- Public read (footer is rendered for anonymous visitors).
+drop policy if exists "Public read site_settings" on public.site_settings;
+create policy "Public read site_settings"
+  on public.site_settings for select
+  to anon, authenticated
+  using (true);
+
+-- Admins manage settings (via admin_users, same as products/articles).
+drop policy if exists "Admins full access site_settings" on public.site_settings;
+create policy "Admins full access site_settings"
+  on public.site_settings for all
+  to authenticated
+  using (exists (select 1 from public.admin_users where admin_users.id = auth.uid()))
+  with check (exists (select 1 from public.admin_users where admin_users.id = auth.uid()));
+
+-- Seed the footer baseline (matches DEFAULT_FOOTER in src/lib/footer.ts).
+-- insert … on conflict do nothing → re-running is safe, never overwrites
+-- admin edits.
+insert into public.site_settings (key, value) values
+  ('footer-v1', '{"tagline":"Honest, curated K-beauty & global skincare recommendations. We compare Amazon and Olive Young so you always get the best price.","disclosure":"Affiliate disclosure: we may earn a commission when you buy through our links — at no extra cost to you. This supports our independent reviews.","shop":[{"label":"Home","href":"/"},{"label":"All products","href":"/shop"},{"label":"Acne care","href":"/shop?concern=Acne"},{"label":"Anti-aging","href":"/shop?concern=Anti-aging"},{"label":"Hydration","href":"/shop?concern=Hydration"}],"learn":[{"label":"Skincare advice","href":"/advice"},{"label":"Beginner routine","href":"/advice/10-step-korean-routine-beginners"},{"label":"Market report","href":"/market-report"},{"label":"Report archive","href":"/market-report/archive"},{"label":"Image optimizer","href":"/tools/image-optimizer"}],"company":[{"label":"About us","href":"/about"},{"label":"How we review","href":"/how-we-review"},{"label":"Contact us","href":"/contact"},{"label":"Affiliate disclosure","href":"/affiliate-disclosure"},{"label":"Privacy policy","href":"/privacy"}],"socials":[{"label":"Facebook","href":"https://www.facebook.com/mohamed.mosbeh.508798/"},{"label":"Instagram","href":"https://www.instagram.com/beautynest_k_beauty_expert/"},{"label":"Pinterest","href":"https://fr.pinterest.com/beautynest_skincare/"},{"label":"Benable","href":"https://benable.com/BeautyNest2026"},{"label":"Short links","href":"https://c8ke.me/beautynestkorea"},{"label":"Google Sites","href":"https://sites.google.com/view/beautynestskincare/kbeauty-serums"},{"label":"Email","href":"mailto:mohamedmosbeh255@gmail.com"}]}'::jsonb)
+on conflict (key) do nothing;
+
 -- ─── Admin bootstrap (run AFTER creating your auth user) ─────
 -- 1. Supabase Dashboard → Authentication → Users → Add user (email + password).
 --    If "Confirm email" is on in Auth → Providers → Email, confirm the user

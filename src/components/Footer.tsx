@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Sparkles, Link as LinkIcon, FileText, Mail, Music2, ShoppingBag } from "lucide-react";
 import { isSponsoredCurationLink } from "@/lib/affiliates";
+import { getFooterLinks } from "@/lib/footer";
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -35,7 +36,7 @@ function PinterestIcon({ className }: { className?: string }) {
   );
 }
 
-const socials = [
+const DEFAULT_SOCIALS = [
   { href: "https://www.facebook.com/mohamed.mosbeh.508798/", label: "Facebook", Icon: FacebookIcon },
   { href: "https://www.instagram.com/beautynest_k_beauty_expert/", label: "Instagram", Icon: InstagramIcon },
   { href: "https://fr.pinterest.com/beautynest_skincare/", label: "Pinterest", Icon: PinterestIcon },
@@ -45,7 +46,29 @@ const socials = [
   { href: "mailto:mohamedmosbeh255@gmail.com", label: "Email", Icon: Mail },
 ];
 
-export default function Footer() {
+/** Map a DB social label to its icon (code-owned — DB stores only label+href, code derives presentation + rel). */
+function socialIconFor(label: string) {
+  const l = label.toLowerCase();
+  if (l.includes("facebook")) return FacebookIcon;
+  if (l.includes("instagram")) return InstagramIcon;
+  if (l.includes("pinterest")) return PinterestIcon;
+  if (l.includes("youtube")) return YoutubeIcon;
+  if (l.includes("tiktok") || l.includes("music")) return Music2;
+  if (l.includes("benable") || l.includes("shop")) return ShoppingBag;
+  if (l.includes("mail") || l.includes("email") || l.includes("contact")) return Mail;
+  if (l.includes("google") || l.includes("site") || l.includes("doc")) return FileText;
+  return LinkIcon;
+}
+
+export default async function Footer() {
+  // Cached read (24h) with instant fallback to DEFAULT_FOOTER on any
+  // failure — never throws, never renders empty. Cookie-free, so this
+  // async Server Component still participates in Full Route Cache.
+  const data = await getFooterLinks();
+  const socialItems = (data.socials.length > 0 ? data.socials : DEFAULT_SOCIALS).map((s) => ({
+    ...s,
+    Icon: socialIconFor(s.label),
+  }));
   return (
     <footer className="mt-20 border-t border-sage-100 bg-white/70 backdrop-blur">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-5">
@@ -57,13 +80,13 @@ export default function Footer() {
             <span className="font-serif-display text-lg font-bold">BeautyNestKorea</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">
-            Honest, curated K-beauty & global skincare recommendations. We compare Amazon and Olive Young so you always get the best price.
+            {data.tagline}
           </p>
           <p className="mt-4 max-w-sm text-xs leading-relaxed text-ink-soft/80">
-            Affiliate disclosure: we may earn a commission when you buy through our links — at no extra cost to you. This supports our independent reviews.
+            {data.disclosure}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            {socials.map(({ href, label, Icon }) => (
+            {socialItems.map(({ href, label, Icon }) => (
               <a
                 key={label}
                 href={href}
@@ -96,31 +119,25 @@ export default function Footer() {
         <div>
           <h4 className="text-sm font-semibold uppercase tracking-wider text-ink">Shop</h4>
           <ul className="mt-3 space-y-2 text-sm text-ink-soft">
-            <li><Link href="/" className="hover:text-ink">Home</Link></li>
-            <li><Link href="/shop" className="hover:text-ink">All products</Link></li>
-            <li><Link href="/shop?concern=Acne" className="hover:text-ink">Acne care</Link></li>
-            <li><Link href="/shop?concern=Anti-aging" className="hover:text-ink">Anti-aging</Link></li>
-            <li><Link href="/shop?concern=Hydration" className="hover:text-ink">Hydration</Link></li>
+            {data.shop.map((l) => (
+              <li key={`${l.label}-${l.href}`}><Link href={l.href} className="hover:text-ink">{l.label}</Link></li>
+            ))}
           </ul>
         </div>
         <div>
           <h4 className="text-sm font-semibold uppercase tracking-wider text-ink">Learn</h4>
           <ul className="mt-3 space-y-2 text-sm text-ink-soft">
-            <li><Link href="/advice" className="hover:text-ink">Skincare advice</Link></li>
-            <li><Link href="/advice/10-step-korean-routine-beginners" className="hover:text-ink">Beginner routine</Link></li>
-            <li><Link href="/market-report" className="hover:text-ink">Market report</Link></li>
-            <li><Link href="/market-report/archive" className="hover:text-ink">Report archive</Link></li>
-            <li><Link href="/tools/image-optimizer" className="hover:text-ink">Image optimizer</Link></li>
+            {data.learn.map((l) => (
+              <li key={`${l.label}-${l.href}`}><Link href={l.href} className="hover:text-ink">{l.label}</Link></li>
+            ))}
           </ul>
         </div>
         <div>
           <h4 className="text-sm font-semibold uppercase tracking-wider text-ink">Company</h4>
           <ul className="mt-3 space-y-2 text-sm text-ink-soft">
-            <li><Link href="/about" className="hover:text-ink">About us</Link></li>
-            <li><Link href="/how-we-review" className="hover:text-ink">How we review</Link></li>
-            <li><Link href="/contact" className="hover:text-ink">Contact us</Link></li>
-            <li><Link href="/affiliate-disclosure" className="hover:text-ink">Affiliate disclosure</Link></li>
-            <li><Link href="/privacy" className="hover:text-ink">Privacy policy</Link></li>
+            {data.company.map((l) => (
+              <li key={`${l.label}-${l.href}`}><Link href={l.href} className="hover:text-ink">{l.label}</Link></li>
+            ))}
           </ul>
         </div>
       </div>
