@@ -1,0 +1,221 @@
+{
+  "date": "2026-10-03",
+  "generatedAt": "2026-10-03T10:47:28.556Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 365,
+      "previous": 335,
+      "delta": 30
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 53,
+      "previous": 34,
+      "delta": 19
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 404,
+      "previous": 387,
+      "delta": 17
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 44,
+      "previous": 45,
+      "delta": -1
+    },
+    {
+      "name": "Niacinamide",
+      "views": 9,
+      "previous": 14,
+      "delta": -5
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 171,
+      "previous": 177,
+      "delta": -6
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 177,
+      "previous": 188,
+      "delta": -11
+    },
+    {
+      "name": "Squalane",
+      "views": 82,
+      "previous": 94,
+      "delta": -12
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 256,
+      "previous": 272,
+      "delta": -16
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 70,
+      "previous": 90,
+      "delta": -20
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 50,
+      "previous": 72,
+      "delta": -22
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 629,
+      "previous": 683,
+      "delta": -54
+    },
+    {
+      "name": "Ceramides",
+      "views": 110,
+      "previous": 174,
+      "delta": -64
+    },
+    {
+      "name": "Vitamin C",
+      "views": 665,
+      "previous": 736,
+      "delta": -71
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 645,
+      "previous": 729,
+      "delta": -84
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 326,
+      "previous": 420,
+      "delta": -94
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [],
+  "brands": [],
+  "communityPosts": [],
+  "newsHeadlines": [
+    "PDRN Interest Jumps 610% as Dior, L'Oreal Join K-Beauty Trend",
+    "PDRN Is the Ingredient Your Skincare Routine Might Be Missing",
+    "Cetaphil’s Anti-Aging Power Ingredient Will Replace Your Retinol For Less Than $20",
+    "Shoppers are racing to buy this viral COSRX skincare favourite now it’s 60 per cent off",
+    "This K-pharmacy brand has worked magic with buzz ingredient PDRN – and now you can snap it up in Boots",
+    "Dermatologists Share the Best Collagen-Boosting Skincare Ingredients That Actually Work",
+    "Shoppers Say This Hydrating Retinol Serum Made Their ‘Fine Lines Disappear’ in Days, and It’s Only $10 a Bottle",
+    "Uniproma’s recombinant PDRN cream shortlisted for 2026 Laura Marshall Award",
+    "What does retinol actually do for your skin? Here’s what the experts say",
+    "6 Things Dermatologists Wish Everyone Knew Before Using Retinol",
+    "From Smoothing Wrinkles to Clearing Acne, These Retinol Serums Do It All",
+    "The most lightweight K-beauty PDRN cream is now on a rare pre-Prime Day sale"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 29
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 17
+    },
+    {
+      "name": "Exosomes",
+      "count": 3
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 3
+    },
+    {
+      "name": "Collagen",
+      "count": 2
+    },
+    {
+      "name": "Peptides",
+      "count": 2
+    },
+    {
+      "name": "Bakuchiol",
+      "count": 1
+    },
+    {
+      "name": "Hypochlorous Acid",
+      "count": 1
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-10-02 vs 2026-10-01"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "failed",
+      "detail": "no posts retrievable from JSON or Atom"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "200 headline(s) read · 57 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 5/6 sources produced data · degraded (documented fallback): TikTok Creative Center · failed: Reddit community (SkincareAddiction + KoreanBeauty)",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-10-02 vs 2026-10-01). Biggest rise: **Centella Asiatica (Cica)** +30 views (+9.0%). Highest volume: **Centella Asiatica (Cica)** (365 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** no community data today — both the public JSON and the Atom fallback returned nothing usable.",
+    "**News pulse:** 200 headline(s) read across 2 quer(ies), 57 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (29 headline(s)), brand **Medicube** (4 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-10-02 vs 2026-10-01):** up — Centella Asiatica (Cica) +30 views; down — Hyaluronic Acid -94 views. Community mention deltas: up — none, down — Centella Asiatica (Cica) -1.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **PDRN / Salmon DNA**, the strongest demand signal available today (source: news coverage; social source: static-fallback)."
+  ]
+}
