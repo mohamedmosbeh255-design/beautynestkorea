@@ -115,10 +115,14 @@ export default function ProductForm({
       fd.set("category", values.category);
       const toList = (v: unknown): string[] =>
         Array.isArray(v) ? v.map((s) => String(s).trim()).filter(Boolean) : String(v ?? "").split(/[,\n]/).map((s) => s.trim()).filter(Boolean);
+      // Image URLs may contain commas (e.g. "…Balm B5, -png .png") — split on
+      // newlines ONLY, matching newlineToArray in src/lib/validations.ts.
+      const toLines = (v: unknown): string[] =>
+        Array.isArray(v) ? v.map((s) => String(s).trim()).filter(Boolean) : String(v ?? "").split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
       toList(values.concern).forEach((c) => fd.append("concern", c));
       toList(values.skin_type).forEach((s) => fd.append("skin_type", s));
       fd.set("key_ingredients", toList(values.key_ingredients).join(", "));
-      fd.set("image_urls", toList(values.image_urls).join("\n"));
+      fd.set("image_urls", toLines(values.image_urls).join("\n"));
       fd.set("amazon_url", values.amazon_url ?? "");
       fd.set("amazon_asin", (values.amazon_asin ?? "").toString().trim().toUpperCase());
       fd.set("oliveyoung_url", values.oliveyoung_url ?? "");

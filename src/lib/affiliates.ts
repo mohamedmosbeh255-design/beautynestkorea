@@ -2,9 +2,8 @@
  * Single source of truth for the Amazon Associates tag appended to
  * amazon.com/dp/ links rendered on market-report pages.
  *
- * TODO: replace with your real Associates tag (e.g. "yourstore-20").
- * Until then the placeholder below attributes nothing — update it before
- * relying on market-report links to earn.
+ * Verified Oct 2, 2026: matches the real Tracking ID in the owner's
+ * Amazon Associates account (Store ID: beautynest202-20).
  */
 export const AFFILIATE_TAG = "beautynest202-20";
 

@@ -6,6 +6,14 @@ const stringToArray = (val: unknown): string[] => {
   return [];
 };
 
+// Image URLs may legally contain commas (e.g. Supabase object names like
+// "…Cicaplast Balm B5, -png .png") — split on newlines ONLY, never on commas.
+const newlineToArray = (val: unknown): string[] => {
+  if (Array.isArray(val)) return val.map((s) => String(s).trim()).filter(Boolean);
+  if (typeof val === "string") return val.split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
+  return [];
+};
+
 export const productSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
   slug: z.string().min(3, "Slug is required").regex(/^[a-z0-9-]+$/, "Slug must be lowercase alphanumeric with dashes"),
@@ -17,7 +25,7 @@ export const productSchema = z.object({
   concern: z.preprocess(stringToArray, z.array(z.string()).min(1, "Pick at least one concern")),
   skin_type: z.preprocess(stringToArray, z.array(z.string()).default([])),
   key_ingredients: z.preprocess(stringToArray, z.array(z.string()).default([])),
-  image_urls: z.preprocess(stringToArray, z.array(z.string().url("Must be a valid URL")).min(1, "At least one image URL is required")),
+  image_urls: z.preprocess(newlineToArray, z.array(z.string().url("Must be a valid URL")).min(1, "At least one image URL is required")),
   amazon_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
   amazon_asin: z.string().regex(/^B0[0-9A-Z]{8}$/, "Must look like B0XXXXXXXX").optional().or(z.literal("")).or(z.null()),
   oliveyoung_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
