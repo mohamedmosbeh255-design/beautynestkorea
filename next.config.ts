@@ -36,6 +36,10 @@ const nextConfig: NextConfig = {
   // synonym merges themselves happen at the data layer (src/lib/concerns.ts).
   async redirects() {
     return [
+      // Legacy duplicate of the affiliate disclosure (identical title +
+      // description, footer already links /affiliate-disclosure). Consolidates
+      // the indexed pair into one canonical URL; the route file stays as-is.
+      { source: "/disclosure", destination: "/affiliate-disclosure", permanent: true },
       { source: "/category/elasticity", destination: "/category/anti-aging", permanent: true },
       { source: "/category/firming", destination: "/category/anti-aging", permanent: true },
       { source: "/category/sensitive", destination: "/category/sensitive-skin", permanent: true },
