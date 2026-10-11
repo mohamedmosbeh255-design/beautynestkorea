@@ -86,7 +86,6 @@ export const INDEXED_FOOTER_URLS: ReadonlySet<string> = new Set([
   "/about",
   "/contact",
   "/privacy",
-  "/disclosure",
   "/affiliate-disclosure",
   "/how-we-review",
 ]);
