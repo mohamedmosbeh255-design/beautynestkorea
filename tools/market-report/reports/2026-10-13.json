@@ -1,0 +1,473 @@
+{
+  "date": "2026-10-13",
+  "generatedAt": "2026-10-13T13:07:57.188Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 718,
+      "previous": 526,
+      "delta": 192
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 293,
+      "previous": 188,
+      "delta": 105
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 352,
+      "previous": 261,
+      "delta": 91
+    },
+    {
+      "name": "Vitamin C",
+      "views": 671,
+      "previous": 596,
+      "delta": 75
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 642,
+      "previous": 587,
+      "delta": 55
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 216,
+      "previous": 165,
+      "delta": 51
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 386,
+      "previous": 343,
+      "delta": 43
+    },
+    {
+      "name": "Ceramides",
+      "views": 162,
+      "previous": 122,
+      "delta": 40
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 218,
+      "previous": 198,
+      "delta": 20
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 372,
+      "previous": 355,
+      "delta": 17
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 46,
+      "previous": 31,
+      "delta": 15
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 54,
+      "previous": 45,
+      "delta": 9
+    },
+    {
+      "name": "Squalane",
+      "views": 78,
+      "previous": 75,
+      "delta": 3
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 65,
+      "previous": 63,
+      "delta": 2
+    },
+    {
+      "name": "Niacinamide",
+      "views": 14,
+      "previous": 16,
+      "delta": -2
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 90,
+      "previous": 97,
+      "delta": -7
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 10
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 7
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 6
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 3
+    },
+    {
+      "name": "Micellar Water",
+      "count": 2
+    },
+    {
+      "name": "Niacinamide",
+      "count": 2
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 2
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 1
+    },
+    {
+      "name": "Exosomes",
+      "count": 1
+    },
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 1
+    },
+    {
+      "name": "Vitamin C",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "CeraVe",
+      "count": 4
+    },
+    {
+      "name": "La Roche-Posay",
+      "count": 4
+    },
+    {
+      "name": "Skin1004",
+      "count": 3
+    },
+    {
+      "name": "Anua",
+      "count": 2
+    },
+    {
+      "name": "Avène",
+      "count": 2
+    },
+    {
+      "name": "Neutrogena",
+      "count": 2
+    },
+    {
+      "name": "Round Lab",
+      "count": 2
+    },
+    {
+      "name": "The Ordinary",
+      "count": 2
+    },
+    {
+      "name": "Beauty of Joseon",
+      "count": 1
+    },
+    {
+      "name": "Bioderma",
+      "count": 1
+    },
+    {
+      "name": "Cosrx",
+      "count": 1
+    },
+    {
+      "name": "Haruharu Wonder",
+      "count": 1
+    },
+    {
+      "name": "Medicube",
+      "count": 1
+    },
+    {
+      "name": "Nivea",
+      "count": 1
+    },
+    {
+      "name": "Paula's Choice",
+      "count": 1
+    },
+    {
+      "name": "Vaseline",
+      "count": 1
+    }
+  ],
+  "communityPosts": [
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x46xte/acne_one_of_my_pimples_exploded_and_left_a_huge/",
+      "title": "[Acne] One of my pimples exploded and left a huge hole in my skin, will this ever heal?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x44l0g/niacinamide_in_everything_product_request/",
+      "title": "Niacinamide in everything :( [Product request]",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Niacinamide",
+        "Retinol / Retinoids",
+        "PDRN / Salmon DNA",
+        "Exosomes"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x4goey/acne_is_this_a_cystic_pimpleacne/",
+      "title": "[Acne] Is this a cystic pimple/acne",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x487n7/product_question_has_anybody_tried_regimen_labs/",
+      "title": "[product question] Has anybody tried Regimen Lab’s Azelaic Acid Advanced? Or has any other Azelaic Acid recs?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Azelaic Acid",
+        "Salicylic Acid (BHA)",
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "Anua",
+        "Round Lab",
+        "Neutrogena"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x4ebp4/product_request_need_korean_sunscreen/",
+      "title": "[Product Request] Need Korean sunscreen recommendations that are fungal acne safe and are not SHINY.",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "Beauty of Joseon"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x4dhjr/routine_help_trying_help_bf_with_face_and_shaving/",
+      "title": "[Routine Help] Trying help bf with face and shaving routine",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Niacinamide",
+        "Azelaic Acid",
+        "Salicylic Acid (BHA)",
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "CeraVe",
+        "The Ordinary",
+        "Paula's Choice",
+        "Nivea"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x4pwgu/routine_helplip_pigmentation_recommendations_in/",
+      "title": "[routine help]Lip pigmentation recommendations in Japan? (Products that actually work?)",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "Vaseline"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x4kslc/routine_help_how_could_i_fade_this/",
+      "title": "[routine help] how could I fade this hyperpigmentation",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Azelaic Acid",
+        "Benzoyl Peroxide",
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "Haruharu Wonder",
+        "La Roche-Posay"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x4v969/gf_has_eczema_looking_for_non_steroid/",
+      "title": "GF has eczema looking for non steroid remedy/ointment [Product Request]",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x4qxw5/routine_help_what_treatments_to_fix_my_skin/",
+      "title": "[routine help] What treatments to fix my skin? Almost 3 years post-accutane",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids"
+      ],
+      "brands": []
+    }
+  ],
+  "newsHeadlines": [
+    "This 40% off PDRN cream is the missing piece to your skincare routine",
+    "We tested more than a dozen viral Medicube products — these are the ones actually worth it",
+    "7 Retinol Serums Perfect For Beginners This Autumn Season",
+    "Shoppers Say This “Powerful” Yet Gentle Retinol Moisturizer Helps Erase “Stubborn Wrinkles”",
+    "Love Anua’s moisturizer? Its PDRN Collagen Neck Patches is a ‘must have for 40+ gals’",
+    "The ‘miracle’ SPF ingredient taking over skincare – and why you need it",
+    "What is PDRN, or viral K-beauty salmon sperm?",
+    "PDRN Serums Are The Secret To Glass Skin: 6 Of The Best New Products For A 'Salmon Sperm' Facial In A Bottle",
+    "This K-pharmacy brand has worked magic with buzz ingredient PDRN – and now you can snap it up in Boots",
+    "Uniproma’s recombinant PDRN cream shortlisted for 2026 Laura Marshall Award",
+    "What does retinol actually do for your skin? Here’s what the experts say",
+    "6 Things Dermatologists Wish Everyone Knew Before Using Retinol"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 36
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 13
+    },
+    {
+      "name": "Exosomes",
+      "count": 4
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 3
+    },
+    {
+      "name": "Collagen",
+      "count": 2
+    },
+    {
+      "name": "Hypochlorous Acid",
+      "count": 2
+    },
+    {
+      "name": "Peptides",
+      "count": 2
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 2
+    },
+    {
+      "name": "Bakuchiol",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-10-12 vs 2026-10-11"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "25 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "200 headline(s) read · 57 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 6/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · no source failed",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-10-12 vs 2026-10-11). Biggest rise: **Salicylic Acid (BHA)** +192 views (+36.5%). Highest volume: **Salicylic Acid (BHA)** (718 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** 25 posts analysed; the most-discussed ingredient is **Sunscreen (unspecified)** (10 posts), with **CeraVe** the most-mentioned brand (4 posts).",
+    "**News pulse:** 200 headline(s) read across 2 quer(ies), 57 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (36 headline(s)), brand **Medicube** (2 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-10-12 vs 2026-10-11):** up — Salicylic Acid (BHA) +192 views; down — Panthenol (B5) -7 views. Community mention deltas: up — Azelaic Acid +3, down — Hypochlorous Acid -1.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Sunscreen (unspecified)**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
