@@ -10,4 +10,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Product links policy
 - Prefer a full Amazon dp link or bare ASIN in `amazon_url`/`amazon_asin`; `amzn.to` is legacy fallback only.
+- Same for the UK pair (`amazon_uk_url`/`amazon_uk_asin`, amazon.co.uk, tag beautynestkor-21) — never mix US/UK tags.
 - ASIN derivation (`amazon_asin` column, else `/dp/` or `/gp/product/` regex) is automatic — never hand-build tagged URLs.
+- Stylevana AWIN links (`stylevana_url`, awin1.com redirect) pass through untouched — never Amazon-tagged.

@@ -19,6 +19,12 @@ export interface Product {
   /** Effective ASIN: amazon_asin column, else derived from a full amazon_url. Null for short links. */
   asin?: string | null;
   oliveyoung_url?: string | null;
+  /** Amazon UK affiliate link (amazon.co.uk); null/empty = no UK button. */
+  amazon_uk_url?: string | null;
+  /** Bare UK ASIN (B0…) for dynamic ?tag= link building; NULL = derive from amazon_uk_url. */
+  amazon_uk_asin?: string | null;
+  /** Stylevana AWIN deep link (awin1.com redirect); null/empty = no Stylevana button. */
+  stylevana_url?: string | null;
   rating?: number | null;
   review_count?: number | null;
   /**

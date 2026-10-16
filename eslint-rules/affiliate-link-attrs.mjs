@@ -1,7 +1,7 @@
 /**
  * Local ESLint rule: every literal affiliate-domain link (amazon.com,
- * oliveyoung.com) in JSX must carry target="_blank" and
- * rel="nofollow sponsored noopener".
+ * amazon.co.uk, oliveyoung.com, stylevana.com, awin1.com) in JSX must carry
+ * target="_blank" and rel="nofollow sponsored noopener".
  *
  * Dynamic hrefs (AffiliateButtons, markdown renderers) are centralized in
  * src/lib/affiliates.ts `isAffiliateDomainLink` and fixed at the component
@@ -16,7 +16,7 @@ export const affiliateLinkAttrs = {
     schema: [],
   },
   create(context) {
-    const AFFILIATE_RE = /amazon\.com|oliveyoung\.com/i;
+    const AFFILIATE_RE = /amazon\.com|amazon\.co\.uk|oliveyoung\.com|stylevana\.com|awin1\.com/i;
     return {
       JSXElement(node) {
         const opening = node.openingElement;

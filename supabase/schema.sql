@@ -21,6 +21,9 @@ create table if not exists public.products (
   image_urls text[] not null default '{}',
   amazon_url text,
   oliveyoung_url text,
+  amazon_uk_url text, -- Amazon UK affiliate link (amazon.co.uk, tag beautynestkor-21); NULL = no UK button
+  amazon_uk_asin text, -- bare UK ASIN (B0…) for dynamic ?tag= link building; NULL = derive from amazon_uk_url
+  stylevana_url text, -- Stylevana AWIN deep link (awin1.com redirect); NULL = no Stylevana button
   amazon_asin text, -- bare ASIN (B0…) for dynamic ?tag= link building; NULL = use amazon_url verbatim
   rating numeric(2,1) default 4.5,
   review_count integer default 0,
@@ -60,6 +63,12 @@ alter table public.products add column if not exists amazon_asin text;
 -- entirely. Never backfill from updated_at (that tracks edits, not checks).
 alter table public.products add column if not exists price_checked_at timestamptz;
 
+-- Amazon UK + Stylevana (added 2026-10-16, Preview only): two optional
+-- affiliate links. Nullable text, no backfill, no NOT NULL, Olive Young untouched.
+alter table public.products add column if not exists amazon_uk_url text;
+alter table public.products add column if not exists stylevana_url text;
+alter table public.products add column if not exists amazon_uk_asin text;
+
 -- ─── categories ────────────────────────────────────────────
 -- Concern/category catalog (Acne, Hydration, ...). The storefront derives
 -- "Shop by Concern" cards from product data, so new concerns added on
@@ -86,7 +95,7 @@ create table if not exists public.admin_users (
 create table if not exists public.product_clicks (
   id uuid primary key default gen_random_uuid(),
   product_id uuid references public.products(id) on delete cascade,
-  source text not null check (source in ('amazon', 'oliveyoung')),
+  source text not null check (source in ('amazon', 'oliveyoung', 'amazon_uk', 'stylevana')),
   clicked_at timestamptz not null default now(),
   referrer text,
   user_agent text

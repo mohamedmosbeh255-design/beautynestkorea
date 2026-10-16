@@ -33,6 +33,9 @@ function mapRow(row: any): Product {
       ? row.amazon_asin.trim()
       : extractAsinFromUrl(row.amazon_url)),
     oliveyoung_url: row.oliveyoung_url,
+    amazon_uk_url: row.amazon_uk_url ?? null,
+    amazon_uk_asin: row.amazon_uk_asin ?? null,
+    stylevana_url: row.stylevana_url ?? null,
     rating: row.rating != null ? Number(row.rating) : null,
     review_count: row.review_count ?? 0,
     // Verified price-check timestamp only — never updated_at (edit time).
