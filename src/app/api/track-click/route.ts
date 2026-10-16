@@ -4,7 +4,7 @@ import { createServerSupabase } from "@/lib/supabase/server";
 export async function POST(req: Request) {
   try {
     const { productId, source } = await req.json();
-    if (!productId || !["amazon", "oliveyoung"].includes(source)) {
+    if (!productId || !["amazon", "oliveyoung", "amazon_uk", "stylevana"].includes(source)) {
       return NextResponse.json({ ok: false }, { status: 400 });
     }
     const supabase = await createServerSupabase();

@@ -7,12 +7,32 @@
  */
 export const AFFILIATE_TAG = "beautynest202-20";
 
+/** Amazon UK Associates tag (amazon.co.uk only). Never used for .com links. */
+export const AFFILIATE_TAG_UK = "beautynestkor-21";
+
 const DP_RE = /^https:\/\/(www\.)?amazon\.com\/dp\/[A-Z0-9]+/i;
+const DP_UK_RE = /^https:\/\/(www\.)?amazon\.co\.uk\/dp\/[A-Z0-9]+/i;
 
 export function isAmazonDpLink(href: string): boolean {
   return DP_RE.test(href);
 }
 
+export function isAmazonUkDpLink(href: string): boolean {
+  return DP_UK_RE.test(href);
+}
+
+/** Append ?tag=AFFILIATE_TAG_UK to Amazon UK /dp/ links (no-op if a tag is present). All other domains pass through untouched. */
+export function withAmazonUkTag(href: string): string {
+  if (!isAmazonUkDpLink(href)) return href;
+  try {
+    const url = new URL(href);
+    if (!url.searchParams.has("tag")) url.searchParams.set("tag", AFFILIATE_TAG_UK);
+    return url.toString();
+  } catch {
+    const sep = href.includes("?") ? "&" : "?";
+    return href.includes("tag=") ? href : `${href}${sep}tag=${AFFILIATE_TAG_UK}`;
+  }
+}
 /** Append ?tag=AFFILIATE_TAG to Amazon /dp/ links (no-op if a tag is present). Hrefs for all other domains pass through untouched. */
 export function withAmazonTag(href: string): string {
   if (!isAmazonDpLink(href)) return href;
@@ -32,11 +52,12 @@ export function isSponsoredCurationLink(href: string): boolean {
 }
 
 /**
- * Affiliate outbound domains (Amazon, Olive Young). EVERY link to these
- * must render target="_blank" + rel="nofollow sponsored noopener" —
+ * Affiliate outbound domains (Amazon US + UK, Olive Young, Stylevana, AWIN).
+ * EVERY link to these must render target="_blank" + rel="nofollow sponsored noopener" —
  * enforced by eslint-rules/affiliate-link-attrs.mjs for literal hrefs and
  * centralized here for dynamic ones (AffiliateButtons, markdown renderers).
+ * AWIN/Stylevana hrefs pass through untouched (never Amazon-tagged).
  */
 export function isAffiliateDomainLink(href: string): boolean {
-  return /amazon\.com|oliveyoung\.com/i.test(href);
+  return /amazon\.com|amazon\.co\.uk|oliveyoung\.com|stylevana\.com|awin1\.com/i.test(href);
 }

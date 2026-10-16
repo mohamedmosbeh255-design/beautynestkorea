@@ -28,9 +28,12 @@ async function getById(id: string) {
       image_urls: data.image_urls ?? [],
       amazon_url: data.amazon_url,
       amazon_asin: data.amazon_asin ?? null,
+      amazon_uk_url: data.amazon_uk_url ?? null,
+      stylevana_url: data.stylevana_url ?? null,
       oliveyoung_url: data.oliveyoung_url,
       rating: data.rating != null ? Number(data.rating) : null,
       review_count: data.review_count ?? 0,
+      priceCheckedAt: (data.price_checked_at as string | null) ?? null,
       is_featured: Boolean(data.is_featured),
       is_active: data.is_active ?? true,
     };

@@ -29,6 +29,8 @@ export const productSchema = z.object({
   amazon_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
   amazon_asin: z.string().regex(/^B0[0-9A-Z]{8}$/, "Must look like B0XXXXXXXX").optional().or(z.literal("")).or(z.null()),
   oliveyoung_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
+  amazon_uk_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
+  stylevana_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
   rating: z.coerce.number().min(0).max(5).optional().nullable(),
   review_count: z.coerce.number().min(0).optional().nullable(),
   // Verified price-check date (YYYY-MM-DD). Empty/null = unknown → the

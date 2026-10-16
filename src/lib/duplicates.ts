@@ -16,7 +16,10 @@ export interface DuplicateCandidate {
   brand?: string | null;
   amazon_url?: string | null;
   amazon_asin?: string | null;
+  amazon_uk_url?: string | null;
   oliveyoung_url?: string | null;
+  // NOTE: stylevana_url is intentionally excluded — same Stylevana links
+  // across products are warn-only (non-blocking) per owner decision.
 }
 
 export type DuplicateReason =
@@ -144,6 +147,7 @@ export interface NewProductInput {
   slug?: string | null;
   amazon_url?: string | null;
   amazon_asin?: string | null;
+  amazon_uk_url?: string | null;
   oliveyoung_url?: string | null;
 }
 
@@ -154,6 +158,7 @@ export function findDuplicates(
   existing: DuplicateCandidate[]
 ): DuplicateMatch[] {
   const normAmazon = normalizeUrl(input.amazon_url);
+  const normAmazonUk = normalizeUrl(input.amazon_uk_url);
   const normOlive = normalizeUrl(input.oliveyoung_url);
   const asin = extractAsin(input.amazon_asin, input.amazon_url);
   const slug = String(input.slug ?? "").trim().toLowerCase();
@@ -165,6 +170,7 @@ export function findDuplicates(
     let similarity = 0;
 
     if (normAmazon && normalizeUrl(p.amazon_url) === normAmazon) reasons.push("amazon_url");
+    if (normAmazonUk && normalizeUrl(p.amazon_uk_url) === normAmazonUk) reasons.push("amazon_url");
     if (normOlive && normalizeUrl(p.oliveyoung_url) === normOlive) reasons.push("oliveyoung_url");
 
     const pAsin = extractAsin(p.amazon_asin, p.amazon_url);

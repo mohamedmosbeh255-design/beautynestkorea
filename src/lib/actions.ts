@@ -27,6 +27,7 @@ export interface DuplicateCheckInput {
   slug?: string | null;
   amazon_url?: string | null;
   amazon_asin?: string | null;
+  amazon_uk_url?: string | null;
   oliveyoung_url?: string | null;
   /** Exclude this product id (edit mode) so a product never flags itself. */
   excludeId?: string | null;
@@ -39,7 +40,7 @@ async function fetchDuplicateCandidates(
 ): Promise<DuplicateCandidate[]> {
   let query = supabase
     .from("products")
-    .select("id, slug, title, brand, amazon_url, amazon_asin, oliveyoung_url");
+    .select("id, slug, title, brand, amazon_url, amazon_asin, amazon_uk_url, oliveyoung_url");
   if (excludeId) query = query.neq("id", excludeId);
   const { data, error } = await query;
   if (error) throw new Error(error.message);
@@ -81,6 +82,7 @@ export async function checkDuplicates(input: DuplicateCheckInput): Promise<Dupli
     !String(input.slug ?? "").trim() &&
     !String(input.amazon_url ?? "").trim() &&
     !String(input.amazon_asin ?? "").trim() &&
+    !String(input.amazon_uk_url ?? "").trim() &&
     !String(input.oliveyoung_url ?? "").trim()
   ) {
     return [];
@@ -125,6 +127,8 @@ export async function createProduct(formData: FormData) {
     image_urls: String(formData.get("image_urls") ?? "").split("\n").map((s) => s.trim()).filter(Boolean),
     amazon_url: formData.get("amazon_url") || null,
     amazon_asin: formData.get("amazon_asin") || null,
+    amazon_uk_url: formData.get("amazon_uk_url") || null,
+    stylevana_url: formData.get("stylevana_url") || null,
     oliveyoung_url: formData.get("oliveyoung_url") || null,
     rating: formData.get("rating") || null,
     review_count: formData.get("review_count") || 0,
@@ -144,6 +148,7 @@ export async function createProduct(formData: FormData) {
     slug: parsed.data.slug,
     amazon_url: parsed.data.amazon_url ?? null,
     amazon_asin: parsed.data.amazon_asin ?? null,
+    amazon_uk_url: parsed.data.amazon_uk_url ?? null,
     oliveyoung_url: parsed.data.oliveyoung_url ?? null,
   });
   const { error } = await supabase.from("products").insert(parsed.data);
@@ -171,6 +176,8 @@ export async function updateProduct(id: string, formData: FormData) {
     image_urls: String(formData.get("image_urls") ?? "").split("\n").map((s) => s.trim()).filter(Boolean),
     amazon_url: formData.get("amazon_url") || null,
     amazon_asin: formData.get("amazon_asin") || null,
+    amazon_uk_url: formData.get("amazon_uk_url") || null,
+    stylevana_url: formData.get("stylevana_url") || null,
     oliveyoung_url: formData.get("oliveyoung_url") || null,
     rating: formData.get("rating") || null,
     review_count: formData.get("review_count") || 0,
@@ -202,6 +209,7 @@ export async function updateProduct(id: string, formData: FormData) {
     slug: parsed.data.slug,
     amazon_url: parsed.data.amazon_url ?? null,
     amazon_asin: parsed.data.amazon_asin ?? null,
+    amazon_uk_url: parsed.data.amazon_uk_url ?? null,
     oliveyoung_url: parsed.data.oliveyoung_url ?? null,
     excludeId: id,
   });
@@ -227,7 +235,7 @@ export async function deleteProduct(id: string) {
   revalidatePath("/", "layout");
 }
 
-export async function trackClick(productId: string, source: "amazon" | "oliveyoung") {
+export async function trackClick(productId: string, source: "amazon" | "oliveyoung" | "amazon_uk" | "stylevana") {
   try {
     const supabase = await createServerSupabase();
     if (!supabase) return;

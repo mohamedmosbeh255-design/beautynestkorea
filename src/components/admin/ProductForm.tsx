@@ -62,6 +62,8 @@ export default function ProductForm({
       image_urls: (initial?.image_urls ?? []).join("\n"),
       amazon_url: initial?.amazon_url ?? "",
       amazon_asin: initial?.amazon_asin ?? "",
+      amazon_uk_url: initial?.amazon_uk_url ?? "",
+      stylevana_url: initial?.stylevana_url ?? "",
       oliveyoung_url: initial?.oliveyoung_url ?? "",
       rating: initial?.rating ?? 4.5,
       review_count: initial?.review_count ?? 0,
@@ -96,6 +98,7 @@ export default function ProductForm({
         slug: String(values.slug ?? ""),
         amazon_url: String(values.amazon_url ?? ""),
         amazon_asin: String(values.amazon_asin ?? ""),
+        amazon_uk_url: String(values.amazon_uk_url ?? ""),
         oliveyoung_url: String(values.oliveyoung_url ?? ""),
         excludeId,
       });
@@ -125,6 +128,8 @@ export default function ProductForm({
       fd.set("image_urls", toLines(values.image_urls).join("\n"));
       fd.set("amazon_url", values.amazon_url ?? "");
       fd.set("amazon_asin", (values.amazon_asin ?? "").toString().trim().toUpperCase());
+      fd.set("amazon_uk_url", values.amazon_uk_url ?? "");
+      fd.set("stylevana_url", values.stylevana_url ?? "");
       fd.set("oliveyoung_url", values.oliveyoung_url ?? "");
       if (values.rating != null) fd.set("rating", String(values.rating));
       fd.set("review_count", String(values.review_count ?? 0));
@@ -260,6 +265,16 @@ export default function ProductForm({
           <label className={label}>Olive Young affiliate link</label>
           <input {...register("oliveyoung_url")} className={input} placeholder="https://global.oliveyoung.com/..." />
           {errors.oliveyoung_url && <p className="mt-1 text-xs text-red-600">{errors.oliveyoung_url.message}</p>}
+        </div>
+        <div>
+          <label className={label}>Amazon UK affiliate link</label>
+          <input {...register("amazon_uk_url")} className={input} placeholder="https://www.amazon.co.uk/..." />
+          {errors.amazon_uk_url && <p className="mt-1 text-xs text-red-600">{errors.amazon_uk_url.message}</p>}
+        </div>
+        <div>
+          <label className={label}>Stylevana affiliate link (AWIN)</label>
+          <input {...register("stylevana_url")} className={input} placeholder="https://www.awin1.com/..." />
+          {errors.stylevana_url && <p className="mt-1 text-xs text-red-600">{errors.stylevana_url.message}</p>}
         </div>
         <div>
           <label className={label}>Rating (0–5)</label>

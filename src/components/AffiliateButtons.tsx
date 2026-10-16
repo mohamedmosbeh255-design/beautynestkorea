@@ -1,7 +1,7 @@
 "use client";
 
 import { ExternalLink, ShoppingCart } from "lucide-react";
-import { withAmazonTag } from "@/lib/affiliates";
+import { withAmazonTag, withAmazonUkTag } from "@/lib/affiliates";
 import { trackAffiliateClick } from "@/lib/analytics";
 
 export default function AffiliateButtons({
@@ -9,6 +9,8 @@ export default function AffiliateButtons({
   productSlug = "",
   amazonUrl,
   amazonAsin,
+  amazonUkUrl,
+  stylevanaUrl,
   oliveyoungUrl,
   title,
   stackButtons = false,
@@ -17,12 +19,14 @@ export default function AffiliateButtons({
   productSlug?: string;
   amazonUrl?: string | null;
   amazonAsin?: string | null;
+  amazonUkUrl?: string | null;
+  stylevanaUrl?: string | null;
   oliveyoungUrl?: string | null;
   title: string;
   /** Advice embeds only: stack both buttons vertically, full-width, single-line labels. */
   stackButtons?: boolean;
 }) {
-  const track = (source: "amazon" | "oliveyoung") => {
+  const track = (source: "amazon" | "oliveyoung" | "amazon_uk" | "stylevana") => {
     // GA4 first (beacon transport survives the navigation), then the
     // first-party click log. Neither may block or break the outbound link.
     trackAffiliateClick({ retailer: source, product_slug: productSlug });
@@ -57,9 +61,27 @@ export default function AffiliateButtons({
       ? withAmazonTag(amazonUrl)
       : null;
 
-  if (!amazonHref && !oliveyoungUrl) return null;
+  // Amazon UK: derive ASIN from a full amazon.co.uk URL and rebuild a clean
+  // tagged dp link with the UK tag. Non-dp URLs pass through withAmazonUkTag
+  // (identity unless already a UK dp link); empty → no button.
+  // The UK tag (beautynestkor-21) is never applied to .com links.
+  const ukAsinMatch = typeof amazonUkUrl === "string"
+    ? amazonUkUrl.match(/(?:\/dp\/|\/gp\/product\/)(B0[0-9A-Z]{8})\b/)
+    : null;
+  const ukAsin = ukAsinMatch ? ukAsinMatch[1] : null;
+  const amazonUkHref = ukAsin
+    ? withAmazonUkTag(`https://www.amazon.co.uk/dp/${ukAsin}`)
+    : typeof amazonUkUrl === "string" && amazonUkUrl !== ""
+      ? withAmazonUkTag(amazonUkUrl)
+      : null;
 
-  const both = Boolean(amazonHref && oliveyoungUrl);
+  // Stylevana (AWIN redirect): pass through untouched — never Amazon-tagged.
+  const stylevanaHref = typeof stylevanaUrl === "string" && stylevanaUrl !== "" ? stylevanaUrl : null;
+
+  if (!amazonHref && !oliveyoungUrl && !amazonUkHref && !stylevanaHref) return null;
+
+  const visibleCount = [amazonHref, oliveyoungUrl, amazonUkHref, stylevanaHref].filter(Boolean).length;
+  const both = visibleCount >= 2;
   // Stacked mode applies ONLY when both buttons render; every other case
   // keeps its exact existing classes (single-button cards unchanged).
   const stacked = stackButtons && both;
@@ -88,6 +110,30 @@ export default function AffiliateButtons({
           aria-label={`View ${title} on Olive Young`}
         >
           <ShoppingCart className="h-5 w-5" /> View on Olive Young <ExternalLink className="h-4 w-4" />
+        </a>
+      ) : null}
+      {amazonUkHref ? (
+        <a
+          href={amazonUkHref}
+          target="_blank"
+          rel="nofollow sponsored noopener"
+          onClick={() => track("amazon_uk")}
+          className={`inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-sage-600 bg-sage-50 px-6 py-4 text-sm font-bold text-sage-700 transition hover:bg-sage-100${stacked ? " w-full whitespace-nowrap" : ""}`}
+          aria-label={`View ${title} on Amazon UK`}
+        >
+          <ShoppingCart className="h-5 w-5" /> View on Amazon UK <ExternalLink className="h-4 w-4" />
+        </a>
+      ) : null}
+      {stylevanaHref ? (
+        <a
+          href={stylevanaHref}
+          target="_blank"
+          rel="nofollow sponsored noopener"
+          onClick={() => track("stylevana")}
+          className={`inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-sage-600 bg-sage-50 px-6 py-4 text-sm font-bold text-sage-700 transition hover:bg-sage-100${stacked ? " w-full whitespace-nowrap" : ""}`}
+          aria-label={`View ${title} on Stylevana`}
+        >
+          <ShoppingCart className="h-5 w-5" /> View on Stylevana <ExternalLink className="h-4 w-4" />
         </a>
       ) : null}
     </div>
