@@ -28,6 +28,7 @@ export interface DuplicateCheckInput {
   amazon_url?: string | null;
   amazon_asin?: string | null;
   amazon_uk_url?: string | null;
+  amazon_uk_asin?: string | null;
   oliveyoung_url?: string | null;
   /** Exclude this product id (edit mode) so a product never flags itself. */
   excludeId?: string | null;
@@ -40,7 +41,7 @@ async function fetchDuplicateCandidates(
 ): Promise<DuplicateCandidate[]> {
   let query = supabase
     .from("products")
-    .select("id, slug, title, brand, amazon_url, amazon_asin, amazon_uk_url, oliveyoung_url");
+    .select("id, slug, title, brand, amazon_url, amazon_asin, amazon_uk_url, amazon_uk_asin, oliveyoung_url");
   if (excludeId) query = query.neq("id", excludeId);
   const { data, error } = await query;
   if (error) throw new Error(error.message);
@@ -83,6 +84,7 @@ export async function checkDuplicates(input: DuplicateCheckInput): Promise<Dupli
     !String(input.amazon_url ?? "").trim() &&
     !String(input.amazon_asin ?? "").trim() &&
     !String(input.amazon_uk_url ?? "").trim() &&
+    !String(input.amazon_uk_asin ?? "").trim() &&
     !String(input.oliveyoung_url ?? "").trim()
   ) {
     return [];
@@ -128,6 +130,7 @@ export async function createProduct(formData: FormData) {
     amazon_url: formData.get("amazon_url") || null,
     amazon_asin: formData.get("amazon_asin") || null,
     amazon_uk_url: formData.get("amazon_uk_url") || null,
+    amazon_uk_asin: formData.get("amazon_uk_asin") || null,
     stylevana_url: formData.get("stylevana_url") || null,
     oliveyoung_url: formData.get("oliveyoung_url") || null,
     rating: formData.get("rating") || null,
@@ -149,6 +152,7 @@ export async function createProduct(formData: FormData) {
     amazon_url: parsed.data.amazon_url ?? null,
     amazon_asin: parsed.data.amazon_asin ?? null,
     amazon_uk_url: parsed.data.amazon_uk_url ?? null,
+    amazon_uk_asin: parsed.data.amazon_uk_asin ?? null,
     oliveyoung_url: parsed.data.oliveyoung_url ?? null,
   });
   const { error } = await supabase.from("products").insert(parsed.data);
@@ -177,6 +181,7 @@ export async function updateProduct(id: string, formData: FormData) {
     amazon_url: formData.get("amazon_url") || null,
     amazon_asin: formData.get("amazon_asin") || null,
     amazon_uk_url: formData.get("amazon_uk_url") || null,
+    amazon_uk_asin: formData.get("amazon_uk_asin") || null,
     stylevana_url: formData.get("stylevana_url") || null,
     oliveyoung_url: formData.get("oliveyoung_url") || null,
     rating: formData.get("rating") || null,
@@ -210,6 +215,7 @@ export async function updateProduct(id: string, formData: FormData) {
     amazon_url: parsed.data.amazon_url ?? null,
     amazon_asin: parsed.data.amazon_asin ?? null,
     amazon_uk_url: parsed.data.amazon_uk_url ?? null,
+    amazon_uk_asin: parsed.data.amazon_uk_asin ?? null,
     oliveyoung_url: parsed.data.oliveyoung_url ?? null,
     excludeId: id,
   });

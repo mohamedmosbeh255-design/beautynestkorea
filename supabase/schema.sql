@@ -22,6 +22,7 @@ create table if not exists public.products (
   amazon_url text,
   oliveyoung_url text,
   amazon_uk_url text, -- Amazon UK affiliate link (amazon.co.uk, tag beautynestkor-21); NULL = no UK button
+  amazon_uk_asin text, -- bare UK ASIN (B0…) for dynamic ?tag= link building; NULL = derive from amazon_uk_url
   stylevana_url text, -- Stylevana AWIN deep link (awin1.com redirect); NULL = no Stylevana button
   amazon_asin text, -- bare ASIN (B0…) for dynamic ?tag= link building; NULL = use amazon_url verbatim
   rating numeric(2,1) default 4.5,
@@ -66,6 +67,7 @@ alter table public.products add column if not exists price_checked_at timestampt
 -- affiliate links. Nullable text, no backfill, no NOT NULL, Olive Young untouched.
 alter table public.products add column if not exists amazon_uk_url text;
 alter table public.products add column if not exists stylevana_url text;
+alter table public.products add column if not exists amazon_uk_asin text;
 
 -- ─── categories ────────────────────────────────────────────
 -- Concern/category catalog (Acne, Hydration, ...). The storefront derives

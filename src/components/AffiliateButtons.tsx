@@ -10,6 +10,7 @@ export default function AffiliateButtons({
   amazonUrl,
   amazonAsin,
   amazonUkUrl,
+  amazonUkAsin,
   stylevanaUrl,
   oliveyoungUrl,
   title,
@@ -20,6 +21,7 @@ export default function AffiliateButtons({
   amazonUrl?: string | null;
   amazonAsin?: string | null;
   amazonUkUrl?: string | null;
+  amazonUkAsin?: string | null;
   stylevanaUrl?: string | null;
   oliveyoungUrl?: string | null;
   title: string;
@@ -61,14 +63,19 @@ export default function AffiliateButtons({
       ? withAmazonTag(amazonUrl)
       : null;
 
-  // Amazon UK: derive ASIN from a full amazon.co.uk URL and rebuild a clean
-  // tagged dp link with the UK tag. Non-dp URLs pass through withAmazonUkTag
+  // Amazon UK: stored UK ASIN first, else derived from a full amazon.co.uk
+  // URL — mirroring the US effective-ASIN behavior. Rebuilds a clean tagged
+  // dp link with the UK tag. Non-dp URLs pass through withAmazonUkTag
   // (identity unless already a UK dp link); empty → no button.
   // The UK tag (beautynestkor-21) is never applied to .com links.
   const ukAsinMatch = typeof amazonUkUrl === "string"
     ? amazonUkUrl.match(/(?:\/dp\/|\/gp\/product\/)(B0[0-9A-Z]{8})\b/)
     : null;
-  const ukAsin = ukAsinMatch ? ukAsinMatch[1] : null;
+  const ukAsin = (typeof amazonUkAsin === "string" && amazonUkAsin.trim() !== "")
+    ? amazonUkAsin.trim()
+    : ukAsinMatch
+      ? ukAsinMatch[1]
+      : null;
   const amazonUkHref = ukAsin
     ? withAmazonUkTag(`https://www.amazon.co.uk/dp/${ukAsin}`)
     : typeof amazonUkUrl === "string" && amazonUkUrl !== ""

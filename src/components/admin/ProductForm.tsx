@@ -63,6 +63,7 @@ export default function ProductForm({
       amazon_url: initial?.amazon_url ?? "",
       amazon_asin: initial?.amazon_asin ?? "",
       amazon_uk_url: initial?.amazon_uk_url ?? "",
+      amazon_uk_asin: initial?.amazon_uk_asin ?? "",
       stylevana_url: initial?.stylevana_url ?? "",
       oliveyoung_url: initial?.oliveyoung_url ?? "",
       rating: initial?.rating ?? 4.5,
@@ -99,6 +100,7 @@ export default function ProductForm({
         amazon_url: String(values.amazon_url ?? ""),
         amazon_asin: String(values.amazon_asin ?? ""),
         amazon_uk_url: String(values.amazon_uk_url ?? ""),
+        amazon_uk_asin: String(values.amazon_uk_asin ?? ""),
         oliveyoung_url: String(values.oliveyoung_url ?? ""),
         excludeId,
       });
@@ -129,6 +131,7 @@ export default function ProductForm({
       fd.set("amazon_url", values.amazon_url ?? "");
       fd.set("amazon_asin", (values.amazon_asin ?? "").toString().trim().toUpperCase());
       fd.set("amazon_uk_url", values.amazon_uk_url ?? "");
+      fd.set("amazon_uk_asin", (values.amazon_uk_asin ?? "").toString().trim().toUpperCase());
       fd.set("stylevana_url", values.stylevana_url ?? "");
       fd.set("oliveyoung_url", values.oliveyoung_url ?? "");
       if (values.rating != null) fd.set("rating", String(values.rating));
@@ -268,8 +271,29 @@ export default function ProductForm({
         </div>
         <div>
           <label className={label}>Amazon UK affiliate link</label>
-          <input {...register("amazon_uk_url")} className={input} placeholder="https://www.amazon.co.uk/..." />
+          {(() => {
+            const { onChange: ukOnChange, ...ukRest } = register("amazon_uk_url");
+            return (
+              <input
+                {...ukRest}
+                className={input}
+                placeholder="https://www.amazon.co.uk/..."
+                onChange={(e) => {
+                  ukOnChange(e);
+                  const m = e.target.value.match(/(?:\/dp\/|\/gp\/product\/)(B0[0-9A-Z]{8})\b/);
+                  if (m && !String(getValues("amazon_uk_asin") ?? "").trim()) {
+                    setValue("amazon_uk_asin", m[1], { shouldValidate: true });
+                  }
+                }}
+              />
+            );
+          })()}
           {errors.amazon_uk_url && <p className="mt-1 text-xs text-red-600">{errors.amazon_uk_url.message}</p>}
+        </div>
+        <div>
+          <label className={label}>Amazon UK ASIN (optional)</label>
+          <input {...register("amazon_uk_asin")} className={input} placeholder="B0XXXXXXXX" />
+          {errors.amazon_uk_asin && <p className="mt-1 text-xs text-red-600">{errors.amazon_uk_asin.message}</p>}
         </div>
         <div>
           <label className={label}>Stylevana affiliate link (AWIN)</label>

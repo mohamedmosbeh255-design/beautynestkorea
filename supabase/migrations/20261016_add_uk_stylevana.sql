@@ -6,6 +6,7 @@
 -- 1) Two new nullable columns on products (null = button hidden).
 alter table public.products add column if not exists amazon_uk_url text;
 alter table public.products add column if not exists stylevana_url text;
+alter table public.products add column if not exists amazon_uk_asin text;
 
 -- 2) Widen product_clicks.source check additively (no data rewrite).
 -- Uses NOT VALID + VALIDATE to avoid a full table scan lock on live traffic.

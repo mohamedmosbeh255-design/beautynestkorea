@@ -178,7 +178,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </dl>
               </div>
             )}
-            <AffiliateButtons productId={product.id} productSlug={product.slug} amazonUrl={product.amazon_url} amazonAsin={product.amazon_asin} amazonUkUrl={product.amazon_uk_url} stylevanaUrl={product.stylevana_url} oliveyoungUrl={product.oliveyoung_url} title={product.title} />
+            <AffiliateButtons productId={product.id} productSlug={product.slug} amazonUrl={product.amazon_url} amazonAsin={product.amazon_asin} amazonUkUrl={product.amazon_uk_url} amazonUkAsin={product.amazon_uk_asin} stylevanaUrl={product.stylevana_url} oliveyoungUrl={product.oliveyoung_url} title={product.title} />
             {RETAILER_PRICE_DETAILS[slug] ? (
               <p className="mt-3 text-xs text-ink-soft">
                 {whereToBuyAsOf ? (

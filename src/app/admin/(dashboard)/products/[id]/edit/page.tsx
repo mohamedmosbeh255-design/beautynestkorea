@@ -29,6 +29,7 @@ async function getById(id: string) {
       amazon_url: data.amazon_url,
       amazon_asin: data.amazon_asin ?? null,
       amazon_uk_url: data.amazon_uk_url ?? null,
+      amazon_uk_asin: data.amazon_uk_asin ?? null,
       stylevana_url: data.stylevana_url ?? null,
       oliveyoung_url: data.oliveyoung_url,
       rating: data.rating != null ? Number(data.rating) : null,
