@@ -1,0 +1,344 @@
+{
+  "date": "2026-10-17",
+  "generatedAt": "2026-10-17T09:52:14.429Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [],
+  "trendTerms": [],
+  "ingredients": [
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 9
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 6
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 4
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 4
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 3
+    },
+    {
+      "name": "Niacinamide",
+      "count": 3
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 2
+    },
+    {
+      "name": "Micellar Water",
+      "count": 2
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 1
+    },
+    {
+      "name": "Glycolic / AHA",
+      "count": 1
+    },
+    {
+      "name": "Vitamin C",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "La Roche-Posay",
+      "count": 7
+    },
+    {
+      "name": "The Ordinary",
+      "count": 4
+    },
+    {
+      "name": "CeraVe",
+      "count": 3
+    },
+    {
+      "name": "Anua",
+      "count": 2
+    },
+    {
+      "name": "Avène",
+      "count": 2
+    },
+    {
+      "name": "Byoma",
+      "count": 2
+    },
+    {
+      "name": "Paula's Choice",
+      "count": 2
+    },
+    {
+      "name": "Bioderma",
+      "count": 1
+    },
+    {
+      "name": "Neutrogena",
+      "count": 1
+    },
+    {
+      "name": "Numbuzin",
+      "count": 1
+    },
+    {
+      "name": "Purito Seoul",
+      "count": 1
+    },
+    {
+      "name": "Skin1004",
+      "count": 1
+    }
+  ],
+  "communityPosts": [
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x7jflr/cringe_reddit_ad_wtf/",
+      "title": "[Cringe] Reddit ad, wtf!",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x7o5d6/acne_cant_seem_to_get_rid_of_clogged_pores/",
+      "title": "[Acne] can’t seem to get rid of clogged pores",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Azelaic Acid",
+        "Salicylic Acid (BHA)",
+        "Benzoyl Peroxide"
+      ],
+      "brands": [
+        "CeraVe",
+        "Anua",
+        "La Roche-Posay",
+        "Paula's Choice",
+        "Avène"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x7xyj2/acne_two_rounds_of_accutane_and_my_forehead_is/",
+      "title": "[Acne] Two rounds of Accutane and my forehead is already breaking out again??",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Micellar Water"
+      ],
+      "brands": [
+        "La Roche-Posay",
+        "Paula's Choice",
+        "Bioderma"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x7l026/acne_year_8_of_having_acne/",
+      "title": "[Acne] Year #8 of having acne",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x83s3i/acne_need_help_how_to_fix_my_face_got_depressed/",
+      "title": "[acne] need help how to fix my face. got depressed for some years and couldn't take care of myself.",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x7gcm2/acne_reoccurring_breakouts_might_be_from_a/",
+      "title": "[acne] reoccurring breakouts? Might be from a holy-grail ingredient",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Niacinamide"
+      ],
+      "brands": [
+        "CeraVe",
+        "The Ordinary"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x7vvrj/product_request_what_product_or_laser_would_help/",
+      "title": "[Product Request] What product or laser would help with these white dots under my eyes, and what even are they?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x7odvd/product_question_is_the_la_roche_posay_or_the/",
+      "title": "[product question] Is the la roche posay or the clinique moisturizer better for over exfoliated damaged skin",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": [
+        "La Roche-Posay"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x826nm/routine_help_skincare_fountains_appropriate_for_a/",
+      "title": "[Routine Help] Skincare fountains appropriate for a 12 year old…",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": [
+        "Byoma"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1x811sw/hair_removal/",
+      "title": "[Hair removal]",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    }
+  ],
+  "newsHeadlines": [
+    "Spotted in Kylie Jenner’s Bathroom: The Korean Retinol Serum That’s “Worth Every Penny,” Per Shoppers",
+    "I’m in my 40s – here are the best retinol and retinal serums for smoother, firmer skin",
+    "Hypochlorous acid is the soothing ingredient I swear by",
+    "PDRN Is Trending In Skincare—Now It’s Coming For Your Body Care Routine",
+    "This 40% off PDRN cream is the missing piece to your skincare routine",
+    "We tested more than a dozen viral Medicube products — these are the ones actually worth it",
+    "CeraVe’s anti-ageing products rival ‘far more expensive’ options",
+    "COSRX's Viral Snail Mucin Essence Gave Me an Instant Glow—It's $19 Until Midnight",
+    "This viral Medicube serum is the closest I've got to ‘glass skin’, and it's currently 33% off",
+    "PDRN Serums Are The Secret To Glass Skin: 6 Of The Best New Products For A 'Salmon Sperm' Facial In A Bottle",
+    "What is PDRN, or viral K-beauty salmon sperm?",
+    "This K-pharmacy brand has worked magic with buzz ingredient PDRN – and now you can snap it up in Boots"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 34
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 11
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 4
+    },
+    {
+      "name": "Collagen",
+      "count": 3
+    },
+    {
+      "name": "Exosomes",
+      "count": 3
+    },
+    {
+      "name": "Hypochlorous Acid",
+      "count": 3
+    },
+    {
+      "name": "Peptides",
+      "count": 1
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "failed",
+      "detail": "no article answered (18 request(s) attempted)"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "31 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "200 headline(s) read · 57 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 5/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · failed: Wikimedia pageviews (ingredient interest)",
+    "**Ingredient interest:** no pageview data today — every tracked article request failed (see section 1). Secondary Google Trends signal: 12/12 markets answered (120 items scanned), 0 skincare matches.",
+    "**Community pulse:** 31 posts analysed; the most-discussed ingredient is **Sunscreen (unspecified)** (9 posts), with **La Roche-Posay** the most-mentioned brand (7 posts).",
+    "**News pulse:** 200 headline(s) read across 2 quer(ies), 57 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (34 headline(s)), brand **Medicube** (4 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover vs 2026-10-16:** up — Sunscreen (unspecified) +4 (now 9); down — Mugwort -1 (now 0).",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Sunscreen (unspecified)**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
