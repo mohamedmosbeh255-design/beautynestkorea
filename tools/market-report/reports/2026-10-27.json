@@ -1,0 +1,455 @@
+{
+  "date": "2026-10-27",
+  "generatedAt": "2026-10-27T11:14:07.570Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 766,
+      "previous": 588,
+      "delta": 178
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 709,
+      "previous": 554,
+      "delta": 155
+    },
+    {
+      "name": "Vitamin C",
+      "views": 746,
+      "previous": 638,
+      "delta": 108
+    },
+    {
+      "name": "Ceramides",
+      "views": 175,
+      "previous": 91,
+      "delta": 84
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 324,
+      "previous": 259,
+      "delta": 65
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 352,
+      "previous": 302,
+      "delta": 50
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 179,
+      "previous": 135,
+      "delta": 44
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 316,
+      "previous": 275,
+      "delta": 41
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 191,
+      "previous": 161,
+      "delta": 30
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 46,
+      "previous": 36,
+      "delta": 10
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 44,
+      "previous": 36,
+      "delta": 8
+    },
+    {
+      "name": "Niacinamide",
+      "views": 10,
+      "previous": 11,
+      "delta": -1
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 53,
+      "previous": 58,
+      "delta": -5
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 339,
+      "previous": 346,
+      "delta": -7
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 88,
+      "previous": 95,
+      "delta": -7
+    },
+    {
+      "name": "Squalane",
+      "views": 73,
+      "previous": 92,
+      "delta": -19
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [
+    {
+      "name": "Retinol / Retinoids",
+      "count": 12
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 9
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 4
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 4
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 3
+    },
+    {
+      "name": "Ceramides",
+      "count": 2
+    },
+    {
+      "name": "Glycolic / AHA",
+      "count": 2
+    },
+    {
+      "name": "Niacinamide",
+      "count": 2
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 1
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    },
+    {
+      "name": "Rice Extract",
+      "count": 1
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 1
+    },
+    {
+      "name": "Tranexamic Acid",
+      "count": 1
+    },
+    {
+      "name": "Vitamin C",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "La Roche-Posay",
+      "count": 4
+    },
+    {
+      "name": "CeraVe",
+      "count": 3
+    },
+    {
+      "name": "Skin1004",
+      "count": 2
+    },
+    {
+      "name": "The Ordinary",
+      "count": 2
+    },
+    {
+      "name": "Anua",
+      "count": 1
+    },
+    {
+      "name": "Bioderma",
+      "count": 1
+    },
+    {
+      "name": "Byoma",
+      "count": 1
+    },
+    {
+      "name": "EltaMD",
+      "count": 1
+    },
+    {
+      "name": "Haruharu Wonder",
+      "count": 1
+    },
+    {
+      "name": "Neutrogena",
+      "count": 1
+    }
+  ],
+  "communityPosts": [
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xfzmbw/personal_how_do_i_encourage_my_husband_to_treat/",
+      "title": "[Personal] How do I encourage my husband to treat his severe acne without hurting his self-esteem?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xga8pt/hair_removal_big_lump_appeared_while_shaving/",
+      "title": "[hair removal] Big lump appeared while shaving",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xg0x3o/misc_how_to_fix_skin_barrier_thats_been_damaged/",
+      "title": "[Misc] How to fix skin barrier that’s been damaged for years?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Benzoyl Peroxide"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xgk699/acne_blackhead_help/",
+      "title": "[Acne] blackhead help :(",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Salicylic Acid (BHA)",
+        "Glycolic / AHA",
+        "Benzoyl Peroxide"
+      ],
+      "brands": [
+        "The Ordinary"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xgip1k/routine_help_skincare_newb/",
+      "title": "[routine help] skincare newb",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "Neutrogena"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xg8sle/sun_care_is_it_ok_to_use_a_regular_sunscreen/",
+      "title": "[Sun Care] Is it ok to use a regular sunscreen beneath a tinted foundation or moisturiser? Instead of using a tinted sunscreen?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "Bioderma"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xg7u1s/routine_help_in_what_order_should_i_use_my/",
+      "title": "[Routine Help] In what order should I use my products? 1st pic is AM, 2nd pic is PM.",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xgg2ih/research_is_there_a_basis_for_why_you_should_wait/",
+      "title": "[Research] Is there a basis for why you should wait to apply makeup after a facial?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xgf4fj/routine_help_struggling_for_years/",
+      "title": "[Routine Help] struggling for years…",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Niacinamide",
+        "Retinol / Retinoids",
+        "Azelaic Acid",
+        "Salicylic Acid (BHA)",
+        "Benzoyl Peroxide",
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "La Roche-Posay"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xg9gek/acne_advice_needed_for_treating_hormonal_and/",
+      "title": "[Acne] Advice needed for treating hormonal and stress acne",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Salicylic Acid (BHA)"
+      ],
+      "brands": []
+    }
+  ],
+  "newsHeadlines": [
+    "Humuss Beauty’s Niacinamide and Retinol Serums Target Oiliness, Blemishes and Signs of Ageing",
+    "Myntra Beauty Expands K-Beauty Portfolio With Korean Skincare Brand Anua",
+    "장벽 케어 'PDRN 세럼·크림' 글로벌 안착",
+    "SPF Demand Rises 60 percent, K-Beauty Grows 200 percent as Gen Z Leans Towards Ingredient-first, Preventive Beauty, Finds Myntra Report",
+    "CeraVe’s anti-ageing products rival ‘far more expensive’ options",
+    "What the future of PDRN skincare could look like as salmon sperm treatments move beyond celebrity hype",
+    "Shoppers In Their 70s And 80s Say This $21 Age-Defying Retinol Serum Turned Back The Clock On Their Skin",
+    "We Found 7 Great Retinoids For Different Skin Types and Budgets",
+    "I Tried All the Popular K-Beauty PDRN Serums—These Gave Me the Brightest Skin",
+    "블랑드비, 특허 성분·PDRN 담은 ‘페이스 큐어’ 스킨케어 라인 공식 론칭",
+    "캐나다 디오디너리도 선택한 PDRN…K-뷰티 성분, 글로벌 표준 되나",
+    "What is PDRN and why is it trending in skincare?"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 24
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 18
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 7
+    },
+    {
+      "name": "Exosomes",
+      "count": 2
+    },
+    {
+      "name": "Ginseng",
+      "count": 1
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    },
+    {
+      "name": "Niacinamide",
+      "count": 1
+    },
+    {
+      "name": "Peptides",
+      "count": 1
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-10-26 vs 2026-10-25"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "25 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "166 headline(s) read · 53 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 6/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · no source failed",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-10-26 vs 2026-10-25). Biggest rise: **Salicylic Acid (BHA)** +178 views (+30.3%). Highest volume: **Salicylic Acid (BHA)** (766 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** 25 posts analysed; the most-discussed ingredient is **Retinol / Retinoids** (12 posts), with **La Roche-Posay** the most-mentioned brand (4 posts).",
+    "**News pulse:** 166 headline(s) read across 2 quer(ies), 53 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (24 headline(s)), brand **Anua** (1 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-10-26 vs 2026-10-25):** up — Salicylic Acid (BHA) +178 views; down — Squalane -19 views. Community mention deltas: up — Retinol / Retinoids +7, down — Centella Asiatica (Cica) -1.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Retinol / Retinoids**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
