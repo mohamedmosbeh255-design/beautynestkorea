@@ -1,0 +1,452 @@
+{
+  "date": "2026-10-29",
+  "generatedAt": "2026-10-29T11:56:10.800Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Retinol / Retinoids",
+      "views": 656,
+      "previous": 622,
+      "delta": 34
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 179,
+      "previous": 155,
+      "delta": 24
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 55,
+      "previous": 37,
+      "delta": 18
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 374,
+      "previous": 358,
+      "delta": 16
+    },
+    {
+      "name": "Niacinamide",
+      "views": 8,
+      "previous": 8,
+      "delta": 0
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 34,
+      "previous": 38,
+      "delta": -4
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 66,
+      "previous": 77,
+      "delta": -11
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 93,
+      "previous": 109,
+      "delta": -16
+    },
+    {
+      "name": "Squalane",
+      "views": 74,
+      "previous": 90,
+      "delta": -16
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 181,
+      "previous": 199,
+      "delta": -18
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 294,
+      "previous": 313,
+      "delta": -19
+    },
+    {
+      "name": "Ceramides",
+      "views": 115,
+      "previous": 141,
+      "delta": -26
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 360,
+      "previous": 403,
+      "delta": -43
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 320,
+      "previous": 384,
+      "delta": -64
+    },
+    {
+      "name": "Vitamin C",
+      "views": 710,
+      "previous": 781,
+      "delta": -71
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 682,
+      "previous": 764,
+      "delta": -82
+    }
+  ],
+  "trendTerms": [
+    "vacina meningite"
+  ],
+  "ingredients": [
+    {
+      "name": "Retinol / Retinoids",
+      "count": 9
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 7
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 3
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 3
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 2
+    },
+    {
+      "name": "Micellar Water",
+      "count": 2
+    },
+    {
+      "name": "Vitamin C",
+      "count": 2
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 1
+    },
+    {
+      "name": "Ceramides",
+      "count": 1
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Glycolic / AHA",
+      "count": 1
+    },
+    {
+      "name": "Mineral / Zinc SPF",
+      "count": 1
+    },
+    {
+      "name": "Niacinamide",
+      "count": 1
+    },
+    {
+      "name": "Peptides",
+      "count": 1
+    },
+    {
+      "name": "Rice Extract",
+      "count": 1
+    },
+    {
+      "name": "Squalane",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "CeraVe",
+      "count": 5
+    },
+    {
+      "name": "Bioderma",
+      "count": 2
+    },
+    {
+      "name": "Paula's Choice",
+      "count": 2
+    },
+    {
+      "name": "Anua",
+      "count": 1
+    },
+    {
+      "name": "Aquaphor",
+      "count": 1
+    },
+    {
+      "name": "Avène",
+      "count": 1
+    },
+    {
+      "name": "Beauty of Joseon",
+      "count": 1
+    },
+    {
+      "name": "Haruharu Wonder",
+      "count": 1
+    },
+    {
+      "name": "La Roche-Posay",
+      "count": 1
+    },
+    {
+      "name": "Neutrogena",
+      "count": 1
+    },
+    {
+      "name": "The Ordinary",
+      "count": 1
+    }
+  ],
+  "communityPosts": [
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xibixq/beforeafter_how_i_healed_my_skin_after/",
+      "title": "[before&after] how I healed my skin after contracting cutaneous anthrax",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": [
+        "The Ordinary",
+        "Aquaphor"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xi0401/product_question_aestura_atobarrier365_cream_vs/",
+      "title": "[Product Question] AESTURA ATOBARRIER365 Cream vs. ILLIYOON Ceramide Ato Concentrate Cream",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Ceramides"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xhqjmr/antiaging_best_treatment_for_11_lines_without/",
+      "title": "[Anti-Aging] Best treatment for 11 lines without Botox? (32F)",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Peptides"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xhou3n/product_request_help_me_replace_my_beloved_face/",
+      "title": "[Product Request] Help me replace my beloved face mask by Avene!",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": [
+        "Avène",
+        "Bioderma"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xhmcnf/product_question_are_fruitbased_skincare_products/",
+      "title": "[Product Question] Are fruit-based skincare products worth the hype?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xi80in/routine_help_what_am_i_doing_wrong/",
+      "title": "[Routine Help] What am i doing wrong",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xi2qdv/personal_nothing_is_getting_rid_of_my_acne_and/",
+      "title": "[Personal] Nothing is getting rid of my acne and it’s so tiring.",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xhxw4l/acne_anyone_else_break_out_using_this_moisturizer/",
+      "title": "[Acne] Anyone else break out using this moisturizer?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Sunscreen (unspecified)",
+        "Micellar Water"
+      ],
+      "brands": [
+        "CeraVe"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xi55ij/product_request_help_me_find_alternatives_to_this/",
+      "title": "[Product Request] Help me find alternatives to this serum!",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Hyaluronic Acid",
+        "Glycolic / AHA",
+        "Squalane"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xhxglf/product_question_beauty_of_joseon_sunscreen/",
+      "title": "[Product Question] beauty of joseon sunscreen",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "Beauty of Joseon"
+      ]
+    }
+  ],
+  "newsHeadlines": [
+    "The Exact PDRN Body Lotion Jennie Uses for Plump, Firm Skin",
+    "Lowest price ever: You won’t believe how affordable COSRX’s viral snail mucin with 100K purchases is",
+    "7 Korean Retinol Alternatives for a Glass Skin-Approved Glow",
+    "A Dermatologist Spilled All the Retinol Products You Should Be Using—From Your 30s to 70s",
+    "Myntra Beauty Expands K-Beauty Portfolio With Korean Skincare Brand Anua",
+    "CeraVe’s anti-ageing products rival ‘far more expensive’ options",
+    "We Found 7 Great Retinoids For Different Skin Types and Budgets",
+    "I Tried All the Popular K-Beauty PDRN Serums—These Gave Me the Brightest Skin",
+    "What is PDRN and why is it trending in skincare?",
+    "PDRN skincare is everywhere in Singapore. Does it even work?",
+    "From Snail Mucin to PDRN, 10 Ingredients That Define K-beauty",
+    "Exosomes, Growth Factors or PDRN? Here’s How to Choose the Right Skincare Ingredient for Your Goals"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 19
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 15
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 8
+    },
+    {
+      "name": "Exosomes",
+      "count": 2
+    },
+    {
+      "name": "Ginseng",
+      "count": 1
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    },
+    {
+      "name": "Peptides",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-10-28 vs 2026-10-27"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 1 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "34 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "127 headline(s) read · 45 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 6/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · no source failed",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-10-28 vs 2026-10-27). Biggest rise: **Retinol / Retinoids** +34 views (+5.5%). Highest volume: **Retinol / Retinoids** (656 views). Secondary Google Trends signal: \"vacina meningite\" in 1 market(s).",
+    "**Community pulse:** 34 posts analysed; the most-discussed ingredient is **Retinol / Retinoids** (9 posts), with **CeraVe** the most-mentioned brand (5 posts).",
+    "**News pulse:** 127 headline(s) read across 2 quer(ies), 45 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (19 headline(s)), brand **COSRX** (2 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-10-28 vs 2026-10-27):** up — Retinol / Retinoids +34 views; down — Salicylic Acid (BHA) -82 views. Community mention deltas: up — Micellar Water +2, down — Azelaic Acid -1.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Retinol / Retinoids**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
