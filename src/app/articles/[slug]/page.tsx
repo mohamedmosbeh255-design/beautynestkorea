@@ -15,6 +15,7 @@ import ListenButton from "@/components/ListenButton";
 import ArticleTable, { ArticleTableCell, ArticleTableHead, ArticleTableHeader } from "@/components/ArticleTable";
 import EducationalDisclaimer from "@/components/EducationalDisclaimer";
 import ProductCard from "@/components/ProductCard";
+import RelatedArticles from "@/components/RelatedArticles";
 import { ArrowLeft } from "lucide-react";
 
 export const revalidate = 300;
@@ -201,6 +202,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </div>
         </section>
       )}
+
+      <RelatedArticles slug={slug} />
 
       <Link
         href="/articles"
