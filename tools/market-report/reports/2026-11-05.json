@@ -1,0 +1,421 @@
+{
+  "date": "2026-11-05",
+  "generatedAt": "2026-11-05T13:41:02.941Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Vitamin C",
+      "views": 652,
+      "previous": 630,
+      "delta": 22
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 61,
+      "previous": 45,
+      "delta": 16
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 373,
+      "previous": 360,
+      "delta": 13
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 30,
+      "previous": 31,
+      "delta": -1
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 184,
+      "previous": 186,
+      "delta": -2
+    },
+    {
+      "name": "Ceramides",
+      "views": 121,
+      "previous": 124,
+      "delta": -3
+    },
+    {
+      "name": "Niacinamide",
+      "views": 10,
+      "previous": 15,
+      "delta": -5
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 280,
+      "previous": 286,
+      "delta": -6
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 36,
+      "previous": 42,
+      "delta": -6
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 92,
+      "previous": 104,
+      "delta": -12
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 309,
+      "previous": 323,
+      "delta": -14
+    },
+    {
+      "name": "Squalane",
+      "views": 75,
+      "previous": 96,
+      "delta": -21
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 623,
+      "previous": 660,
+      "delta": -37
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 603,
+      "previous": 676,
+      "delta": -73
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 286,
+      "previous": 360,
+      "delta": -74
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 213,
+      "previous": 301,
+      "delta": -88
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [
+    {
+      "name": "Retinol / Retinoids",
+      "count": 9
+    },
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 6
+    },
+    {
+      "name": "Glycolic / AHA",
+      "count": 3
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 2
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 2
+    },
+    {
+      "name": "Ceramides",
+      "count": 1
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    },
+    {
+      "name": "Micellar Water",
+      "count": 1
+    },
+    {
+      "name": "Niacinamide",
+      "count": 1
+    },
+    {
+      "name": "Urea",
+      "count": 1
+    },
+    {
+      "name": "Vitamin C",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "CeraVe",
+      "count": 4
+    },
+    {
+      "name": "Anua",
+      "count": 1
+    },
+    {
+      "name": "Aquaphor",
+      "count": 1
+    },
+    {
+      "name": "Avène",
+      "count": 1
+    },
+    {
+      "name": "Bioderma",
+      "count": 1
+    },
+    {
+      "name": "La Roche-Posay",
+      "count": 1
+    },
+    {
+      "name": "Neutrogena",
+      "count": 1
+    },
+    {
+      "name": "Nivea",
+      "count": 1
+    }
+  ],
+  "communityPosts": [
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xnpsr2/sun_care_how_do_you_reapply_sunscreen_over_makeup/",
+      "title": "[Sun Care] how do you reapply sunscreen over makeup without ruining everything?? 😭",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Sunscreen (unspecified)"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xnqiif/product_question_urea_vs_lactic_acid/",
+      "title": "[Product Question] Urea vs Lactic acid",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Glycolic / AHA",
+        "Urea"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xo1tno/routine_help_clogged_little_guy_on_my_face/",
+      "title": "[routine help] clogged little guy on my face",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Sunscreen (unspecified)"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xnso6p/beforeafter_holy_retinol_effect/",
+      "title": "[Before&After] holy retinol effect",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Niacinamide",
+        "Retinol / Retinoids",
+        "Hyaluronic Acid"
+      ],
+      "brands": [
+        "Nivea"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xnxs1s/acne_advice_i_found_helpful_and_dont_see_as_often/",
+      "title": "[Acne] Advice I found helpful, and don't see as often",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Ceramides",
+        "Vitamin C",
+        "Benzoyl Peroxide",
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "CeraVe",
+        "Neutrogena"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xnujq6/acne_can_some_people_just_not_tolerate_retinol/",
+      "title": "[Acne] Can some people just not tolerate retinol?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Sunscreen (unspecified)"
+      ],
+      "brands": [
+        "CeraVe",
+        "Aquaphor"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xo7rgw/acne_horrible_skin_texture_after_stopping/",
+      "title": "[acne] horrible skin texture after stopping spirolactone and tret",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Glycolic / AHA"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xo9vu2/acne_advice_or_tips_please/",
+      "title": "[Acne] Advice or tips please",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Azelaic Acid"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xo9jeg/personal_coconut_allergy_and_prescription_creams/",
+      "title": "[Personal] Coconut allergy and prescription creams",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xny73u/acne_cant_enjoy_any_food_without_breaking_out/",
+      "title": "[acne] Can't enjoy any food without breaking out",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    }
+  ],
+  "newsHeadlines": [
+    "Vegan Skincare for Indian Skin: Meet iSKINN and the New Vegan PDRN Collection",
+    "A Stronger Version of My Favorite K-Beauty Retinal Is on Sale",
+    "PDRN is K-beauty’s buzzy ingredient for plump, dewy skin — shop Nordstrom picks from $10",
+    "Why Squalane Is Becoming a Standout Ingredient in K-Beauty's Skin Barrier Movement, With S.NATURE Leading the Conversation",
+    "Beyond the PDRN Name: PYDERIN Shares the Story Behind Its Ingredients",
+    "이너뷰티 성분 소비 확산, 레티놀·PDRN이 이끈다",
+    "What Is PDRN? The Ingredient Promising Firmer Skin and Thicker Hair",
+    "Dermatologists reveal the worst things you can do when using retinol",
+    "This Anti-Aging Retinol Cream Smooths “Crypt Keeper Hands,” “Bingo Wings,” “Turkey Neck,” and More—for Just $20",
+    "PDRN skincare: benefits, evidence & uses",
+    "Shoppers in Their 70s Are Getting Mistaken for 40 After Trying This Dermatologist-Loved Retinol Night Cream",
+    "7 Korean Retinol Alternatives for a Glass Skin-Approved Glow"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 20
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 18
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 14
+    },
+    {
+      "name": "Peptides",
+      "count": 2
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 1
+    },
+    {
+      "name": "Squalane",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-11-04 vs 2026-11-03"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "32 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "135 headline(s) read · 52 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 6/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · no source failed",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-11-04 vs 2026-11-03). Biggest rise: **Vitamin C** +22 views (+3.5%). Highest volume: **Vitamin C** (652 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** 32 posts analysed; the most-discussed ingredient is **Retinol / Retinoids** (9 posts), with **CeraVe** the most-mentioned brand (4 posts).",
+    "**News pulse:** 135 headline(s) read across 2 quer(ies), 52 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (20 headline(s)), brand **COSRX** (3 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-11-04 vs 2026-11-03):** up — Vitamin C +22 views; down — Benzoyl Peroxide -88 views. Community mention deltas: up — Glycolic / AHA +2, down — Centella Asiatica (Cica) -1.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still TODO (PA-API); while those wait, prioritise content around **Retinol / Retinoids**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
