@@ -68,11 +68,18 @@ export async function middleware(req: NextRequest) {
   const logEntry = (authenticated: boolean) =>
     console.log(`[admin-entry] ${new Date().toISOString()} path=${pathname} authenticated=${authenticated}`);
 
-  // Supabase mode: sessions required except on public auth pages.
+  // Sessions required except on public auth pages.
   // Mock mode (cookie session) has been removed — there are no hardcoded
   // credentials left in the codebase. If Supabase env is unset, the
   // middleware simply bounces unauthenticated admin hits to the login
   // page instead of serving a guessable fallback.
+  if (!url || !anon) {
+    if (isEntryPage) {
+      logEntry(false);
+    }
+    return toLogin();
+  }
+
   const res = NextResponse.next();
   const supabase = createServerClient(url, anon, {
     cookies: {
