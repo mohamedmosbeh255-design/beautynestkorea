@@ -17,6 +17,36 @@ export async function middleware(req: NextRequest) {
     }
   }
 
+  // 301 /shop?concern=<Name> → canonical /category/<slug>.
+  // Only the 20 canonical concerns (plus the 3 legacy aliases already
+  // redirected at /category/*) are redirected — unknown values keep the
+  // previous "show all products" behaviour instead of becoming a 404.
+  if (pathname === "/shop") {
+    const raw = req.nextUrl.searchParams.get("concern");
+    if (raw) {
+      const ALIASES: Record<string, string> = {
+        sensitive: "sensitive-skin",
+        elasticity: "anti-aging",
+        firming: "anti-aging",
+      };
+      const slug = raw.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      const target = ALIASES[slug] ?? slug;
+      const CANONICAL = new Set([
+        "acne", "anti-aging", "barrier-repair", "blackheads", "brightening",
+        "dark-circles", "dehydration", "dryness", "dullness", "fine-lines",
+        "hydration", "hyperpigmentation", "loss-of-elasticity", "oiliness",
+        "pores", "redness", "sensitive-skin", "sun-protection",
+        "uneven-texture", "wrinkles",
+      ]);
+      if (CANONICAL.has(target)) {
+        const url = req.nextUrl.clone();
+        url.pathname = `/category/${target}`;
+        url.search = "";
+        return NextResponse.redirect(url, 301);
+      }
+    }
+  }
+
   const isEntryPage = pathname === ADMIN_ENTRY_PATH;
   if (!pathname.startsWith("/admin") && !isEntryPage) return NextResponse.next();
 
