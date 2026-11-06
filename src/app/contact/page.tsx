@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { siteBaseUrl } from "@/lib/market-report";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "How to reach BeautyNestKorea with questions about products or routines.",
+  description: "Reach BeautyNestKorea with questions about products, routines, or partnerships.",
   alternates: { canonical: `${siteBaseUrl()}/contact` },
 };
 
@@ -16,7 +17,13 @@ export default function ContactPage() {
 
       <div className="glass mt-8 max-w-2xl rounded-[2rem] p-8 sm:p-10">
         <p className="leading-relaxed text-ink-soft">
-          Email us directly:{" "}
+          Questions about a product, a routine, or working together? Send us a message and we will get back to you.
+        </p>
+        <div className="mt-6">
+          <ContactForm />
+        </div>
+        <p className="mt-6 text-sm text-ink-soft">
+          Or email us directly:{" "}
           <a href="mailto:mohamedmosbeh255@gmail.com" className="font-semibold text-sage-700 hover:underline">
             mohamedmosbeh255@gmail.com
           </a>

@@ -297,6 +297,23 @@ create policy "email_subscribers_insert_anon"
   on public.email_subscribers for insert
   with check (true);
 
+-- ─── Contact form messages ──────────────────────────────────────
+create table if not exists public.contact_messages (
+  id uuid primary key default gen_random_uuid(),
+  name text,
+  email text not null,
+  message text not null,
+  created_at timestamptz not null default now()
+);
+
+alter table public.contact_messages enable row level security;
+
+-- Anyone can insert (public form). No read policy — admin reads via
+-- service role only, so messages never leak to anonymous visitors.
+create policy "contact_messages_insert_anon"
+  on public.contact_messages for insert
+  with check (true);
+
 -- ─── Admin bootstrap (run AFTER creating your auth user) ─────
 -- 1. Supabase Dashboard → Authentication → Users → Add user (email + password).
 --    If "Confirm email" is on in Auth → Providers → Email, confirm the user
