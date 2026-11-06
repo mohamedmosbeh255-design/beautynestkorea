@@ -34,7 +34,14 @@ function PinterestIcon({ className }: { className?: string }) {  return (
 
 export default function ShareButtons({ title, path }: { title: string; path: string }) {
   const [copied, setCopied] = useState(false);
-  const url = path.startsWith("http") ? path : `https://beautynestkorea.com${path}`;
+  // Use the live origin so share links always resolve, even if the
+  // canonical host (NEXT_PUBLIC_SITE_URL) changes. Falls back to the
+  // configured site base URL when running in a non-browser context.
+  const origin =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : process.env.NEXT_PUBLIC_SITE_URL ?? "https://beautynestkorea.vercel.app";
+  const url = path.startsWith("http") ? path : `${origin}${path}`;
   const text = `${title} — via BeautyNestKorea`;
 
   const copy = async () => {

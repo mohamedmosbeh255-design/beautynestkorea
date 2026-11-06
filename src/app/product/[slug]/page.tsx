@@ -234,6 +234,23 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </div>
 
       <MedicalCaveat className="mt-8" />
+
+      {/* REVIEWS */}
+      <div className="glass mt-12 rounded-3xl p-6 sm:p-8">
+        <h2 className="font-serif-display text-xl font-bold">Reviews</h2>
+        <p className="mt-1 text-sm text-ink-soft">
+          {product.rating ? (
+            <>
+              {product.rating.toFixed(1)} / 5 from {(product.review_count ?? 0).toLocaleString()} reviews
+            </>
+          ) : (
+            "Be the first to review this product."
+          )}
+        </p>
+        <div className="mt-6">
+          <ReviewForm productId={product.id} />
+        </div>
+      </div>
     </div>
   );
 }
