@@ -7,6 +7,7 @@ import ImageGallery from "@/components/ImageGallery";
 import AffiliateButtons from "@/components/AffiliateButtons";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import { productConcernsToSlugs } from "@/lib/advice-kb";
+import ReviewForm from "@/components/ReviewForm";
 import { concernSlug } from "@/lib/concerns";
 import ProductCard from "@/components/ProductCard";
 import PriceNote from "@/components/PriceNote";

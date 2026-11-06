@@ -314,6 +314,23 @@ create policy "contact_messages_insert_anon"
   on public.contact_messages for insert
   with check (true);
 
+-- ─── Product reviews (user-submitted ratings + comments) ──────
+create table if not exists public.product_reviews (
+  id uuid primary key default gen_random_uuid(),
+  product_id uuid not null references public.products(id) on delete cascade,
+  rating integer not null check (rating >= 1 and rating <= 5),
+  comment text,
+  created_at timestamptz not null default now()
+);
+
+alter table public.product_reviews enable row level security;
+
+-- Anyone can insert (public reviews). No read policy — served via
+-- server-side aggregation so raw rows never leak to anonymous visitors.
+create policy "product_reviews_insert_anon"
+  on public.product_reviews for insert
+  with check (true);
+
 -- ─── Admin bootstrap (run AFTER creating your auth user) ─────
 -- 1. Supabase Dashboard → Authentication → Users → Add user (email + password).
 --    If "Confirm email" is on in Auth → Providers → Email, confirm the user
