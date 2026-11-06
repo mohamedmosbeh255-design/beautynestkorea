@@ -16,6 +16,7 @@ import ArticleTable, { ArticleTableCell, ArticleTableHead, ArticleTableHeader } 
 import EducationalDisclaimer from "@/components/EducationalDisclaimer";
 import ProductCard from "@/components/ProductCard";
 import RelatedArticles from "@/components/RelatedArticles";
+import EmailCapture from "@/components/EmailCapture";
 import { ArrowLeft } from "lucide-react";
 
 export const revalidate = 300;
@@ -204,6 +205,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       )}
 
       <RelatedArticles slug={slug} />
+
+      <div className="mt-10 glass rounded-2xl p-6 sm:p-8">
+        <h3 className="font-serif-display text-lg font-bold">Enjoying this guide?</h3>
+        <p className="mt-1 text-sm text-ink-soft">Get new picks and routine guides in your inbox — one email a week.</p>
+        <div className="mt-4">
+          <EmailCapture source="article" />
+        </div>
+      </div>
 
       <Link
         href="/articles"

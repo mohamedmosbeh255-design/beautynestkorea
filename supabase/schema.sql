@@ -280,6 +280,23 @@ insert into public.site_settings (key, value) values
   ('footer-v1', '{"tagline":"Honest, curated K-beauty & global skincare recommendations. We compare Amazon and Olive Young so you always get the best price.","disclosure":"Affiliate disclosure: we may earn a commission when you buy through our links — at no extra cost to you. This supports our independent reviews.","shop":[{"label":"Home","href":"/"},{"label":"All products","href":"/shop"},{"label":"Acne care","href":"/shop?concern=Acne"},{"label":"Anti-aging","href":"/shop?concern=Anti-aging"},{"label":"Hydration","href":"/shop?concern=Hydration"}],"learn":[{"label":"Skincare advice","href":"/advice"},{"label":"Beginner routine","href":"/advice/10-step-korean-routine-beginners"},{"label":"Market report","href":"/market-report"},{"label":"Report archive","href":"/market-report/archive"},{"label":"Image optimizer","href":"/tools/image-optimizer"}],"company":[{"label":"About us","href":"/about"},{"label":"How we review","href":"/how-we-review"},{"label":"Contact us","href":"/contact"},{"label":"Affiliate disclosure","href":"/affiliate-disclosure"},{"label":"Privacy policy","href":"/privacy"}],"socials":[{"label":"Facebook","href":"https://www.facebook.com/mohamed.mosbeh.508798/"},{"label":"Instagram","href":"https://www.instagram.com/beautynest_k_beauty_expert/"},{"label":"Pinterest","href":"https://fr.pinterest.com/beautynest_skincare/"},{"label":"Benable","href":"https://benable.com/BeautyNest2026"},{"label":"Short links","href":"https://c8ke.me/beautynestkorea"},{"label":"Google Sites","href":"https://sites.google.com/view/beautynestskincare/kbeauty-serums"},{"label":"Email","href":"mailto:mohamedmosbeh255@gmail.com"}]}'::jsonb)
 on conflict (key) do nothing;
 
+-- ─── Email subscribers (newsletter capture) ────────────────────
+-- Lightweight capture: email + source. No auth required, so the
+-- storefront can collect emails without a login wall.
+create table if not exists public.email_subscribers (
+  id uuid primary key default gen_random_uuid(),
+  email text unique not null,
+  source text,            -- where they signed up: homepage, article, shop, etc.
+  created_at timestamptz not null default now()
+);
+
+alter table public.email_subscribers enable row level security;
+
+-- Anyone can insert (public capture). Only service role reads.
+create policy "email_subscribers_insert_anon"
+  on public.email_subscribers for insert
+  with check (true);
+
 -- ─── Admin bootstrap (run AFTER creating your auth user) ─────
 -- 1. Supabase Dashboard → Authentication → Users → Add user (email + password).
 --    If "Confirm email" is on in Auth → Providers → Email, confirm the user

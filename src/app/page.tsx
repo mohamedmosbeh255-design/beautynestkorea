@@ -7,6 +7,7 @@ import { getConcernStats, concernSlug } from "@/lib/concerns";
 import { getAllAdvice } from "@/lib/advice";
 import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
+import EmailCapture from "@/components/EmailCapture";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 
 export const metadata: Metadata = {
@@ -188,6 +189,17 @@ export default async function HomePage() {
               </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* NEWSLETTER CAPTURE */}
+      <section className="mx-auto mt-16 max-w-7xl px-4 sm:px-6">
+        <div className="glass rounded-[2rem] p-8 sm:p-12 text-center">
+          <h2 className="font-serif-display text-2xl font-bold sm:text-3xl">Get new picks in your inbox</h2>
+          <p className="mt-2 text-sm text-ink-soft">New K-Beauty picks, price drops, and routine guides — one email a week, unsubscribe anytime.</p>
+          <div className="mt-6 flex justify-center">
+            <EmailCapture source="homepage" />
+          </div>
         </div>
       </section>
     </div>
