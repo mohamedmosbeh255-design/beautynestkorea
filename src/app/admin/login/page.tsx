@@ -22,16 +22,7 @@ export default function AdminLoginPage() {
     try {
       const supabase = createClient();
       if (!supabase) {
-        // Mock mode: verify via API so a session cookie is set (persists refresh)
-        const res = await fetch("/api/mock-login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data?.error ?? "Invalid mock credentials.");
-        router.push("/admin");
-        router.refresh();
+        setError("Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.");
         return;
       }
       const { error: signInError } = await supabase.auth.signInWithPassword(values);
@@ -73,8 +64,10 @@ export default function AdminLoginPage() {
           </button>
         </form>
         <p className="mt-4 text-center text-xs text-ink-soft">
-          Mock mode: use <code>admin@beautynestkorea.com</code> / <code>admin123</code>. With Supabase
-          configured, sign in with your real admin account (must exist in <code>admin_users</code>).
+          Sign in with your real admin account (must exist in <code>admin_users</code>).
+          If Supabase is not configured, admin login is unavailable — set
+          <code>NEXT_PUBLIC_SUPABASE_URL</code> and
+          <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>.
         </p>
       </div>
     </div>

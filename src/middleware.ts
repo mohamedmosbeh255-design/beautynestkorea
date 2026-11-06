@@ -1,6 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { MOCK_ADMIN_COOKIE } from "@/app/api/mock-login/route";
 import { getRetiredRedirect } from "@/lib/retired-slugs";
 import { ADMIN_ENTRY_PATH } from "@/lib/admin-entry";
 
@@ -69,18 +68,11 @@ export async function middleware(req: NextRequest) {
   const logEntry = (authenticated: boolean) =>
     console.log(`[admin-entry] ${new Date().toISOString()} path=${pathname} authenticated=${authenticated}`);
 
-  // ── Mock mode (no Supabase configured): cookie session ──
-  if (!url || !anon) {
-    const isMockAdmin = req.cookies.get(MOCK_ADMIN_COOKIE)?.value === "1";
-    if (isEntryPage) {
-      logEntry(isMockAdmin);
-      return isMockAdmin ? toAdmin() : NextResponse.next();
-    }
-    if (!isMockAdmin) return toLogin();
-    return NextResponse.next();
-  }
-
-  // ── Supabase mode: sessions required except on public auth pages ──
+  // Supabase mode: sessions required except on public auth pages.
+  // Mock mode (cookie session) has been removed — there are no hardcoded
+  // credentials left in the codebase. If Supabase env is unset, the
+  // middleware simply bounces unauthenticated admin hits to the login
+  // page instead of serving a guessable fallback.
   const res = NextResponse.next();
   const supabase = createServerClient(url, anon, {
     cookies: {
