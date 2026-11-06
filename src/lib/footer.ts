@@ -79,7 +79,9 @@ export const DEFAULT_FOOTER: FooterData = {
 export const INDEXED_FOOTER_URLS: ReadonlySet<string> = new Set([
   "/",
   "/shop",
+  "/best-picks",
   "/advice",
+  "/articles",
   "/market-report",
   "/market-report/archive",
   "/tools/image-optimizer",
