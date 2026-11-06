@@ -11,6 +11,17 @@ export function extractAsinFromUrl(url?: string | null): string | null {
 }
 
 function mapRow(row: any): Product {
+  // Sanitize amazon_url: strip any [YOUR_TAG] placeholder so the raw
+  // string never leaks into the page source / RSC payload. The
+  // AffiliateButtons component rebuilds the tagged URL from the ASIN
+  // anyway, so a clean URL here is safe.
+  const rawAmazonUrl: string | null = row.amazon_url ?? null;
+  const amazon_url = rawAmazonUrl && rawAmazonUrl.includes("[YOUR_TAG]")
+    ? extractAsinFromUrl(rawAmazonUrl)
+      ? `https://www.amazon.com/dp/${extractAsinFromUrl(rawAmazonUrl)}`
+      : null
+    : rawAmazonUrl;
+
   return {
     id: String(row.id),
     slug: row.slug,
@@ -25,7 +36,7 @@ function mapRow(row: any): Product {
     skin_type: row.skin_type ?? [],
     key_ingredients: row.key_ingredients ?? [],
     image_urls: row.image_urls ?? [],
-    amazon_url: row.amazon_url,
+    amazon_url,
     amazon_asin: row.amazon_asin ?? null,
     // Effective ASIN: stored column first, else derived from a full Amazon URL.
     // Short links (amzn.to) never yield one — they stay verbatim fallbacks.
