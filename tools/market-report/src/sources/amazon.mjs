@@ -14,7 +14,11 @@
 import { WATCHLIST } from '../lib/lexicon.mjs';
 import { table } from '../lib/markdown.mjs';
 
-export const AMAZON_TODO = 'TODO (PA-API)';
+// "Not yet available" instead of a developer TODO marker — the columns
+// are intentionally empty (no Amazon requests by design), but the text
+// should read as honest status copy, not an unfinished template.
+export const AMAZON_TODO = 'Not yet available';
+export const WATCHLIST_STATUS = 'Pending PA-API credentials';
 
 /**
  * @returns {{ asin: string, label: string, url: string, price: string, rating: string, bsr: string, status: string }[]}
@@ -28,7 +32,7 @@ export function collectWatchlist() {
     price: AMAZON_TODO,
     rating: AMAZON_TODO,
     bsr: AMAZON_TODO,
-    status: 'pending PA-API credentials',
+    status: WATCHLIST_STATUS,
   }));
 }
 

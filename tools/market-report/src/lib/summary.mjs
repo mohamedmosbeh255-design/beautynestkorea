@@ -107,7 +107,7 @@ export function buildSummary(input) {
   // 6) Commercial next step, driven by today's strongest signal.
   const focus = ing ? ing.name : (pressIng ? pressIng.name : (googleTop ? googleTop.matchedKeywords[0] : (measured[0] ? measured[0].name : 'sunscreen')));
   const focusSource = ing ? 'community mentions' : (pressIng ? 'news coverage' : (googleTop ? 'Google Trends RSS' : (measured[0] ? 'ingredient pageviews' : 'default editorial pick')));
-  lines.push(`**Next action:** watchlist holds ${watchlist.length} ASINs with price/rating/BSR still ${'TODO (PA-API)'}; while those wait, prioritise content around **${focus}**, the strongest demand signal available today (source: ${focusSource}; social source: ${social.source}).`);
+  lines.push(`**Next action:** watchlist holds ${watchlist.length} ASINs with price/rating/BSR still not yet available; while those wait, prioritise content around **${focus}**, the strongest demand signal available today (source: ${focusSource}; social source: ${social.source}).`);
 
   return lines;
 }
