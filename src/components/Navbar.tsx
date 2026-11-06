@@ -9,6 +9,7 @@ import SearchBox from "@/components/SearchBox";
 
 const links = [
   { href: "/", label: "Home" },
+  { href: "/best-picks", label: "Best Picks" },
   { href: "/shop", label: "Shop" },
   { href: "/advice", label: "Advice" },
   { href: "/market-report", label: "Market Report" },
