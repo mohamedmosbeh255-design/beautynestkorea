@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { getProducts } from "@/lib/products";
-import { getAllConcernNames } from "@/lib/concerns";
+import { getAllConcernNames, concernSlug } from "@/lib/concerns";
 import { MOCK_PRODUCTS } from "@/lib/data/products";
 import { listReportDatesSync } from "@/lib/market-report";
 
@@ -247,23 +247,32 @@ export function productConcernsToSlugs(concerns: string[]): Array<{ slug: string
   return out;
 }
 
-// KB slug → /shop?concern= filter label. The link renders only when the
-// filter actually exists in the live catalog (checked at build time).
+// KB slug → canonical /category/<slug> URL. The link renders only when the
+// category actually exists in the live catalog (checked at build time).
+// Using /category/<slug> instead of /shop?concern= gives each concern guide
+// a direct internal link to its canonical category page.
 const SHOP_FILTER_BY_SLUG: Record<string, string> = {
-  acne: "Acne",
-  "hyperpigmentation-dark-spots": "Brightening",
-  dehydration: "Hydration",
-  "anti-aging-fine-lines": "Anti-aging",
-  "sensitive-skin-redness": "Sensitive",
-  "enlarged-pores": "Pores",
+  acne: "acne",
+  "hyperpigmentation-dark-spots": "brightening",
+  dehydration: "hydration",
+  "anti-aging-fine-lines": "anti-aging",
+  "sensitive-skin-redness": "sensitive-skin",
+  "enlarged-pores": "pores",
+  blackheads: "blackheads",
+  "oily-skin-sebum-control": "oiliness",
+  "dull-skin": "dullness",
+  "damaged-skin-barrier": "barrier-repair",
 };
 
-/** Shop filter label for "Browse all {concern} products", or null when absent. */
+/** Canonical category slug for "Browse all {concern} products", or null when absent. */
 export async function getConcernShopFilter(slug: string): Promise<string | null> {
   const wanted = SHOP_FILTER_BY_SLUG[slug];
   if (!wanted) return null;
   const names = getAllConcernNames(await getProducts());
-  return names.includes(wanted) ? wanted : null;
+  // Resolve the slug back to a canonical concern name to confirm the
+  // category page exists; the returned slug is what gets linked.
+  const matched = names.find((n) => concernSlug(n) === wanted);
+  return matched ? wanted : null;
 }
 
 // Reciprocal links between easily confused concerns (distinct angles,

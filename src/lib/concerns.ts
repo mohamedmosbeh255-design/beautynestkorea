@@ -54,6 +54,20 @@ export function productMatchesConcern(product: Product, concern: string): boolea
 // Count how many products target each concern. Synonym tags merge into
 // their canonical concern; concerns with zero products never appear, so
 // empty cards cannot render. Includes custom concerns added via Admin.
+/**
+ * Convert a concern display name to its canonical category slug
+ * (e.g. "Anti-aging" → "anti-aging", "Dark Spots" → "dark-spots").
+ * Used by product concern chips and category-page links so every
+ * internal link lands on the canonical /category/<slug> URL.
+ */
+export function concernSlug(name: string): string {
+  return normalizeConcernName(name)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export function getConcernStats(products: Product[]): ConcernStat[] {
   const counts = new Map<string, number>();
   for (const p of products) {

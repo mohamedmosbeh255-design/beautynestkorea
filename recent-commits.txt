@@ -1,0 +1,6 @@
+820822e chore: set real author name and contact email (§6a + §2)
+0c7b357 feat: add /about, /contact, /privacy pages (§2)
+49496e3 fix: restore affiliate disclosure in articles (§2)
+f2ae9b6 chore: mark author fields pending real name (§6a)
+e85be27 audit(§6a): byline parity — same author+bio+dates block on all journal articles
+ad9e87b audit(§2): FTC affiliate disclosure + compliant outbound link attrs

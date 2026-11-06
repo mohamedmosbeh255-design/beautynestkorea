@@ -1,0 +1,723 @@
+diff --git a/content/advice/10-step-korean-routine-beginners.md b/content/advice/10-step-korean-routine-beginners.md
+index eac0467..503dccc 100644
+--- a/content/advice/10-step-korean-routine-beginners.md
++++ b/content/advice/10-step-korean-routine-beginners.md
+@@ -8,6 +8,10 @@ image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200
+ date: "2026-08-20"
+ ---
+ 
++**By BeautyNestKorea Editorial Team**
++Published: 2026-08-20 · Last updated: 2026-08-20
++The BeautyNestKorea Editorial Team researches K-beauty formulations and pricing, cross-checking retailer data and peer-reviewed sources. Content is educational only — not medical advice.
++
+ The famous 10-step Korean skincare routine is more philosophy than prescription: layer lightweight hydration, protect your barrier, and never skip sunscreen.
+ 
+ For beginners, start with five essentials: an oil cleanser at night, a gentle water cleanser, a hydrating toner, a treatment serum for your main concern, and moisturizer plus SPF in the morning.
+diff --git a/content/advice/colloidal-oatmeal-salicylic-acid-retinoids.md b/content/advice/colloidal-oatmeal-salicylic-acid-retinoids.md
+index 35623f8..4d780a6 100644
+--- a/content/advice/colloidal-oatmeal-salicylic-acid-retinoids.md
++++ b/content/advice/colloidal-oatmeal-salicylic-acid-retinoids.md
+@@ -16,8 +16,6 @@ faqSchema: true
+ Published: 2026-09-19 · Last updated: 2026-09-20
+ Researched from FDA and American Academy of Dermatology sources. **Not medically reviewed.**
+ 
+-*Affiliate disclosure: we may earn a commission when you buy through links on this page, at no extra cost to you. As an Amazon Associate we earn from qualifying purchases. This supports our independent reviews.*
+-
+ > **Educational only.** This guide covers cosmetic skincare, not diagnosis or treatment. Patch-test new products and see a dermatologist for persistent issues. **Seek urgent medical care for swelling of the face, mouth or throat, or any difficulty breathing.**
+ 
+ Most skincare advice assumes your barrier is intact. After hives, a reaction, or a stretch of over-exfoliation, that assumption is wrong, and following a normal "actives" routine tends to make things worse. This guide covers the four decisions that matter most in those weeks: which oat ingredient you are actually buying, whether new breakouts mean progress or damage, and how to reintroduce glycolic and salicylic acid without starting over.
+diff --git a/content/advice/niacinamide-vs-vitamin-c.md b/content/advice/niacinamide-vs-vitamin-c.md
+index 0f63caa..66b46b8 100644
+--- a/content/advice/niacinamide-vs-vitamin-c.md
++++ b/content/advice/niacinamide-vs-vitamin-c.md
+@@ -8,6 +8,10 @@ image: "https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1200
+ date: "2026-08-12"
+ ---
+ 
++**By BeautyNestKorea Editorial Team**
++Published: 2026-08-12 · Last updated: 2026-08-12
++The BeautyNestKorea Editorial Team researches K-beauty formulations and pricing, cross-checking retailer data and peer-reviewed sources. Content is educational only — not medical advice.
++
+ Niacinamide (vitamin B3) regulates oil, minimizes pores and fades hyperpigmentation gently — suitable for almost all skin types, including sensitive.
+ 
+ Vitamin C (L-ascorbic acid and derivatives) is a stronger antioxidant brightener but can irritate sensitive skin and oxidize quickly if poorly formulated.
+diff --git a/content/advice/scars-vs-hyperpigmentation.md b/content/advice/scars-vs-hyperpigmentation.md
+index d1d3c2f..187aef0 100644
+--- a/content/advice/scars-vs-hyperpigmentation.md
++++ b/content/advice/scars-vs-hyperpigmentation.md
+@@ -20,7 +20,9 @@ date: "2026-09-14"
+ >
+ > Product recommendations on BeautyNestKorea are cosmetic suggestions, not medical treatments. Where applicable, some links may be affiliate links, meaning we may earn a commission at no additional cost to you. Our editorial recommendations remain independent of these relationships.
+ 
+-*Written by the BeautyNestKorea Editorial Team · Last updated September 14, 2026 · Affiliate disclosure: we may earn a small commission from product links at no extra cost to you.*
++**By BeautyNestKorea Editorial Team**
++Published: 2026-09-14 · Last updated: 2026-09-14
++The BeautyNestKorea Editorial Team researches K-beauty formulations and pricing, cross-checking retailer data and peer-reviewed sources. Content is educational only — not medical advice.
+ 
+ ---
+ 
+diff --git a/content/advice/what-is-pdrn-salmon-dna-kbeauty.md b/content/advice/what-is-pdrn-salmon-dna-kbeauty.md
+index 2a23e21..876f6c9 100644
+--- a/content/advice/what-is-pdrn-salmon-dna-kbeauty.md
++++ b/content/advice/what-is-pdrn-salmon-dna-kbeauty.md
+@@ -9,6 +9,10 @@ imageAlt: "medicube Salmon DNA PDRN Pink Vitamin Coated Sheet Mask — clinical
+ date: "2026-09-05"
+ ---
+ 
++**By BeautyNestKorea Editorial Team**
++Published: 2026-09-05 · Last updated: 2026-09-05
++The BeautyNestKorea Editorial Team researches K-beauty formulations and pricing, cross-checking retailer data and peer-reviewed sources. Content is educational only — not medical advice.
++
+ PDRN (polydeoxyribonucleotide) is a DNA-derived ingredient, most famously sourced from salmon, long used in Korean dermatology clinics for skin repair and regeneration. In K-beauty it has jumped from in-office treatments into serums and sheet masks promising faster recovery and bounce.
+ 
+ Why the hype? PDRN is prized for supporting the skin barrier, improving the look of elasticity and firmness, calming stressed skin, and boosting hydration — the exact combo behind the glass-skin finish. It pairs well with hydrators like hyaluronic acid, collagen and niacinamide.
+diff --git a/eslint-rules/affiliate-link-attrs.mjs b/eslint-rules/affiliate-link-attrs.mjs
+new file mode 100644
+index 0000000..0b77849
+--- /dev/null
++++ b/eslint-rules/affiliate-link-attrs.mjs
+@@ -0,0 +1,59 @@
++/**
++ * Local ESLint rule: every literal affiliate-domain link (amazon.com,
++ * oliveyoung.com) in JSX must carry target="_blank" and
++ * rel="nofollow sponsored noopener".
++ *
++ * Dynamic hrefs (AffiliateButtons, markdown renderers) are centralized in
++ * src/lib/affiliates.ts `isAffiliateDomainLink` and fixed at the component
++ * level; this rule guards all literal hrefs so regressions fail `npm run lint`.
++ */
++export const affiliateLinkAttrs = {
++  meta: {
++    type: "problem",
++    docs: {
++      description: "Require target + sponsored rel on affiliate-domain links",
++    },
++    schema: [],
++  },
++  create(context) {
++    const AFFILIATE_RE = /amazon\.com|oliveyoung\.com/i;
++    return {
++      JSXElement(node) {
++        const opening = node.openingElement;
++        if (opening.name?.type !== "JSXIdentifier" || opening.name.name !== "a") return;
++        let href = null;
++        let rel = null;
++        let target = null;
++        for (const attr of opening.attributes) {
++          if (attr.type !== "JSXAttribute" || attr.name.type !== "JSXIdentifier") continue;
++          if (attr.value?.type === "Literal" && typeof attr.value.value === "string") {
++            if (attr.name.name === "href") href = attr.value.value;
++            if (attr.name.name === "rel") rel = attr.value.value;
++            if (attr.name.name === "target") target = attr.value.value;
++          }
++        }
++        if (typeof href !== "string" || !AFFILIATE_RE.test(href)) return;
++        const tokens = new Set((rel ?? "").toLowerCase().split(/\s+/).filter(Boolean));
++        const missing = ["nofollow", "sponsored", "noopener"].filter((t) => !tokens.has(t));
++        if (target !== "_blank" || missing.length > 0) {
++          context.report({
++            node: opening,
++            message:
++              "Affiliate link to {{href}} must use target=\"_blank\" and rel=\"nofollow sponsored noopener\"{{detail}}.",
++            data: {
++              href,
++              detail:
++                target !== "_blank"
++                  ? " (target is missing or not _blank)"
++                  : ` (rel is missing: ${missing.join(", ")})`,
++            },
++          });
++        }
++      },
++    };
++  },
++};
++
++const affiliateLinksPlugin = { rules: { "affiliate-link-attrs": affiliateLinkAttrs } };
++
++export default affiliateLinksPlugin;
+diff --git a/eslint.config.mjs b/eslint.config.mjs
+index 05e726d..838127f 100644
+--- a/eslint.config.mjs
++++ b/eslint.config.mjs
+@@ -1,10 +1,16 @@
+ import { defineConfig, globalIgnores } from "eslint/config";
+ import nextVitals from "eslint-config-next/core-web-vitals";
+ import nextTs from "eslint-config-next/typescript";
++import affiliateLinks from "./eslint-rules/affiliate-link-attrs.mjs";
+ 
+ const eslintConfig = defineConfig([
+   ...nextVitals,
+   ...nextTs,
++  {
++    files: ["src/**/*.{ts,tsx}"],
++    plugins: { local: affiliateLinks },
++    rules: { "local/affiliate-link-attrs": "error" },
++  },
+   // Override default ignores of eslint-config-next.
+   globalIgnores([
+     // Default ignores of eslint-config-next:
+diff --git a/src/app/advice/[slug]/page.tsx b/src/app/advice/[slug]/page.tsx
+index 153e531..fc50e11 100644
+--- a/src/app/advice/[slug]/page.tsx
++++ b/src/app/advice/[slug]/page.tsx
+@@ -14,6 +14,7 @@ import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/schema";
+ import { getConcernBySlug, getConcernSlugs } from "@/lib/advice-kb";
+ import ConcernArticle from "@/components/ConcernArticle";
+ import AffiliateDisclosure from "@/components/AffiliateDisclosure";
++import { isAffiliateDomainLink } from "@/lib/affiliates";
+ import EducationalDisclaimer from "@/components/EducationalDisclaimer";
+ import { ArrowLeft } from "lucide-react";
+ 
+@@ -106,6 +107,15 @@ function InternalLink({ href, children, className }: { href?: string; children?:
+       </a>
+     );
+   }
++  // Affiliate-domain outbound links (Amazon, Olive Young): FTC/compliance
++  // attrs, enforced for literals by eslint-rules/affiliate-link-attrs.mjs.
++  if (isAffiliateDomainLink(url)) {
++    return (
++      <a href={url} target="_blank" rel="nofollow sponsored noopener" className={linkClass}>
++        {children}
++      </a>
++    );
++  }
+   return (
+     <a href={url} className={className}>
+       {children}
+diff --git a/src/app/affiliate-disclosure/page.tsx b/src/app/affiliate-disclosure/page.tsx
+new file mode 100644
+index 0000000..5286747
+--- /dev/null
++++ b/src/app/affiliate-disclosure/page.tsx
+@@ -0,0 +1,72 @@
++import type { Metadata } from "next";
++import Link from "next/link";
++import { BadgeDollarSign } from "lucide-react";
++import { siteBaseUrl } from "@/lib/market-report";
++import { AFFILIATE_DISCLOSURE_TEXT } from "@/components/AffiliateDisclosure";
++
++export const metadata: Metadata = {
++  title: "Affiliate Disclosure",
++  description:
++    "FTC-compliant affiliate disclosure: how BeautyNestKorea earns commissions from Amazon Associates and other affiliate programs at no extra cost to you.",
++  alternates: { canonical: `${siteBaseUrl()}/affiliate-disclosure` },
++};
++
++// Canonical affiliate-disclosure URL (linked from the footer). The legacy
++// /disclosure route renders the same policy; this page is the canonical home.
++export default function AffiliateDisclosurePage() {
++  return (
++    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
++      <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">Transparency</p>
++      <h1 className="font-serif-display mt-2 text-4xl font-bold tracking-tight">
++        Affiliate Disclosure
++      </h1>
++      <p className="mt-3 max-w-2xl leading-relaxed text-ink-soft">
++        Last updated: {new Date().getFullYear()} — {AFFILIATE_DISCLOSURE_TEXT}
++      </p>
++
++      <div className="glass mt-8 rounded-[2rem] p-8 sm:p-12">
++        <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sage-100 text-sage-700">
++          <BadgeDollarSign className="h-5 w-5" />
++        </span>
++        <h2 className="font-serif-display mt-4 text-2xl font-bold">How affiliate links work here</h2>
++        <div className="mt-4 space-y-4 text-sm leading-relaxed text-ink-soft sm:text-base">
++          <p>
++            BeautyNestKorea is a reader-supported affiliate blog. Many outbound
++            links — including product buttons to Amazon and Olive Young — are
++            affiliate links. If you click one and make a purchase, the retailer
++            pays us a small commission. The price you pay stays exactly the same.
++          </p>
++          <p>
++            We participate in the <strong className="font-semibold text-ink">Amazon Associates Program</strong> as
++            well as other affiliate programs (including Olive Young and partner
++            networks where applicable). As an Amazon Associate, we earn from
++            qualifying purchases.
++          </p>
++          <p>
++            These commissions support our independent testing, price comparisons
++            and free guides. They never decide what we recommend: products earn a
++            spot because of formula, skin-type fit and value — not commission rate.
++            If a product disappoints us, we say so or remove it.
++          </p>
++          <p>
++            Per FTC guidelines, assume every shopping link on this site may be an
++            affiliate link. Product prices and availability shown on retailer sites
++            apply at the time of purchase and may differ from what is displayed here.
++          </p>
++        </div>
++      </div>
++
++      <p className="mt-6 text-sm text-ink-soft">
++        Questions about our recommendations?{" "}
++        <Link href="/contact" className="font-semibold text-sage-700 hover:underline">
++          Contact us
++        </Link>{" "}
++        or learn more{" "}
++        <Link href="/about" className="font-semibold text-sage-700 hover:underline">
++          about how we test
++        </Link>
++        .
++      </p>
++    </div>
++  );
++}
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+index 3e0431d..f727308 100644
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@ -7,6 +7,7 @@ import { getConcernStats } from "@/lib/concerns";
+ import { getAllAdvice } from "@/lib/advice";
+ import { siteBaseUrl } from "@/lib/market-report";
+ import ProductCard from "@/components/ProductCard";
++import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+ 
+ export const metadata: Metadata = {
+   alternates: { canonical: siteBaseUrl() },
+@@ -70,7 +71,7 @@ export default async function HomePage() {
+           Discover K-Beauty & Skincare That Loves You Back
+         </h1>
+         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-ink-soft sm:text-base">
+-          Curated Korean bestsellers with honest reviews and live Amazon vs Olive Young price comparison.
++          Curated Korean bestsellers with honest reviews and Amazon vs Olive Young price comparison, re-checked monthly.
+         </p>
+       </section>
+ 
+@@ -120,6 +121,7 @@ export default async function HomePage() {
+             View all <ArrowRight className="h-4 w-4" />
+           </Link>
+         </div>
++        <AffiliateDisclosure className="mt-3 max-w-xl" />
+         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+           {grid.map((p) => <ProductCard key={p.id} product={p} />)}
+         </div>
+diff --git a/src/app/product/[slug]/page.tsx b/src/app/product/[slug]/page.tsx
+index c7a8950..f8ba3f7 100644
+--- a/src/app/product/[slug]/page.tsx
++++ b/src/app/product/[slug]/page.tsx
+@@ -9,7 +9,7 @@ import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+ import { productConcernsToSlugs } from "@/lib/advice-kb";
+ import ProductCard from "@/components/ProductCard";
+ import MedicalCaveat from "@/components/MedicalCaveat";
+-import { formatAsOf, formatPrice } from "@/lib/utils";
++import { formatPriceChecked, formatPrice } from "@/lib/utils";
+ import { siteBaseUrl } from "@/lib/market-report";
+ import { breadcrumbJsonLd, faqJsonLd, productJsonLd, type FaqItem } from "@/lib/schema";
+ 
+@@ -24,7 +24,7 @@ const RETAILER_PRICE_DETAILS: Record<
+   { asOf: string; rows: Array<{ retailer: string; price: string; perMl: string; note: string }> }
+ > = {
+   "arencia-vitamin-c-booster-shot": {
+-    asOf: "Sep 21, 2026",
++    asOf: "2026-09-21",
+     rows: [
+       { retailer: "Amazon", price: "$22.00", perMl: "$0.73/ml", note: "30ml · 30K+ bought in past month" },
+       { retailer: "Olive Young", price: "$27.91", perMl: "$0.47/ml", note: "30ml Double Set (60ml total)" },
+@@ -50,11 +50,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug:
+   if (!product) notFound();
+ 
+   const related = (await getProducts()).filter((p) => p.slug !== product.slug && p.concern.some((c) => product.concern.includes(c))).slice(0, 3);
+-  // Price provenance: discount UI renders only when the product carries a
+-  // last-updated date; otherwise the badge/compare-at price are omitted.
+-  const priceAsOf = formatAsOf(product.updated_at);
+-  const discount = priceAsOf && product.compare_at_price && product.compare_at_price > product.price
++  // Price provenance: the price block renders ONLY with a verified
++  // priceCheckedAt date. Unknown → NULL → hidden entirely.
++  const priceChecked = formatPriceChecked(product.priceCheckedAt);
++  const discount = priceChecked && product.compare_at_price && product.compare_at_price > product.price
+     ? Math.round((1 - product.price / product.compare_at_price) * 100) : 0;
++  const whereToBuyAsOf = slug in RETAILER_PRICE_DETAILS
++    ? formatPriceChecked(RETAILER_PRICE_DETAILS[slug].asOf)
++    : null;
+ 
+   const base = siteBaseUrl();
+   const canonical = `${base}/product/${slug}`;
+@@ -68,7 +71,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug:
+     },
+     {
+       question: "Where is it cheapest — Amazon or Olive Young?",
+-      answer: "Prices rotate with sales. Use the buttons above to compare live prices; Olive Young often bundles minis and limited editions.",
++      answer: "Prices rotate with sales. Use the buttons above to compare current retailer prices; Olive Young often bundles minis and limited editions.",
+     },
+   ];
+   const jsonLd = [
+@@ -96,17 +99,19 @@ export default async function ProductPage({ params }: { params: Promise<{ slug:
+             <span className="text-ink-soft">{(product.review_count ?? 0).toLocaleString()} Amazon reviews</span>
+           </div>
+ 
+-          <div className="mt-4 flex items-baseline gap-3">
+-            <span className="text-3xl font-bold">{formatPrice(product.price, product.currency)}</span>
+-            {discount > 0 && (
+-              <>
+-                <span className="text-lg text-ink-soft line-through">{formatPrice(product.compare_at_price, product.currency)}</span>
+-                <span className="rounded-full bg-blush-500 px-2.5 py-1 text-xs font-bold text-white">Save {discount}%</span>
+-              </>
+-            )}
+-          </div>
+-          {priceAsOf && (
+-            <p className="mt-1 text-xs text-ink-soft">Price as of {priceAsOf} — check live retailer prices before buying.</p>
++          {priceChecked && (
++            <>
++              <div className="mt-4 flex items-baseline gap-3">
++                <span className="text-3xl font-bold">{formatPrice(product.price, product.currency)}</span>
++                {discount > 0 && (
++                  <>
++                    <span className="text-lg text-ink-soft line-through">{formatPrice(product.compare_at_price, product.currency)}</span>
++                    <span className="rounded-full bg-blush-500 px-2.5 py-1 text-xs font-bold text-white">Save {discount}%</span>
++                  </>
++                )}
++              </div>
++              <p className="mt-1 text-xs text-ink-soft">Price checked {priceChecked} · may have changed</p>
++            </>
+           )}
+ 
+           <p className="mt-5 leading-relaxed text-ink-soft">{product.description}</p>
+@@ -158,8 +163,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug:
+             <AffiliateButtons productId={product.id} productSlug={product.slug} amazonUrl={product.amazon_url} amazonAsin={product.amazon_asin} oliveyoungUrl={product.oliveyoung_url} title={product.title} />
+             {RETAILER_PRICE_DETAILS[slug] ? (
+               <p className="mt-3 text-xs text-ink-soft">
+-                Prices as of {RETAILER_PRICE_DETAILS[slug].asOf} — per-ml based on 30ml (Amazon) and 60ml double-set total
+-                (Olive Young). Check live retailer prices before buying. We may earn a commission at no cost to you.
++                {whereToBuyAsOf ? (
++                  <>Prices checked {whereToBuyAsOf} · may have changed — per-ml based on 30ml (Amazon) and 60ml double-set total (Olive Young). </>
++                ) : null}
++                Check current retailer prices before buying. We may earn a commission at no cost to you.
+               </p>
+             ) : (
+               <p className="mt-3 flex items-center gap-1.5 text-xs text-ink-soft">
+diff --git a/src/components/AffiliateButtons.tsx b/src/components/AffiliateButtons.tsx
+index 3bea8e4..ffdfdb5 100644
+--- a/src/components/AffiliateButtons.tsx
++++ b/src/components/AffiliateButtons.tsx
+@@ -82,7 +82,7 @@ export default function AffiliateButtons({
+         <a
+           href={oliveyoungUrl}
+           target="_blank"
+-          rel="sponsored noopener noreferrer"
++          rel="nofollow sponsored noopener"
+           onClick={() => track("oliveyoung")}
+           className={`inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-sage-600 bg-sage-50 px-6 py-4 text-sm font-bold text-sage-700 transition hover:bg-sage-100${stacked ? " w-full whitespace-nowrap" : ""}`}
+           aria-label={`View ${title} on Olive Young`}
+diff --git a/src/components/AffiliateDisclosure.tsx b/src/components/AffiliateDisclosure.tsx
+index 79f16d5..f702b95 100644
+--- a/src/components/AffiliateDisclosure.tsx
++++ b/src/components/AffiliateDisclosure.tsx
+@@ -1,7 +1,7 @@
+ import { cn } from "@/lib/utils";
+ 
+ export const AFFILIATE_DISCLOSURE_TEXT =
+-  "We may earn a commission from links on this page — at no extra cost to you.";
++  "Some links are affiliate links. We may earn a commission at no extra cost to you.";
+ 
+ /** One-line commission notice placed immediately above buy buttons / monetised content. */
+ export default function AffiliateDisclosure({ className }: { className?: string }) {
+diff --git a/src/components/ConcernArticle.tsx b/src/components/ConcernArticle.tsx
+index cbd601b..215fcff 100644
+--- a/src/components/ConcernArticle.tsx
++++ b/src/components/ConcernArticle.tsx
+@@ -111,7 +111,7 @@ export default async function ConcernArticle({ concern }: { concern: KbConcern }
+         <div className="mt-10">
+           <h2 className="font-serif-display text-2xl font-bold tracking-tight">Matching products</h2>
+           <p className="mt-1 text-sm text-ink-soft">
+-            From our catalog — open a product to compare live retailer prices.
++            From our catalog — open a product to compare current retailer prices.
+           </p>
+           <AffiliateDisclosure className="mt-4" />
+           <ul className="mt-2 space-y-3">
+diff --git a/src/components/Footer.tsx b/src/components/Footer.tsx
+index 503fb41..85ea4fc 100644
+--- a/src/components/Footer.tsx
++++ b/src/components/Footer.tsx
+@@ -86,6 +86,7 @@ export default function Footer() {
+             <li><Link href="/advice/10-step-korean-routine-beginners" className="hover:text-ink">Beginner routine</Link></li>
+             <li><Link href="/market-report" className="hover:text-ink">Market report</Link></li>
+             <li><Link href="/market-report/archive" className="hover:text-ink">Report archive</Link></li>
++            <li><Link href="/tools/image-optimizer" className="hover:text-ink">Image optimizer</Link></li>
+           </ul>
+         </div>
+         <div>
+@@ -93,7 +94,7 @@ export default function Footer() {
+           <ul className="mt-3 space-y-2 text-sm text-ink-soft">
+             <li><Link href="/about" className="hover:text-ink">About us</Link></li>
+             <li><Link href="/contact" className="hover:text-ink">Contact us</Link></li>
+-            <li><Link href="/disclosure" className="hover:text-ink">Affiliate disclosure</Link></li>
++            <li><Link href="/affiliate-disclosure" className="hover:text-ink">Affiliate disclosure</Link></li>
+             <li><Link href="/privacy" className="hover:text-ink">Privacy policy</Link></li>
+           </ul>
+         </div>
+diff --git a/src/components/MarketReportBody.tsx b/src/components/MarketReportBody.tsx
+index c153770..d85e77e 100644
+--- a/src/components/MarketReportBody.tsx
++++ b/src/components/MarketReportBody.tsx
+@@ -10,7 +10,7 @@ import {
+ import ReactMarkdown from "react-markdown";
+ import remarkGfm from "remark-gfm";
+ import { shiftDateStr, stripTitle, type WikiSnapshotView } from "@/lib/market-report";
+-import { isAmazonDpLink, withAmazonTag } from "@/lib/affiliates";
++import { isAmazonDpLink, isAffiliateDomainLink, withAmazonTag } from "@/lib/affiliates";
+ import { AFFILIATE_DISCLOSURE_TEXT } from "@/components/AffiliateDisclosure";
+ import ScrollableTable from "@/components/ScrollableTable";
+ 
+@@ -96,14 +96,15 @@ const baseMarkdownComponents = {
+         </Link>
+       );
+     }
+-    // Amazon /dp/ watchlist links earn via the Associates tag; all other
+-    // outbound hrefs (Reddit, Trends, curation links, …) pass through byte-identical.
+-    if (isAmazonDpLink(url)) {
++    // Amazon /dp/ watchlist links earn via the Associates tag; every affiliate-domain
++    // link (Amazon, Olive Young) carries target + rel="nofollow sponsored noopener".
++    // All other outbound hrefs (Reddit, Trends, curation links, …) pass through byte-identical.
++    if (isAmazonDpLink(url) || isAffiliateDomainLink(url)) {
+       return (
+         <a
+           href={withAmazonTag(url)}
+           target="_blank"
+-          rel="sponsored noopener noreferrer"
++          rel="nofollow sponsored noopener"
+           className="font-medium text-sage-700 underline decoration-sage-300 underline-offset-2 transition hover:text-sage-600 hover:decoration-sage-500"
+         >
+           {children}
+diff --git a/src/components/ProductCard.tsx b/src/components/ProductCard.tsx
+index bd79022..1208daf 100644
+--- a/src/components/ProductCard.tsx
++++ b/src/components/ProductCard.tsx
+@@ -2,14 +2,14 @@ import Link from "next/link";
+ import Image from "next/image";
+ import { Star, ArrowUpRight } from "lucide-react";
+ import type { Product } from "@/lib/types";
+-import { formatAsOf, formatPrice } from "@/lib/utils";
++import { formatPriceChecked, formatPrice } from "@/lib/utils";
+ 
+ export default function ProductCard({ product }: { product: Product }) {
+   const img = product.image_urls[0] ?? "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80";
+-  // Price provenance: discount UI renders only when the product carries a
+-  // last-updated date; otherwise the badge/compare-at price are omitted.
+-  const priceAsOf = formatAsOf(product.updated_at);
+-  const discount = priceAsOf && product.compare_at_price && product.compare_at_price > product.price
++  // Price provenance: the WHOLE price block (price, discount badge, stamp)
++  // renders only with a verified priceCheckedAt date. Unknown → NULL → hidden.
++  const priceChecked = formatPriceChecked(product.priceCheckedAt);
++  const discount = priceChecked && product.compare_at_price && product.compare_at_price > product.price
+     ? Math.round((1 - product.price / product.compare_at_price) * 100)
+     : 0;
+   return (
+@@ -44,19 +44,21 @@ export default function ProductCard({ product }: { product: Product }) {
+           <span className="font-semibold">{product.rating?.toFixed(1) ?? "—"}</span>
+           <span className="text-ink-soft">({(product.review_count ?? 0).toLocaleString()})</span>
+         </div>
+-        <div className="mt-3 flex items-center justify-between">
+-          <div className="flex items-baseline gap-2">
+-            <span className="text-lg font-bold">{formatPrice(product.price, product.currency)}</span>
+-            {discount > 0 && (
+-              <span className="text-sm text-ink-soft line-through">{formatPrice(product.compare_at_price, product.currency)}</span>
+-            )}
+-          </div>
+-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-ink text-white transition group-hover:bg-sage-600">
+-            <ArrowUpRight className="h-4 w-4" />
+-          </span>
+-        </div>
+-        {priceAsOf && (
+-          <p className="mt-1 text-[11px] text-ink-soft">as of {priceAsOf}</p>
++        {priceChecked && (
++          <>
++            <div className="mt-3 flex items-center justify-between">
++              <div className="flex items-baseline gap-2">
++                <span className="text-lg font-bold">{formatPrice(product.price, product.currency)}</span>
++                {discount > 0 && (
++                  <span className="text-sm text-ink-soft line-through">{formatPrice(product.compare_at_price, product.currency)}</span>
++                )}
++              </div>
++              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-ink text-white transition group-hover:bg-sage-600">
++                <ArrowUpRight className="h-4 w-4" />
++              </span>
++            </div>
++            <p className="mt-1 text-[11px] text-ink-soft">Price checked {priceChecked} · may have changed</p>
++          </>
+         )}
+         <div className="mt-3 flex flex-wrap gap-1.5">
+           {product.concern.slice(0, 3).map((c) => (
+diff --git a/src/components/admin/ProductForm.tsx b/src/components/admin/ProductForm.tsx
+index 6776c6d..aec8507 100644
+--- a/src/components/admin/ProductForm.tsx
++++ b/src/components/admin/ProductForm.tsx
+@@ -39,6 +39,7 @@ export default function ProductForm({
+       oliveyoung_url: initial?.oliveyoung_url ?? "",
+       rating: initial?.rating ?? 4.5,
+       review_count: initial?.review_count ?? 0,
++      price_checked_at: initial?.priceCheckedAt ? String(initial.priceCheckedAt).slice(0, 10) : "",
+       is_featured: initial?.is_featured ?? false,
+       is_active: initial?.is_active ?? true,
+     },
+@@ -77,6 +78,7 @@ export default function ProductForm({
+       fd.set("oliveyoung_url", values.oliveyoung_url ?? "");
+       if (values.rating != null) fd.set("rating", String(values.rating));
+       fd.set("review_count", String(values.review_count ?? 0));
++      fd.set("price_checked_at", String(values.price_checked_at ?? "").trim());
+       if (values.is_featured) fd.set("is_featured", "on");
+       if (!values.is_active) fd.set("is_active", "off");
+       await action(fd);
+@@ -208,6 +210,12 @@ export default function ProductForm({
+           <label className={label}>Review count</label>
+           <input type="number" {...register("review_count")} className={input} />
+         </div>
++        <div>
++          <label className={label}>Price last checked (YYYY-MM-DD)</label>
++          <input type="date" {...register("price_checked_at")} className={input} />
++          {errors.price_checked_at && <p className="mt-1 text-xs text-red-600">{errors.price_checked_at.message}</p>}
++          <p className="mt-1 text-[11px] text-ink-soft">Leave empty if unknown — the price block hides until a real check date is saved. Never copy updated_at here.</p>
++        </div>
+         <div className="flex items-center gap-6 md:col-span-2">
+           <label className="flex items-center gap-2 text-sm font-medium">
+             <input type="checkbox" {...register("is_featured")} className="h-4 w-4 accent-sage-600" /> Featured on homepage
+diff --git a/src/lib/actions.ts b/src/lib/actions.ts
+index 72c8442..cb939d2 100644
+--- a/src/lib/actions.ts
++++ b/src/lib/actions.ts
+@@ -35,6 +35,7 @@ export async function createProduct(formData: FormData) {
+     oliveyoung_url: formData.get("oliveyoung_url") || null,
+     rating: formData.get("rating") || null,
+     review_count: formData.get("review_count") || 0,
++    price_checked_at: (formData.get("price_checked_at") as string | null) || null,
+     is_featured: formData.get("is_featured") === "on",
+     is_active: formData.get("is_active") !== "off",
+   };
+@@ -68,6 +69,7 @@ export async function updateProduct(id: string, formData: FormData) {
+     oliveyoung_url: formData.get("oliveyoung_url") || null,
+     rating: formData.get("rating") || null,
+     review_count: formData.get("review_count") || 0,
++    price_checked_at: (formData.get("price_checked_at") as string | null) || null,
+     is_featured: formData.get("is_featured") === "on",
+     is_active: formData.get("is_active") !== "off",
+   };
+diff --git a/src/lib/affiliates.ts b/src/lib/affiliates.ts
+index 0880f14..18ea2cd 100644
+--- a/src/lib/affiliates.ts
++++ b/src/lib/affiliates.ts
+@@ -31,3 +31,13 @@ export function withAmazonTag(href: string): string {
+ export function isSponsoredCurationLink(href: string): boolean {
+   return /benable\.com|c8ke\.me|sites\.google\.com/i.test(href);
+ }
++
++/**
++ * Affiliate outbound domains (Amazon, Olive Young). EVERY link to these
++ * must render target="_blank" + rel="nofollow sponsored noopener" —
++ * enforced by eslint-rules/affiliate-link-attrs.mjs for literal hrefs and
++ * centralized here for dynamic ones (AffiliateButtons, markdown renderers).
++ */
++export function isAffiliateDomainLink(href: string): boolean {
++  return /amazon\.com|oliveyoung\.com/i.test(href);
++}
+diff --git a/src/lib/data/products.ts b/src/lib/data/products.ts
+index 901a85b..2aa4755 100644
+--- a/src/lib/data/products.ts
++++ b/src/lib/data/products.ts
+@@ -168,6 +168,8 @@ export const MOCK_PRODUCTS: Product[] = [
+     is_active: true,
+     created_at: "2026-09-21T12:00:00.000Z",
+     updated_at: "2026-09-21T12:00:00.000Z",
++    // Verified price-check timestamp (known collection date 2026-09-21).
++    priceCheckedAt: "2026-09-21T12:00:00.000Z",
+   },
+ ];
+ 
+diff --git a/src/lib/products.ts b/src/lib/products.ts
+index a20b38d..0a0b57e 100644
+--- a/src/lib/products.ts
++++ b/src/lib/products.ts
+@@ -35,6 +35,8 @@ function mapRow(row: any): Product {
+     oliveyoung_url: row.oliveyoung_url,
+     rating: row.rating != null ? Number(row.rating) : null,
+     review_count: row.review_count ?? 0,
++    // Verified price-check timestamp only — never updated_at (edit time).
++    priceCheckedAt: (row.price_checked_at as string | null) ?? null,
+     is_featured: Boolean(row.is_featured),
+     is_active: row.is_active ?? true,
+     created_at: row.created_at,
+diff --git a/src/lib/types.ts b/src/lib/types.ts
+index 5b7ef8e..3429500 100644
+--- a/src/lib/types.ts
++++ b/src/lib/types.ts
+@@ -21,6 +21,12 @@ export interface Product {
+   oliveyoung_url?: string | null;
+   rating?: number | null;
+   review_count?: number | null;
++  /**
++   * Verified price-check timestamp (DB: price_checked_at). NULL = unknown →
++   * the storefront must HIDE the price block entirely. Never derive this
++   * from updated_at/created_at — those track edits, not price checks.
++   */
++  priceCheckedAt?: string | null;
+   is_featured?: boolean;
+   is_active?: boolean;
+   created_at?: string;
+diff --git a/src/lib/utils.ts b/src/lib/utils.ts
+index a1cab5c..67c25d4 100644
+--- a/src/lib/utils.ts
++++ b/src/lib/utils.ts
+@@ -11,11 +11,12 @@ export function formatPrice(price: number | null | undefined, currency = "$") {
+ }
+ 
+ /**
+- * Price provenance stamp: "September 2026" from a product's last-updated
+- * field. Returns null when no usable date exists — callers must then omit
+- * discount badges rather than show undated prices as deals.
++ * Price provenance stamp: "September 2026" from a product's VERIFIED
++ * price-checked timestamp. Returns null when no usable date exists —
++ * callers must then HIDE the price block entirely rather than show an
++ * undated price as current (affiliate accuracy: never show an unknown date).
+  */
+-export function formatAsOf(iso?: string | null): string | null {
++export function formatPriceChecked(iso?: string | null): string | null {
+   if (!iso) return null;
+   const d = new Date(iso);
+   if (Number.isNaN(d.getTime())) return null;
+diff --git a/src/lib/validations.ts b/src/lib/validations.ts
+index cebf3f7..4a0d603 100644
+--- a/src/lib/validations.ts
++++ b/src/lib/validations.ts
+@@ -23,6 +23,15 @@ export const productSchema = z.object({
+   oliveyoung_url: z.string().url("Must be a valid URL").optional().or(z.literal("")).or(z.null()),
+   rating: z.coerce.number().min(0).max(5).optional().nullable(),
+   review_count: z.coerce.number().min(0).optional().nullable(),
++  // Verified price-check date (YYYY-MM-DD). Empty/null = unknown → the
++  // storefront hides the price block. Never auto-fill from updated_at.
++  price_checked_at: z
++    .string()
++    .optional()
++    .nullable()
++    .refine((v) => v == null || String(v).trim() === "" || !Number.isNaN(Date.parse(String(v))), {
++      message: "Must be a valid date",
++    }),
+   is_featured: z.boolean().default(false),
+   is_active: z.boolean().default(true),
+ });
+diff --git a/supabase/schema.sql b/supabase/schema.sql
+index 3c953cd..9a62ffa 100644
+--- a/supabase/schema.sql
++++ b/supabase/schema.sql
+@@ -55,6 +55,11 @@ create index if not exists idx_products_active on public.products (is_active) wh
+ -- Run on existing databases; fresh creates get it from the table def above.
+ alter table public.products add column if not exists amazon_asin text;
+ 
++-- Price provenance (added 2026-09-21): verified price-check timestamp.
++-- NULL = collection date unknown → the storefront hides the price block
++-- entirely. Never backfill from updated_at (that tracks edits, not checks).
++alter table public.products add column if not exists price_checked_at timestamptz;
++
+ -- ─── categories ────────────────────────────────────────────
+ -- Concern/category catalog (Acne, Hydration, ...). The storefront derives
+ -- "Shop by Concern" cards from product data, so new concerns added on
+@@ -157,9 +162,9 @@ create policy "Admins full access categories"
+ -- ─── Seed data (optional) ──────────────────────────────────
+ -- Live-catalog insert for the Arencia Vitamin C serum (conflict-safe;
+ -- mirrors the Admin-panel row so fresh databases surface it on day one).
+-insert into public.products (slug, title, brand, description, price, compare_at_price, category, concern, skin_type, key_ingredients, image_urls, amazon_url, amazon_asin, oliveyoung_url, rating, review_count, is_featured)
++insert into public.products (slug, title, brand, description, price, compare_at_price, category, concern, skin_type, key_ingredients, image_urls, amazon_url, amazon_asin, oliveyoung_url, rating, review_count, is_featured, price_checked_at)
+ values
+-  ('arencia-vitamin-c-booster-shot', 'Vitamin C Booster Shot Serum 30ml', 'Arencia', 'Brightening booster serum with vitamin C, glutathione, niacinamide and vitamin E. Made to improve the look of dark spots and fine lines while supporting a glass-skin glow. 30ml bottle.', 22.00, null, 'Serum', '{Brightening,Anti-aging,Hydration}', '{All}', '{Vitamin C,Glutathione,Niacinamide,Vitamin E}', '{https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=800&q=80,https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80}', 'https://www.amazon.com/dp/B0FX418XT8', 'B0FX418XT8', 'https://global.oliveyoung.com/product/detail?prdtNo=GA260439702', 4.4, 3866, true)
++  ('arencia-vitamin-c-booster-shot', 'Vitamin C Booster Shot Serum 30ml', 'Arencia', 'Brightening booster serum with vitamin C, glutathione, niacinamide and vitamin E. Made to improve the look of dark spots and fine lines while supporting a glass-skin glow. 30ml bottle.', 22.00, null, 'Serum', '{Brightening,Anti-aging,Hydration}', '{All}', '{Vitamin C,Glutathione,Niacinamide,Vitamin E}', '{https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=800&q=80,https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80}', 'https://www.amazon.com/dp/B0FX418XT8', 'B0FX418XT8', 'https://global.oliveyoung.com/product/detail?prdtNo=GA260439702', 4.4, 3866, true, '2026-09-21T12:00:00+00')
+ on conflict (slug) do nothing;
+ 
+ insert into public.products (slug, title, brand, description, price, compare_at_price, category, concern, skin_type, key_ingredients, image_urls, amazon_url, oliveyoung_url, rating, review_count, is_featured)

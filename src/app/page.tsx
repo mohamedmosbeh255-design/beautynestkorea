@@ -3,7 +3,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowRight, ShieldCheck, Sparkles, Droplets, Sun, Leaf, Star, CircleDot } from "lucide-react";
 import { getProducts } from "@/lib/products";
-import { getConcernStats } from "@/lib/concerns";
+import { getConcernStats, concernSlug } from "@/lib/concerns";
 import { getAllAdvice } from "@/lib/advice";
 import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
@@ -110,7 +110,7 @@ export default async function HomePage() {
             const meta = CONCERN_META[name] ?? FALLBACK_META[i % FALLBACK_META.length];
             const Icon = meta.icon;
             return (
-              <Link key={name} href={`/shop?concern=${encodeURIComponent(name)}`}
+              <Link key={name} href={`/category/${concernSlug(name)}`}
                 className={`group rounded-3xl bg-gradient-to-br ${meta.gradient} p-6 transition hover:-translate-y-1 hover:shadow-xl`}>
                 <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/80 shadow-sm">
                   <Icon className="h-5 w-5 text-sage-700" />

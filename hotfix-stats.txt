@@ -1,0 +1,47 @@
+commit 820822ecd6dd4e3df33865cd62ddf1497039db10
+Author: OTP <otp@OTPs-MacBook-Pro.local>
+Date:   Mon Sep 21 18:39:15 2026 +0100
+
+    chore: set real author name and contact email (§6a + §2)
+
+ content/advice/10-step-korean-routine-beginners.md           |  4 ++--
+ content/advice/colloidal-oatmeal-salicylic-acid-retinoids.md |  4 ++--
+ content/advice/niacinamide-vs-vitamin-c.md                   |  4 ++--
+ content/advice/scars-vs-hyperpigmentation.md                 |  4 ++--
+ content/advice/what-is-pdrn-salmon-dna-kbeauty.md            |  4 ++--
+ src/app/about/page.tsx                                       | 10 +++++-----
+ src/app/contact/page.tsx                                     |  6 ++++--
+ 7 files changed, 19 insertions(+), 17 deletions(-)
+
+commit 0c7b357ff8effea6e64bede38715e7336755c8db
+Author: OTP <otp@OTPs-MacBook-Pro.local>
+Date:   Mon Sep 21 18:26:12 2026 +0100
+
+    feat: add /about, /contact, /privacy pages (§2)
+
+ src/app/about/page.tsx   | 121 ++++++++++++++++-------------------------------
+ src/app/contact/page.tsx |  73 +++++-----------------------
+ src/app/privacy/page.tsx | 108 +++++++++++++++++++++---------------------
+ 3 files changed, 110 insertions(+), 192 deletions(-)
+
+commit 49496e365b01b88fd5600f0e4af02c95861ad923
+Author: OTP <otp@OTPs-MacBook-Pro.local>
+Date:   Mon Sep 21 18:24:20 2026 +0100
+
+    fix: restore affiliate disclosure in articles (§2)
+
+ content/advice/colloidal-oatmeal-salicylic-acid-retinoids.md | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit f2ae9b6cb03af2ae7543b6dc8ba8d0abefcbf923
+Author: OTP <otp@OTPs-MacBook-Pro.local>
+Date:   Mon Sep 21 18:24:02 2026 +0100
+
+    chore: mark author fields pending real name (§6a)
+
+ content/advice/10-step-korean-routine-beginners.md           | 2 +-
+ content/advice/colloidal-oatmeal-salicylic-acid-retinoids.md | 2 +-
+ content/advice/niacinamide-vs-vitamin-c.md                   | 2 +-
+ content/advice/scars-vs-hyperpigmentation.md                 | 2 +-
+ content/advice/what-is-pdrn-salmon-dna-kbeauty.md            | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)

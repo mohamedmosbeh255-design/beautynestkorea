@@ -43,9 +43,9 @@ export const DEFAULT_FOOTER: FooterData = {
   shop: [
     { label: "Home", href: "/" },
     { label: "All products", href: "/shop" },
-    { label: "Acne care", href: "/shop?concern=Acne" },
-    { label: "Anti-aging", href: "/shop?concern=Anti-aging" },
-    { label: "Hydration", href: "/shop?concern=Hydration" },
+    { label: "Acne care", href: "/category/acne" },
+    { label: "Anti-aging", href: "/category/anti-aging" },
+    { label: "Hydration", href: "/category/hydration" },
   ],
   learn: [
     { label: "Skincare advice", href: "/advice" },

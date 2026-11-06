@@ -70,5 +70,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/product/:slug*", "/beautynest-entry-2026-sable-heron-47"],
+  matcher: ["/shop", "/admin/:path*", "/product/:slug*", "/beautynest-entry-2026-sable-heron-47"],
 };
