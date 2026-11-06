@@ -1,9 +1,16 @@
 import type { MetadataRoute } from "next";
+import { siteBaseUrl } from "@/lib/market-report";
 
 export default function robots(): MetadataRoute.Robots {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://beautynestkorea.com";
+  const base = siteBaseUrl();
   return {
-    rules: [{ userAgent: "*", allow: "/", disallow: ["/admin/", "/api/"] }],
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/admin/", "/api/", "/beautynest-entry-2026-sable-heron-47"],
+      },
+    ],
     sitemap: `${base}/sitemap.xml`,
   };
 }
