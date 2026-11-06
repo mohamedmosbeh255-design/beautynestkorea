@@ -89,7 +89,7 @@ Reintroduce one active at a time, at low frequency, and give it a week or two be
 - [Anua Heartleaf 77 Soothing Toner](/product/anua-heartleaf-77-soothing-toner): A watery heartleaf toner for the back-to-basics weeks: hydration first, actives later.
 - [medicube PDRN Salmon DNA CICA Soothing Toner](/product/medicube-pdrn-cica-soothing-toner): A fragrance-light CICA toner for when comfort matters more than actives.
 
-[Browse all hydration products](/shop?concern=Hydration) · Related reading: [damaged skin barrier](/advice/damaged-skin-barrier) · [sensitive skin and redness](/advice/sensitive-skin-redness)
+[Browse all hydration products](/category/hydration) · Related reading: [damaged skin barrier](/advice/damaged-skin-barrier) · [sensitive skin and redness](/advice/sensitive-skin-redness)
 
 ## Frequently Asked Questions
 

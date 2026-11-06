@@ -139,7 +139,7 @@ export default async function ConcernArticle({ concern }: { concern: KbConcern }
           </ul>
           {shopFilter && (
             <Link
-              href={`/shop?concern=${encodeURIComponent(shopFilter)}`}
+              href={`/category/${shopFilter}`}
               className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700 hover:underline"
             >
               Browse all {concern.title} products <ArrowRight className="h-4 w-4" />
