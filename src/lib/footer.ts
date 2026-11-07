@@ -171,7 +171,7 @@ export async function getFooterLinks(): Promise<FooterData> {
     if (!url || !anon) return DEFAULT_FOOTER;
 
     const res = await fetch(
-      `${url}/rest/v1/site_settings?select=value&key=eq.${FOOTER_SETTINGS_KEY}`,
+      `${url}/rest/v1/site_settings?select=value&key=eq.${FOOTER_SETTINGS_KEY}&cache=v2`,
       {
         headers: { apikey: anon, Authorization: `Bearer ${anon}` },
         // 24h ISR cache + stable tag for on-demand purge on Admin save.
