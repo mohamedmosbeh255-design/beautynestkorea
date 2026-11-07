@@ -11,13 +11,17 @@ import { Lock, ArrowRight } from "lucide-react";
 //    reachable); everything else under /admin/* bounces logged-out
 //    visitors to /admin/login.
 //  • NOT linked from any public page (nav, footer, sitemap all clean).
-//  • NOT in sitemap.xml, NO robots meta — naturally undiscoverable.
+//  • NOT in sitemap.xml, noindex robots meta — naturally undiscoverable.
 //  • Every hit is logged in src/middleware.ts ([admin-entry] lines).
 // ─────────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
   title: "Admin Login — BeautyNestKorea",
   description: "Staff entry point for BeautyNestKorea administration.",
+  robots: { index: false, follow: false },
+  alternates: {
+    canonical: "https://beautynestkorea.vercel.app/beautynest-entry-2026-sable-heron-47",
+  },
 };
 
 export default function AdminEntryPage() {

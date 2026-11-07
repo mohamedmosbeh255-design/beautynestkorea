@@ -10,7 +10,7 @@ export const revalidate = 3600;
 // Evergreen hub (no date): dated editions live at /market-report/[date].
 const HUB_TITLE = "K-Beauty Market Report: Daily Skincare Trends & Ingredient Movers";
 const HUB_DESCRIPTION =
-  "Daily K-beauty market intelligence: Wikipedia ingredient-interest trends, community buzz, skincare news headlines, social signals and price watchlists — refreshed every morning by our market intelligence bot.";
+  "Daily K-beauty market intelligence: Wikipedia ingredient-interest trends, community buzz, skincare news headlines, social signals and price watchlists — refreshed every morning by our market intelligence bot. Amazon pricing data requires PA-API credentials and is not yet shown.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const base = siteBaseUrl();
@@ -100,7 +100,13 @@ export default async function MarketReportPage() {
       <MedicalCaveat className="mt-5" />
 
       <div className="mt-8">
-        <MarketReportBody markdown={report.markdown} reportDate={report.date} ingredientSnapshot={snapshot} />
+        <MarketReportBody
+          markdown={report.markdown
+            .replace(/TODO \(PA-API\)/g, "Pending PA-API")
+            .replace(/Not yet available/g, "Pending PA-API")}
+          reportDate={report.date}
+          ingredientSnapshot={snapshot}
+        />
       </div>
 
       <div className="glass mt-10 flex flex-wrap items-center justify-between gap-3 rounded-2xl p-5">

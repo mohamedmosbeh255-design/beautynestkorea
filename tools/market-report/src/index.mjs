@@ -245,7 +245,7 @@ function renderDocument(ctx) {
   out.push('- **Community:** the public JSON endpoint is currently blocked (HTTP 403 for non-browser clients), so the Atom feed is the documented fallback. Score shows engagement (upvotes + comments) where Reddit shares both counts; "—" means Reddit shared no counts for that row, never an error. Titles keep their source wording; feed-truncated titles are restored from the post URL where possible and stay linked to the full post.');
   out.push('- **Social:** TikTok Creative Center hashtag rankings are gated behind an authenticated session, so the curated list in `src/lib/lexicon.mjs` is used and the probe verdicts are printed as evidence.');
   out.push('- **News:** Google News RSS headlines (English + Korean queries) are filtered against the same ingredient/brand lexicon and printed with publisher and timestamp. Editorial coverage is a *coverage* signal, not consumer demand or sales volume; unmatched headlines are counted as read-but-skipped, never padded into the table.');
-  out.push('- **Watchlist:** price/rating/BSR stay `TODO (PA-API)`; this tool never contacts Amazon.');
+  out.push('- **Watchlist:** price/rating/BSR stay `Not yet available`; this tool never contacts Amazon.');
   out.push('- **Summary:** rule-based only — every line derived from the values above, never generated prose.');
   out.push('');
   out.push(`_Next report: ${date} + 1 day at 06:00 UTC via GitHub Actions._`);
