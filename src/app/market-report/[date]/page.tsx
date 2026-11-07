@@ -27,6 +27,10 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: url },
+    // Watchlist metrics (price/rating/BSR) are still TODO (PA-API) — these
+    // editions are placeholder data, so keep them out of Google's index
+    // until real Amazon metrics ship. The archive hub stays indexed.
+    robots: { index: false, follow: true },
     openGraph: { title, description, url, type: "article", images: [{ url: `${base}/og-default.png`, width: 1200, height: 630, alt: "BeautyNestKorea — curated K-beauty & skincare" }], publishedTime: `${date}T06:00:00Z` },
     twitter: { card: "summary_large_image", title, description },
   };

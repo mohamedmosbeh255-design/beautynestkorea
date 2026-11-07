@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { MOCK_PRODUCTS } from "@/lib/data/products";
 import { getAllAdvice } from "@/lib/advice";
 import { getConcernSlugs } from "@/lib/advice-kb";
-import { listReportDatesSync, siteBaseUrl } from "@/lib/market-report";
+import { siteBaseUrl } from "@/lib/market-report";
 import { RETIRED_PRODUCT_SLUGS } from "@/lib/retired-slugs";
 import { getProducts } from "@/lib/products";
 import { getActiveConcernNames } from "@/lib/concerns";
@@ -61,10 +61,9 @@ async function getLiveArticleRows(): Promise<Array<{ slug: string; updated_at?: 
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteBaseUrl();
-  const [products, advice, reportDates, concernSlugs, articles] = await Promise.all([
+  const [products, advice, concernSlugs, articles] = await Promise.all([
     getLiveProductRows(),
     Promise.resolve(getAllAdvice()),
-    Promise.resolve(listReportDatesSync()),
     Promise.resolve(getConcernSlugs()),
     getLiveArticleRows(),
   ]);
@@ -95,7 +94,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/affiliate-disclosure`, lastModified: new Date() },
     { url: `${base}/author`, lastModified: new Date() },
     { url: `${base}/how-we-review`, lastModified: new Date() },
-    ...reportDates.map((d) => ({ url: `${base}/market-report/${d}`, lastModified: new Date(d) })),
+    // Dated report editions are noindex until PA-API metrics ship, so they
+    // are deliberately NOT listed here — the archive hub is the crawlable entry.
     ...[...new Set(categories)].map((slug) => ({ url: `${base}/category/${slug}`, lastModified: new Date() })),
     ...products
       .filter((p): p is LiveProductRow & { slug: string } => Boolean(p.slug))
