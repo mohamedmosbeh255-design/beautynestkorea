@@ -37,7 +37,7 @@ export const FOOTER_CACHE_TAG = "footer-settings";
 /** Frozen SEO baseline — today's hardcoded footer. Never mutate at runtime. */
 export const DEFAULT_FOOTER: FooterData = {
   tagline:
-    "Honest, curated K-beauty & global skincare recommendations. We compare Amazon and Olive Young so you always get the best price.",
+    "Honest, curated K-beauty & global skincare recommendations. We compare trusted retailers so you always get the best price.",
   disclosure:
     "Affiliate disclosure: we may earn a commission when you buy through our links — at no extra cost to you. This supports our independent reviews.",
   shop: [

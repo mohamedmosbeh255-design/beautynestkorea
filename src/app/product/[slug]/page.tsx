@@ -184,14 +184,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             {RETAILER_PRICE_DETAILS[slug] ? (
               <p className="mt-3 text-xs text-ink-soft">
                 {whereToBuyAsOf ? (
-                  <><PriceNote checkedDate={whereToBuyAsOf} /> — per-ml based on 30ml (Amazon) and 60ml double-set total (Olive Young). </>
+                  <>Per-ml based on 30ml (Amazon) and 60ml double-set total (Olive Young). </>
                 ) : null}
-                We may earn a commission at no cost to you.
+                Prices and ratings at all retailers are subject to change at any time; please visit each retailer’s website for the most up-to-date information. We may earn a commission at no additional cost to you.
               </p>
             ) : (
               <p className="mt-3 flex items-center gap-1.5 text-xs text-ink-soft">
                 <ShieldCheck className="h-3.5 w-3.5 text-sage-600" />
-                <span><PriceNote />. We may earn a commission at no cost to you.</span>
+                <span>Prices and ratings at all retailers are subject to change at any time; please visit each retailer’s website for the most up-to-date information. We may earn a commission at no additional cost to you.</span>
               </p>
             )}
           </div>
