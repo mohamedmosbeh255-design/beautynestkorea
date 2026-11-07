@@ -69,20 +69,6 @@ alter table public.products add column if not exists amazon_uk_url text;
 alter table public.products add column if not exists stylevana_url text;
 alter table public.products add column if not exists amazon_uk_asin text;
 
--- ─── categories ────────────────────────────────────────────
--- Concern/category catalog (Acne, Hydration, ...). The storefront derives
--- "Shop by Concern" cards from product data, so new concerns added on
--- products appear automatically; this table organizes them + powers future
--- category landing pages.
-create table if not exists public.categories (
-  id uuid primary key default gen_random_uuid(),
-  name text unique not null,
-  slug text unique not null,
-  description text,
-  image_url text,
-  created_at timestamptz not null default now()
-);
-
 -- ─── admin_users ───────────────────────────────────────────
 create table if not exists public.admin_users (
   id uuid primary key references auth.users(id) on delete cascade,
@@ -105,7 +91,6 @@ create index if not exists idx_clicks_date on public.product_clicks (clicked_at 
 
 -- ─── Row Level Security ────────────────────────────────────
 alter table public.products enable row level security;
-alter table public.categories enable row level security;
 alter table public.admin_users enable row level security;
 alter table public.product_clicks enable row level security;
 
@@ -143,20 +128,6 @@ create policy "Admins read clicks"
   to authenticated
   using (exists (select 1 from public.admin_users where admin_users.id = auth.uid()));
 
--- Categories: public read, admins write
-drop policy if exists "Public read categories" on public.categories;
-create policy "Public read categories"
-  on public.categories for select
-  to anon, authenticated
-  using (true);
-
-drop policy if exists "Admins full access categories" on public.categories;
-create policy "Admins full access categories"
-  on public.categories for all
-  to authenticated
-  using (exists (select 1 from public.admin_users where admin_users.id = auth.uid()))
-  with check (exists (select 1 from public.admin_users where admin_users.id = auth.uid()));
-
 -- ─── Storage bucket for product images ─────────────────────
 -- Run in dashboard or via SQL:
 -- insert into storage.buckets (id, name, public) values ('product-images', 'product-images', true)
@@ -181,15 +152,6 @@ values
   ('beauty-of-joseon-relief-sun', 'Relief Sun : Rice + Probiotics SPF50+', 'Beauty of Joseon', 'A lightweight organic sunscreen with rice extract and grain probiotics that hydrates while protecting. No white cast, perfect under makeup.', 18.00, 22.00, 'Sunscreen', '{Hydration,Brightening,Sensitive}', '{All,Sensitive,Dry}', '{Rice Extract,Probiotics,Niacinamide}', '{https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80}', 'https://www.amazon.com/s?k=beauty+of+joseon+relief+sun', 'https://www.oliveyoung.com/', 4.8, 12400, true),
   ('cosrx-snail-96-mucin', 'Advanced Snail 96 Mucin Power Essence', 'COSRX', 'Cult-favorite essence with 96.3% snail secretion filtrate to repair, hydrate and plump skin. Fades acne scars and boosts glow.', 17.50, 25.00, 'Serum', '{Acne,Hydration,Anti-aging}', '{All,Oily,Combination}', '{Snail Mucin,Hyaluronic Acid,Panthenol}', '{https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80}', 'https://www.amazon.com/s?k=cosrx+snail+mucin', 'https://www.oliveyoung.com/', 4.7, 28900, true),
   ('anua-heartleaf-toner', 'Heartleaf 77% Soothing Toner', 'Anua', 'Calming toner with 77% heartleaf extract that soothes redness, balances oil and preps skin. A must for acne-prone routines.', 15.00, 20.00, 'Toner', '{Acne,Sensitive,Pores}', '{Oily,Combination,Sensitive}', '{Heartleaf,Centella,Panthenol}', '{https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80}', 'https://www.amazon.com/s?k=anua+heartleaf+toner', 'https://www.oliveyoung.com/', 4.6, 15200, true)
-on conflict (slug) do nothing;
-
-insert into public.categories (name, slug, description) values
-  ('Acne', 'acne', 'Calm breakouts, fade marks'),
-  ('Anti-aging', 'anti-aging', 'Firm, smooth & glow'),
-  ('Hydration', 'hydration', 'Glass-skin moisture'),
-  ('Brightening', 'brightening', 'Fade dark spots, glow'),
-  ('Sensitive', 'sensitive', 'Gentle, barrier-first'),
-  ('Pores', 'pores', 'Refine & balance oil')
 on conflict (slug) do nothing;
 
 -- ─── articles (guides with strategic product linking) ─────

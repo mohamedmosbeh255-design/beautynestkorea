@@ -5,6 +5,9 @@
  * limiting) — this is a per-instance defense that is enough for low
  * traffic on a single server. Swap for a shared store before expecting
  * meaningful traffic.
+ *
+ * KNOWN LIMITATION: the store is per serverless instance, so limits are
+ * not shared across instances — use Upstash/Vercel KV for global limits.
  */
 
 type Entry = { count: number; resetAt: number };

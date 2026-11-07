@@ -13,7 +13,7 @@ import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 export const metadata: Metadata = {
   title: "BeautyNestKorea — Curated K-Beauty & Skincare That Loves You Back",
   description:
-    "Discover curated Korean bestsellers with honest reviews, ingredient-first guides, and Amazon vs Olive Young price comparison — re-checked regularly.",
+    "Discover curated Korean bestsellers with honest reviews, ingredient-first guides, and Amazon vs Olive Young price comparison — prices observed at the time of writing and may have changed since.",
   alternates: { canonical: siteBaseUrl() },
   openGraph: {
     title: "BeautyNestKorea — Curated K-Beauty & Skincare",
