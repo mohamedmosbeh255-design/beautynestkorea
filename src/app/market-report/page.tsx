@@ -19,6 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: HUB_TITLE,
     description: HUB_DESCRIPTION,
+    // Watchlist metrics are still placeholder (PA-API pending) — keep the
+    // hub out of Google's index until real Amazon data ships. Dated
+    // editions are already noindex; this covers the hub itself.
+    robots: { index: false, follow: true },
     alternates: { canonical: url },
     openGraph: {
       title: HUB_TITLE,
