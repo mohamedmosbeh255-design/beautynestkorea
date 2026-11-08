@@ -1,0 +1,112 @@
+{
+  "date": "2026-11-08",
+  "generatedAt": "2026-11-08T12:24:26.948Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [],
+  "trendTerms": [],
+  "ingredients": [],
+  "brands": [],
+  "communityPosts": [],
+  "newsHeadlines": [
+    "Velvente Pairs Vegan PDRN With a Full 3-Step Anti-Aging Routine",
+    "Velvente Pairs Vegan PDRN With a Full 3-Step Anti-Aging Routine | Press Releases | mycarrollcountynews.com",
+    "PDRN Is Having a Major Skincare Moment—9 Serums a Facialist Recommends",
+    "Want Retinol Results Without The Irritation? Dermatologists Say This New Ingredient Is The One to Try",
+    "75-Year-Olds Say They Pass for 50 Thanks to This $18 Retinol Body Cream 33,000+ Shoppers Love",
+    "A Stronger Version of My Favorite K-Beauty Retinal Is on Sale",
+    "이너뷰티 성분 소비 확산, 레티놀·PDRN이 이끈다",
+    "I tried every Biodance sheet mask: Here’s which one is actually worth it",
+    "Dermatologists reveal the worst things you can do when using retinol",
+    "Shoppers in Their 70s Are Getting Mistaken for 40 After Trying This Dermatologist-Loved Retinol Night Cream",
+    "A Review of Medicube’s 3 Best K-Beauty Skin Care Products",
+    "7 Korean Retinol Alternatives for a Glass Skin-Approved Glow"
+  ],
+  "newsIngredients": [
+    {
+      "name": "Retinol / Retinoids",
+      "count": 19
+    },
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 17
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 11
+    },
+    {
+      "name": "Peptides",
+      "count": 3
+    },
+    {
+      "name": "Exosomes",
+      "count": 2
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "failed",
+      "detail": "no article answered (18 request(s) attempted)"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "failed",
+      "detail": "no posts retrievable from JSON or Atom"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "136 headline(s) read · 50 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 4/6 sources produced data · degraded (documented fallback): TikTok Creative Center · failed: Wikimedia pageviews (ingredient interest), Reddit community (SkincareAddiction + KoreanBeauty)",
+    "**Ingredient interest:** no pageview data today — every tracked article request failed (see section 1). Secondary Google Trends signal: 12/12 markets answered (120 items scanned), 0 skincare matches.",
+    "**Community pulse:** no community data today — both the public JSON and the Atom fallback returned nothing usable.",
+    "**News pulse:** 136 headline(s) read across 2 quer(ies), 50 matched the lexicon. Most-covered: **Retinol / Retinoids** (19 headline(s)), brand **COSRX** (2 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover vs 2026-11-07:** up — nothing rose; down — Azelaic Acid -1 (now 0).",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still not yet available; while those wait, prioritise content around **Retinol / Retinoids**, the strongest demand signal available today (source: news coverage; social source: static-fallback)."
+  ]
+}
