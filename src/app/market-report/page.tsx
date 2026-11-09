@@ -19,10 +19,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: HUB_TITLE,
     description: HUB_DESCRIPTION,
-    // Watchlist metrics are still placeholder (PA-API pending) — keep the
-    // hub out of Google's index until real Amazon data ships. Dated
-    // editions are already noindex; this covers the hub itself.
-    robots: { index: false, follow: true },
+    // The hub is the single stable, evergreen URL for this content and stays
+    // indexable so the daily reports keep earning search traffic at one
+    // canonical address. Dated /market-report/[date] editions remain noindex
+    // (56+ near-identical pages = thin/duplicate content) and canonicalise
+    // here, so Google consolidates every edition into this page.
     alternates: { canonical: url },
     openGraph: {
       title: HUB_TITLE,
