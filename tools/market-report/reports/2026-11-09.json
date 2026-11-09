@@ -1,0 +1,357 @@
+{
+  "date": "2026-11-09",
+  "generatedAt": "2026-11-09T14:38:15.009Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Vitamin C",
+      "views": 582,
+      "previous": 557,
+      "delta": 25
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [
+    {
+      "name": "Sunscreen (unspecified)",
+      "count": 10
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 7
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "count": 5
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "count": 4
+    },
+    {
+      "name": "Azelaic Acid",
+      "count": 3
+    },
+    {
+      "name": "Micellar Water",
+      "count": 3
+    },
+    {
+      "name": "Glycolic / AHA",
+      "count": 2
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 1
+    },
+    {
+      "name": "Ceramides",
+      "count": 1
+    },
+    {
+      "name": "Collagen",
+      "count": 1
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    },
+    {
+      "name": "Niacinamide",
+      "count": 1
+    },
+    {
+      "name": "Vitamin C",
+      "count": 1
+    }
+  ],
+  "brands": [
+    {
+      "name": "CeraVe",
+      "count": 4
+    },
+    {
+      "name": "Bioderma",
+      "count": 2
+    },
+    {
+      "name": "La Roche-Posay",
+      "count": 2
+    },
+    {
+      "name": "Neutrogena",
+      "count": 2
+    },
+    {
+      "name": "Anua",
+      "count": 1
+    },
+    {
+      "name": "Cosrx",
+      "count": 1
+    },
+    {
+      "name": "Medicube",
+      "count": 1
+    },
+    {
+      "name": "Nivea",
+      "count": 1
+    },
+    {
+      "name": "Purito Seoul",
+      "count": 1
+    },
+    {
+      "name": "Skin1004",
+      "count": 1
+    },
+    {
+      "name": "The Ordinary",
+      "count": 1
+    }
+  ],
+  "communityPosts": [
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xr1a3p/beforeafter_the_difference_2_weeks_and_changing/",
+      "title": "[Before&After] The difference 2 weeks and changing products made to my skin. I have DRY,flushing, hyper sensitive, hyper reactive rosecea and I'm STUNNED.",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Sunscreen (unspecified)",
+        "Micellar Water"
+      ],
+      "brands": [
+        "Nivea"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xrj5mb/misc_developing_stinky_feet_after_moving_to/",
+      "title": "[Misc] Developing stinky feet after moving to college",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xrfrko/routine_help_please_help_assess_my_acne_scars_and/",
+      "title": "[Routine help] Please help assess my acne scars and how to clear them",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Niacinamide",
+        "Retinol / Retinoids",
+        "Centella Asiatica (Cica)",
+        "Salicylic Acid (BHA)",
+        "Vitamin C",
+        "Sunscreen (unspecified)",
+        "Micellar Water"
+      ],
+      "brands": [
+        "Skin1004",
+        "Bioderma"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xr04o0/misc_face_mole_removal/",
+      "title": "[Misc] Face Mole Removal",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xrqlm8/before_and_after_fungal_acne_safe_routine_for/",
+      "title": "[Before and After] Fungal acne safe routine for sebaceous filaments!",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Salicylic Acid (BHA)",
+        "Glycolic / AHA",
+        "Sunscreen (unspecified)",
+        "Micellar Water"
+      ],
+      "brands": [
+        "Cosrx",
+        "Purito Seoul",
+        "Bioderma"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xrlt74/acne_after_longterm_use_im_wondering_if_applying/",
+      "title": "[Acne] After long-term use, I’m wondering if applying tretinoin every night is still necessary, or if reducing frequency works just as well for maintenance?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xragox/routine_help_what_is_wrong_with_my_skin/",
+      "title": "[Routine Help] What is wrong with my skin?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Azelaic Acid",
+        "Salicylic Acid (BHA)"
+      ],
+      "brands": [
+        "CeraVe",
+        "La Roche-Posay"
+      ]
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xr8a5r/acne_is_this_routine_okay_for_my_acne_am_i_using/",
+      "title": "[ACNE] Is this routine okay for my acne? Am I using Adapalene + BP correctly?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [
+        "Retinol / Retinoids",
+        "Salicylic Acid (BHA)",
+        "Glycolic / AHA",
+        "Sunscreen (unspecified)"
+      ],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xr14p5/product_question_nira_vs_tria_frx_vs_mimisilk/",
+      "title": "[Product Question] NIRA vs Tria FRX vs MimiSilk. Feedback needed.Face laser, at-home-device, fine lines.",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    },
+    {
+      "url": "https://www.reddit.com/r/SkincareAddiction/comments/1xrlw6d/misc_reusable_cloth_towels_vs_singleuse/",
+      "title": "[Misc] Reusable cloth towels vs single-use disposable face towels: which team are you on and why?",
+      "subreddit": "SkincareAddiction",
+      "score": null,
+      "comments": null,
+      "engagement": null,
+      "ingredients": [],
+      "brands": []
+    }
+  ],
+  "newsHeadlines": [
+    "FARMSTAY to showcase its PDRN & Vitamin collection at Mall of the Emirates",
+    "Velvente Pairs Vegan PDRN With a Full 3-Step Anti-Aging Routine",
+    "PDRN Is Having a Major Skincare Moment—9 Serums a Facialist Recommends",
+    "RoC® Skincare Celebrates Sixth Annual National Retinol Day with Appointment of First-Ever Chief Dermatologist and Triple Serum Innovation",
+    "Want Retinol Results Without The Irritation? Dermatologists Say This New Ingredient Is The One to Try",
+    "My Grandma, 68, Wants to Firm Up Her Turkey Neck—I Told Her About the Retinol Serum Fans Say Leaves Skin “Tight”",
+    "A Stronger Version of My Favorite K-Beauty Retinal Is on Sale",
+    "PDRN is K-beauty’s buzzy ingredient for plump, dewy skin — shop Nordstrom picks from $10",
+    "이너뷰티 성분 소비 확산, 레티놀·PDRN이 이끈다",
+    "I tried every Biodance sheet mask: Here’s which one is actually worth it",
+    "Dermatologists reveal the worst things you can do when using retinol",
+    "Shoppers in Their 70s Are Getting Mistaken for 40 After Trying This Dermatologist-Loved Retinol Night Cream"
+  ],
+  "newsIngredients": [
+    {
+      "name": "Retinol / Retinoids",
+      "count": 20
+    },
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 18
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 13
+    },
+    {
+      "name": "Peptides",
+      "count": 3
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 1
+    },
+    {
+      "name": "Exosomes",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "1 ingredient(s) measured · 18/18 article requests OK · 2026-11-08 vs 2026-11-07"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "partial",
+      "detail": "35 posts analysed · Atom fallback used (public JSON blocked)"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "135 headline(s) read · 53 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 6/6 sources produced data · degraded (documented fallback): Reddit community (SkincareAddiction + KoreanBeauty), TikTok Creative Center · no source failed",
+    "**Ingredient interest:** 1/16 tracked ingredients measured (Wikipedia pageviews, 2026-11-08 vs 2026-11-07). Biggest rise: **Vitamin C** +25 views (+4.5%). Highest volume: **Vitamin C** (582 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** 35 posts analysed; the most-discussed ingredient is **Sunscreen (unspecified)** (10 posts), with **CeraVe** the most-mentioned brand (4 posts).",
+    "**News pulse:** 135 headline(s) read across 2 quer(ies), 53 matched the lexicon. Most-covered: **Retinol / Retinoids** (20 headline(s)), brand **COSRX** (3 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-11-08 vs 2026-11-07):** up — Vitamin C +25 views; down — nothing fell. Community mention deltas: up — Sunscreen (unspecified) +10, down — none.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still not yet available; while those wait, prioritise content around **Sunscreen (unspecified)**, the strongest demand signal available today (source: community mentions; social source: static-fallback)."
+  ]
+}
