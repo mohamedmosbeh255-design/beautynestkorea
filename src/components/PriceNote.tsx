@@ -16,14 +16,15 @@ export default function PriceNote({ checkedDate }: { checkedDate?: string | null
   if (checkedDate) {
     return (
       <>
-        Prices &amp; ratings as of {checkedDate} · may change anytime on Amazon &amp; Olive Young · check
-        the retailer for current info
+        Prices and ratings as of {checkedDate} · These may change at any time; please check the
+        respective store for the most up-to-date information.
       </>
     );
   }
   return (
     <>
-      Prices &amp; ratings may change anytime on Amazon &amp; Olive Young · check the retailer for current info
+      Prices and ratings may change at any time; please check the respective store for the most
+      up-to-date information.
     </>
   );
 }

@@ -36,7 +36,7 @@ const RETAILER_PRICE_DETAILS: Record<
   },
 };
 
-// Product-page-only full-date stamp (e.g. "Sep 24, 2026") for the main
+// Product-page-only full-date stamp (e.g. "September 24, 2026") for the main
 // price line. Shared formatPriceChecked (month + year) is left untouched
 // so cards and other surfaces keep today's output. Null → null, so old
 // products without a date render exactly as today (no backfill, no guess).
@@ -44,7 +44,7 @@ function formatPriceCheckedFull(iso?: string | null): string | null {
   if (!iso) return null;
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return null;
-  return d.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+  return d.toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
