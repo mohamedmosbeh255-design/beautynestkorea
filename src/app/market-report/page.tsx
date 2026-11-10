@@ -25,6 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // (56+ near-identical pages = thin/duplicate content) and canonicalise
     // here, so Google consolidates every edition into this page.
     alternates: { canonical: url },
+    robots: { index: false, follow: true },
     openGraph: {
       title: HUB_TITLE,
       description: HUB_DESCRIPTION,
