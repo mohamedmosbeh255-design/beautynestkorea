@@ -89,8 +89,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         : `It suits ${product.skin_type.join(", ")} skin best. Patch-test if you're sensitive.`,
     },
     {
-      question: "Where is it cheapest — Amazon or Olive Young?",
-      answer: "Prices rotate with sales. Use the buttons above to compare current retailer prices; Olive Young often bundles minis and limited editions.",
+      question: "Where Can You Find the Best Value?",
+      answer: "Prices vary depending on special offers and discounts. Use the buttons above to compare current prices, available promotions, and product benefits so you can find the best value for your skincare needs.",
     },
   ];
   const jsonLd = [
