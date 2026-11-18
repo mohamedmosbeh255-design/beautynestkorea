@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { ArrowRight, ShieldCheck, Sparkles, Droplets, Sun, Leaf, Star, CircleDot } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, Droplets, Sun, Leaf, Star, CircleDot, Globe2 } from "lucide-react";
 import { getProducts } from "@/lib/products";
 import { getConcernStats, concernSlug } from "@/lib/concerns";
 import { getAllAdvice } from "@/lib/advice";
@@ -58,7 +58,12 @@ export default async function HomePage() {
   // concern in Admin automatically adds/updates a card here. Zero-product
   // concerns never appear (counts come from products), so empty cards
   // cannot render; every card below carries a count + non-empty blurb.
-  const concernStats = getConcernStats(allProducts).filter(({ count }) => count > 0);
+  const stats = getConcernStats(allProducts);
+  const globalCount = stats.find(({ name }) => name === "Global Skincare")?.count ?? 0;
+  // "Global Skincare" is a curated collection, not a skin concern — it gets its
+  // own banner below and is excluded from the concern grid so the existing
+  // cards keep their exact order, copy and count.
+  const concernStats = stats.filter(({ count, name }) => count > 0 && name !== "Global Skincare");
 
   return (
     <div>
@@ -94,6 +99,33 @@ export default async function HomePage() {
           Curated Korean bestsellers with honest reviews and Amazon vs Olive Young price comparison, re-checked monthly.
         </p>
       </section>
+
+      {/* GLOBAL SKINCARE COLLECTION */}
+      {globalCount > 0 && (
+        <section className="mx-auto mt-8 max-w-7xl px-4 sm:px-6">
+          <Link
+            href="/category/global-skincare"
+            className="group relative flex flex-col gap-4 overflow-hidden rounded-3xl bg-gradient-to-br from-stone-100 via-sage-50 to-blush-50 p-7 transition hover:-translate-y-1 hover:shadow-xl sm:flex-row sm:items-center sm:justify-between sm:p-9"
+          >
+            <div className="flex items-start gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/80 shadow-sm">
+                <Globe2 className="h-6 w-6 text-sage-700" />
+              </span>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">New collection</p>
+                <h2 className="font-serif-display mt-1 text-2xl font-bold tracking-tight sm:text-3xl">Global Skincare</h2>
+                <p className="mt-1 text-sm text-ink-soft">
+                  Dermatologist-recommended Western essentials — CeraVe, La Roche-Posay, Paula&apos;s Choice, Vaseline and more.
+                </p>
+              </div>
+            </div>
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700">
+              Shop the collection
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            </span>
+          </Link>
+        </section>
+      )}
 
       {/* SHOP BY CONCERN */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6">

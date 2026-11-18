@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import Link from "next/link";
+import { ArrowRight, Globe2 } from "lucide-react";
 import { getProducts } from "@/lib/products";
 import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
@@ -16,6 +18,9 @@ export const revalidate = 3600;
 
 export default async function ShopPage() {
   const products = await getProducts();
+  // Guard: the collection card only renders once products carry the concern,
+  // so a mis-ordered deploy can never ship a link to an empty 404 page.
+  const hasGlobal = products.some((p) => (p.concern ?? []).includes("Global Skincare"));
   // Deep links (/shop?concern=Hydration, /shop?category=Sunscreen) are
   // resolved client-side in ShopFromParams so this page stays static ISR.
   // Bestsellers strip: featured picks first, then top rated.
@@ -30,6 +35,27 @@ export default async function ShopPage() {
         Filter by brand, concern, price and source. Every card links to both Amazon and Olive Young on the product page.
       </p>
       <MedicalCaveat className="mt-4 max-w-xl" />
+      {hasGlobal && (
+        <section className="mt-10">
+          <h2 className="font-serif-display text-2xl font-bold tracking-tight sm:text-3xl">Shop by collection</h2>
+          <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <Link
+              href="/category/global-skincare"
+              className="group rounded-3xl bg-gradient-to-br from-stone-100 to-sage-100 p-6 transition hover:-translate-y-1 hover:shadow-xl"
+            >
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/80 shadow-sm">
+                <Globe2 className="h-5 w-5 text-sage-700" />
+              </span>
+              <h3 className="font-serif-display mt-4 text-xl font-bold">Global Skincare</h3>
+              <p className="mt-1 text-sm text-ink-soft">Dermatologist-recommended Western essentials</p>
+              <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-ink">
+                Explore the collection
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </span>
+            </Link>
+          </div>
+        </section>
+      )}
       {bestsellers.length > 0 && (
         <section className="mt-10">
           <h2 className="font-serif-display text-2xl font-bold tracking-tight sm:text-3xl">Bestsellers</h2>

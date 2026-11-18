@@ -58,8 +58,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const concern = await resolveConcern(slug);
   if (!concern) return { title: "Category not found" };
   const base = siteBaseUrl();
-  const title = `${concern} Skincare Products — Curated K-Beauty Picks`;
-  const description = `Shop curated ${concern.toLowerCase()} skincare: bestsellers with honest reviews and Amazon vs Olive Young price comparison.`;
+  // "Global Skincare" is a curated collection, not a skin concern, so the
+  // generic "<concern> skincare" phrasing would read "Global Skincare skincare".
+  // Scoped to this one slug — every existing category keeps its exact metadata.
+  const isGlobal = concern === "Global Skincare";
+  const title = isGlobal
+    ? "Global Skincare Products — Dermatologist-Recommended Essentials"
+    : `${concern} Skincare Products — Curated K-Beauty Picks`;
+  const description = isGlobal
+    ? "Shop curated Western skincare essentials from CeraVe, La Roche-Posay, Paula's Choice, Vaseline, Aquaphor, O'Keeffe's, Bioderma, The Ordinary and EltaMD."
+    : `Shop curated ${concern.toLowerCase()} skincare: bestsellers with honest reviews and Amazon vs Olive Young price comparison.`;
   return {
     title,
     description,
@@ -72,6 +80,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   const concern = await resolveConcern(slug);
   if (!concern) notFound();
+  const isGlobal = concern === "Global Skincare";
 
   // Read-only filter over live catalog data: products keep every concern tag
   // they already have — this page only READS associations, never rewrites.
@@ -91,11 +100,16 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <Link href="/shop" className="inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700 hover:underline">
         <ArrowLeft className="h-4 w-4" /> All products
       </Link>
-      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: `${concern} skincare` }]} />
-      <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-sage-600">Shop by concern</p>
-      <h1 className="font-serif-display mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{concern} skincare</h1>
+      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: isGlobal ? concern : `${concern} skincare` }]} />
+      <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-sage-600">
+        {isGlobal ? "Shop by collection" : "Shop by concern"}
+      </p>
+      <h1 className="font-serif-display mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+        {isGlobal ? concern : `${concern} skincare`}
+      </h1>
       <p className="mt-3 max-w-2xl text-base text-ink-soft">
-        {matched.length} curated product{matched.length !== 1 && "s"} for {concern.toLowerCase()} — prices
+        {matched.length} curated product{matched.length !== 1 && "s"} for{" "}
+        {isGlobal ? "dermatologist-recommended Western routines" : concern.toLowerCase()} — prices
         pulled straight from the catalog below, with Amazon vs Olive Young comparison on every product page.
       </p>
       <AffiliateDisclosure className="mt-4 max-w-2xl" />
