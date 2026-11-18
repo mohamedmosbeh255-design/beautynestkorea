@@ -108,9 +108,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         {isGlobal ? concern : `${concern} skincare`}
       </h1>
       <p className="mt-3 max-w-2xl text-base text-ink-soft">
-        {matched.length} curated product{matched.length !== 1 && "s"} for{" "}
-        {isGlobal ? "dermatologist-recommended Western routines" : concern.toLowerCase()} — prices
-        pulled straight from the catalog below, with Amazon vs Olive Young comparison on every product page.
+        {isGlobal ? (
+          "The best Western products, carefully selected."
+        ) : (
+          <>
+            {matched.length} curated product{matched.length !== 1 && "s"} for {concern.toLowerCase()} — prices
+            pulled straight from the catalog below, with Amazon vs Olive Young comparison on every product page.
+          </>
+        )}
       </p>
       <AffiliateDisclosure className="mt-4 max-w-2xl" />
       {matched.length > 0 ? (
