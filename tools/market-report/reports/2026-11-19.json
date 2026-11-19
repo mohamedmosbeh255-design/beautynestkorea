@@ -1,0 +1,213 @@
+{
+  "date": "2026-11-19",
+  "generatedAt": "2026-11-19T14:53:11.213Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Hyaluronic Acid",
+      "views": 470,
+      "previous": 340,
+      "delta": 130
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 701,
+      "previous": 615,
+      "delta": 86
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 285,
+      "previous": 247,
+      "delta": 38
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 200,
+      "previous": 174,
+      "delta": 26
+    },
+    {
+      "name": "Squalane",
+      "views": 79,
+      "previous": 68,
+      "delta": 11
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 62,
+      "previous": 55,
+      "delta": 7
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 360,
+      "previous": 355,
+      "delta": 5
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 52,
+      "previous": 48,
+      "delta": 4
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 635,
+      "previous": 632,
+      "delta": 3
+    },
+    {
+      "name": "Niacinamide",
+      "views": 11,
+      "previous": 10,
+      "delta": 1
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 34,
+      "previous": 42,
+      "delta": -8
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 62,
+      "previous": 71,
+      "delta": -9
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 296,
+      "previous": 323,
+      "delta": -27
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 165,
+      "previous": 195,
+      "delta": -30
+    },
+    {
+      "name": "Ceramides",
+      "views": 111,
+      "previous": 148,
+      "delta": -37
+    },
+    {
+      "name": "Vitamin C",
+      "views": 661,
+      "previous": 732,
+      "delta": -71
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [],
+  "brands": [],
+  "communityPosts": [],
+  "newsHeadlines": [
+    "Dr. Reju-All's Buzzy PDRN Skincare Duo Is Going On Sale For Black Friday—Don't Miss Out!",
+    "The Skincare Technique Behind Kendall’s Look- Underglazing With @Anua Global PDRN Cream.",
+    "The Body Retinol That Proves Skincare Shouldn’t Stop at the Neck",
+    "The beauty directors’ guide to K-beauty, from PDRN to snail mucin",
+    "Even Wrinkles and Hanging Skin Are “Back to Normal,” Shoppers Say After Using This $9 Retinol Serum",
+    "From PDRN to AI: Five skincare trends shaping beauty routines in 2026",
+    "16 best retinol creams and serums for smoother, younger-looking skin",
+    "A Review of Medicube’s 3 Best K-Beauty Skin Care Products",
+    "7 Korean Retinol Alternatives for a Glass Skin-Approved Glow",
+    "I’m in my 40s – here are the best retinol and retinal serums for smoother, firmer skin",
+    "We Found 7 Great Retinoids For Different Skin Types and Budgets",
+    "I Tried All the Popular K-Beauty PDRN Serums—These Gave Me the Brightest Skin"
+  ],
+  "newsIngredients": [
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 18
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "count": 18
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 11
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 2
+    },
+    {
+      "name": "Exosomes",
+      "count": 2
+    },
+    {
+      "name": "Peptides",
+      "count": 2
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-11-18 vs 2026-11-17"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "failed",
+      "detail": "no posts retrievable from JSON or Atom"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "128 headline(s) read · 51 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 5/6 sources produced data · degraded (documented fallback): TikTok Creative Center · failed: Reddit community (SkincareAddiction + KoreanBeauty)",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-11-18 vs 2026-11-17). Biggest rise: **Hyaluronic Acid** +130 views (+38.2%). Highest volume: **Hyaluronic Acid** (470 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** no community data today — both the public JSON and the Atom fallback returned nothing usable.",
+    "**News pulse:** 128 headline(s) read across 2 quer(ies), 51 matched the lexicon. Most-covered: **PDRN / Salmon DNA** (18 headline(s)), brand **COSRX** (2 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-11-18 vs 2026-11-17):** up — Hyaluronic Acid +130 views; down — Vitamin C -71 views.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still not yet available; while those wait, prioritise content around **PDRN / Salmon DNA**, the strongest demand signal available today (source: news coverage; social source: static-fallback)."
+  ]
+}
