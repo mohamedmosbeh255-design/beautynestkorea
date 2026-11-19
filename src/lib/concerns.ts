@@ -46,6 +46,10 @@ const GLOBAL_SKINCARE_BRANDS = new Set([
   "bioderma",
   "theordinary",
   "eltamd",
+  "firstaidbeauty",
+  // Live row stores the brand with a trailing typo ("First Aid Beautyv");
+  // keep it working until the DB value is corrected — then this line is safe to drop.
+  "firstaidbeautyv",
 ]);
 
 /** Brand key: lowercase, punctuation-free (" La Roche-Posay" → "larocheposay"). */
