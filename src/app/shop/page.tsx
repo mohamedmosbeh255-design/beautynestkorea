@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowRight, Globe2 } from "lucide-react";
 import { getProducts } from "@/lib/products";
+import { GLOBAL_SKINCARE, productMatchesConcern } from "@/lib/concerns";
 import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
 import MedicalCaveat from "@/components/MedicalCaveat";
@@ -19,8 +20,9 @@ export const revalidate = 3600;
 export default async function ShopPage() {
   const products = await getProducts();
   // Guard: the collection card only renders once products carry the concern,
-  // so a mis-ordered deploy can never ship a link to an empty 404 page.
-  const hasGlobal = products.some((p) => (p.concern ?? []).includes("Global Skincare"));
+  // including read-time membership derived from a Western brand, so a
+  // mis-ordered deploy can never ship a link to an empty 404 page.
+  const hasGlobal = products.some((p) => productMatchesConcern(p, GLOBAL_SKINCARE));
   // Deep links (/shop?concern=Hydration, /shop?category=Sunscreen) are
   // resolved client-side in ShopFromParams so this page stays static ISR.
   // Bestsellers strip: featured picks first, then top rated.

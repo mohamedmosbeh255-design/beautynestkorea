@@ -24,6 +24,52 @@ const CONCERN_SYNONYMS: Record<string, string> = {
 };
 
 /**
+ * "Global Skincare" is a curated collection, not a skin concern. It is stored
+ * as a normal concern tag on Western-brand products, but products added via
+ * Admin form, SQL or any future import never receive that tag automatically.
+ * Membership is therefore derived at READ time from the brand:
+ * - zero writes to product data (no migration, no backfill, no deletions)
+ * - works for every insertion path, including direct SQL
+ * - brand matching is normalized because live data carries " La Roche-Posay",
+ *   " O'Keeffe's" and "BIODERMA" (leading-space / casing drift).
+ * Adding a new Western brand = one entry below.
+ */
+export const GLOBAL_SKINCARE = "Global Skincare";
+
+const GLOBAL_SKINCARE_BRANDS = new Set([
+  "cerave",
+  "larocheposay",
+  "paulaschoice",
+  "vaseline",
+  "aquaphor",
+  "okeeffes",
+  "bioderma",
+  "theordinary",
+  "eltamd",
+]);
+
+/** Brand key: lowercase, punctuation-free (" La Roche-Posay" → "larocheposay"). */
+function brandKey(brand?: string | null): string {
+  return (brand ?? "").normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+/** True when the product belongs to the curated Global Skincare collection. */
+export function isGlobalSkincareProduct(product: Product): boolean {
+  return GLOBAL_SKINCARE_BRANDS.has(brandKey(product.brand));
+}
+
+/**
+ * Concern tags used for display/filtering, including read-time collection
+ * membership. Never mutates the product; the stored array is returned as-is
+ * when the collection is already tagged.
+ */
+export function effectiveConcerns(product: Product): string[] {
+  const list = product.concern ?? [];
+  if (list.includes(GLOBAL_SKINCARE) || !isGlobalSkincareProduct(product)) return list;
+  return [...list, GLOBAL_SKINCARE];
+}
+
+/**
  * Display-cased canonical names. normalizeConcernName folds any casing
  * variant ("Anti-Aging", "SENSITIVE SKIN") to these, so live-DB label drift
  * can never spawn a duplicate card. CONCERNS entries are included so the fold
@@ -48,7 +94,7 @@ export function normalizeConcernName(raw: string): string {
 /** True when a product targets a concern, resolving synonyms to canonical. */
 export function productMatchesConcern(product: Product, concern: string): boolean {
   const wanted = normalizeConcernName(concern);
-  return (product.concern ?? []).some((c) => normalizeConcernName(c) === wanted);
+  return effectiveConcerns(product).some((c) => normalizeConcernName(c) === wanted);
 }
 
 // Count how many products target each concern. Synonym tags merge into
@@ -71,7 +117,7 @@ export function concernSlug(name: string): string {
 export function getConcernStats(products: Product[]): ConcernStat[] {
   const counts = new Map<string, number>();
   for (const p of products) {
-    for (const raw of p.concern ?? []) {
+    for (const raw of effectiveConcerns(p)) {
       const name = normalizeConcernName(raw);
       if (!name) continue;
       counts.set(name, (counts.get(name) ?? 0) + 1);
