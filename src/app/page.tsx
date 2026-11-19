@@ -185,7 +185,7 @@ export default async function HomePage() {
           <h2 className="font-serif-display text-center text-2xl font-bold sm:text-3xl">Why shop with BeautyNestKorea?</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             {[
-              { title: "Price-checked twice", desc: "Every product links to both Amazon and Olive Young so you pick the cheaper, faster option." },
+              { title: "Checking Prices", desc: "Each product includes links to Amazon US, Amazon UK, and Stylevana, allowing you to choose the option that works best for you." },
               { title: "Ingredients first", desc: "We list key actives, skin-type fit and concerns — no marketing fluff, just what works." },
               { title: "Routines that stick", desc: "Step-by-step routine guides so you layer products in the right order, morning and night." },
             ].map((v) => (
