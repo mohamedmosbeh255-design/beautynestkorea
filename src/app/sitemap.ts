@@ -59,6 +59,12 @@ async function getLiveArticleRows(): Promise<Array<{ slug: string; updated_at?: 
   return [];
 }
 
+// Metadata routes are cached at build time by default. Revalidate hourly so
+// newly published products/articles reach /sitemap.xml without a redeploy.
+// This never adds or removes URLs by itself — the <loc> set still comes from
+// the same catalog/article data as before.
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteBaseUrl();
   const [products, advice, concernSlugs, articles] = await Promise.all([
@@ -80,23 +86,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   return [
-    { url: `${base}/`, lastModified: new Date() },
-    { url: `${base}/shop`, lastModified: new Date() },
-    { url: `${base}/best-picks`, lastModified: new Date() },
-    { url: `${base}/advice`, lastModified: new Date() },
-    { url: `${base}/articles`, lastModified: new Date() },
-    { url: `${base}/market-report`, lastModified: new Date() },
-    { url: `${base}/market-report/archive`, lastModified: new Date() },
-    { url: `${base}/tools/image-optimizer`, lastModified: new Date() },
-    { url: `${base}/about`, lastModified: new Date() },
-    { url: `${base}/contact`, lastModified: new Date() },
-    { url: `${base}/privacy`, lastModified: new Date() },
-    { url: `${base}/affiliate-disclosure`, lastModified: new Date() },
-    { url: `${base}/author`, lastModified: new Date() },
-    { url: `${base}/how-we-review`, lastModified: new Date() },
+    // Static pages carry no lastModified: a synthetic `new Date()` on every
+    // revalidation would claim all pages changed hourly and erode lastmod trust.
+    { url: `${base}/` },
+    { url: `${base}/shop` },
+    { url: `${base}/best-picks` },
+    { url: `${base}/advice` },
+    { url: `${base}/articles` },
+    { url: `${base}/market-report` },
+    { url: `${base}/market-report/archive` },
+    { url: `${base}/tools/image-optimizer` },
+    { url: `${base}/about` },
+    { url: `${base}/contact` },
+    { url: `${base}/privacy` },
+    { url: `${base}/affiliate-disclosure` },
+    { url: `${base}/author` },
+    { url: `${base}/how-we-review` },
     // Dated report editions are noindex until PA-API metrics ship, so they
     // are deliberately NOT listed here — the archive hub is the crawlable entry.
-    ...[...new Set(categories)].map((slug) => ({ url: `${base}/category/${slug}`, lastModified: new Date() })),
+    ...[...new Set(categories)].map((slug) => ({ url: `${base}/category/${slug}` })),
     ...products
       .filter((p): p is LiveProductRow & { slug: string } => Boolean(p.slug))
       .map((p) => ({

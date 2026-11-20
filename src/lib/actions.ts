@@ -161,6 +161,7 @@ export async function createProduct(formData: FormData) {
   revalidatePath("/shop");
   revalidatePath(`/product/${parsed.data.slug}`);
   revalidatePath("/", "layout");
+  revalidatePath("/sitemap.xml");
   redirect("/admin/products");
 }
 
@@ -226,6 +227,7 @@ export async function updateProduct(id: string, formData: FormData) {
   revalidatePath(`/product/${parsed.data.slug}`);
   if (existing?.slug && existing.slug !== parsed.data.slug) revalidatePath(`/product/${existing.slug}`);
   revalidatePath("/", "layout");
+  revalidatePath("/sitemap.xml");
   redirect("/admin/products");
 }
 
@@ -239,6 +241,7 @@ export async function deleteProduct(id: string) {
   revalidatePath("/admin/products");
   if (existing?.slug) revalidatePath(`/product/${existing.slug}`);
   revalidatePath("/", "layout");
+  revalidatePath("/sitemap.xml");
 }
 
 export async function trackClick(productId: string, source: "amazon" | "oliveyoung" | "amazon_uk" | "stylevana") {
@@ -352,6 +355,7 @@ export async function createArticle(formData: FormData) {
   revalidatePath("/articles");
   revalidatePath(`/articles/${data.slug}`);
   revalidatePath("/", "layout");
+  revalidatePath("/sitemap.xml");
   redirect("/admin/articles");
 }
 
@@ -386,6 +390,7 @@ export async function updateArticle(id: string, formData: FormData) {
   revalidatePath(`/articles/${data.slug}`);
   if (existing?.slug && existing.slug !== data.slug) revalidatePath(`/articles/${existing.slug}`);
   revalidatePath("/", "layout");
+  revalidatePath("/sitemap.xml");
   redirect("/admin/articles");
 }
 
@@ -399,4 +404,5 @@ export async function deleteArticle(id: string) {
   revalidatePath("/admin/articles");
   if (existing?.slug) revalidatePath(`/articles/${existing.slug}`);
   revalidatePath("/", "layout");
+  revalidatePath("/sitemap.xml");
 }
