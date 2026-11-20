@@ -1,18 +1,20 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { CATEGORIES } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
 import { cn } from "@/lib/utils";
 import { getActiveConcernNames, normalizeConcernName, productMatchesConcern } from "@/lib/concerns";
+import { isWinterPick } from "@/lib/winter-picks";
 
-export default function ShopClient({ products, initialConcern = "All", initialCategory = "All" }: { products: Product[]; initialConcern?: string; initialCategory?: string }) {
+export default function ShopClient({ products, initialConcern = "All", initialCategory = "All", initialTag = "" }: { products: Product[]; initialConcern?: string; initialCategory?: string; initialTag?: string }) {
   const [query, setQuery] = useState("");
   const [brand, setBrand] = useState("All");
   const [category, setCategory] = useState(initialCategory);
   const [concern, setConcern] = useState(initialConcern);
+  const [winterOnly, setWinterOnly] = useState(initialTag === "winter");
   const [source, setSource] = useState<"All" | "Amazon" | "Olive Young">("All");
   // Default must include every active product: derive the ceiling from the
   // live catalog instead of a hardcoded $30 (e.g. triple-sets cost more).
@@ -25,15 +27,9 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
   const effectiveMaxPrice = maxPrice ?? priceUpper;
   const [sort, setSort] = useState("featured");
 
-  // Sync when navigating between deep links, e.g. homepage cards
-  // (/shop?concern=Acne → /shop?concern=Hydration) without a full reload.
-  useEffect(() => {
-    setConcern(initialConcern);
-  }, [initialConcern]);
-
-  useEffect(() => {
-    setCategory(initialCategory);
-  }, [initialCategory]);
+  // Deep-link values arrive as props; ShopFromParams remounts this component
+  // (key = concern|category|tag) when they change, so state stays in sync
+  // without setState-in-effect cascades.
 
   const brands = useMemo(() => ["All", ...Array.from(new Set(products.map((p) => p.brand)))], [products]);
   // Dynamic chips: active (normalized, product-backed) concerns only, so a
@@ -58,6 +54,7 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
       if (brand !== "All" && p.brand !== brand) return false;
       if (effectiveCategory !== "All" && p.category !== effectiveCategory) return false;
       if (effectiveConcern !== "All" && !productMatchesConcern(p, effectiveConcern)) return false;
+      if (winterOnly && !isWinterPick(p.slug)) return false;
       if (p.price > effectiveMaxPrice) return false;
       if (source === "Amazon" && !p.amazon_url) return false;
       if (source === "Olive Young" && !p.oliveyoung_url) return false;
@@ -67,7 +64,7 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
     if (sort === "price-desc") list = [...list].sort((a, b) => b.price - a.price);
     if (sort === "rating") list = [...list].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
     return list;
-  }, [products, query, brand, effectiveCategory, effectiveConcern, source, effectiveMaxPrice, sort]);
+  }, [products, query, brand, effectiveCategory, effectiveConcern, winterOnly, source, effectiveMaxPrice, sort]);
 
   return (
     <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
@@ -75,6 +72,21 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
       <aside className="glass h-fit rounded-3xl p-5 lg:sticky lg:top-24">
         <div className="flex items-center gap-2 text-sm font-semibold">
           <SlidersHorizontal className="h-4 w-4" /> Filters
+        </div>
+
+        <div className="mt-4">
+          <label className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Quick filter</label>
+          <button
+            type="button"
+            onClick={() => setWinterOnly((v) => !v)}
+            aria-pressed={winterOnly}
+            className={cn(
+              "mt-1.5 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition",
+              winterOnly ? "bg-ink text-white" : "bg-white/70 text-ink-soft hover:bg-sage-50"
+            )}
+          >
+            ❄️ Winter essentials
+          </button>
         </div>
 
         <div className="mt-4">
@@ -157,8 +169,8 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
           </select>
         </div>
 
-        {(query || brand !== "All" || effectiveCategory !== "All" || effectiveConcern !== "All" || source !== "All" || maxPrice !== null) && (
-          <button onClick={() => { setQuery(""); setBrand("All"); setCategory("All"); setConcern("All"); setSource("All"); setMaxPrice(null); }}
+        {(query || brand !== "All" || effectiveCategory !== "All" || effectiveConcern !== "All" || winterOnly || source !== "All" || maxPrice !== null) && (
+          <button onClick={() => { setQuery(""); setBrand("All"); setCategory("All"); setConcern("All"); setWinterOnly(false); setSource("All"); setMaxPrice(null); }}
             className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-blush-600 hover:underline">
             <X className="h-3.5 w-3.5" /> Clear all filters
           </button>
