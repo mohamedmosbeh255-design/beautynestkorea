@@ -32,6 +32,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Announcement bar: hidden before first paint for visitors who dismissed it.
+   The attribute is set by the inline script at the top of <body> in layout.tsx. */
+html[data-announcement="dismissed"] #announcement-bar {
+  display: none;
+}
+
 body {
   background: var(--color-cream);
   color: var(--color-ink);

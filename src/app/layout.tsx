@@ -4,6 +4,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import Footer from "@/components/Footer";
 import { siteBaseUrl } from "@/lib/market-report";
 import { organizationJsonLd } from "@/lib/schema";
@@ -53,10 +54,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </>
       ) : null}
       <body className="flex min-h-full flex-col">
+        {/* Runs before the banner is parsed: returning visitors who dismissed it
+            never see it (no flash, no layout shift). CSP allows inline scripts. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{if(localStorage.getItem("bnk-announcement-dismissed")==="1"){document.documentElement.setAttribute("data-announcement","dismissed")}}catch(e){}',
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd(siteUrl)) }}
         />
+        <AnnouncementBar />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
