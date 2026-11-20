@@ -43,6 +43,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: "article",
       images: article.cover_image_url ? [article.cover_image_url] : [`${base}/og-default.png`],
     },
+    // Twitter/X card: use the article cover when present. This is additive —
+    // canonical, OG and every other tag stay exactly as they were.
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description,
+      images: article.cover_image_url ? [article.cover_image_url] : [`${base}/og-default.png`],
+    },
   };
 }
 
