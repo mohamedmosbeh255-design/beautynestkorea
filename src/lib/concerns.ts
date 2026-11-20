@@ -51,6 +51,7 @@ const GLOBAL_SKINCARE_BRANDS = new Set([
   // keep it working until the DB value is corrected — then this line is safe to drop.
   "firstaidbeautyv",
   "elemis",
+  "differin",
 ]);
 
 /** Brand key: lowercase, punctuation-free (" La Roche-Posay" → "larocheposay"). */
