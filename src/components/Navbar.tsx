@@ -15,12 +15,28 @@ const links = [
   { href: "/market-report", label: "Market Report" },
 ];
 
-// Sub-links for the "Shop" dropdown. The Shop link itself still points at
-// /shop — nothing existing moves or changes URL.
+// Sub-links for dropdown parents. The parent link itself keeps its existing
+// URL — nothing moves. /articles is surfaced under Advice so guides are
+// discoverable on desktop and mobile without adding a new route.
 const shopMenu = [
   { href: "/shop", label: "All products" },
   { href: "/category/global-skincare", label: "Global Skincare" },
 ];
+
+const adviceMenu = [
+  { href: "/advice", label: "Skincare advice" },
+  { href: "/articles", label: "Guides & articles" },
+];
+
+const menus: Record<string, { href: string; label: string }[]> = {
+  "/shop": shopMenu,
+  "/advice": adviceMenu,
+};
+
+function isActive(pathname: string, href: string, menu?: { href: string }[]): boolean {
+  if (pathname === href) return true;
+  return Boolean(menu?.some((item) => pathname === item.href || pathname.startsWith(`${item.href}/`)));
+}
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -44,14 +60,16 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden items-center gap-1 md:flex">
-            {links.map((l) =>
-              l.href === "/shop" ? (
+            {links.map((l) => {
+              const menu = menus[l.href];
+              const active = isActive(pathname, l.href, menu);
+              return menu ? (
                 <div key={l.href} className="group relative">
                   <Link
                     href={l.href}
                     className={cn(
                       "flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition",
-                      pathname === l.href ? "bg-sage-100 text-sage-800" : "text-ink-soft hover:bg-white/70 hover:text-ink"
+                      active ? "bg-sage-100 text-sage-800" : "text-ink-soft hover:bg-white/70 hover:text-ink"
                     )}
                   >
                     {l.label}
@@ -59,7 +77,7 @@ export default function Navbar() {
                   </Link>
                   <div className="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                     <div className="min-w-[220px] rounded-2xl border border-sage-100 bg-cream p-2 shadow-xl">
-                      {shopMenu.map((item) => (
+                      {menu.map((item) => (
                         <Link
                           key={item.href}
                           href={item.href}
@@ -77,13 +95,13 @@ export default function Navbar() {
                   href={l.href}
                   className={cn(
                     "rounded-full px-4 py-2 text-sm font-medium transition",
-                    pathname === l.href ? "bg-sage-100 text-sage-800" : "text-ink-soft hover:bg-white/70 hover:text-ink"
+                    active ? "bg-sage-100 text-sage-800" : "text-ink-soft hover:bg-white/70 hover:text-ink"
                   )}
                 >
                   {l.label}
                 </Link>
-              )
-            )}
+              );
+            })}
             <Link
               href="/shop"
               className="ml-2 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition hover:bg-sage-700"
@@ -118,7 +136,21 @@ export default function Navbar() {
                 </Link>
                 {l.href === "/shop" && (
                   <div className="ml-7 border-l border-sage-100 pl-3">
-                    {shopMenu.slice(1).map((item) => (
+                    {menus[l.href].slice(1).map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setOpen(false)}
+                        className="block rounded-xl px-3 py-2 text-sm font-medium text-ink-soft hover:bg-white/70"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                {l.href === "/advice" && (
+                  <div className="ml-7 border-l border-sage-100 pl-3">
+                    {menus[l.href].slice(1).map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
