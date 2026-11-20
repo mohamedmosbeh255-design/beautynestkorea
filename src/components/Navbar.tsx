@@ -24,8 +24,8 @@ const shopMenu = [
 ];
 
 const adviceMenu = [
-  { href: "/advice", label: "Skincare advice" },
   { href: "/articles", label: "Guides & articles" },
+  { href: "/advice", label: "Skincare advice" },
 ];
 
 const menus: Record<string, { href: string; label: string }[]> = {
