@@ -231,5 +231,5 @@ export function stripTitle(markdown: string): string {
 }
 
 export function siteBaseUrl(): string {
-  return process.env.NEXT_PUBLIC_SITE_URL ?? "https://beautynestkorea.com";
+  return process.env.NEXT_PUBLIC_SITE_URL ?? "https://beautynestkorea.vercel.app";
 }
