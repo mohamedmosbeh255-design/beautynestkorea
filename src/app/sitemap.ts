@@ -112,7 +112,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: p.updated_at ? new Date(p.updated_at) : p.created_at ? new Date(p.created_at) : new Date(),
       })),
     ...advice.map((p) => ({ url: `${base}/advice/${p.slug}`, lastModified: new Date(p.date) })),
-    ...concernSlugs.map((slug) => ({ url: `${base}/advice/${slug}`, lastModified: new Date() })),
+    ...concernSlugs.map((slug) => ({ url: `${base}/advice/${slug}` })),
     ...articles.map((a) => ({
       url: `${base}/articles/${a.slug}`,
       lastModified: a.updated_at ? new Date(a.updated_at) : a.published_at ? new Date(a.published_at) : new Date(),
