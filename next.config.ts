@@ -43,6 +43,13 @@ const nextConfig: NextConfig = {
       { source: "/category/elasticity", destination: "/category/anti-aging", permanent: true },
       { source: "/category/firming", destination: "/category/anti-aging", permanent: true },
       { source: "/category/sensitive", destination: "/category/sensitive-skin", permanent: true },
+      // One-off slug correction: the live row lost the leading "l".
+      // statusCode: 301 (not permanent: true) because Next maps permanent→308.
+      {
+        source: "/product/a-roche-posay-toleriane-hydrating-gentle-facial-cleanser",
+        destination: "/product/la-roche-posay-toleriane-hydrating-gentle-facial-cleanser",
+        statusCode: 301,
+      },
     ];
   },
   async headers() {

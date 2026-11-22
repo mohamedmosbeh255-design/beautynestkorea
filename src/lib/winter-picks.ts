@@ -13,7 +13,7 @@
 export const WINTER_PICK_SLUGS: ReadonlySet<string> = new Set([
   // Cleansers
   "cerave-hydrating-facial-cleanser-16oz",
-  "a-roche-posay-toleriane-hydrating-gentle-facial-cleanser",
+  "la-roche-posay-toleriane-hydrating-gentle-facial-cleanser",
   // Barrier / moisturizers
   "la-roche-posay-cicaplast-balm-b5",
   "cerave-moisturizing-cream-19oz",
