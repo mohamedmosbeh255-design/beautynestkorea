@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 /**
  * Lightweight newsletter capture. Posts to /api/subscribe.
@@ -44,23 +45,32 @@ export default function EmailCapture({ source }: { source: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full max-w-md flex-col gap-2 sm:flex-row">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="you@example.com"
-        className="w-full flex-1 rounded-xl border border-sand-line bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sage-300"
-        aria-label="Email for newsletter"
-      />
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="rounded-xl bg-sage-700 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-sage-800 disabled:opacity-50"
-      >
-        {status === "loading" ? "Subscribing…" : "Subscribe"}
-      </button>
-      {error && <p className="text-xs text-blush-600">{error}</p>}
-    </form>
+    <div className="w-full max-w-md">
+      <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2 sm:flex-row">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@example.com"
+          className="w-full flex-1 rounded-xl border border-sand-line bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sage-300"
+          aria-label="Email for newsletter"
+        />
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="rounded-xl bg-sage-700 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-sage-800 disabled:opacity-50"
+        >
+          {status === "loading" ? "Subscribing…" : "Subscribe"}
+        </button>
+        {error && <p className="text-xs text-blush-600">{error}</p>}
+      </form>
+      <p className="mt-2 text-center text-xs text-ink-soft">
+        By subscribing you agree to our{" "}
+        <Link href="/privacy" className="font-semibold text-sage-700 hover:underline">
+          Privacy Policy
+        </Link>
+        . We use your email only for the newsletter.
+      </p>
+    </div>
   );
 }

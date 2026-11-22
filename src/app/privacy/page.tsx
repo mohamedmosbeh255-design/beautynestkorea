@@ -5,7 +5,7 @@ import { siteBaseUrl } from "@/lib/market-report";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Privacy policy for BeautyNestKorea: Google Analytics, cookies, Amazon Associates and Olive Young affiliate tracking, and your GDPR/CCPA rights.",
+    "Privacy policy for BeautyNestKorea: newsletter and contact data, Google Analytics, cookies, affiliate tracking, and your GDPR/CCPA rights.",
   alternates: { canonical: `${siteBaseUrl()}/privacy` },
 };
 
@@ -15,22 +15,43 @@ export default function PrivacyPage() {
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">Legal</p>
       <h1 className="font-serif-display mt-2 text-4xl font-bold tracking-tight">Privacy Policy</h1>
       <p className="mt-3 max-w-2xl leading-relaxed text-ink-soft">
-        Last updated: September 21, 2026 — this policy explains what
-        BeautyNestKorea collects, how cookies and affiliate tracking work here,
-        and the rights you have over your data.
+        Last updated: November 22, 2026 — this policy explains what
+        BeautyNestKorea collects, including newsletter sign-ups, contact
+        messages and product reviews, how cookies and affiliate tracking work
+        here, and the rights you have over your data.
       </p>
 
       <div className="glass mt-8 rounded-[2rem] p-8 sm:p-12">
         <div className="max-w-3xl space-y-6 text-sm leading-relaxed text-ink-soft sm:text-base">
           <div>
             <h2 className="font-serif-display text-xl font-bold text-ink">What we collect</h2>
+            <p className="mt-2">We collect only what you choose to give us, plus aggregate analytics:</p>
+            <ul className="mt-2 list-disc space-y-1 pl-5">
+              <li>
+                <strong>Newsletter:</strong> if you subscribe, we store your email address and the page you signed up from, so we can send the weekly picks.
+              </li>
+              <li>
+                <strong>Contact form:</strong> if you message us, we store your name (optional), email address and message so we can reply.
+              </li>
+              <li>
+                <strong>Product reviews:</strong> if you submit a review, we store the star rating and comment you write. Please do not include personal details in a review.
+              </li>
+            </ul>
             <p className="mt-2">
-              We use Google Analytics to understand aggregate, anonymised usage
+              We also use Google Analytics to understand aggregate, anonymised usage
               of the site — such as which pages are visited and which products
               are popular. Google Analytics sets its own cookies and processes
-              data under Google&apos;s privacy policy. We do not run accounts,
-              checkouts, or newsletters, and we do not ask for your name,
-              address, or payment details.
+              data under Google&apos;s privacy policy. We do not offer customer
+              accounts, checkouts or payment processing, and we never ask for
+              your address or card details.
+            </p>
+          </div>
+          <div>
+            <h2 className="font-serif-display text-xl font-bold text-ink">How long we keep it</h2>
+            <p className="mt-2">
+              Newsletter emails are kept until you ask us to delete them.
+              Contact messages are kept for up to 24 months. Product reviews are
+              kept until you ask us to remove them.
             </p>
           </div>
           <div>
@@ -58,7 +79,7 @@ export default function PrivacyPage() {
               personal data. You can block or clear cookies at any time in your
               browser settings, and you can use an ad-blocker or opt out of
               Google Analytics to limit analytics collection. To exercise a
-              privacy right, contact us and we will respond within the time
+              privacy right, <Link href="/contact" className="font-semibold text-sage-700 hover:underline">contact us</Link> and we will respond within the time
               limits the applicable law requires.
             </p>
           </div>

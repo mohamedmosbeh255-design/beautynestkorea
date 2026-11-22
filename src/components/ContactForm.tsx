@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 /**
  * Contact form. Posts to /api/contact.
@@ -99,6 +100,13 @@ export default function ContactForm() {
       >
         {status === "loading" ? "Sending…" : "Send message"}
       </button>
+      <p className="text-xs text-ink-soft">
+        By sending a message you agree to our{" "}
+        <Link href="/privacy" className="font-semibold text-sage-700 hover:underline">
+          Privacy Policy
+        </Link>
+        . We use your name and email only to reply.
+      </p>
     </form>
   );
 }
