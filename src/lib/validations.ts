@@ -48,6 +48,8 @@ export const productSchema = z.object({
 });
 
 export type ProductFormValues = z.infer<typeof productSchema>;
+/** Raw form-input shape (coercion/preprocess fields are still unknown). */
+export type ProductFormInput = z.input<typeof productSchema>;
 
 const uuidArray = (val: unknown): string[] => {
   if (Array.isArray(val)) return val.map((s) => String(s).trim()).filter(Boolean);
@@ -79,6 +81,8 @@ export const articleSchema = z.object({
 });
 
 export type ArticleFormValues = z.infer<typeof articleSchema>;
+/** Raw form-input shape (preprocess fields are still unknown before parsing). */
+export type ArticleFormInput = z.input<typeof articleSchema>;
 
 export const loginSchema = z.object({
   email: z.string().email("Enter a valid email"),

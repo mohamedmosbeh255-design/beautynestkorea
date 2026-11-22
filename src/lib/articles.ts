@@ -9,7 +9,23 @@ import type { Article, Product } from "@/lib/types";
 // - admin reads use the session client,
 // - unconfigured Supabase → empty lists (never fake articles in production).
 
-function mapRow(row: any): Article {
+/** Shape returned by Supabase `select("*")` on public.articles. */
+interface ArticleRow {
+  id: string;
+  title: string;
+  slug: string;
+  content: string | null;
+  excerpt: string | null;
+  cover_image_url: string | null;
+  category: string | null;
+  published_at: string | null;
+  is_published: boolean | null;
+  related_product_ids: string[] | null;
+  created_at?: string;
+  updated_at?: string;
+}
+
+function mapRow(row: ArticleRow): Article {
   return {
     id: String(row.id),
     title: row.title,

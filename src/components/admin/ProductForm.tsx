@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { productSchema } from "@/lib/validations";
+import { productSchema, type ProductFormInput, type ProductFormValues } from "@/lib/validations";
 import { CONCERNS, CATEGORIES, type Product } from "@/lib/types";
 import { checkDuplicates } from "@/lib/actions";
 import { REASON_LABELS, type DuplicateMatch } from "@/lib/duplicates";
@@ -46,8 +46,8 @@ export default function ProductForm({
     setValue,
     getValues,
     formState: { errors: formErrors },
-  } = useForm<any>({
-    resolver: zodResolver(productSchema) as any,
+  } = useForm<ProductFormInput, unknown, ProductFormValues>({
+    resolver: zodResolver(productSchema),
     defaultValues: {
       title: initial?.title ?? "",
       slug: initial?.slug ?? "",
@@ -74,7 +74,7 @@ export default function ProductForm({
     },
   });
 
-  const errors = formErrors as any;
+  const errors = formErrors;
   const [submitting, setSubmitting] = useState(false);
   const [checking, setChecking] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
@@ -87,7 +87,7 @@ export default function ProductForm({
     !String(initial?.amazon_asin ?? "").trim()
   );
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: ProductFormValues) => {
     setSubmitting(true);
     setFormError(null);
     try {
@@ -140,17 +140,17 @@ export default function ProductForm({
       if (values.is_featured) fd.set("is_featured", "on");
       if (!values.is_active) fd.set("is_active", "off");
       await action(fd);
-    } catch (e: any) {
+    } catch (e: unknown) {
       // 2) Server-side enforcement fallback: if the row was created between
       //    the pre-check and the insert (or the pre-check was bypassed),
       //    the action throws DUPLICATE_PRODUCT — surface the same modal.
-      const serverMatches = parseDuplicateError(String(e?.message ?? ""));
+      const serverMatches = parseDuplicateError(e instanceof Error ? e.message : "");
       if (serverMatches && serverMatches.length > 0) {
         setDuplicates(serverMatches);
         setSubmitting(false);
         return;
       }
-      setFormError(e?.message ?? "Something went wrong");
+      setFormError(e instanceof Error && e.message ? e.message : "Something went wrong");
       setSubmitting(false);
     }
   };

@@ -10,7 +10,37 @@ export function extractAsinFromUrl(url?: string | null): string | null {
   return m ? m[1] : null;
 }
 
-function mapRow(row: any): Product {
+/** Shape returned by Supabase `select("*")` on public.products. */
+interface ProductRow {
+  id: string;
+  slug: string;
+  title: string;
+  brand: string;
+  description: string;
+  price: number | string;
+  compare_at_price: number | string | null;
+  currency: string | null;
+  category: string;
+  concern: string[] | null;
+  skin_type: string[] | null;
+  key_ingredients: string[] | null;
+  image_urls: string[] | null;
+  amazon_url: string | null;
+  amazon_asin: string | null;
+  oliveyoung_url: string | null;
+  amazon_uk_url: string | null;
+  amazon_uk_asin: string | null;
+  stylevana_url: string | null;
+  rating: number | string | null;
+  review_count: number | null;
+  price_checked_at: string | null;
+  is_featured: boolean | null;
+  is_active: boolean | null;
+  created_at?: string;
+  updated_at?: string;
+}
+
+function mapRow(row: ProductRow): Product {
   // Sanitize amazon_url: strip any [YOUR_TAG] placeholder so the raw
   // string never leaks into the page source / RSC payload. The
   // AffiliateButtons component rebuilds the tagged URL from the ASIN

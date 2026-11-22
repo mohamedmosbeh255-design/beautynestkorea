@@ -29,8 +29,8 @@ export default function AdminLoginPage() {
       if (signInError) throw new Error(signInError.message);
       router.push("/admin");
       router.refresh();
-    } catch (e: any) {
-      setError(e?.message ?? "Login failed");
+    } catch (e: unknown) {
+      setError(e instanceof Error && e.message ? e.message : "Login failed");
     } finally {
       setLoading(false);
     }

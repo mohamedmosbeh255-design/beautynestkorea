@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { articleSchema } from "@/lib/validations";
+import { articleSchema, type ArticleFormInput, type ArticleFormValues } from "@/lib/validations";
 import { ARTICLE_CATEGORIES, type Article } from "@/lib/types";
 import { slugify } from "@/lib/utils";
 import { useState } from "react";
@@ -30,8 +30,8 @@ export default function ArticleForm({
     handleSubmit,
     setValue,
     formState: { errors: formErrors },
-  } = useForm<any>({
-    resolver: zodResolver(articleSchema) as any,
+  } = useForm<ArticleFormInput, unknown, ArticleFormValues>({
+    resolver: zodResolver(articleSchema),
     defaultValues: {
       title: initial?.title ?? "",
       slug: initial?.slug ?? "",
@@ -44,7 +44,7 @@ export default function ArticleForm({
     },
   });
 
-  const errors = formErrors as any;
+  const errors = formErrors;
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [selected, setSelected] = useState<string[]>(initial?.related_product_ids ?? []);
@@ -61,7 +61,7 @@ export default function ArticleForm({
     });
   };
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: ArticleFormValues) => {
     if (selected.length > MAX_RELATED) {
       setFormError(`Pick at most ${MAX_RELATED} related products (currently ${selected.length}).`);
       return;
@@ -80,8 +80,8 @@ export default function ArticleForm({
       selected.forEach((id) => fd.append("related_product_ids", id));
       if (values.is_published) fd.set("is_published", "on");
       await action(fd);
-    } catch (e: any) {
-      setFormError(e?.message ?? "Something went wrong");
+    } catch (e: unknown) {
+      setFormError(e instanceof Error && e.message ? e.message : "Something went wrong");
       setSubmitting(false);
     }
   };
