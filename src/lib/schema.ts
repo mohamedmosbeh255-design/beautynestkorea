@@ -42,15 +42,6 @@ export function productJsonLd(product: Product, base: string, canonical: string)
     brand: { "@type": "Brand", name: product.brand },
     ...(product.image_urls.length > 0 ? { image: product.image_urls.slice(0, 4) } : {}),
     ...(asin ? { sku: asin } : {}),
-    ...(product.rating != null
-      ? {
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: product.rating,
-            reviewCount: product.review_count ?? 0,
-          },
-        }
-      : {}),
     ...(hasVerifiedPrice
       ? {
           offers: {
