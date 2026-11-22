@@ -8,7 +8,6 @@ import AffiliateButtons from "@/components/AffiliateButtons";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import { productConcernsToSlugs } from "@/lib/advice-kb";
 import ReviewForm from "@/components/ReviewForm";
-import { concernSlug } from "@/lib/concerns";
 import ProductCard from "@/components/ProductCard";
 import PriceNote from "@/components/PriceNote";
 import MedicalCaveat from "@/components/MedicalCaveat";
@@ -16,7 +15,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { formatPriceChecked, formatPrice } from "@/lib/utils";
 import { siteBaseUrl } from "@/lib/market-report";
 import { breadcrumbJsonLd, faqJsonLd, productJsonLd, type FaqItem } from "@/lib/schema";
-import { hasIngredientConflict } from "@/lib/product-safety";
+import { hasIngredientConflict, isDevice, isExfoliatingAcid, isRetinoid } from "@/lib/product-safety";
 
 export const revalidate = 60;
 
@@ -87,13 +86,19 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const base = siteBaseUrl();
   const canonical = `${base}/product/${slug}`;
   // FAQ answers double as FAQPage JSON-LD — single source keeps them in sync.
+  // Devices, retinoids and exfoliating acids never get the auto "sensitive
+  // skin? Yes" answer: it is a medical-adjacent claim, and it is meaningless
+  // for a device with no formula.
+  const showSensitiveFaq = !isDevice(product) && !isRetinoid(product) && !isExfoliatingAcid(product);
   const faqs: FaqItem[] = [
-    {
-      question: `Is ${product.title} good for sensitive skin?`,
-      answer: product.skin_type.includes("Sensitive") || product.skin_type.includes("All")
-        ? "Yes — its formula is well tolerated by sensitive types. Patch-test first."
-        : `It suits ${product.skin_type.join(", ")} skin best. Patch-test if you're sensitive.`,
-    },
+    ...(showSensitiveFaq
+      ? [{
+          question: `Is ${product.title} good for sensitive skin?`,
+          answer: product.skin_type.includes("Sensitive") || product.skin_type.includes("All")
+            ? "Yes — its formula is well tolerated by sensitive types. Patch-test first."
+            : `It suits ${product.skin_type.join(", ")} skin best. Patch-test if you're sensitive.`,
+        }]
+      : []),
     {
       question: "Where Can You Find the Best Value?",
       answer: "Prices vary depending on special offers and discounts. Use the buttons above to compare current prices, available promotions, and product benefits so you can find the best value for your skincare needs.",
@@ -204,7 +209,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
           <div className="glass mt-7 rounded-3xl p-6">
             <h2 className="flex items-center gap-2 font-serif-display text-lg font-bold">
-              <Leaf className="h-5 w-5 text-sage-600" /> Key ingredients
+              <Leaf className="h-5 w-5 text-sage-600" /> {isDevice(product) ? "Key technologies" : "Key ingredients"}
             </h2>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {product.key_ingredients.map((ing) => (
