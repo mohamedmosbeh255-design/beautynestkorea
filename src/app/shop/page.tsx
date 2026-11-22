@@ -34,7 +34,7 @@ export default async function ShopPage() {
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">The shelf</p>
       <h1 className="font-serif-display mt-2 text-4xl font-bold tracking-tight">Shop skincare</h1>
       <p className="mt-2 max-w-xl text-sm text-ink-soft sm:text-base">
-        Filter by brand, concern, price and source. Every card links to both Amazon and Olive Young on the product page.
+        Filter by brand, concern, price and source. Each product page links to every retailer where we track that item — Amazon, Olive Young or Stylevana.
       </p>
       <MedicalCaveat className="mt-4 max-w-xl" />
       {hasGlobal && (

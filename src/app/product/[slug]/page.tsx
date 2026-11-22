@@ -16,6 +16,7 @@ import { formatPriceChecked, formatPrice } from "@/lib/utils";
 import { siteBaseUrl } from "@/lib/market-report";
 import { breadcrumbJsonLd, faqJsonLd, productJsonLd, type FaqItem } from "@/lib/schema";
 import { hasIngredientConflict, isDevice, isExfoliatingAcid, isRetinoid } from "@/lib/product-safety";
+import { formatRetailerList, getRetailerNames } from "@/lib/retailers";
 
 export const revalidate = 60;
 
@@ -90,6 +91,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   // skin? Yes" answer: it is a medical-adjacent claim, and it is meaningless
   // for a device with no formula.
   const showSensitiveFaq = !isDevice(product) && !isRetinoid(product) && !isExfoliatingAcid(product);
+  const retailers = getRetailerNames(product);
+  const retailerList = formatRetailerList(retailers);
   const faqs: FaqItem[] = [
     ...(showSensitiveFaq
       ? [{
@@ -100,8 +103,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         }]
       : []),
     {
-      question: "Where Can You Find the Best Value?",
-      answer: "Prices vary depending on special offers and discounts. Use the buttons above to compare current prices, available promotions, and product benefits so you can find the best value for your skincare needs.",
+      question: retailers.length > 1 ? "Where Can You Find the Best Value?" : "Where Can You Buy This?",
+      answer:
+        retailers.length > 1
+          ? `Prices vary depending on special offers and discounts. Use the buttons above to compare current prices across ${retailerList}, including any live promotions, so you can find the best value for your skincare needs.`
+          : retailers.length === 1
+            ? `This product is currently listed at ${retailers[0]}. Use the button above to see the current price and any live promotion directly on the retailer site.`
+            : "Check the retailer page for the current price and any live promotion before buying.",
     },
   ];
   const jsonLd = [

@@ -33,7 +33,7 @@ export default async function BestPicksPage() {
       <h1 className="font-serif-display mt-2 text-4xl font-bold tracking-tight">Best Picks</h1>
       <p className="mt-3 max-w-2xl text-base text-ink-soft">
         Our hand-picked favorites across every skin concern — ranked by reviews, not by budget.
-        Every product links to both Amazon and Olive Young so you can compare prices.
+        Each product links to the retailers where it is listed — Amazon, Olive Young or Stylevana — so you can check the current price at the source.
       </p>
 
       <section className="mt-10">

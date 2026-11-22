@@ -113,7 +113,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         ) : (
           <>
             {matched.length} curated product{matched.length !== 1 && "s"} for {concern.toLowerCase()} — prices
-            pulled straight from the catalog below, with Amazon vs Olive Young comparison on every product page.
+            pulled straight from the catalog below, with retailer price comparison where available.
           </>
         )}
       </p>
