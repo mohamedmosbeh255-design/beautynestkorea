@@ -19,6 +19,8 @@ const CONCERN_SYNONYMS: Record<string, string> = {
   sensitive: "Sensitive Skin",
   sensitivity: "Sensitive Skin",
   "sensitive skin": "Sensitive Skin",
+  "dry skin": "Dryness",
+  oiliness: "Oily Skin",
   "dark spots": "Hyperpigmentation",
   hyperpigmentation: "Hyperpigmentation",
 };

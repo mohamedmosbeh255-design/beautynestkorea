@@ -259,7 +259,7 @@ const SHOP_FILTER_BY_SLUG: Record<string, string> = {
   "sensitive-skin-redness": "sensitive-skin",
   "enlarged-pores": "pores",
   blackheads: "blackheads",
-  "oily-skin-sebum-control": "oiliness",
+  "oily-skin-sebum-control": "oily-skin",
   "dull-skin": "dullness",
   "damaged-skin-barrier": "barrier-repair",
 };

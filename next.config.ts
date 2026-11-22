@@ -43,6 +43,14 @@ const nextConfig: NextConfig = {
       { source: "/category/elasticity", destination: "/category/anti-aging", permanent: true },
       { source: "/category/firming", destination: "/category/anti-aging", permanent: true },
       { source: "/category/sensitive", destination: "/category/sensitive-skin", permanent: true },
+      // Package 3 — concern label consolidation. Each destination is a live
+      // canonical category; the alias URL must never 404 after the DB merge.
+      // statusCode: 301 keeps these literal 301s (permanent: true → 308).
+      { source: "/category/sensitivity", destination: "/category/sensitive-skin", statusCode: 301 },
+      { source: "/category/dry-skin", destination: "/category/dryness", statusCode: 301 },
+      { source: "/category/oiliness", destination: "/category/oily-skin", statusCode: 301 },
+      { source: "/category/wrinkles", destination: "/category/anti-aging", statusCode: 301 },
+      { source: "/category/fine-lines", destination: "/category/anti-aging", statusCode: 301 },
       // One-off slug correction: the live row lost the leading "l".
       // statusCode: 301 (not permanent: true) because Next maps permanent→308.
       {
