@@ -16,6 +16,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { formatPriceChecked, formatPrice } from "@/lib/utils";
 import { siteBaseUrl } from "@/lib/market-report";
 import { breadcrumbJsonLd, faqJsonLd, productJsonLd, type FaqItem } from "@/lib/schema";
+import { hasIngredientConflict } from "@/lib/product-safety";
 
 export const revalidate = 60;
 
@@ -68,7 +69,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const related = (await getProducts()).filter((p) => p.slug !== product.slug && p.concern.some((c) => product.concern.includes(c))).slice(0, 3);
+  // Same concern pool, then drop anything that conflicts at ingredient level.
+  // A retinoid never recommends another retinoid or an AHA/BHA/PHA exfoliant.
+  const related = (await getProducts())
+    .filter((p) => p.slug !== product.slug && p.concern.some((c) => product.concern.includes(c)))
+    .filter((p) => !hasIngredientConflict(product, p))
+    .slice(0, 3);
   // Price provenance: the price block renders ONLY with a verified
   // priceCheckedAt date. Unknown → NULL → hidden entirely.
   const priceChecked = formatPriceCheckedFull(product.priceCheckedAt);
