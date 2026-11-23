@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { ArrowRight, ShieldCheck, Sparkles, Droplets, Sun, Leaf, Star, CircleDot, Globe2 } from "lucide-react";
 import { getProducts } from "@/lib/products";
 import { getConcernStats, concernSlug } from "@/lib/concerns";
-import { getAllAdvice } from "@/lib/advice";
+import { getLatestGuides } from "@/lib/guides";
 import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
 import EmailCapture from "@/components/EmailCapture";
@@ -51,6 +51,7 @@ const FALLBACK_META = [
 ];
 
 export default async function HomePage() {
+  const latestGuides = await getLatestGuides(6);
   const featured = await getProducts({ featuredOnly: true, limit: 6 });
   const allProducts = await getProducts();
   const grid = featured.length > 0 ? featured : allProducts.slice(0, 3);
@@ -207,15 +208,18 @@ export default async function HomePage() {
           </Link>
         </div>
         <div className="mt-6 grid gap-6 md:grid-cols-3">
-          {getAllAdvice().map((post) => (
-            <Link key={post.slug} href={`/advice/${post.slug}`} className="glass group overflow-hidden rounded-3xl transition hover:-translate-y-1 hover:shadow-xl">
+          {latestGuides.map((post) => (
+            <Link key={post.key} href={post.href} className="glass group overflow-hidden rounded-3xl transition hover:-translate-y-1 hover:shadow-xl">
               {post.image ? (
                 <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image src={post.image} alt={post.title} fill className="object-cover transition group-hover:scale-105" sizes="33vw" />
+                  <Image src={post.image} alt={post.imageAlt} fill className="object-cover transition group-hover:scale-105" sizes="33vw" />
                 </div>
               ) : null}
               <div className="p-5">
-                <p className="text-xs font-semibold uppercase tracking-wider text-sage-600">{post.category} • {post.readTime}</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-sage-600">
+                  {post.category} • {post.readTime}
+                  {post.displayDate ? ` • ${post.displayDate}` : ""}
+                </p>
                 <h3 className="font-serif-display mt-1.5 text-lg font-bold leading-snug">{post.title}</h3>
                 <p className="mt-2 text-sm text-ink-soft clamp-2">{post.excerpt}</p>
               </div>
