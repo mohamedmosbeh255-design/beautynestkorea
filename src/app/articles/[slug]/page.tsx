@@ -9,6 +9,7 @@ import { getArticleBySlug, getPublishedArticles, getRelatedProducts } from "@/li
 import { siteBaseUrl } from "@/lib/market-report";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { isAffiliateDomainLink } from "@/lib/affiliates";
+import ArticleNotice from "@/components/ArticleNotice";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import ShareButtons from "@/components/ShareButtons";
 import ListenButton from "@/components/ListenButton";
@@ -159,6 +160,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {article.excerpt && (
         <p className="mt-6 text-base font-medium leading-relaxed text-ink sm:text-lg">{article.excerpt}</p>
       )}
+      <ArticleNotice className="mt-6" />
       <div id="article-body" className="prose-beauty mt-6 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}

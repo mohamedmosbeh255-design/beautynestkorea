@@ -13,7 +13,7 @@ import { siteBaseUrl } from "@/lib/market-report";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/schema";
 import { getConcernBySlug, getConcernSlugs } from "@/lib/advice-kb";
 import ConcernArticle from "@/components/ConcernArticle";
-import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+import ArticleNotice from "@/components/ArticleNotice";
 import ShareButtons from "@/components/ShareButtons";
 import ListenButton from "@/components/ListenButton";
 import { isAffiliateDomainLink } from "@/lib/affiliates";
@@ -248,8 +248,7 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
       )}
       <div id="article-body" className="prose-beauty mt-8 space-y-5 text-[1rem] leading-relaxed text-ink/90 sm:text-[1.05rem]">
         <p className="text-base font-medium text-ink sm:text-lg">{post.excerpt}</p>
-        <AffiliateDisclosure className="mt-0 border-y border-sage-100 py-3" />
-        <EducationalDisclaimer />
+        <ArticleNotice className="mt-0" />
         {(() => {
           const split = splitRoutinePicks(post.body);
           if (!split) {
@@ -276,6 +275,7 @@ export default async function AdviceArticlePage({ params }: { params: Promise<{ 
           <ShareButtons title={post.title} path={`/advice/${slug}`} />
         </div>
       </div>
+      <EducationalDisclaimer className="mt-8" />
     </article>
   );
 }
