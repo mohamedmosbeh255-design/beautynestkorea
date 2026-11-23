@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingCart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getProductBySlug } from "@/lib/products";
 import type { RoutinePick } from "@/lib/advice";
 
@@ -57,10 +57,10 @@ export default async function RoutinePicks({ picks }: { picks: RoutinePick[] }) 
                 <div className="mt-4">
                   <Link
                     href={`/product/${product.slug}`}
-                    className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-[#FF9900] px-6 py-4 text-sm font-bold text-black shadow-lg shadow-orange-200 transition hover:brightness-95"
+                    className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-sage-700 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-sage-200 transition hover:bg-sage-800"
                     aria-label={`View ${product.title} — product page`}
                   >
-                    <ShoppingCart className="h-5 w-5" /> View on Amazon
+                    <ArrowRight className="h-5 w-5" /> View product
                   </Link>
                 </div>
               </div>
