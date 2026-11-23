@@ -38,6 +38,15 @@ const CONCERN_SYNONYMS: Record<string, string> = {
  */
 export const GLOBAL_SKINCARE = "Global Skincare";
 
+/**
+ * Hair & Scalp Care is a curated collection keyed off the single-value
+ * product `category` field (unlike Global Skincare, which derives membership
+ * from the brand). It is deliberately NOT a concern: it must never appear in
+ * the skin-concern chips, homepage concern grid or advice mappings.
+ */
+export const HAIR_SCALP_CARE = "Hair & Scalp";
+export const HAIR_SCALP_CARE_SLUG = "hair-scalp-care";
+
 const GLOBAL_SKINCARE_BRANDS = new Set([
   "cerave",
   "larocheposay",

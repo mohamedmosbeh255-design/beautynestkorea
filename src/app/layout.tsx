@@ -22,16 +22,17 @@ export const metadata: Metadata = {
     template: "%s | BeautyNestKorea",
   },
   description:
-    "Curated K-beauty & global skincare. Compare prices on Amazon vs Olive Young. Honest reviews, routines and bestsellers for acne, anti-aging & hydration.",
-  keywords: ["K-beauty", "Korean skincare", "Olive Young", "Amazon skincare", "acne", "hydration", "anti-aging"],
+    "Curated K-beauty and global skincare, with honest reviews and price comparisons across trusted retailers. Routines and bestsellers for acne, anti-aging and hydration.",
+  keywords: ["K-beauty", "Korean skincare", "global skincare", "skincare price comparison", "Amazon skincare", "acne", "hydration", "anti-aging"],
   openGraph: {
     title: "BeautyNestKorea — Discover K-Beauty & Global Skincare",
-    description: "Curated K-beauty bestsellers with Amazon & Olive Young price comparison.",
+    description: "Curated K-beauty and global skincare with honest reviews and price comparisons across trusted retailers.",
     type: "website",
     images: [{ url: defaultOgImage, width: 1200, height: 630, alt: "BeautyNestKorea — curated K-beauty & skincare" }],
   },
   twitter: {
     card: "summary_large_image",
+    description: "Curated K-beauty and global skincare with honest reviews and price comparisons across trusted retailers.",
     images: [defaultOgImage],
   },
   robots: { index: true, follow: true },

@@ -6,7 +6,7 @@ import type { Product } from "@/lib/types";
 import { CATEGORIES } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
 import { cn } from "@/lib/utils";
-import { getActiveConcernNames, normalizeConcernName, productMatchesConcern } from "@/lib/concerns";
+import { getActiveConcernNames, HAIR_SCALP_CARE, normalizeConcernName, productMatchesConcern } from "@/lib/concerns";
 import { isWinterPick } from "@/lib/winter-picks";
 
 export default function ShopClient({ products, initialConcern = "All", initialCategory = "All", initialTag = "" }: { products: Product[]; initialConcern?: string; initialCategory?: string; initialTag?: string }) {
@@ -44,8 +44,13 @@ export default function ShopClient({ products, initialConcern = "All", initialCa
       ? normalizedIncoming
       : "All";
   // Fixed catalog list so new categories (e.g. "Cream") appear even
-  // before any product uses them.
-  const categories = useMemo(() => ["All", ...CATEGORIES], []);
+  // before any product uses them. Hair & Scalp is the exception: its chip
+  // stays hidden until at least one live product carries that category, so
+  // /shop never offers a filter that yields zero results.
+  const categories = useMemo(() => {
+    const hasHair = products.some((p) => p.category === HAIR_SCALP_CARE);
+    return ["All", ...CATEGORIES.filter((c) => c !== HAIR_SCALP_CARE || hasHair)];
+  }, [products]);
   const effectiveCategory = categories.includes(category) ? category : "All";
 
   const filtered = useMemo(() => {

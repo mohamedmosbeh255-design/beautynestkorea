@@ -17,6 +17,7 @@ import { siteBaseUrl } from "@/lib/market-report";
 import { breadcrumbJsonLd, faqJsonLd, productJsonLd, type FaqItem } from "@/lib/schema";
 import { hasIngredientConflict, isDevice, isExfoliatingAcid, isRetinoid } from "@/lib/product-safety";
 import { formatRetailerList, getRetailerNames } from "@/lib/retailers";
+import { HAIR_SCALP_CARE } from "@/lib/concerns";
 
 export const revalidate = 60;
 
@@ -71,7 +72,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   // Same concern pool, then drop anything that conflicts at ingredient level.
   // A retinoid never recommends another retinoid or an AHA/BHA/PHA exfoliant.
+  // Hair & Scalp Care is isolated: hair products never recommend skincare
+  // products and vice versa, even when they share a concern tag.
+  const isHairProduct = product.category === HAIR_SCALP_CARE;
   const related = (await getProducts())
+    .filter((p) => (p.category === HAIR_SCALP_CARE) === isHairProduct)
     .filter((p) => p.slug !== product.slug && p.concern.some((c) => product.concern.includes(c)))
     .filter((p) => !hasIngredientConflict(product, p))
     .slice(0, 3);

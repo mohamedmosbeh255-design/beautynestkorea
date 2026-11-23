@@ -5,7 +5,7 @@ import { getConcernSlugs } from "@/lib/advice-kb";
 import { siteBaseUrl } from "@/lib/market-report";
 import { RETIRED_PRODUCT_SLUGS } from "@/lib/retired-slugs";
 import { getProducts } from "@/lib/products";
-import { getActiveConcernNames } from "@/lib/concerns";
+import { getActiveConcernNames, HAIR_SCALP_CARE, HAIR_SCALP_CARE_SLUG } from "@/lib/concerns";
 
 interface LiveProductRow {
   slug: string | null;
@@ -80,7 +80,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   let categories: string[] = [];
   try {
-    categories = getActiveConcernNames(await getProducts()).map(toSlug).filter(Boolean);
+    const catalog = await getProducts();
+    categories = getActiveConcernNames(catalog).map(toSlug).filter(Boolean);
+    // Hair & Scalp Care is a category-keyed collection, not a concern. It
+    // enters the sitemap only at the 4-product index threshold — below that
+    // the page is 200 + noindex and carries no internal links.
+    if (catalog.filter((p) => p.category === HAIR_SCALP_CARE).length >= 4) {
+      categories.push(HAIR_SCALP_CARE_SLUG);
+    }
   } catch {
     categories = [];
   }

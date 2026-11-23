@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getProducts } from "@/lib/products";
-import { getActiveConcernNames, normalizeConcernName, productMatchesConcern } from "@/lib/concerns";
+import { getActiveConcernNames, normalizeConcernName, productMatchesConcern, HAIR_SCALP_CARE, HAIR_SCALP_CARE_SLUG } from "@/lib/concerns";
 import { CONCERN_COPY } from "@/lib/concern-copy";
 import ProductCard from "@/components/ProductCard";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
@@ -33,6 +33,9 @@ function slugifyConcern(name: string): string {
  * deleted — duplicates alias, the canonical keeps everything.
  */
 async function resolveConcern(slug: string): Promise<string | null> {
+  // Explicit collection route: never slugified dynamically. The URL is
+  // /category/hair-scalp-care while the catalog value is "Hair & Scalp".
+  if (slug === HAIR_SCALP_CARE_SLUG) return HAIR_SCALP_CARE;
   const products = await getProducts();
   // Active names only (see getActiveConcernNames): stale labels like the old
   // "Sensitive" can never resolve to a second page shadowing "Sensitive Skin".
@@ -51,7 +54,12 @@ export async function generateStaticParams() {
   // Canonical slugs only: synonym URLs stay live via the next.config.ts 301s
   // but are never emitted as canonical, so no duplicate-content signals.
   // Active names only — a renamed canonical never leaves a stale twin page.
-  return getActiveConcernNames(products).map((name) => ({ slug: slugifyConcern(name) }));
+  // Hair & Scalp Care is an explicit collection (category-keyed), not a
+  // concern, so it is emitted by its literal slug and is always reachable.
+  return [
+    ...getActiveConcernNames(products).map((name) => ({ slug: slugifyConcern(name) })),
+    { slug: HAIR_SCALP_CARE_SLUG },
+  ];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -63,19 +71,29 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // generic "<concern> skincare" phrasing would read "Global Skincare skincare".
   // Scoped to this one slug — every existing category keeps its exact metadata.
   const isGlobal = concern === "Global Skincare";
-  const copy = isGlobal ? undefined : CONCERN_COPY[slugifyConcern(concern)];
-  const title = isGlobal
-    ? "Global Skincare Products — Dermatologist-Recommended Essentials"
-    : `${concern} Skincare Products — Curated K-Beauty Picks`;
+  const isHair = concern === HAIR_SCALP_CARE;
+  const canonicalSlug = isHair ? HAIR_SCALP_CARE_SLUG : slugifyConcern(concern);
+  const copy = isGlobal ? undefined : CONCERN_COPY[canonicalSlug];
+  const title = isHair
+    ? "Hair & Scalp Care — Korean Scalp Rituals"
+    : isGlobal
+      ? "Global Skincare Products — Dermatologist-Recommended Essentials"
+      : `${concern} Skincare Products — Curated K-Beauty Picks`;
   const description = isGlobal
     ? "Shop curated Western skincare essentials from CeraVe, La Roche-Posay, Paula's Choice, Vaseline, Aquaphor, O'Keeffe's, Bioderma, The Ordinary and EltaMD."
     : copy?.description ??
       `Shop curated ${concern.toLowerCase()} skincare: bestsellers with honest reviews and Amazon vs Olive Young price comparison.`;
+  // Index threshold (hair only): 0–3 active products → reachable but noindex,
+  // so it stays out of Google until the collection is substantial enough.
+  const hairCount = isHair
+    ? (await getProducts()).filter((p) => p.category === HAIR_SCALP_CARE).length
+    : 0;
   return {
     title,
     description,
-    alternates: { canonical: `${base}/category/${slugifyConcern(concern)}` },
+    alternates: { canonical: `${base}/category/${canonicalSlug}` },
     openGraph: { title, description, type: "website" },
+    ...(isHair && hairCount < 4 ? { robots: { index: false, follow: true } } : {}),
   };
 }
 
@@ -84,18 +102,24 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const concern = await resolveConcern(slug);
   if (!concern) notFound();
   const isGlobal = concern === "Global Skincare";
+  const isHair = concern === HAIR_SCALP_CARE;
+  const canonicalSlug = isHair ? HAIR_SCALP_CARE_SLUG : slugifyConcern(concern);
 
   // Read-only filter over live catalog data: products keep every concern tag
   // they already have — this page only READS associations, never rewrites.
   const products = await getProducts();
-  const matched = products.filter((p) => productMatchesConcern(p, concern));
-  const copy = isGlobal ? undefined : CONCERN_COPY[slugifyConcern(concern)];
+  // Hair & Scalp is keyed off the single-value `category` field and is
+  // intentionally excluded from concern-based matching everywhere else.
+  const matched = isHair
+    ? products.filter((p) => p.category === HAIR_SCALP_CARE)
+    : products.filter((p) => productMatchesConcern(p, concern));
+  const copy = isGlobal ? undefined : CONCERN_COPY[canonicalSlug];
 
   const base = siteBaseUrl();
   const jsonLd = breadcrumbJsonLd(base, [
     { name: "Home", path: "/" },
     { name: "Shop", path: "/shop" },
-    { name: concern, path: `/category/${slugifyConcern(concern)}` },
+    { name: concern, path: `/category/${canonicalSlug}` },
   ]);
 
   return (
@@ -104,12 +128,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <Link href="/shop" className="inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700 hover:underline">
         <ArrowLeft className="h-4 w-4" /> All products
       </Link>
-      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: isGlobal ? concern : `${concern} skincare` }]} />
+      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: isGlobal ? concern : isHair ? "Hair & Scalp Care" : `${concern} skincare` }]} />
       <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-sage-600">
-        {isGlobal ? "Shop by collection" : "Shop by concern"}
+        {isHair || isGlobal ? "Shop by collection" : "Shop by concern"}
       </p>
       <h1 className="font-serif-display mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-        {isGlobal ? concern : `${concern} skincare`}
+        {isHair ? "Korean Scalp Rituals & Global Essentials" : isGlobal ? concern : `${concern} skincare`}
       </h1>
       <p className="mt-3 max-w-2xl text-base text-ink-soft">
         {isGlobal ? (
@@ -128,9 +152,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         </div>
       ) : (
         <div className="glass mt-8 rounded-3xl p-8 text-center">
-          <p className="font-semibold">No products carry this concern yet.</p>
+          <p className="font-semibold">{isHair ? "No products in this collection yet." : "No products carry this concern yet."}</p>
           <p className="mt-2 text-sm text-ink-soft">
-            Browse the full catalog instead — new picks land regularly.
+            {isHair
+              ? "New hair and scalp picks are on the way — browse the full catalog in the meantime."
+              : "Browse the full catalog instead — new picks land regularly."}
           </p>
           <Link
             href="/shop"

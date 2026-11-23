@@ -6,6 +6,12 @@
  * visible intro paragraph come from this map.
  */
 export const CONCERN_COPY: Record<string, { description: string; intro: string }> = {
+  "hair-scalp-care": {
+    description:
+      "Korean scalp rituals and global hair essentials — gentle cleansers, scalp toners and treatments for a healthier-looking scalp.",
+    intro:
+      "A healthy scalp is the foundation for healthy-looking hair. These picks pair Korean scalp rituals — gentle cleansing, soothing toners and lightweight treatments — with trusted global essentials.",
+  },
   "anti-aging": {
     description:
       "Firm-looking skin without the hype: retinoids, peptides and barrier-first moisturizers for fine lines and elasticity.",

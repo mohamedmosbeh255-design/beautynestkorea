@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { ArrowRight, ShieldCheck, Sparkles, Droplets, Sun, Leaf, Star, CircleDot, Globe2 } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, Droplets, Sun, Leaf, Star, CircleDot, Globe2, Scissors } from "lucide-react";
 import { getProducts } from "@/lib/products";
-import { getConcernStats, concernSlug } from "@/lib/concerns";
+import { getConcernStats, concernSlug, HAIR_SCALP_CARE, HAIR_SCALP_CARE_SLUG } from "@/lib/concerns";
 import { getLatestGuides } from "@/lib/guides";
 import { siteBaseUrl } from "@/lib/market-report";
 import ProductCard from "@/components/ProductCard";
@@ -61,6 +61,10 @@ export default async function HomePage() {
   // cannot render; every card below carries a count + non-empty blurb.
   const stats = getConcernStats(allProducts);
   const globalCount = stats.find(({ name }) => name === "Global Skincare")?.count ?? 0;
+  // Hair & Scalp Care is a category-keyed collection, not a concern — it only
+  // gets a homepage card at the 4-product index threshold.
+  const hairCount = allProducts.filter((p) => p.category === HAIR_SCALP_CARE).length;
+  const showHairCollection = hairCount >= 4;
   // "Global Skincare" is a curated collection, not a skin concern — it gets its
   // own banner below and is excluded from the concern grid so the existing
   // cards keep their exact order, copy and count.
@@ -101,30 +105,57 @@ export default async function HomePage() {
         </p>
       </section>
 
-      {/* GLOBAL SKINCARE COLLECTION */}
-      {globalCount > 0 && (
+      {/* COLLECTIONS */}
+      {(globalCount > 0 || showHairCollection) && (
         <section className="mx-auto mt-8 max-w-7xl px-4 sm:px-6">
-          <Link
-            href="/category/global-skincare"
-            className="group relative flex flex-col gap-4 overflow-hidden rounded-3xl bg-gradient-to-br from-stone-100 via-sage-50 to-blush-50 p-7 transition hover:-translate-y-1 hover:shadow-xl sm:flex-row sm:items-center sm:justify-between sm:p-9"
-          >
-            <div className="flex items-start gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/80 shadow-sm">
-                <Globe2 className="h-6 w-6 text-sage-700" />
-              </span>
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">New collection</p>
-                <h2 className="font-serif-display mt-1 text-2xl font-bold tracking-tight sm:text-3xl">Global Skincare</h2>
-                <p className="mt-1 text-sm text-ink-soft">
-                  Dermatologist-recommended Western essentials — CeraVe, La Roche-Posay, Paula&apos;s Choice, Vaseline and more.
-                </p>
-              </div>
-            </div>
-            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700">
-              Shop the collection
-              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-            </span>
-          </Link>
+          <div className="grid gap-5 lg:grid-cols-2">
+            {globalCount > 0 && (
+              <Link
+                href="/category/global-skincare"
+                className="group relative flex flex-col gap-4 overflow-hidden rounded-3xl bg-gradient-to-br from-stone-100 via-sage-50 to-blush-50 p-7 transition hover:-translate-y-1 hover:shadow-xl sm:flex-row sm:items-center sm:justify-between sm:p-9"
+              >
+                <div className="flex items-start gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/80 shadow-sm">
+                    <Globe2 className="h-6 w-6 text-sage-700" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">New collection</p>
+                    <h2 className="font-serif-display mt-1 text-2xl font-bold tracking-tight sm:text-3xl">Global Skincare</h2>
+                    <p className="mt-1 text-sm text-ink-soft">
+                      Dermatologist-recommended Western essentials — CeraVe, La Roche-Posay, Paula&apos;s Choice, Vaseline and more.
+                    </p>
+                  </div>
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700">
+                  Shop the collection
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                </span>
+              </Link>
+            )}
+            {showHairCollection && (
+              <Link
+                href={`/category/${HAIR_SCALP_CARE_SLUG}`}
+                className="group relative flex flex-col gap-4 overflow-hidden rounded-3xl bg-gradient-to-br from-sage-50 via-sky-50 to-stone-100 p-7 transition hover:-translate-y-1 hover:shadow-xl sm:flex-row sm:items-center sm:justify-between sm:p-9"
+              >
+                <div className="flex items-start gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/80 shadow-sm">
+                    <Scissors className="h-6 w-6 text-sage-700" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-sage-600">New collection</p>
+                    <h2 className="font-serif-display mt-1 text-2xl font-bold tracking-tight sm:text-3xl">Hair &amp; Scalp Care</h2>
+                    <p className="mt-1 text-sm text-ink-soft">
+                      Korean scalp rituals and global hair essentials — gentle cleansing, soothing toners and lightweight treatments.
+                    </p>
+                  </div>
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-sage-700">
+                  Shop the collection
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                </span>
+              </Link>
+            )}
+          </div>
         </section>
       )}
 
