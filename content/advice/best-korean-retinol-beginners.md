@@ -11,13 +11,9 @@ dateModified: "2026-10-07"
 faqSchema: true
 ---
 
-**Affiliate Disclosure:** We may earn a commission when you buy through links on this page, at no extra cost to you.
-
 By Mohamed Mosbeh · Founder & Beauty Curator, BeautyNestKorea
 Published: 2026-10-07 · Last updated: 2026-10-07
 Mohamed Mosbeh founded BeautyNestKorea to bring transparent, per-ml price comparisons and evidence-based K-beauty guidance to shoppers.
-
-> **Educational only.** This guide covers cosmetic skincare, not diagnosis or treatment. Patch-test new products and see a dermatologist for persistent issues.
 
 If you are new to vitamin A, start with a low-strength retinal around 0.1% — it is gentler on beginners than it sounds, and the Korean formulas here buffer it with calming ingredients like cica and panthenol. Use a pea-size amount every other evening for the first two weeks, then move to nightly if your skin is comfortable. Always apply sunscreen the morning after, because vitamin A can make skin more sun-sensitive. Below are the four beginner-friendly Korean retinol and retinal products we curate, with honest per-ml prices.
 
@@ -91,4 +87,4 @@ Many people do — it is a 30ml bottle, which is larger than most dedicated eye 
 
 Plan on 8-12 weeks of consistent use before judging results, and take progress photos in the same light to compare fairly. Retinoids work gradually — first you may notice smoother-looking texture, and the look of fine lines improves more slowly. If you see nothing at all after three months of nightly use, the strength may be too low for your skin, and a step-up like the COSRX 0.5 oil could be the next move.
 
-*Cosmetic educational content only. Patch-test new products, follow the product label, and consult a dermatologist if symptoms persist or become severe. If you are pregnant or breastfeeding, topical retinol and retinal are generally not recommended — ask your clinician before use.*
+*If you are pregnant or breastfeeding, topical retinol and retinal are generally not recommended — ask your clinician before use.*

@@ -75,5 +75,3 @@ See one before starting or changing any minoxidil routine, and promptly for ches
 - [FDA: Salicylic acid, OTC acne, 21 CFR 333.310](https://www.ecfr.gov/current/title-21/chapter-I/subchapter-D/part-333/subpart-D/section-333.310)
 - [FDA: Salicylic acid, dandruff and seborrheic dermatitis, 21 CFR 358.710](https://www.ecfr.gov/current/title-21/chapter-I/subchapter-D/part-358/subpart-H/section-358.710)
 - [PubMed: Follicular sulfotransferase activity during topical minoxidil use](https://pubmed.ncbi.nlm.nih.gov/30043580/)
-
-*Educational only. Not medical advice. Do not start, stop, or change any medication based on this page.*

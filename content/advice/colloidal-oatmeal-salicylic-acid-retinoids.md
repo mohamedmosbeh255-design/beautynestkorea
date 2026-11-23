@@ -12,13 +12,11 @@ dateModified: "2026-09-20"
 faqSchema: true
 ---
 
-**Affiliate Disclosure:** We may earn a commission when you buy through links on this page, at no extra cost to you.
-
 By Mohamed Mosbeh · Founder & Beauty Curator, BeautyNestKorea
 Published: 2026-09-19 · Last updated: 2026-09-20
 Mohamed Mosbeh founded BeautyNestKorea to bring transparent, per-ml price comparisons and evidence-based K-beauty guidance to shoppers.
 
-> **Educational only.** This guide covers cosmetic skincare, not diagnosis or treatment. Patch-test new products and see a dermatologist for persistent issues. **Seek urgent medical care for swelling of the face, mouth or throat, or any difficulty breathing.**
+> **Seek urgent medical care for swelling of the face, mouth or throat, or any difficulty breathing.**
 
 Most skincare advice assumes your barrier is intact. After hives, a reaction, or a stretch of over-exfoliation, that assumption is wrong, and following a normal "actives" routine tends to make things worse. This guide covers the four decisions that matter most in those weeks: which oat ingredient you are actually buying, whether new breakouts mean progress or damage, and how to reintroduce glycolic and salicylic acid without starting over.
 
@@ -121,5 +119,3 @@ Go if hives persist or keep returning, or if you have a painful rash or noticeab
 - [American Academy of Dermatology: Keratosis Pilaris Self-Care](https://www.aad.org/public/diseases/a-z/keratosis-pilaris-self-care)
 - [American Academy of Dermatology: Skincare Product Order](https://www.aad.org/public/everyday-care/skin-care-basics/care/apply-skin-care-certain-order)
 - [Yentzer et al.: Do topical retinoids cause acne to flare?](https://pubmed.ncbi.nlm.nih.gov/19746671/)
-
-*Cosmetic educational content only. Patch-test new products, follow the product label, and consult a dermatologist if symptoms persist or become severe.*

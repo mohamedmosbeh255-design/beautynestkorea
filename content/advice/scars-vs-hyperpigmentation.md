@@ -18,7 +18,7 @@ date: "2026-09-14"
 >
 > If you have a persistent, painful, rapidly changing, or concerning skin issue, or if you are unsure which treatment is appropriate for you, please consult a qualified dermatologist or healthcare professional.
 >
-> Product recommendations on BeautyNestKorea are cosmetic suggestions, not medical treatments. Where applicable, some links may be affiliate links, meaning we may earn a commission at no additional cost to you. Our editorial recommendations remain independent of these relationships.
+> Product recommendations on BeautyNestKorea are cosmetic suggestions, not medical treatments.
 
 By Mohamed Mosbeh · Founder & Beauty Curator, BeautyNestKorea
 Published: 2026-09-14 · Last updated: 2026-09-14

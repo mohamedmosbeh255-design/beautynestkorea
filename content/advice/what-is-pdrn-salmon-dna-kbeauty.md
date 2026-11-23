@@ -44,7 +44,6 @@ What to look for: formulas that combine PDRN with barrier helpers (ceramides, pa
   <h3 class="text-lg font-semibold text-stone-900 mb-3">medicube Salmon DNA PDRN Pink Mask</h3>
   <p class="text-sm text-stone-600 mb-4">4.6★ (1,254 reviews) · $19.90 · +34.8% radiance in 1 use</p>
   <a href="/product/medicube-salmon-dna-pdrn-pink-vitamin-sheet-mask" class="inline-block bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-6 py-3 rounded-lg transition-colors">Shop this mask →</a>
-  <p class="text-xs text-stone-500 mt-3">We may earn a small commission at no extra cost to you.</p>
 </div>
 
 **A note on safety:** PDRN is DNA-derived — usually salmon or trout — so if you have a fish allergy, ask your clinician before trying it; published guidance conflicts on this. There are no safety trials in pregnancy or breastfeeding, so ask your clinician first. Patch-test any new product, and introduce one PDRN product at a time.

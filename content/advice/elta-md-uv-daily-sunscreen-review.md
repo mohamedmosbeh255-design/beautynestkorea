@@ -206,12 +206,9 @@ On the other hand, do not buy it if you:
 | Value for money | ★★★☆☆ | Premium, justified only with daily, correct-amount use |
 | **Overall** | **4.2 / 5** | Excellent for dry skin — and nothing more than that |
 
-## Disclosure and important notes
+## Primary sources
 
-- **Disclosure:** this article may contain affiliate links, and we may earn a small commission on purchases made through them at no extra cost to you.
-- **Pricing:** all prices and sizes cited above were recorded from the product listing (Amazon and authorized retailers) at the time of writing and change frequently. Shipping and import charges depend on destination and order weight.
-- **Medical note:** this content is informational and is not medical advice. If you use prescription topicals or have a skin condition, consult a dermatologist before changing your routine.
-- **Primary sources:** the official FDA drug labels via DailyMed for both versions (SPF 40: Zinc Oxide 9% + Octinoxate 7.5%; SPF 50: Zinc Oxide 11% + Octisalate 5%), the official EltaMD product pages, and the Amazon listing details below.
+- FDA drug labels via DailyMed for both versions (SPF 40: Zinc Oxide 9% + Octinoxate 7.5%; SPF 50: Zinc Oxide 11% + Octisalate 5%), the official EltaMD product pages, and the Amazon listing details below.
 
 ### Sources (to verify every number above)
 1. FDA / DailyMed label, `ELTAMD UV DAILY` (Octinoxate 7.5% + Zinc Oxide 9.0%): https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6dde7055-5f77-4a7f-a182-c03e1f30bfaa

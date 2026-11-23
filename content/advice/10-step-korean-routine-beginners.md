@@ -96,7 +96,6 @@ Budget tips: combine toner and essence with a 2-in-1 formula to save a step, buy
   <h3 class="text-lg font-semibold text-stone-900 mb-3">Beauty of Joseon Relief Sun Triple Set</h3>
   <p class="text-sm text-stone-600 mb-4">One easy first step that fits every beginner routine.</p>
   <a href="/product/beauty-of-joseon-relief-sun-triple-set" class="inline-block bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-6 py-3 rounded-lg transition-colors">Shop it →</a>
-  <p class="text-xs text-stone-500 mt-3">We may earn a small commission at no extra cost to you.</p>
 </div>
 
 ## FAQ
