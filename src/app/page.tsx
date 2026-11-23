@@ -77,7 +77,7 @@ export default async function HomePage() {
             <div className="glass-strong relative overflow-hidden rounded-xl p-0">
               <div className="relative aspect-[2000/768] overflow-hidden rounded-xl">
                 <Image
-                  src="https://wlbsswmkoahjzentukns.supabase.co/storage/v1/object/public/site-assets/ChatGPT%20Image%20Sep%2013,%202026,%2008_31_36%20PM.png"
+                  src="https://wlbsswmkoahjzentukns.supabase.co/storage/v1/object/public/site-assets/Radiant%20K-Beauty%20Skincare%20Banner%20(1).png"
                   alt="BeautyNestKorea curated K-beauty skincare banner"
                   fill
                   className="object-cover"
