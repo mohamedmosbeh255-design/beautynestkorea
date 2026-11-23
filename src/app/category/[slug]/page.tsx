@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getProducts } from "@/lib/products";
 import { getActiveConcernNames, normalizeConcernName, productMatchesConcern } from "@/lib/concerns";
+import { CONCERN_COPY } from "@/lib/concern-copy";
 import ProductCard from "@/components/ProductCard";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -62,12 +63,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // generic "<concern> skincare" phrasing would read "Global Skincare skincare".
   // Scoped to this one slug — every existing category keeps its exact metadata.
   const isGlobal = concern === "Global Skincare";
+  const copy = isGlobal ? undefined : CONCERN_COPY[slugifyConcern(concern)];
   const title = isGlobal
     ? "Global Skincare Products — Dermatologist-Recommended Essentials"
     : `${concern} Skincare Products — Curated K-Beauty Picks`;
   const description = isGlobal
     ? "Shop curated Western skincare essentials from CeraVe, La Roche-Posay, Paula's Choice, Vaseline, Aquaphor, O'Keeffe's, Bioderma, The Ordinary and EltaMD."
-    : `Shop curated ${concern.toLowerCase()} skincare: bestsellers with honest reviews and Amazon vs Olive Young price comparison.`;
+    : copy?.description ??
+      `Shop curated ${concern.toLowerCase()} skincare: bestsellers with honest reviews and Amazon vs Olive Young price comparison.`;
   return {
     title,
     description,
@@ -86,6 +89,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   // they already have — this page only READS associations, never rewrites.
   const products = await getProducts();
   const matched = products.filter((p) => productMatchesConcern(p, concern));
+  const copy = isGlobal ? undefined : CONCERN_COPY[slugifyConcern(concern)];
 
   const base = siteBaseUrl();
   const jsonLd = breadcrumbJsonLd(base, [
@@ -111,10 +115,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         {isGlobal ? (
           "The best Western products, carefully selected."
         ) : (
-          <>
-            {matched.length} curated product{matched.length !== 1 && "s"} for {concern.toLowerCase()} — prices
-            pulled straight from the catalog below, with retailer price comparison where available.
-          </>
+          copy?.intro ??
+          `${matched.length} curated product${matched.length !== 1 ? "s" : ""} for ${concern.toLowerCase()} — prices pulled straight from the catalog below, with retailer price comparison where available.`
         )}
       </p>
       <AffiliateDisclosure className="mt-4 max-w-2xl" />
