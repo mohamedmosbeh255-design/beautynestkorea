@@ -1,0 +1,213 @@
+{
+  "date": "2026-11-24",
+  "generatedAt": "2026-11-24T16:41:04.227Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Hyaluronic Acid",
+      "views": 365,
+      "previous": 257,
+      "delta": 108
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 344,
+      "previous": 274,
+      "delta": 70
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 597,
+      "previous": 543,
+      "delta": 54
+    },
+    {
+      "name": "Vitamin C",
+      "views": 615,
+      "previous": 577,
+      "delta": 38
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 300,
+      "previous": 262,
+      "delta": 38
+    },
+    {
+      "name": "Ceramides",
+      "views": 119,
+      "previous": 102,
+      "delta": 17
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 57,
+      "previous": 43,
+      "delta": 14
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 169,
+      "previous": 159,
+      "delta": 10
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 302,
+      "previous": 293,
+      "delta": 9
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 93,
+      "previous": 89,
+      "delta": 4
+    },
+    {
+      "name": "Niacinamide",
+      "views": 18,
+      "previous": 14,
+      "delta": 4
+    },
+    {
+      "name": "Squalane",
+      "views": 84,
+      "previous": 84,
+      "delta": 0
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 625,
+      "previous": 628,
+      "delta": -3
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 151,
+      "previous": 156,
+      "delta": -5
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 54,
+      "previous": 59,
+      "delta": -5
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 44,
+      "previous": 68,
+      "delta": -24
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [],
+  "brands": [],
+  "communityPosts": [],
+  "newsHeadlines": [
+    "Shoppers Say This Hydrating Retinol Serum Made Their “Fine Lines Disappear” in Days, and It’s Only $10 a Bottle",
+    "Retinol 101: We Asked An Expert To Debunk Retinol Myths",
+    "TikTok's favorite K-beauty brand, Medicube, is on sale at Walmart this Black Friday — and prices start at just $13.23",
+    "The Exact Retinal Kylie Jenner Uses Is Just $14 for Black Friday — Plus, More Amazon Anti-Aging Skincare Deals",
+    "6 ESSENTIAL THINGS TO KNOW BEFORE USING RETINOL",
+    "Shoppers in Their 70s Say Cetaphil’s Retinol Alternative Serum Is “Nothing Short of Amazing” at Lifting Wrinkles",
+    "Dr. Reju-All's Buzzy PDRN Skincare Duo Is Going On Sale For Black Friday—Don't Miss Out!",
+    "My 65-Year-Old Mom and I Are Ditching Expensive Moisturizers for This Firming, Youth-Boosting Retinol Cream",
+    "The Body Retinol That Proves Skincare Shouldn’t Stop at the Neck",
+    "The beauty directors’ guide to K-beauty, from PDRN to snail mucin",
+    "16 best retinol creams and serums for smoother, younger-looking skin",
+    "A Review of Medicube’s 3 Best K-Beauty Skin Care Products"
+  ],
+  "newsIngredients": [
+    {
+      "name": "Retinol / Retinoids",
+      "count": 23
+    },
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 19
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 14
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 2
+    },
+    {
+      "name": "Exosomes",
+      "count": 2
+    },
+    {
+      "name": "Peptides",
+      "count": 2
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-11-23 vs 2026-11-22"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "failed",
+      "detail": "no posts retrievable from JSON or Atom"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "175 headline(s) read · 61 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 5/6 sources produced data · degraded (documented fallback): TikTok Creative Center · failed: Reddit community (SkincareAddiction + KoreanBeauty)",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-11-23 vs 2026-11-22). Biggest rise: **Hyaluronic Acid** +108 views (+42.0%). Highest volume: **Hyaluronic Acid** (365 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** no community data today — both the public JSON and the Atom fallback returned nothing usable.",
+    "**News pulse:** 175 headline(s) read across 2 quer(ies), 61 matched the lexicon. Most-covered: **Retinol / Retinoids** (23 headline(s)), brand **COSRX** (2 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-11-23 vs 2026-11-22):** up — Hyaluronic Acid +108 views; down — Kojic Acid -24 views.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still not yet available; while those wait, prioritise content around **Retinol / Retinoids**, the strongest demand signal available today (source: news coverage; social source: static-fallback)."
+  ]
+}
