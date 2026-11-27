@@ -1,0 +1,217 @@
+{
+  "date": "2026-11-27",
+  "generatedAt": "2026-11-27T15:47:03.947Z",
+  "tool": "market-report v1.1.0",
+  "wikiViews": [
+    {
+      "name": "Centella Asiatica (Cica)",
+      "views": 310,
+      "previous": 297,
+      "delta": 13
+    },
+    {
+      "name": "Kojic Acid",
+      "views": 55,
+      "previous": 46,
+      "delta": 9
+    },
+    {
+      "name": "Benzoyl Peroxide",
+      "views": 167,
+      "previous": 159,
+      "delta": 8
+    },
+    {
+      "name": "Vitamin C",
+      "views": 577,
+      "previous": 570,
+      "delta": 7
+    },
+    {
+      "name": "Ceramides",
+      "views": 116,
+      "previous": 110,
+      "delta": 6
+    },
+    {
+      "name": "Retinol / Retinoids",
+      "views": 687,
+      "previous": 683,
+      "delta": 4
+    },
+    {
+      "name": "Panthenol (B5)",
+      "views": 74,
+      "previous": 70,
+      "delta": 4
+    },
+    {
+      "name": "Niacinamide",
+      "views": 9,
+      "previous": 10,
+      "delta": -1
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "views": 324,
+      "previous": 326,
+      "delta": -2
+    },
+    {
+      "name": "Snail Mucin",
+      "views": 31,
+      "previous": 35,
+      "delta": -4
+    },
+    {
+      "name": "Glycolic / AHA",
+      "views": 163,
+      "previous": 171,
+      "delta": -8
+    },
+    {
+      "name": "Squalane",
+      "views": 71,
+      "previous": 80,
+      "delta": -9
+    },
+    {
+      "name": "Bakuchiol",
+      "views": 51,
+      "previous": 63,
+      "delta": -12
+    },
+    {
+      "name": "Salicylic Acid (BHA)",
+      "views": 527,
+      "previous": 549,
+      "delta": -22
+    },
+    {
+      "name": "Azelaic Acid",
+      "views": 256,
+      "previous": 290,
+      "delta": -34
+    },
+    {
+      "name": "Tranexamic Acid",
+      "views": 280,
+      "previous": 316,
+      "delta": -36
+    }
+  ],
+  "trendTerms": [],
+  "ingredients": [],
+  "brands": [],
+  "communityPosts": [],
+  "newsHeadlines": [
+    "Are you using retinol too early? What to know before starting anti-ageing skincare",
+    "Eternal Skincare’s £12 hypochlorous facial mist wins at Get The Gloss Beauty Awards",
+    "Medicube skincare slashed in Amazon Black Friday sale",
+    "COSRX's Best Amazon Black Friday Deals: Cult-Favorite Snail Mucin, Peptide Skincare, and Holiday Gift Sets Up to 50% Off",
+    "Leighton Meester Swears By This Snail Mucin for Glowing Skin and It's 50% Off for Black Friday",
+    "Shoppers Say This Hydrating Retinol Serum Made Their “Fine Lines Disappear” in Days, and It’s Only $10 a Bottle",
+    "The 14 Best Retinol Serums And Creams, Recommended By Dermatologists",
+    "16 best retinol creams and serums for smoother, younger-looking skin",
+    "PDRN Is Having a Major Skincare Moment—9 Serums a Facialist Recommends",
+    "A Review of Medicube’s 3 Best K-Beauty Skin Care Products",
+    "7 Korean Retinol Alternatives for a Glass Skin-Approved Glow",
+    "I’m in my 40s – here are the best retinol and retinal serums for smoother, firmer skin"
+  ],
+  "newsIngredients": [
+    {
+      "name": "Retinol / Retinoids",
+      "count": 18
+    },
+    {
+      "name": "PDRN / Salmon DNA",
+      "count": 17
+    },
+    {
+      "name": "Snail Mucin",
+      "count": 13
+    },
+    {
+      "name": "Peptides",
+      "count": 4
+    },
+    {
+      "name": "Exosomes",
+      "count": 2
+    },
+    {
+      "name": "Centella Asiatica (Cica)",
+      "count": 1
+    },
+    {
+      "name": "Hyaluronic Acid",
+      "count": 1
+    },
+    {
+      "name": "Hypochlorous Acid",
+      "count": 1
+    }
+  ],
+  "hashtags": [
+    "#skincare",
+    "#skincaretips",
+    "#koreanskincare",
+    "#glassskin",
+    "#skincareroutine",
+    "#retinol",
+    "#niacinamide",
+    "#sunscreen",
+    "#slugging",
+    "#skincycling",
+    "#acne",
+    "#acnescar",
+    "#pores",
+    "#darkspots",
+    "#snailmucin",
+    "#pdrn",
+    "#collagen",
+    "#doublecleanse",
+    "#sensitiveskin",
+    "#beautyofjoseon"
+  ],
+  "sources": [
+    {
+      "id": "interest",
+      "state": "ok",
+      "detail": "16 ingredient(s) measured · 18/18 article requests OK · 2026-11-26 vs 2026-11-25"
+    },
+    {
+      "id": "trends",
+      "state": "ok",
+      "detail": "12/12 markets answered · 120 items · 0 skin matches"
+    },
+    {
+      "id": "community",
+      "state": "failed",
+      "detail": "no posts retrievable from JSON or Atom"
+    },
+    {
+      "id": "news",
+      "state": "ok",
+      "detail": "178 headline(s) read · 53 lexicon-matched · 12 shown"
+    },
+    {
+      "id": "social",
+      "state": "partial",
+      "detail": "curated static fallback (endpoint gated)"
+    },
+    {
+      "id": "watchlist",
+      "state": "ok",
+      "detail": "6 ASINs listed · 0 Amazon requests by design"
+    }
+  ],
+  "summary": [
+    "**Source health:** 5/6 sources produced data · degraded (documented fallback): TikTok Creative Center · failed: Reddit community (SkincareAddiction + KoreanBeauty)",
+    "**Ingredient interest:** 16/16 tracked ingredients measured (Wikipedia pageviews, 2026-11-26 vs 2026-11-25). Biggest rise: **Centella Asiatica (Cica)** +13 views (+4.4%). Highest volume: **Centella Asiatica (Cica)** (310 views). Secondary Google Trends signal: none today (12/12 markets answered, 120 items scanned, 0 skincare matches).",
+    "**Community pulse:** no community data today — both the public JSON and the Atom fallback returned nothing usable.",
+    "**News pulse:** 178 headline(s) read across 2 quer(ies), 53 matched the lexicon. Most-covered: **Retinol / Retinoids** (18 headline(s)), brand **COSRX** (4 headline(s)) — editorial coverage, not consumer demand.",
+    "**Biggest mover (pageviews 2026-11-26 vs 2026-11-25):** up — Centella Asiatica (Cica) +13 views; down — Tranexamic Acid -36 views.",
+    "**Next action:** watchlist holds 6 ASINs with price/rating/BSR still not yet available; while those wait, prioritise content around **Retinol / Retinoids**, the strongest demand signal available today (source: news coverage; social source: static-fallback)."
+  ]
+}
